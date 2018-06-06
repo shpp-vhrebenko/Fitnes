@@ -67,10 +67,13 @@
             <div class="col-md-5 about__populated" >
                 <div class="elementor-background-overlay"></div>
                 <div class="play-btn">                    
-                    <img width="324" height="284" src="https://gizerskaya.com/wp-content/uploads/2018/04/playbtn-324x308-копия.png" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://gizerskaya.com/wp-content/uploads/2018/04/playbtn-324x308-копия.png 351w, https://gizerskaya.com/wp-content/uploads/2018/04/playbtn-324x308-копия-300x263.png 300w" sizes="(max-width: 324px) 100vw, 324px" />                            
+                    <img width="324" height="264" src="img/playbtn-324x308-копия.png"  alt="#" sizes="(max-width: 324px) 100vw, 324px" />                            
                 </div>                
             </div>
         </div>
+    </section>
+    <section class="gotop" id="gotop">
+        
     </section>
 </main>
 @endsection

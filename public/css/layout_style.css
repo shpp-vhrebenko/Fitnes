@@ -428,12 +428,13 @@ strong {
 .play-btn {
 	position: absolute;
     left: -140px;
-    bottom: -30px;
+    bottom: -30px;    
 }
 
 .play-btn img {
 	height: auto;
     max-width: 100%;   
+    z-index: 1;
 }
 
 .gizerhash {
@@ -473,3 +474,17 @@ strong {
 }
 
 /* END SECTION ABOUT */
+
+/* SECTION GOTOP */
+.gotop {
+	position: relative;
+	height: 1000px;
+	background-color: transparent;
+    background-image: linear-gradient(130deg, #743f4d 0%, #2f2e45 100%);
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 60px 0px 0px 0px;
+    z-index: 2;
+}
+/* END SECTION GOTOP */
