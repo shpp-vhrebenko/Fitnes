@@ -16,7 +16,7 @@
 			</div>
 			<div class="col-md-6">
 				<div id='fixed-contact' class="fixed-contact">
-				    <a href='#gotop'>
+				    <a href='#price'>
 				    	<i class="fa fa-credit-card" aria-hidden="true"></i>
 					    <span class="fixe-contact__title">
 						    КУПИТЬ КУРС
@@ -34,7 +34,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 	<script>
 		$( document ).ready(function() {
-			// animation slidebar navigation
+			// animation sidebar navigation
 		    $("#fixed-menu div div").click(function(){    
 				$("#div-menu").stop(true , true).animate({right:"0"},500);				      
 			});				    
@@ -62,7 +62,7 @@
 <ul id='mainGizMenu'>
 <li><a href='#main' >Главная</a></li>
   <li><a href='#about'>О проекте</a></li>
-  <li><a href='#gotop'>Пакеты</a></li>
+  <li><a href='#price'>Пакеты</a></li>
   <li><a href='#testamonials'>Отзывы</a></li>
   <li><a href='#results'>Результаты</a></li>
   <li><a href='#faq'>Вопросы</a></li>

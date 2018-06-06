@@ -72,8 +72,57 @@
             </div>
         </div>
     </section>
-    <section class="gotop" id="gotop">
-        
+    <section class="price" id="price">
+        <div class='price__header'>
+            <p class="price__title"><b>Выберите</b></p>
+            <p class="price__sub-title">Направление курса</p>
+        </div>       
+        <div class="price__box row">
+            <div class="col-md-6 price-item" id="price_marafon">
+                <h3 class="price-item__title">МАРАФОН<br>ОБЩЕЕ ПОХУДЕНИЕ</h3>
+                <p class="price-item__subtitle">ВСЕГО ЗА 1990 РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
+                <div class="price-item__icon" style="background-image: url('./img/weight-clock-icon.png');">
+                    
+                </div>
+                <ul class="price-item__list">
+                    <li>Программу тренировок на 2 недели</li>
+                    <li>План питания с подробными рецептами</li>
+                    <li>Чат с участницами и мной в WhatsApp</li>
+                    <li>Моя поддержка 24/7</li>
+                    <li>Раздел с полезными советами статьями</li>
+                </ul>
+                <div class="price-item__val">
+                    <p>1990</p>
+                    <p>рублей</p>
+                </div>
+                <a class="price-item__button">
+                    купить курс
+                </a>
+                <p class="price-item__message">Cтарт марафона 11 июня</p>
+            </div>
+            <div class="col-md-6 price-item" id="price_curs">
+                <h3 class="price-item__title">СТРОЙНОЕ ТЕЛО<br>ЗА 30 ДНЕЙ</h3>
+                <p class="price-item__subtitle">ВСЕГО ЗА 2990 РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
+                <div class="price-item__icon" style="background-image:url('./img/polotence-icon.png')">
+                    
+                </div>
+                <ul class="price-item__list">
+                    <li>Программу тренировок на месяц</li>
+                    <li>План питания с подробными рецептами</li>
+                    <li>Чат с участницами и мной в WhatsApp</li>
+                    <li>Моя поддержка 24/7</li>
+                    <li>Раздел с полезными советами статьями</li>
+                </ul>
+                <div class="price-item__val">
+                    <p>2990</p>
+                    <p>рублей</p>
+                </div>
+                <a class="price-item__button">
+                    купить курс
+                </a>
+                <p class="price-item__message"></p>
+            </div>
+        </div>         
     </section>
 </main>
 @endsection

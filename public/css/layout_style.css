@@ -475,8 +475,8 @@ strong {
 
 /* END SECTION ABOUT */
 
-/* SECTION GOTOP */
-.gotop {
+/* SECTION PRICE */
+.price {
 	position: relative;
 	height: 1000px;
 	background-color: transparent;
@@ -486,5 +486,126 @@ strong {
     margin-bottom: 0px;
     padding: 60px 0px 0px 0px;
     z-index: 2;
+}
+
+.price__header {
+	width: 100%;
+	margin-bottom: 2.5rem;
+}
+
+.price__title {
+	font-size: 35px;
+    text-transform: uppercase;
+    color: #dc5c6d;
+    letter-spacing: 1px;
+    text-align: center;
+    font-family: HelveticaBold;
+    margin-bottom: 0;
+}
+
+.price__sub-title {
+	text-align: center;
+	font-size: 14px;
+    text-transform: uppercase;
+    color: #abaaad;
+    font-family: HelveticaLight;
+}
+
+.price__box {
+	width: 1140px;
+	height: 800px;
+	margin: 0 auto;
+	background-color: #1f2343;
+}
+
+.price-item {
+	height:800px;
+	padding: 45px 75px;
+}
+
+.price-item__title {
+	font-family: HelveticaBold;
+    font-size: 20px;
+    color: #dcdcdc;
+    letter-spacing: 1px;
+    text-align: center;    
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.price-item__subtitle {
+	text-align: center;
+    color: #80818b;
+    font-family: HelveticaLight;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+	margin-bottom: 24px;
+}
+
+.price-item__icon {	
+	height: 100px;
+    width: 100px;
+    background-size: contain;
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    margin-bottom: 24px;
+}
+
+.price-item__list {		
+	padding-left: 24px;
+	border-bottom: 2px solid #374c77;	
+	margin: 0 auto;
+	margin-bottom: 24px;
+}
+
+.price-item__list li {	
+	list-style-image: url(https://gizerskaya.com/wp-content/uploads/2018/05/icon-pay-list.png);
+    margin-bottom: 30px;
+    color: #cbcbcb;
+    letter-spacing: 1px;
+    font-family: HelveticaLight;
+}
+
+.price-item__val {	
+	margin: 0 auto;
+	margin-bottom: 15px;
+}
+
+.price-item__val p {	
+	text-align: center;
+    font-family: HelveticaNeue;
+	letter-spacing: 2px;
+    color: #9c9c9c;
+}
+
+.price-item__val p:first-child {
+	font-family: HelveticaBold;
+    letter-spacing: 3px;
+    color: #fff;
+    font-size: 40px;
+    margin-bottom: 0px;
+    line-height: 1.2;
+}
+
+a.price-item__button {	
+	display: block;
+    color: #fff !important;
+    font-size: 20px;
+    background-color: #dc5c6d;
+    width: 200px;
+    text-align: center;
+    padding: 20px;
+    margin: 0 auto;
+    margin-bottom: 24px;
+    font-family: HelveticaBold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.price-item__message {
+	text-align: center;
+    color: #dc5c6d;
+    font-family: HelveticaLight;
 }
 /* END SECTION GOTOP */
