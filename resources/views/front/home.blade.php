@@ -10,7 +10,7 @@
 @endsection
 
 @section('header-scripts')
-   
+   @parent
 @endsection
 
 @section('content')
@@ -67,7 +67,7 @@
             <div class="col-md-5 about__populated" >
                 <div class="elementor-background-overlay"></div>
                 <div class="play-btn">                    
-                    <img width="324" height="264" src="img/playbtn-324x308-копия.png"  alt="#" sizes="(max-width: 324px) 100vw, 324px" />                            
+                    <img width="324" height="264" src="img/playbtn.png"  alt="#" sizes="(max-width: 324px) 100vw, 324px" />                            
                 </div>                
             </div>
         </div>
@@ -127,6 +127,7 @@
 </main>
 @endsection
 
-@section('footer--scripts')
+@section('footer-scripts')    
     @parent
+    <script  src="{{asset('js/main.js') }}"></script>   
 @endsection

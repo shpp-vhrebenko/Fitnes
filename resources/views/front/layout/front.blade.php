@@ -4,7 +4,6 @@
 	
 	@yield('content')
 
-
 @include('front/partials/footer')
 
 

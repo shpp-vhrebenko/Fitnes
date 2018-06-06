@@ -10,7 +10,6 @@
 	@show
 
 	@section('header-scripts')
-	<script  src="{{asset('js/jquery/jquery.js') }}"></script>
-	<script  src="{{asset('js/jquery/jquery-migrate.min.js') }}"></script>
+	<script  src="{{asset('js/lib/jquery-3.3.1.min.js') }}"></script>	
 	@show
 </head>	
