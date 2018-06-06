@@ -6,11 +6,11 @@
 	<title>gizerskaya &#8212; Фитнесс Тренер</title>
 	<meta name='robots' content='noindex,follow' />	
 	@section('header-styles')		
-		<link rel="stylesheet" href="{{ asset('css/layout_style.css') }}">		
+	<link rel="stylesheet" href="{{ asset('css/layout_style.css') }}">		
 	@show
 
 	@section('header-scripts')
-		<script  src="{{asset('js/jquery/jquery.js') }}"></script>
-		<script  src="{{asset('js/jquery/jquery-migrate.min.js') }}"></script>
+	<script  src="{{asset('js/jquery/jquery.js') }}"></script>
+	<script  src="{{asset('js/jquery/jquery-migrate.min.js') }}"></script>
 	@show
 </head>	

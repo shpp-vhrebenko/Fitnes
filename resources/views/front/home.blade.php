@@ -15,7 +15,7 @@
 
 @section('content')
 <main role="main">
-    <section class="main">
+    <section class="main" id="main">
         <div class="elementor-background-overlay"></div>
         <div class="main__text-box">            
             <div class="main__text_1 row">                
@@ -42,6 +42,35 @@
                 </div>
             </div>                
         </div>        
+    </section>
+    <section class="about" id="about">
+        <div class="row">
+            <div class="col-md-6 offset-md-1">
+                <p class='gizerhash'>#GIZERSKAYA</p>
+                <p class="about-progect"><b>О ПРОЕКТЕ</b></p>               
+                <p class="good-sam">ЗДРАВСТВУЙТЕ, Я АНАСТАСИЯ ГИЗЕРСКАЯ</p>
+                <br>
+                <p class="second-block">Моя программа - это выдержка всего лучшего из мира спорта и правильного питания. Более 7 лет активной спортивной практики, изучения физиологии и диетологии дали мне возможность создать такой комплекс упражнений, который поможет тебе привести себя в форму всего лишь за 30 дней. Теперь все в твоих руках! </p>
+                <br>
+                <p class="second-block">
+                Я помогу сбросить лишние килограммы, правильно настроить свой рацион, сделать полезную еду вкусной, а вас настоящими красавицами. </
+                </p>
+                <br/>
+                <p class="second-block">
+                Мою программу прошли уже более 500 девушек, получив по окончанию впечатляющий результат.
+                </p>
+                <br/>
+                <p class="second-block">             
+                Присоединяйся и стань лучше прямо сейчас!
+                </p>
+            </div>                
+            <div class="col-md-5 about__populated" >
+                <div class="elementor-background-overlay"></div>
+                <div class="play-btn">                    
+                    <img width="324" height="284" src="https://gizerskaya.com/wp-content/uploads/2018/04/playbtn-324x308-копия.png" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" srcset="https://gizerskaya.com/wp-content/uploads/2018/04/playbtn-324x308-копия.png 351w, https://gizerskaya.com/wp-content/uploads/2018/04/playbtn-324x308-копия-300x263.png 300w" sizes="(max-width: 324px) 100vw, 324px" />                            
+                </div>                
+            </div>
+        </div>
     </section>
 </main>
 @endsection

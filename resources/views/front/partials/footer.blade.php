@@ -34,16 +34,24 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 	<script>
 		$( document ).ready(function() {
-		    $("#fixed-menu div div").click(function(){
-    
-				$("#div-menu").stop(true , true).animate({right:"0"},500);
-				      
+			// animation slidebar navigation
+		    $("#fixed-menu div div").click(function(){    
+				$("#div-menu").stop(true , true).animate({right:"0"},500);				      
 			});				    
-			$("#div-menu .button-close").click(function(){
-				         	
-				$("#div-menu").stop(true , true).animate({right:"-325"},500);
-				      
+			$("#div-menu .button-close").click(function(){				         	
+				$("#div-menu").stop(true , true).animate({right:"-325"},500);				      
 			});
+
+			// animation smooth scrolling of the anchor in the address bar
+			$("a[href*=\\#]").on("click", function(e){
+				var anchor = $(this);
+				$('html, body').stop().animate({
+					scrollTop: $(anchor.attr('href')).offset().top
+				}, 777);
+				e.preventDefault();
+				return false;
+			});	
+
 		});
 		
 
@@ -52,7 +60,7 @@
 <div id='div-menu' class="sidebar-menu">
   <span class='button-close'>X</span>
 <ul id='mainGizMenu'>
-<li><a href='#main'>Главная</a></li>
+<li><a href='#main' >Главная</a></li>
   <li><a href='#about'>О проекте</a></li>
   <li><a href='#gotop'>Пакеты</a></li>
   <li><a href='#testamonials'>Отзывы</a></li>

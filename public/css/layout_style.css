@@ -178,7 +178,7 @@ strong {
     top: 0;
     left: 0;
     position: absolute;
-	background-image: url(../img/2323232.png)!important;
+	background-image: url(../img/2323232.png);
 	background-attachment: scroll;
 	background-position: center center;
     background-repeat: no-repeat;
@@ -382,3 +382,94 @@ strong {
 	font-size:13px;
 	cursor:pointer;
 }
+
+/* SECTION ABOUT */
+.about {
+	position: relative;
+	height: 560px;
+    padding: 0 15px;
+    background-size: cover;
+    background-attachment: scroll;
+    background-color: #583940;
+    background-image: url(../img/fon-1.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+}
+
+.about .row {
+	padding: 0 15px;
+}
+
+.about__populated {
+	height: 560px;
+	background-attachment: scroll;
+	background-image: url(https://gizerskaya.com/wp-content/uploads/2018/04/photo_2018-03-23_02-20-38.jpg);
+    background-position: top left;
+    background-repeat: no-repeat;
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s
+}
+
+.about__populated .elementor-background-overlay {
+	background-attachment: scroll;
+	transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+	background-image: url(http://gizerskaya.com/wp-content/uploads/2018/03/girl.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 1;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.play-btn {
+	position: absolute;
+    left: -140px;
+    bottom: -30px;
+}
+
+.play-btn img {
+	height: auto;
+    max-width: 100%;   
+}
+
+.gizerhash {
+	text-align: right;
+	color: #fff;
+	font-family: HelveticaUltraLight;
+	font-size: 30px;
+    margin-top: 20px;
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+.about-progect {
+	letter-spacing: 4px;
+    color: #dc5c6d;
+    text-align: right;
+    font-size: 80px;
+    line-height: 60px;
+    font-family: HelveticaBold;
+}
+
+.good-sam {
+	font-family: MyriadProRegular;
+	letter-spacing: 0px;
+    color: #fff;
+    line-height: 26px;
+    font-size: 18px;
+}
+
+.second-block {
+	font-family: MyriadProRegular;
+	text-align: left;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 24px;
+}
+
+/* END SECTION ABOUT */
