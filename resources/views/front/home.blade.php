@@ -5,7 +5,8 @@
     <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">             
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,300italic,400italic,600,700,900&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />   
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">    
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">  
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">     
     @parent   
 @endsection
 
@@ -124,10 +125,291 @@
             </div>
         </div>         
     </section>
+    <section class="testamonials" id="testamonials">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 testamonials__title">
+                    <h3>ОТЗЫВЫ</h3>
+                    <p>234 ОТЗЫВА</p>
+                </div>
+
+                <div id="carouselExampleIndicators" class="carousel vert slide col-md-7" data-ride="false">
+                    <div class="row">
+                        <div class="col-md-2 testamonials__indicators">
+                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                            </a>
+                            <ol class="carousel-indicators carousel-indicators-numbers">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">1</li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1">2</li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2">3</li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="3">4</li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="4">5</li>
+                            </ol>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                        <div class="col-md-10 testamonials__content">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>                                    
+                                </div> 
+                                <div class="carousel-item">
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>                                    
+                                </div> 
+                                <div class="carousel-item">
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="testamonial-item">
+                                        <div class="testamonial-item__title">
+                                            <div class="testamonial-item__ava" style="background-image:url(http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png);">    
+                                            </div>
+                                            <div class="testamonial-item__info">
+                                                <p class="title"><b>Ксения</b></p>
+                                                <p class="sub-title"><span class="span-class" style="display:block; float:left;"><b>22 года</b></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="testamonials-item__description">
+                                            <svg width="26" height="20" xmlns="http://www.w3.org/2000/svg" style="position:absolute; top:-13px; left:32px;"><g><title>Layer 1</title><path id="svg_2" d="m0.750001,18.749998l12.000001,-17.999999l12.000001,17.999999l-24.000003,0z" fill-opacity="null" fill="#a3748a"></path></g></svg>
+                                            <p class="testamonials-item__text">Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня пе...<a class="testamonials-item__open-modal" data-id="0" data-target="#exampleModal" data-toggle="modal" ><span>Подробнее</span></a></p>
+                                        </div>
+                                    </div>                                    
+                                </div>                                                                
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>        
+    </section>
 </main>
 @endsection
 
 @section('footer-scripts')    
     @parent
     <script  src="{{asset('js/main.js') }}"></script>   
+@endsection
+
+@section('footer-modal')
+    @parent 
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal_block-otziv" role="document">
+            <div class="modal-content block-otziv">
+                
+                <button type="button" class="close block-otziv__close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">X</span>
+                    </button>
+                <div class="modal-body">
+                    <div class="block-otziv__info">
+                        <div class="foto-otziv">
+                            <img src="http://gizerskaya.com/wp-content/uploads/2018/03/girl12.png">
+                        </div>
+                        <div class="name">Вика</div>
+                        <span class="age">21 год</span>
+                    </div>
+                    <div class="block-otziv__text">Настя огромное спасибо за марафон,за мотивацию. Я полностью изменила своё отношение к еде и к образу жизни</div> 
+                </div>  
+                           
+            </div>            
+        </div>
+    </div>    
 @endsection

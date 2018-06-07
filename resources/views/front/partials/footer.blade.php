@@ -29,23 +29,26 @@
        
 </footer>
 @section('footer-scripts')	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>	
+	<script  src="{{asset('js/lib/popper.min.js') }}"></script>
+	<script  src="{{asset('js/lib/bootstrap.min.js') }}"></script>
 @show
+@section('footer-modal')
 <div id='div-menu' class="sidebar-menu">
   <span class='button-close'>X</span>
 	<ul id='mainGizMenu'>
-		<li><a href='#main' >Главная</a></li>
-	  	<li><a href='#about'>О проекте</a></li>
-	  	<li><a href='#price'>Пакеты</a></li>
-	  	<li><a href='#testamonials'>Отзывы</a></li>
-	  	<li><a href='#results'>Результаты</a></li>
-	  	<li><a href='#faq'>Вопросы</a></li>
-		<li><a href='#contacts'>Контакты</a></li>
+		<li><a href='#main' class="anchor-link">Главная</a></li>
+	  	<li><a href='#about' class="anchor-link">О проекте</a></li>
+	  	<li><a href='#price' class="anchor-link">Пакеты</a></li>
+	  	<li><a href='#testamonials' class="anchor-link">Отзывы</a></li>
+	  	<li><a href='#results' class="anchor-link">Результаты</a></li>
+	  	<li><a href='#faq' class="anchor-link">Вопросы</a></li>
+		<li><a href='#contacts' class="anchor-link">Контакты</a></li>
 	  	<li><a href='#' id='modalOpen3' class="eModal-3">Конкурс</a></li>
 		<li><a href='https://gizerskaya.com/wp-content/uploads/2018/04/ПОЛИТИКА_КОНФИДЕНЦИАЛЬНОСТИ_ИП_Гизерская.pdf' target='_blank'>Политика конфиденциальности</a></li>
 	</ul>
 <div>
+@show
+
 
 </body>
 </html>

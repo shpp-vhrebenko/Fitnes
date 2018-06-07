@@ -8,7 +8,7 @@ $( document ).ready(function() {
 	});
 
 	// animation smooth scrolling of the anchor in the address bar
-	$("a[href*=\\#]").on("click", function(e){
+	$("a.anchor-link").on("click", function(e){
 		var anchor = $(this);
 		$('html, body').stop().animate({
 			scrollTop: $(anchor.attr('href')).offset().top
