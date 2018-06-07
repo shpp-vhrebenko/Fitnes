@@ -12,4 +12,5 @@
 	@section('header-scripts')
 	<script  src="{{asset('js/lib/jquery-3.3.1.min.js') }}"></script>	
 	@show
+	
 </head>	

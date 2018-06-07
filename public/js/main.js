@@ -17,4 +17,19 @@ $( document ).ready(function() {
 		return false;
 	});	
 
+	$('#sliderResults').slick({   
+    dots: true,
+    customPaging : function(slider, i) {
+    var thumb = $(slider.$slides[i]).data();
+    return '<a>'+(i+1)+'</a>';
+    },
+    arrows: true,
+    vertical: true,
+    slidesToShow: 1,
+    centerMode: true,       
+  }); 
+
+
+	
+
 });

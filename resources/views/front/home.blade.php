@@ -6,7 +6,9 @@
     href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">             
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,300italic,400italic,600,700,900&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />   
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">  
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">     
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">   
     @parent   
 @endsection
 
@@ -45,33 +47,35 @@
         </div>        
     </section>
     <section class="about" id="about">
-        <div class="row">
-            <div class="col-md-6 offset-md-1">
-                <p class='gizerhash'>#GIZERSKAYA</p>
-                <p class="about-progect"><b>О ПРОЕКТЕ</b></p>               
-                <p class="good-sam">ЗДРАВСТВУЙТЕ, Я АНАСТАСИЯ ГИЗЕРСКАЯ</p>
-                <br>
-                <p class="second-block">Моя программа - это выдержка всего лучшего из мира спорта и правильного питания. Более 7 лет активной спортивной практики, изучения физиологии и диетологии дали мне возможность создать такой комплекс упражнений, который поможет тебе привести себя в форму всего лишь за 30 дней. Теперь все в твоих руках! </p>
-                <br>
-                <p class="second-block">
-                Я помогу сбросить лишние килограммы, правильно настроить свой рацион, сделать полезную еду вкусной, а вас настоящими красавицами. </
-                </p>
-                <br/>
-                <p class="second-block">
-                Мою программу прошли уже более 500 девушек, получив по окончанию впечатляющий результат.
-                </p>
-                <br/>
-                <p class="second-block">             
-                Присоединяйся и стань лучше прямо сейчас!
-                </p>
-            </div>                
-            <div class="col-md-5 about__populated" >
-                <div class="elementor-background-overlay"></div>
-                <div class="play-btn">                    
-                    <img width="324" height="264" src="img/playbtn.png"  alt="#" sizes="(max-width: 324px) 100vw, 324px" />                            
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-1">
+                    <p class='gizerhash'>#GIZERSKAYA</p>
+                    <p class="about-progect"><b>О ПРОЕКТЕ</b></p>               
+                    <p class="good-sam">ЗДРАВСТВУЙТЕ, Я АНАСТАСИЯ ГИЗЕРСКАЯ</p>
+                    <br>
+                    <p class="second-block">Моя программа - это выдержка всего лучшего из мира спорта и правильного питания. Более 7 лет активной спортивной практики, изучения физиологии и диетологии дали мне возможность создать такой комплекс упражнений, который поможет тебе привести себя в форму всего лишь за 30 дней. Теперь все в твоих руках! </p>
+                    <br>
+                    <p class="second-block">
+                    Я помогу сбросить лишние килограммы, правильно настроить свой рацион, сделать полезную еду вкусной, а вас настоящими красавицами. </
+                    </p>
+                    <br/>
+                    <p class="second-block">
+                    Мою программу прошли уже более 500 девушек, получив по окончанию впечатляющий результат.
+                    </p>
+                    <br/>
+                    <p class="second-block">             
+                    Присоединяйся и стань лучше прямо сейчас!
+                    </p>
                 </div>                
+                <div class="col-md-5 about__populated" >
+                    <div class="elementor-background-overlay"></div>
+                    <div class="play-btn">                    
+                        <img width="324" height="264" src="img/playbtn.png"  alt="#" sizes="(max-width: 324px) 100vw, 324px" />                            
+                    </div>                
+                </div>
             </div>
-        </div>
+        </div>        
     </section>
     <section class="price" id="price">
         <div class='price__header'>
@@ -133,21 +137,21 @@
                     <p>234 ОТЗЫВА</p>
                 </div>
 
-                <div id="carouselExampleIndicators" class="carousel vert slide col-md-7" data-ride="false">
+                <div id="carouselTestamonials" class="carousel vert slide col-md-7" data-ride="false">
                     <div class="row">
                         <div class="col-md-2 testamonials__indicators">
-                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                             <a class="carousel-control-prev" href="#carouselTestamonials" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                             </a>
                             <ol class="carousel-indicators carousel-indicators-numbers">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">1</li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1">2</li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2">3</li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="3">4</li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="4">5</li>
+                                <li data-target="#carouselTestamonials" data-slide-to="0" class="active">1</li>
+                                <li data-target="#carouselTestamonials" data-slide-to="1">2</li>
+                                <li data-target="#carouselTestamonials" data-slide-to="2">3</li>
+                                <li data-target="#carouselTestamonials" data-slide-to="3">4</li>
+                                <li data-target="#carouselTestamonials" data-slide-to="4">5</li>
                             </ol>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <a class="carousel-control-next" href="#carouselTestamonials" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                             </a>
@@ -381,12 +385,60 @@
             </div>
         </div>        
     </section>
+    <section class="results" id="results">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="results__title">
+                        <p><span class="results__header"><b>РЕЗУЛЬТАТЫ</b></span><br>
+                        <span>С НАМИ ТРЕНИРУЮТСЯ БОЛЕЕ</span><br>
+                        <span><strong>5 000</strong> ДЕВУШЕК</span>
+                        </p>
+                    </div>                    
+                </div>
+                <div class="col-md-9">
+                    <div id="sliderResults" class="slider-results">
+                        <div class="results-item">
+                            <div class="content-overlay"></div>                                  
+                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                        </div>
+                        <div class="results-item">
+                            <div class="content-overlay"></div>                                  
+                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                        </div>  
+                        <div class="results-item">
+                            <div class="content-overlay"></div>                                       
+                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                        </div>  
+                        <div class="results-item">
+                            <div class="content-overlay"></div>                                  
+                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                        </div>  
+                        <div class="results-item">
+                            <div class="content-overlay"></div>                                  
+                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                        </div>  
+                        <div class="results-item">
+                            <div class="content-overlay"></div>                                  
+                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                        </div>  
+                        <div class="results-item">
+                            <div class="content-overlay"></div>                                  
+                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                        </div>              
+                    </div>
+                </div>                
+                
+            </div>
+        </div>   
+    </section>    
 </main>
 @endsection
 
 @section('footer-scripts')    
-    @parent
-    <script  src="{{asset('js/main.js') }}"></script>   
+    @parent    
+    <script  src="{{asset('js/lib/slick.min.js') }}"></script>   
+    <script  src="{{asset('js/main.js') }}"></script> 
 @endsection
 
 @section('footer-modal')
