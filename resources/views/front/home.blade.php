@@ -400,38 +400,77 @@
                     <div id="sliderResults" class="slider-results">
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                            <div class="results-item__img" style="background-image:url(./img/result1.jpg);"></div>
                         </div>
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                            <div class="results-item__img" style="background-image:url(./img/result2.jpg);"></div>
                         </div>  
                         <div class="results-item">
                             <div class="content-overlay"></div>                                       
-                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                            <div class="results-item__img" style="background-image:url(./img/result3.jpg);"></div>
                         </div>  
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                            <div class="results-item__img" style="background-image:url(./img/result4.jpg);"></div>
                         </div>  
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                            <div class="results-item__img" style="background-image:url(./img/result5.jpg);"></div>
                         </div>  
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                            <div class="results-item__img" style="background-image:url(./img/result6.jpg);"></div>
                         </div>  
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(https://gizerskaya.com/wp-content/uploads/2018/03/result1.jpg);"></div>
+                            <div class="results-item__img" style="background-image:url(./img/result7.jpg);"></div>
                         </div>              
                     </div>
                 </div>                
                 
             </div>
         </div>   
-    </section>    
+    </section>  
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-1 faq__text">
+                    <div class="faq-text" id="faq-text">
+                        <p class="faq-text__title"><strong>FAQ</strong></p>
+                        <p class="faq-text__subtitle"><strong id="faq-question">Что входит в стоимость программы?
+                        </strong></p>
+                        <p class="faq-text__description" id="faq-answer">
+                            В стоимость программы входит курс тренировок на указанный срок, программа питания с рецептами, раздел с интересными статьями и советами, моя поддержка в общем чате 24/7, а также связь с куратором программы.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-5 faq__list" >
+                    <div class="overflow-bg"></div>
+                    <ul id="faq-list-tab" class="faq-list">    
+                        <li data-id-question="0" class="curent"><a>Что входит в стоимость программы?</a></li>
+                        
+                        <li data-id-question="1"><a>Какие ограничения по возрасту?</a></li>
+                        
+                        <li data-id-question="2"><a>Смогу ли я выполнять тренировки дома?</a></li>
+                        
+                        <li data-id-question="3"><a>Могу ли я участвовать в программе, если у меня есть ограничения по здоровью?</a></li>
+                        
+                        <li data-id-question="4"><a>Останется ли у меня доступ к программе, после окончания курса?</a></li>
+                        
+                        <li data-id-question="5"><a>Можно ли тренироваться, если я беременна/нахожусь на ГВ?</a></li>
+                        
+                        <li data-id-question="6"><a>Как скоро я увижу результат тренировок?</a></li>
+                       
+                        <li data-id-question="7"><a>Если я не употребляю в пищу какие-то определенные продукты? </a></li>
+                        
+                        <li data-id-question="8"><a>Есть ли в программе меню для вегетарианцев? </a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>  
 </main>
 @endsection
 
