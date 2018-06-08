@@ -386,7 +386,7 @@ strong {
 /* SECTION ABOUT */
 .about {
 	position: relative;
-	height: 560px;
+	height: 100vh;
     padding: 0 15px;
     background-size: cover;
     background-attachment: scroll;
@@ -397,16 +397,24 @@ strong {
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
 }
 
-.about .row {
-	padding: 0 15px;
+.about__description {
+	display: flex;
+	height: 100vh;	
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.about__description-block {	
+	padding-right: 1rem;
 }
 
 .about__populated {
-	height: 560px;
+	height: 100vh;
 	background-attachment: scroll;
 	background-image: url(https://gizerskaya.com/wp-content/uploads/2018/04/photo_2018-03-23_02-20-38.jpg);
     background-position: top left;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;    
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s
 }
 
@@ -441,19 +449,19 @@ strong {
 	text-align: right;
 	color: #fff;
 	font-family: HelveticaUltraLight;
-	font-size: 30px;
-    margin-top: 20px;
+	font-size: 30px;    
     margin-right: 0;
     margin-bottom: 0;
+    line-height: 1;
 }
 
 .about-progect {
 	letter-spacing: 4px;
     color: #dc5c6d;
     text-align: right;
-    font-size: 80px;
-    line-height: 60px;
+    font-size: 80px;    
     font-family: HelveticaBold;
+    line-height: 1;
 }
 
 .good-sam {
@@ -478,13 +486,14 @@ strong {
 /* SECTION PRICE */
 .price {
 	position: relative;
-	height: 1000px;
+	width: 100%;
+	height: 100%;
 	background-color: transparent;
     background-image: linear-gradient(130deg, #743f4d 0%, #2f2e45 100%);
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
     margin-top: 0px;
     margin-bottom: 0px;
-    padding: 60px 0px 0px 0px;
+    padding: 60px 0px;
     z-index: 2;
 }
 
@@ -511,16 +520,9 @@ strong {
     font-family: HelveticaLight;
 }
 
-.price__box {
-	width: 1140px;
-	height: 800px;
-	margin: 0 auto;
-	background-color: #1f2343;
-}
-
-.price-item {
-	height:800px;
+.price-item {	
 	padding: 45px 75px;
+	background-color: #1f2343;
 }
 
 .price-item__title {

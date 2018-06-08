@@ -1,0 +1,133 @@
+/* SECTION MAIN */
+/* END SECTION MAIN */
+
+/* SECTION ABOUT */
+/* Extra small devices (phones, 600px and down) .col */
+@media only screen and (max-width: 576px) {
+    .example {background: red;}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) .col-sm*/
+@media only screen and (min-width: 576px) {
+    .example {background: green;}
+}
+
+/* Medium devices (landscape tablets, 768px and up) .col-md*/
+@media only screen and (min-width: 768px) {
+    .about {
+    	height: 100vh;   
+    	max-height: 900px; 	
+    }
+
+    .about .container {
+	    max-width: initial;
+	    width: 100%;
+	}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) .col-lg*/
+@media only screen and (min-width: 992px) {
+    .about {
+		max-height: initial;    	
+    }	
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) .col-xl*/
+@media only screen and (min-width: 1200px) {	
+	.about .container {
+	    max-width: 1400px;
+	}
+    .gizerhash {
+    	font-size: 60px;
+    }
+    .play-btn {
+    	bottom: -20px;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+	.about .about-progect {
+    	font-size: 100px;
+    }	
+	.play-btn {
+    	bottom: 150px;
+    }
+}
+
+@media only screen and (min-width: 1800px) {	
+	.about .about-progect {
+    	font-size: 110px;
+    }
+}
+@media only screen and (min-width: 2000px) {
+	.about .about-progect {
+    	font-size: 120px;
+    }
+}
+/* END SECTION ABOUT */
+
+/* SECTION PRICE */
+/* Small devices (portrait tablets and large phones, 600px and up) .col-sm*/
+@media only screen and (max-width: 576px) {
+    .price-item {
+    	padding: 45px;
+    } 
+}
+
+/* Medium devices (landscape tablets, 768px and up) .col-md*/
+@media only screen and (max-width: 768px) {
+    .price .container {
+    	max-width: 100%;
+    }
+} 
+
+/* END SECTION PRICE */
+
+/* SECTION REVIEW */
+/* END SECTION REVIEW */
+
+/* SECTION RESULTS */
+/* END SECTION RESULTS */
+
+/* SECTION FAQ */
+/* Large devices (laptops/desktops, 992px and up) .col-lg*/
+@media only screen and (max-width: 992px) {
+	.faq {
+		height: auto;
+	}
+
+	.faq .container {
+    	max-width: 100%;
+    }
+
+    .faq__text {
+    	height: auto;
+    	min-height: initial;    	
+    }    
+
+    .faq__list .overflow-bg {
+    	display: none;
+    }
+
+    .faq__list {
+    	height: auto;
+    	min-height: initial;
+    	padding: 20px;
+    	background-image: linear-gradient(180deg, #ce586c 0%, #191659 100%);   
+    }  
+
+    .faq-text {
+    	padding: 20px;
+    }
+
+    .faq-list {
+    	position: relative;
+    	top: initial;
+    	transform: none;
+    	padding: 20px;
+    }
+} 
+/* END SECTION FAQ */
+
+/* SECTION CONTACTS */
+/* END SECTION CONTACTS */
