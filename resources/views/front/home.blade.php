@@ -246,6 +246,27 @@
             </div>
         </div>
     </section>  
+    <section class="contacts" id="contacts">
+        <div class="contacts__bg-overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 offset-md-4 contacts__content">
+                    <p class="contacts__first-text">
+                        <span class="contacts__title">ОСТАЛИСЬ</span><br>
+                        <span class="contacts__subtitle" >
+                            <strong>
+                               ВОПРОСЫ?
+                            </strong>
+                        </span>
+                    </p>
+                    <p class="contacts__second-text"><b>НАПИШИТЕ МНЕ И Я СВЯЖУСЬ С ВАМИ</b></p>
+                    <a class="contacts__mail-link" href="mailto:gizerskaya.fitness@mail.ru">gizerskaya.fitness@mail.ru</a>           
+                    <p class="contacts__third-text"><b>СВЯЗАТЬСЯ СО МНОЙ</b></p>
+                    <button class="contacts__button" data-toggle="modal" data-target="#modalContacts">НАПИСАТЬ ПИСЬМО</button>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 @endsection
 
@@ -259,11 +280,10 @@
     @parent 
     <div class="modal fade" id="testamonialModal" tabindex="-1" role="dialog" aria-labelledby="testamonialModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal_block-otziv" role="document">
-            <div class="modal-content block-otziv">
-                
+            <div class="modal-content block-otziv">                
                 <button type="button" class="close block-otziv__close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">X</span>
-                    </button>
+                </button>
                 <div class="modal-body">
                     <div class="block-otziv__info">
                         <div class="foto-otziv">
@@ -277,5 +297,33 @@
                            
             </div>            
         </div>
-    </div>    
+    </div>  
+
+    <div class="modal fade" id="modalContacts" tabindex="-1" role="dialog" aria-labelledby="modalContactsTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-block-contacts" role="document">
+        <div class="modal-content block-contacts">
+            <button type="button" class="close block-contacts__close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">X</span>
+            </button>
+            <div class="modal-body">
+                <form action="#" class="form-contacts">
+                    <div class="form-group">
+                        <label for="name">имя</label>
+                        <input type="text" class="form-control" id="name"  placeholder="" required="true">             
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="" required="true">                        
+                    </div>
+                    <div class="form-group form-contacts__text">
+                        <label for="textMessage">текст сообщения</label>
+                        <textarea class="form-control" id="textMessage" rows="4"></textarea>
+                    </div>
+                    <button class="form-contacts__button" id="submitFormContacts">отправить</button>
+                </form>
+            </div>
+          
+        </div>
+      </div>
+    </div>  
 @endsection
