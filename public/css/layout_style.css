@@ -810,6 +810,20 @@ a.price-item__button {
 	font-family: HelveticaLight;
 }
 
+.testamonials-item__text:after {
+	content: '';
+	position: absolute;
+	top: 10px;
+	left: 15%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-bottom-color: #a3748a;
+	border-top: 0;
+	margin-left: -25px;
+	margin-top: -25px;
+}
+
 .testamonials-item__open-modal {
 	float: right;
 	text-decoration: underline !important;
@@ -1058,6 +1072,7 @@ a.price-item__button {
 .faq__list {
 	position: relative;
 	height: 100vh;	
+	min-height: 900px;
 }
 
 .faq-list {
