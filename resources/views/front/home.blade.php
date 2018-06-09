@@ -20,36 +20,37 @@
 <main role="main">
     <section class="main" id="main">
         <div class="elementor-background-overlay"></div>
-        <div class="main__text-box">            
+        <div class="main__container container-fluid">            
             <div class="main__text_1 row">                
-                <div class="col-md-4"></div>
-                <div class="col-md-3"></div>
-                <div class="col-md-5">
-                    <p class="elementor-heading-title elementor-size-xxl">ANASTASIA</p>
+                <div class="col-xl-4 col-lg-4"></div>
+                <div class="col-xl-3 col-lg-3"></div>
+                <div class="col-xl-5 col-lg-5 col-md-12">
+                    <p>ANASTASIA</p>
                 </div>                
             </div>
-            <div class="main__text_2">
-                <p><strong>GIZER<strong style='z-index:99; position:absolute;'>S</strong><text style='opacity:0;'>K</text>KAYA</strong></p>
+            <div class="main__text_2 row"> 
+                <div class="col-md-12">
+                    <p><strong>GIZER<strong class="lete-s">S</strong><text class="lete-k" style='opacity:0;'>K</text>KAYA</strong></p>
+                </div>               
+                
             </div>             
-            <div class="container-fluid container__text">
-                <div class="row">
-                    <div class="col-md-6 main__text_3">
-                        <p class="elementor-heading-title elementor-size-xxl animated animated-slow fadeIn">ОНЛАЙН ФИТНEC ДЛЯ ЖЕНЩИН</p>
-                    </div>
-                    <div class="col-md-3 main__text_4">
-                        <p id='krasota-za-30-dney'>КРАСОТА<br/>ЗА 30 ДНЕЙ</p> 
-                    </div>
-                    <div class="col-md-3 main__button animated bounceIn">                         
-                        <a href="#price" id="button-curs1" class="button-curs1 animated  slideInRight animated-slow anchor-link" role="button">КУПИТЬ КУРС</a>                       
-                    </div>
+            <div class="container__text row">                
+                <div class="col-xl-6 col-lg-6 col-md-12 main__text_3">
+                    <p class="elementor-heading-title elementor-size-xxl animated animated-slow fadeIn">ОНЛАЙН ФИТНEC ДЛЯ ЖЕНЩИН</p>
                 </div>
+                <div class="col-xl-3 col-lg-3 main__text_4">
+                    <p id='krasota-za-30-dney'>КРАСОТА<br/>ЗА 30 ДНЕЙ</p> 
+                </div>
+                <div class="col-xl-3 col-lg-3 main__button animated bounceIn">         
+                    <a href="#price" id="button-curs1" class="button-curs animated  slideInRight animated-slow anchor-link" role="button">КУПИТЬ КУРС</a>                       
+                </div>                
             </div>                
         </div>        
     </section>
     <section class="about" id="about">
         <div class="container">
             <div class="row">
-                <div class="col-xl-7 col-lg-7 about__description">
+                <div class="col-md-12 col-xl-7 col-lg-7 about__description">
                     <div class="about__description-block">
                         <p class='gizerhash'>#GIZERSKAYA</p>
                         <p class="about-progect"><b>О ПРОЕКТЕ</b></p>               
@@ -70,10 +71,10 @@
                         </p>
                     </div>                    
                 </div>                
-                <div class="col-xl-5 col-lg-5 about__populated" >
+                <div class="col-md-12 col-xl-5 col-lg-5 about__populated" >
                     <div class="elementor-background-overlay"></div>
                     <div class="play-btn">                    
-                        <img width="324" height="264" src="img/playbtn.png"  alt="#" sizes="(max-width: 324px) 100vw, 324px" />                            
+                        <img  src="img/playbtn.png"  alt="#"  />                            
                     </div>                
                 </div>
             </div>

@@ -1,7 +1,5 @@
 /* SECTION MAIN */
-/* END SECTION MAIN */
 
-/* SECTION ABOUT */
 /* Extra small devices (phones, 600px and down) .col */
 @media only screen and (max-width: 576px) {
     .example {background: red;}
@@ -14,22 +12,189 @@
 
 /* Medium devices (landscape tablets, 768px and up) .col-md*/
 @media only screen and (min-width: 768px) {
-    .about {
-    	height: 100vh;   
-    	max-height: 900px; 	
+    .example {background: blue;}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) .col-lg*/
+@media only screen and (max-width: 992px) {
+	.main .elementor-background-overlay {
+		height: 80%;
+		top: initial;
+		bottom: 0;
+	}
+
+	.main__container {
+		justify-content: flex-start;
+		padding-top: 55px;
+	}
+
+    .main__button {
+    	display: none;
     }
 
+    .main__text_1 p {
+		text-align: center;
+		font-size: 20px;
+		margin-bottom: .5rem;
+		line-height: 1;
+	}	
+
+	.main__text_2 p {    	
+    	font-size: 45px;
+	    letter-spacing: 6px;	
+	    line-height: 1; 
+	    margin-bottom: 1rem;   
+    }    
+
+    .main__text_2 .lete-s {
+		z-index:initial;
+		position:initial;
+	}
+
+	.main__text_2 .lete-k {
+		display: none;
+	}
+
+    .main__text_3 p {
+    	font-size: 22px;
+    	letter-spacing: 2px;
+    	font-style: normal;
+    	line-height: 1;
+    	text-align: center;
+    }
+
+    .main__text_4 {
+    	display: block;
+    	width: auto;
+    	position: absolute;
+    	bottom: 15px;
+    	right: 15px;
+    	z-index: 2;
+    }
+
+    .main__text_4 p {
+    	font-family: HelveticaBold;
+    	font-size: 35px;
+
+    }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) .col-xl*/
+@media (min-width: 1200px) and (max-width: 1500px) {
+	.main__text_1 p {
+		font-size: 45px;
+	}
+
+    .main__text_2 p {    	
+    	font-size: 100px;
+	    letter-spacing: 35px;	    
+    }    
+
+    .main__text_3 p {
+    	font-size: 45px;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+	.main__text_1 p {
+		font-size: 65px;
+	}
+
+    .main__text_2 p {    	
+    	font-size: 160px;
+	    letter-spacing: 35px;	    
+    }   
+
+    .main__text_2 {
+    	margin-bottom: 1rem;
+    }
+
+    .main__text_3 p {
+    	font-size: 65px;
+    }
+}
+
+/* END SECTION MAIN */
+
+/* SECTION ABOUT */
+/* Small devices (portrait tablets and large phones, 600px and up) .col-sm*/
+@media only screen and (min-width: 576px) {
     .about .container {
 	    max-width: initial;
 	    width: 100%;
+	}
+}
+
+/* Extra small devices (phones, 600px and down) .col */
+@media only screen and (max-width: 768px) {
+    .about-progect {
+    	font-size: 50px;
+    }
+
+    .about__description {
+    	height: 100%;
+	    margin-bottom: 0px;
+	}
+
+	.about__description-block {
+	    padding: 1rem .5rem;
+	}
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) .col-md*/
+@media only screen and (min-width: 768px) {     
+
+	.about__description {
+		height: auto;
+	}
+
+	.about__description-block {
+		padding: 1rem;
+	}
+} 
+
+@media (min-width: 576px) and (max-width: 992px) {
+	.about__description {
+		margin-bottom: 50px;
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	.about {
+		height: 100%;
+		padding: 0;
+	}
+	.about__populated {
+		position: relative;
+		height: 300px;
+		background-image: url(https://gizerskaya.com/wp-content/uploads/2018/03/bg_750_706.jpg) !important;
+	    background-position: center 20% !important;
+	    background-size: cover;
+	    background-repeat: no-repeat;
+	}
+
+	
+
+	.play-btn {
+		position: absolute;
+		height: 100px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.play-btn img{
+		width: auto;
+		height: 100%;		
 	}
 } 
 
 /* Large devices (laptops/desktops, 992px and up) .col-lg*/
 @media only screen and (min-width: 992px) {
-    .about {
-		max-height: initial;    	
-    }	
+   .about {    	
+    	max-height: 900px; 	
+    }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) .col-xl*/
