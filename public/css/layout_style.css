@@ -168,7 +168,7 @@ strong {
 	color: #fff;
 }
 
-.elementor-background-overlay {
+.main__background-overlay {
 	height: 100%;
     width: 100%;
     top: 0;
@@ -414,7 +414,7 @@ strong {
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s
 }
 
-.about__populated .elementor-background-overlay {
+.about__populated .about__background-overlay {
 	background-attachment: scroll;
 	transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
 	background-image: url(http://gizerskaya.com/wp-content/uploads/2018/03/girl.png);

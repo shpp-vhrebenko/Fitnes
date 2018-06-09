@@ -19,7 +19,7 @@
 @section('content')
 <main role="main">
     <section class="main" id="main">
-        <div class="elementor-background-overlay"></div>
+        <div class="main__background-overlay"></div>
         <div class="main__container container-fluid">            
             <div class="main__text_1 row">                
                 <div class="col-xl-4 col-lg-4"></div>
@@ -72,7 +72,7 @@
                     </div>                    
                 </div>                
                 <div class="col-md-12 col-xl-5 col-lg-5 about__populated" >
-                    <div class="elementor-background-overlay"></div>
+                    <div class="about__background-overlay"></div>
                     <div class="play-btn">                    
                         <img  src="img/playbtn.png"  alt="#"  />                            
                     </div>                
@@ -166,9 +166,9 @@
         </div>        
     </section>
     <section class="results" id="results">
-        <div class="container">
+        <div class="container results-container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-12 col-lg-2 col-xl-3 results-title__box">
                     <div class="results__title">
                         <p><span class="results__header"><b>РЕЗУЛЬТАТЫ</b></span><br>
                         <span>С НАМИ ТРЕНИРУЮТСЯ БОЛЕЕ</span><br>
@@ -176,7 +176,7 @@
                         </p>
                     </div>                    
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-12 col-lg-10 col-xl-9 results-slider__box">
                     <div id="sliderResults" class="slider-results">
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  

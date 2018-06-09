@@ -27,7 +27,7 @@ $( document ).ready(function() {
 	    arrows: true,
 	    vertical: true,
 	    slidesToShow: 1,
-	    centerMode: true,       
+	    centerMode: true,     
 	}); 
 
 	// review --------------------------------------------------------
