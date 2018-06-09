@@ -1,5 +1,6 @@
 body {    
-      
+	line-height: 1.2;
+	font-size: 16px;
 }
 
 @font-face {
@@ -51,11 +52,50 @@ strong {
     animation-duration: 2s;
 }
 
-.main {
-	overflow-y: hidden;
+/* NAVBAR MENU */
+.navbar {
+	background-color: rgba(0,0,0,.45);
+	height: 55px;
 }
 
+.navbar-brand img {
+	width: 150px;
+	height: 24px;
+}
+
+.fixed-menu__right span {
+	display:inline-block;
+	color:white;
+	margin-top:5px;
+	font-size:13px;
+}
+
+.fixed-menu__button {
+	margin-left:21px;
+	cursor:pointer;
+	float:right;
+	width:26px;
+	border-top:4px solid #fff;
+	border-bottom:4px solid #fff;
+}
+
+.fixed-menu__button .inner-button {
+	width:35%;
+	border-top:3px solid #fff;
+	margin:25% auto;
+	background-color:#fff;
+}
+/* END NAVBAR MENU */
+
 /* SECTION MAIN */
+.main {
+	overflow-y: hidden;
+	background-color: transparent;
+    background-image: linear-gradient(270deg, #ce586c 21%, #191659 100%);
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+    height: 100vh;
+}
+
 .main__container {
 	position: relative;	
 	height: 100%;
@@ -184,24 +224,7 @@ strong {
 	z-index: 1;	
 }
 
-.navbar {
-	background-color: rgba(0,0,0,.45);
-	height: 55px;
-}
 
-.navbar-brand img {
-	width: 150px;
-	height: 24px;
-}
-
-
-
-.main {
-	background-color: transparent;
-    background-image: linear-gradient(270deg, #ce586c 21%, #191659 100%);
-    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
-    height: 100vh;
-}
 
 
 .footer {
@@ -917,6 +940,10 @@ a.price-item__button {
 .slider-results {
 	position: relative;
 	height: 900px;
+}
+
+.slick-prev, .slick-next {
+	opacity: .5;
 }
 
 .slider-results.slick-dotted.slick-slider {

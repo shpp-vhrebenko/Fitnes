@@ -134,17 +134,17 @@
         </div>
                 
     </section>
-    <section class="testamonials" id="testamonials">
-        <div class="container">
+    <section class="testamonials" id="review">
+        <div class="container testamonials__container">
             <div class="row">
-                <div class="col-md-5 testamonials__title">
+                <div class="col-md-12 col-lg-5 testamonials__title">
                     <h3>ОТЗЫВЫ</h3>
                     <p>234 ОТЗЫВА</p>
                 </div>
 
-                <div id="carouselTestamonials" class="carousel vert slide col-md-7" data-ride="false">
+                <div id="carouselTestamonials" class="carousel vert slide col-md-12 col-lg-7" data-ride="false">
                     <div class="row">
-                        <div class="col-md-2 testamonials__indicators">
+                        <div class="col-md-12 order-md-2 order-sm-2 order-2 col-lg-2 testamonials__indicators">
                              <a class="carousel-control-prev" href="#carouselTestamonials" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
@@ -156,7 +156,7 @@
                             <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <div class="col-md-10 testamonials__content">
+                        <div class="col-md-12 order-md-1 order-sm-1 order-1 col-lg-10 testamonials__content">
                             <div class="carousel-inner" id="carouselTestamonials-inner">                             
                             </div>
                         </div>

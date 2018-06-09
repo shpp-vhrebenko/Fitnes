@@ -7,10 +7,10 @@
       <i class="fa fa-user-circle-o user-icon" aria-hidden="true"></i>            
          <span class="fixed-menu__title" >ЛИЧНЫЙ КАБИНЕТ</span>
     </a>
-    <div style='float:right;'>
-    <span style='display:block; color:white; margin-top:5px;font-size:13px; display:inline-block;'>МЕНЮ</span>
-    <div style="margin-left:21px; cursor:pointer; float:right; width:26px; border-top:4px solid #fff; border-bottom:4px solid #fff;">
-        <div style="width:35%; border-top:3px solid #fff; margin:25% auto; background-color:#fff;"></div>
+    <div  class="fixed-menu__right pull-right">
+      <span>МЕНЮ</span>
+      <div class="fixed-menu__button">
+        <div class="inner-button"></div>
+      </div>
     </div>
-  </div>
 </nav>
