@@ -1138,10 +1138,26 @@ a.price-item__button {
 	text-align: right;
 }
 
+.contacts__content-md {		
+	width: 100%;
+	background-color: #2e2c34;
+	display: none;
+	padding: 20px 0 60px 0;
+}
+
+.contacts__content-md .contacts__third-text {
+	text-align: center;
+	color: #fff;
+	font-size: 30px;
+}
+
+.contacts__content-md .contacts__button {
+	align-self: center;
+}
+
 .contacts__title {
 	font-family: HelveticaUltraLight;
-	letter-spacing: 2px;
-    line-height: 130px;
+	letter-spacing: 2px;    
     font-size: 55px;
 }
 
@@ -1152,8 +1168,7 @@ a.price-item__button {
 .contacts__subtitle {
 	font-family: HelveticaBold;
 	letter-spacing: 2px;
-    font-size: 90px;
-    line-height: 0px;    
+    font-size: 90px;      
 }
 
 .contacts__second-text {

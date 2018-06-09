@@ -253,23 +253,27 @@
     </section>  
     <section class="contacts" id="contacts">
         <div class="contacts__bg-overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7 offset-md-4 contacts__content">
-                    <p class="contacts__first-text">
-                        <span class="contacts__title">ОСТАЛИСЬ</span><br>
-                        <span class="contacts__subtitle" >
+        <div class="container-fluid ">
+            <div class="row contacts-container">
+                <div class="col-md-12 col-lg-12 col-xl-7 offset-xl-4 contacts__content">
+                    <div class="contacts__first-text">
+                        <p class="contacts__title">ОСТАЛИСЬ</p>
+                        <p class="contacts__subtitle" >
                             <strong>
                                ВОПРОСЫ?
                             </strong>
-                        </span>
-                    </p>
+                        </p>
+                    </div>
                     <p class="contacts__second-text"><b>НАПИШИТЕ МНЕ И Я СВЯЖУСЬ С ВАМИ</b></p>
                     <a class="contacts__mail-link" href="mailto:gizerskaya.fitness@mail.ru">gizerskaya.fitness@mail.ru</a>           
                     <p class="contacts__third-text"><b>СВЯЗАТЬСЯ СО МНОЙ</b></p>
-                    <button class="contacts__button" data-toggle="modal" data-target="#modalContacts">НАПИСАТЬ ПИСЬМО</button>
+                    <button id="contacts-button-w" class="contacts__button" data-toggle="modal" data-target="#modalContacts">НАПИСАТЬ ПИСЬМО</button>
                 </div>
-            </div>
+                <div class="col-md-12 contacts__content-md">
+                    <p class="contacts__third-text"><b>СВЯЗАТЬСЯ СО МНОЙ</b></p>
+                    <button id="contacts-button-d" class="contacts__button" data-toggle="modal" data-target="#modalContacts">НАПИСАТЬ ПИСЬМО</button>
+                </div>
+            </div>            
         </div>
     </section>
 </main>

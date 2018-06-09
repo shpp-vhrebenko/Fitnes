@@ -2,20 +2,40 @@
 
 /* Extra small devices (phones, 600px and down) .col */
 @media only screen and (max-width: 576px) {
-    .example {background: red;}
-}
+    .main__text_1 p {		
+		font-size: 20px;
+		letter-spacing: 6px;
+		margin-bottom: 0;		
+	}	
 
-/* Small devices (portrait tablets and large phones, 600px and up) .col-sm*/
-@media only screen and (min-width: 576px) {
-    .example {background: green;}
-}
+	.main__text_2 p {    	
+    	font-size: 33px;
+    	letter-spacing: 6px;	     
+    } 
 
-/* Medium devices (landscape tablets, 768px and up) .col-md*/
-@media only screen and (min-width: 768px) {
-    .example {background: blue;}
-} 
+    .main__text_3 p {
+    	font-size: 15px;    	
+    }
+}
 
 /* Large devices (laptops/desktops, 992px and up) .col-lg*/
+@media (min-width: 576px) and (max-width: 992px) {
+	.main__text_1 p {		
+		margin-bottom: .5rem;		
+	}	
+
+	.main__text_2 p {    	
+    	font-size: 45px;
+	    letter-spacing: 6px;	
+	    line-height: 1; 
+	    margin-bottom: 1rem;   
+    }
+
+    .main__text_3 p {
+    	font-size: 22px;    	
+    }
+}
+
 @media only screen and (max-width: 992px) {
 	.main .elementor-background-overlay {
 		height: 80%;
@@ -25,7 +45,7 @@
 
 	.main__container {
 		justify-content: flex-start;
-		padding-top: 55px;
+		padding-top: 58px;
 	}
 
     .main__button {
@@ -34,17 +54,9 @@
 
     .main__text_1 p {
 		text-align: center;
-		font-size: 20px;
-		margin-bottom: .5rem;
+		font-size: 20px;		
 		line-height: 1;
-	}	
-
-	.main__text_2 p {    	
-    	font-size: 45px;
-	    letter-spacing: 6px;	
-	    line-height: 1; 
-	    margin-bottom: 1rem;   
-    }    
+	}		    
 
     .main__text_2 .lete-s {
 		z-index:initial;
@@ -55,8 +67,7 @@
 		display: none;
 	}
 
-    .main__text_3 p {
-    	font-size: 22px;
+    .main__text_3 p {    	
     	letter-spacing: 2px;
     	font-style: normal;
     	line-height: 1;
@@ -295,4 +306,116 @@
 /* END SECTION FAQ */
 
 /* SECTION CONTACTS */
+/* Extra small devices (phones, 600px and down) .col */
+@media only screen and (max-width: 576px) {
+    .contacts__content {
+	    align-items: flex-start;
+	    text-align: left;
+	}
+	.contacts__bg-overlay {
+		background-position: 0% 62%;
+	}
+
+	.contacts__title {
+		font-size: 20px;
+		line-height: 1;	
+		margin-bottom: 0;	
+	}
+
+	.contacts__subtitle {
+		font-size: 40px;		
+	}
+
+	.contacts__second-text {
+		font-size: 16px;
+	}
+
+	.contacts__mail-link {
+		font-size: 20px;
+	}
+
+	.contacts__mail-link {
+		font-size: 14px;
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) .col-sm*/
+@media only screen and (min-width: 576px) {
+    .contacts__title {		
+		line-height: 1;	
+		margin-bottom: 0px;	
+	}
+
+	.contacts__subtitle {
+		line-height: 1;
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) .col-md*/
+@media only screen and (min-width: 768px) {
+    .example {background: blue;}
+} 
+
+@media (min-width: 576px) and (max-width: 992px)  {
+    .contacts__bg-overlay {
+		background-position: 0% 55%;
+	}
+
+	.contacts__second-text {
+		font-size: 20px;
+	}
+
+	.contacts__mail-link {
+		font-size: 20px;
+	}
+
+	.contacts__subtitle {
+		font-size: 46px;
+		letter-spacing: 2px;
+	}	
+}
+
+/* Large devices (laptops/desktops, 992px and up) .col-lg*/
+@media only screen and (max-width: 992px) {
+	.contacts {
+		height: 100vh;
+		max-height: initial;
+		min-height: initial;
+	}
+
+	.contacts-container {
+		height: 100vh;
+	}	
+
+	.contacts__content {
+		justify-content: flex-start;
+		min-height: initial;
+		max-height: initial;
+		padding: 3rem 2rem;
+		height: 80%;		
+	}
+
+	.contacts__content-md {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: auto;
+	}
+
+	.contacts__content .contacts__third-text {
+		display: none;
+	}	
+
+    #contacts-button-w {
+    	display: none;
+    }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) .col-xl*/
+@media (min-width: 992px) and (max-width: 1200px)  {
+    .contacts__content {
+    	padding: 2rem;
+    }
+}
+
 /* END SECTION CONTACTS */
