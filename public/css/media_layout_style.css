@@ -47,22 +47,32 @@
     }
 }
 
-/* Large devices (laptops/desktops, 992px and up) .col-lg*/
-@media (min-width: 576px) and (max-width: 992px) {
+@media only screen and (min-width: 576px) {
 	.main__text_1 p {		
-		margin-bottom: .5rem;		
+		margin-bottom: 0;
+		line-height: 1;		
 	}	
+}
+
+/* Large devices (laptops/desktops, 992px and up) .col-lg*/
+@media (min-width: 576px) and (max-width: 992px) {	
 
 	.main__text_2 p {    	
     	font-size: 45px;
 	    letter-spacing: 6px;	
 	    line-height: 1; 
-	    margin-bottom: 1rem;   
+	    margin-bottom: .5rem;   
     }
 
     .main__text_3 p {
     	font-size: 22px;    	
     }
+}
+
+@media only screen and (min-width: 992px) {
+	.main__text_1 {
+		margin-top: 1rem;
+	}
 }
 
 @media only screen and (max-width: 992px) {
@@ -104,7 +114,7 @@
     }
 
     .main__text_4 {
-    	display: block;
+    	display: none;
     	width: auto;
     	position: absolute;
     	bottom: 15px;
@@ -127,7 +137,8 @@
 
     .main__text_2 p {    	
     	font-size: 100px;
-	    letter-spacing: 35px;	    
+	    letter-spacing: 35px;	
+	    margin-bottom: 0;    
     }    
 
     .main__text_3 p {
@@ -138,15 +149,17 @@
 @media only screen and (min-width: 1500px) {
 	.main__text_1 p {
 		font-size: 65px;
+		padding-left: 1rem;
 	}
 
     .main__text_2 p {    	
     	font-size: 160px;
-	    letter-spacing: 35px;	    
+	    letter-spacing: 35px;
+	    line-height: 130px;	    
     }   
 
     .main__text_2 {
-    	margin-bottom: 1rem;
+    	margin-bottom: 0;
     }
 
     .main__text_3 p {
@@ -165,12 +178,21 @@
 	}
 }
 
-/* Extra small devices (phones, 600px and down) .col */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 576px) {
     .about-progect {
-    	font-size: 48px;
+    	font-size: 50px;
     }
+}
 
+/* Extra small devices (phones, 600px and down) .col */
+@media (min-width: 576px) and (max-width: 768px) {
+	.about-progect {
+    	font-size: 64px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    
     .about__description {
     	height: 100%;
 	    margin-bottom: 0px;
@@ -178,6 +200,16 @@
 
 	.about__description-block {
 	    padding: 1rem .5rem;
+	}
+
+	.good-sam {
+		font-family: HelveticaLight;
+		font-size: 13px;
+	}
+
+	.second-block {
+		font-family: HelveticaLight;
+		font-size: 13px;
 	}
 }
 
@@ -214,7 +246,10 @@
 	    background-repeat: no-repeat;
 	}
 
-	
+	.about__populated .about__background-overlay {	    
+	    height: 120%;	    
+	    top: -30px;	    
+	}
 
 	.play-btn {
 		position: absolute;
@@ -233,7 +268,11 @@
 /* Large devices (laptops/desktops, 992px and up) .col-lg*/
 @media only screen and (min-width: 992px) {
    .about {    	
-    	max-height: 900px; 	
+    	min-height: 900px; 	
+    }
+
+    .about__populated{
+    	min-height: 900px
     }
 } 
 
@@ -339,6 +378,10 @@
     	height: 100%;
     }
 
+    .testamonials__content {
+    	height: auto;
+    }
+
 	.testamonials__container {    	
     	max-width: initial;
     	width: 100%;
@@ -356,7 +399,8 @@
 
     .testamonials__indicators {
 	    position: relative;
-	    height: auto;
+	    height: 46px;
+	    min-height: initial;
 	    padding: 1rem;
 	}
 
@@ -366,9 +410,9 @@
 	    flex-direction: row;	       
 	    align-items: center;
 	    top: initial;
-	    bottom: 0;	    
-	    padding: 2rem 0;
+	    bottom: 0;	   
 	    margin: 0 auto;
+	    padding: 0;
 	    transform: none;
 	}
 
@@ -419,17 +463,29 @@
 /* Large devices (laptops/desktops, 992px and up) .col-lg*/
 @media only screen and (min-width: 992px) {
     .testamonials {
-    	height: 900px;
+    	height: 100vh;
+    	min-height: 900px;
     }
 
     .testamonials__title {
-		height: 900px;
+		height: 100vh;
+		min-height: 900px;
     }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) .col-xl*/
-@media only screen and (min-width: 1200px) {
-    
+@media only screen and (min-width: 1500px) {
+	.testamonials__title {
+		padding-right: 3%;
+	}
+
+	.testamonials__content {
+    	padding-left: 5%;
+    }
+
+    .testamonials__title h3 {
+    	font-size: 125px
+    }
 }
 
 /* END SECTION REVIEW */
@@ -623,6 +679,12 @@
 
 /* SECTION FAQ */
 /* Large devices (laptops/desktops, 992px and up) .col-lg*/
+@media only screen and (min-width: 992px) {
+	.faq__text {
+		padding-right: 10%;
+	}
+}
+
 @media only screen and (max-width: 992px) {
 	.faq {
 		height: auto;

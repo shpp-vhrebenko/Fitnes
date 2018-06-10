@@ -30,7 +30,7 @@
             </div>
             <div class="main__text_2 row"> 
                 <div class="col-md-12">
-                    <p><strong>GIZER<strong class="lete-s">S</strong><text class="lete-k" style='opacity:0;'>K</text>KAYA</strong></p>
+                    <p><strong>GIZER<span class="lete-s">S</span><span class="lete-k" >K</span>KAYA</strong></p>
                 </div>               
                 
             </div>             
@@ -48,7 +48,7 @@
         </div>        
     </section>
     <section class="about" id="about">
-        <div class="container">
+        <div class="container about__container">
             <div class="row">
                 <div class="col-md-12 col-xl-7 col-lg-7 about__description">
                     <div class="about__description-block">
@@ -135,16 +135,15 @@
                 
     </section>
     <section class="testamonials" id="review">
-        <div class="container testamonials__container">
+        <div class="container-fluid testamonials__container">
             <div class="row">
                 <div class="col-md-12 col-lg-5 testamonials__title">
                     <h3>ОТЗЫВЫ</h3>
                     <p>234 ОТЗЫВА</p>
                 </div>
-
-                <div id="carouselTestamonials" class="carousel vert slide col-md-12 col-lg-7" data-ride="false">
+                <div id="carouselTestamonials" class="testamonials__carousel carousel vert slide col-md-12 col-lg-7" data-ride="false">
                     <div class="row">
-                        <div class="col-md-12 order-md-2 order-sm-2 order-2 col-lg-2 testamonials__indicators">
+                        <div class="col-md-12 col-lg-1 testamonials__indicators">
                              <a class="carousel-control-prev" href="#carouselTestamonials" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
@@ -156,7 +155,7 @@
                             <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <div class="col-md-12 order-md-1 order-sm-1 order-1 col-lg-10 testamonials__content">
+                        <div class="col-md-12 col-lg-10 testamonials__content">
                             <div class="carousel-inner" id="carouselTestamonials-inner">                             
                             </div>
                         </div>
@@ -213,9 +212,9 @@
         </div>   
     </section>  
     <section class="faq" id="faq">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12 col-lg-6 col-xl-6 offset-lg-1 offset-xl-1 faq__text">
+                <div class="col-md-12 col-lg-7 col-xl-7 offset-lg-1 offset-xl-1 faq__text">
                     <div class="faq-text" id="faq-text">
                         <p class="faq-text__title"><strong>FAQ</strong></p>
                         <p class="faq-text__subtitle"><strong id="faq-question">Что входит в стоимость программы?
@@ -225,7 +224,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-5 col-xl-5 faq__list" >
+                <div class="col-md-12 col-lg-4 col-xl-4 faq__list" >
                     <div class="overflow-bg"></div>
                     <ul id="faq-list-tab" class="faq-list">    
                         <li data-id-question="0" class="curent"><a>Что входит в стоимость программы?</a></li>
