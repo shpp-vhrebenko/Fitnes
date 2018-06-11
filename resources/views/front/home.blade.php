@@ -81,7 +81,7 @@
         </div>        
     </section>
     <section class="price" id="price">
-        <div class="container">
+        <div class="container price__container">
             <div class='price__header'>
                 <p class="price__title"><b>Выберите</b></p>
                 <p class="price__sub-title">Направление курса</p>
@@ -143,7 +143,7 @@
                 </div>
                 <div id="carouselTestamonials" class="testamonials__carousel carousel vert slide col-md-12 col-lg-7" data-ride="false">
                     <div class="row">
-                        <div class="col-md-12 col-lg-1 testamonials__indicators">
+                        <div class="col-12 order-2 col-md-12 col-lg-1 order-lg-1 testamonials__indicators">
                              <a class="carousel-control-prev" href="#carouselTestamonials" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
@@ -155,7 +155,7 @@
                             <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <div class="col-md-12 col-lg-11 testamonials__content">
+                        <div class="col-12 order-1 col-md-12 col-lg-11 order-lg-2 testamonials__content">
                             <div class="carousel-inner" id="carouselTestamonials-inner">                             
                             </div>
                         </div>
@@ -290,7 +290,7 @@
                 </div>
                 <div class="col-md-12 contacts__content-md">
                     <p class="contacts__third-text"><b>СВЯЗАТЬСЯ СО МНОЙ</b></p>
-                    <button id="contacts-button-d" class="contacts__button" data-toggle="modal" data-target="#modalContacts">НАПИСАТЬ ПИСЬМО</button>
+                    <button id="contacts-button-d" class="contacts__button" data-toggle="modal" data-target="#modalContacts">НАПИСАТЬ<br>ПИСЬМО</button>
                 </div>
             </div>            
         </div>
