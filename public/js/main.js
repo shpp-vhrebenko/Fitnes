@@ -226,6 +226,10 @@ $( document ).ready(function() {
 		$("#faq-answer").text(answers[idQuestion]);
 		var currentQuestionItem = $("#faq-list-tab").find('li.curent').removeClass('curent');		
 		$(this).addClass('curent');	
+
+	 	$('html,body').stop(false,true).animate({
+			scrollTop: $("#faq").offset().top
+		})	
 	});
 
 	// end faq ---------------------------------------------------------
