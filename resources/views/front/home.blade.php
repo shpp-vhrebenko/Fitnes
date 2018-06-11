@@ -155,7 +155,7 @@
                             <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <div class="col-md-12 col-lg-10 testamonials__content">
+                        <div class="col-md-12 col-lg-11 testamonials__content">
                             <div class="carousel-inner" id="carouselTestamonials-inner">                             
                             </div>
                         </div>

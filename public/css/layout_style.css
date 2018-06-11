@@ -553,7 +553,7 @@ strong {
 }
 
 .price-item {	
-	padding: 45px 75px;
+	padding: 45px 85px;
 	background-color: #1f2343;
 }
 
@@ -583,7 +583,7 @@ strong {
     background-position: 100% 100%;
     background-repeat: no-repeat;
     margin: 0 auto;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .price-item__list {		
@@ -725,7 +725,7 @@ a.price-item__button {
 	display: block;
 	width: 10px;
 	height: 100px;    
-	top: 15%;
+	top: 20%;
 	left: 50%;
 	bottom: initial;
 	transform: translateX(-50%);
@@ -745,7 +745,7 @@ a.price-item__button {
 	display: block;
 	width: 10px;
 	height: 100px;
-	bottom: 15%;
+	bottom: 20%;
 	left: 50%;
 	top: initial;
 	transform: translateX(-50%);
@@ -848,8 +848,8 @@ a.price-item__button {
 .testamonials-item__text:after {
 	content: '';
 	position: absolute;
-	top: 10px;
-	left: 15%;
+	top: 14px;
+	left: 6%;
 	width: 0;
 	height: 0;
 	border: 20px solid transparent;
