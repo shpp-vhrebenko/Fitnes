@@ -30,6 +30,8 @@ $( document ).ready(function() {
 	    centerMode: true,     
 	}); 
 
+
+
 	// review --------------------------------------------------------
 	var textarr = [
 		"Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня первый день как марафон закончился, а я начала день по прежнему с овсянки" , 
@@ -217,7 +219,9 @@ $( document ).ready(function() {
     "К сожалению, на данный момент такое питание отсутсвует, но будет разработано в ближайшем будущем."];
 
     $("#faq-list-tab li").click(function(){
-    	var idQuestion = $(this).data('idQuestion');		
+    	var idQuestion = $(this).data('idQuestion');
+    	var faqTextBox = $('.faq-text');
+    	faqTextBox.attr('id', 'question_' + idQuestion);		
 		$("#faq-question").text($(this).text());
 		$("#faq-answer").text(answers[idQuestion]);
 		var currentQuestionItem = $("#faq-list-tab").find('li.curent').removeClass('curent');		
