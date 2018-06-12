@@ -247,23 +247,23 @@
                 <div class="col-md-12 col-lg-4 col-xl-4 faq__list" >
                     <div class="overflow-bg"></div>
                     <ul id="faq-list-tab" class="faq-list">    
-                        <li data-id-question="0" class="curent"><a href="#question_0">Что входит в стоимость программы?</a></li>
+                        <li data-id-question="0" class="curent"><a>Что входит в стоимость программы?</a></li>
                         
-                        <li data-id-question="1"><a href="#question_1">Какие ограничения по возрасту?</a></li>
+                        <li data-id-question="1"><a>Какие ограничения по возрасту?</a></li>
                         
-                        <li data-id-question="2"><a href="#question_2">Смогу ли я выполнять тренировки дома?</a></li>
+                        <li data-id-question="2"><a>Смогу ли я выполнять тренировки дома?</a></li>
                         
-                        <li data-id-question="3"><a href="#question_3">Могу ли я участвовать в программе, если у меня есть ограничения по здоровью?</a></li>
+                        <li data-id-question="3"><a>Могу ли я участвовать в программе, если у меня есть ограничения по здоровью?</a></li>
                         
-                        <li data-id-question="4"><a href="#question_4">Останется ли у меня доступ к программе, после окончания курса?</a></li>
+                        <li data-id-question="4"><a>Останется ли у меня доступ к программе, после окончания курса?</a></li>
                         
-                        <li data-id-question="5"><a href="#question_5">Можно ли тренироваться, если я беременна/нахожусь на ГВ?</a></li>
+                        <li data-id-question="5"><a>Можно ли тренироваться, если я беременна/нахожусь на ГВ?</a></li>
                         
-                        <li data-id-question="6"><a href="#question_6">Как скоро я увижу результат тренировок?</a></li>
+                        <li data-id-question="6"><a>Как скоро я увижу результат тренировок?</a></li>
                        
-                        <li data-id-question="7"><a href="#question_7">Если я не употребляю в пищу какие-то определенные продукты? </a></li>
+                        <li data-id-question="7"><a>Если я не употребляю в пищу какие-то определенные продукты? </a></li>
                         
-                        <li data-id-question="8"><a href="#question_8">Есть ли в программе меню для вегетарианцев? </a></li>
+                        <li data-id-question="8"><a>Есть ли в программе меню для вегетарианцев? </a></li>
                         
                     </ul>
                 </div>

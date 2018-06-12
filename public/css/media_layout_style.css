@@ -31,12 +31,12 @@
 		font-size: 20px;
 		letter-spacing: 6px;
 		margin-bottom: 0;		
-	}	
+	}		
 
 	.main__text_2 p {    	
     	font-size: 33px;
-    	letter-spacing: 6px;	
-    	margin-bottom: .5rem;     
+    	letter-spacing: 6px; 
+    	margin-bottom: 0.3rem;   	   
     } 
 
     .main__text_3 p {
@@ -58,7 +58,7 @@
     	font-size: 45px;
 	    letter-spacing: 6px;	
 	    line-height: 1; 
-	    margin-bottom: .5rem;   
+	    margin-bottom: .3rem;   
     }
 
     .main__text_3 p {
@@ -68,7 +68,11 @@
 
 @media only screen and (min-width: 992px) {
 	.main__text_1 {
-		margin-top: 1rem;
+		margin-top: 1rem;				
+	}
+
+	.main__text_2 strong {
+		line-height: 1;
 	}
 }
 
@@ -86,13 +90,13 @@
 
     .main__button {
     	display: none;
-    }
+    }    
 
     .main__text_1 p {
 		text-align: center;
 		font-size: 20px;		
 		line-height: 1;
-	}		    
+	}  
 
     .main__text_2 .lete-s {
 		z-index:initial;
@@ -126,11 +130,33 @@
     }
 } 
 
+@media (min-width: 992px) and (max-width: 1200px) {
+	.main__text_1 p {
+		font-size: 45px;
+		margin-bottom: -1rem;
+	}	
+
+    .main__text_2 p {    	
+    	font-size: 100px;
+	    letter-spacing: 35px;	
+	    margin-bottom: 0;    
+    }   
+
+	.main__text_2 {
+    	margin-bottom: -0.5rem;
+    }
+
+	.main__text_2 .lete-s {
+    	top: 5px;
+    }
+}
+
 /* Extra large devices (large laptops and desktops, 1200px and up) .col-xl*/
 @media (min-width: 1200px) and (max-width: 1500px) {
 	.main__text_1 p {
 		font-size: 45px;
-	}
+		margin-bottom: -1rem;
+	}	
 
     .main__text_2 p {    	
     	font-size: 100px;
@@ -138,15 +164,32 @@
 	    margin-bottom: 0;    
     }    
 
+    .main__text_2 {
+    	margin-bottom: -0.5rem;
+    }
+
+    .main__text_2 .lete-s {
+    	top: 7px;
+    }
+
+    .main__text_3 {
+		padding-right: 1%;
+		padding-left: 100px;
+	}
+
     .main__text_3 p {
     	font-size: 45px;
     }
 }
 
 @media only screen and (min-width: 1500px) {
+	.main__text_1 {		
+		margin-bottom: -0.5rem;
+	}
+
 	.main__text_1 p {
 		font-size: 65px;
-		padding-left: 1rem;
+		padding-left: 3rem;
 	}
 
     .main__text_2 p {    	
@@ -156,8 +199,13 @@
     }   
 
     .main__text_2 {
-    	margin-bottom: 0;
-    }
+		margin-bottom: -0.5rem;
+	}
+
+	.main__text_3 {
+		padding-right: 2%;
+		padding-left: 100px;
+	}
 
     .main__text_3 p {
     	font-size: 65px;
@@ -308,18 +356,18 @@
     }    
 }
 
-@media only screen and (min-width: 1400px) {
+@media only screen and (min-width: 1200px) {
 	.about .about-progect {
     	font-size: 100px;
     }	
 }
 
-@media only screen and (min-width: 1800px) {	
+@media only screen and (min-width: 1400px) {	
 	.about .about-progect {
     	font-size: 110px;
     }
 }
-@media only screen and (min-width: 2000px) {
+@media only screen and (min-width: 1600px) {
 	.about .about-progect {
     	font-size: 120px;
     }
@@ -840,19 +888,19 @@
 		padding-left: 5%;
 	}
 
-	.faq-list li.curent:after {
-		content: '';
-		position: absolute;
-		left: -40px;
-		top: 50%;
-		width: 0;
-		height: 0;
-		border: 15px solid transparent;	
-		border-right-color: #db5b6d;
-		border-left: 0;
-		margin-top: -20px;
-		margin-left: -20px;
-	}
+/* 	.faq-list li.curent:after {
+	content: '';
+	position: absolute;
+	left: -40px;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 15px solid transparent;	
+	border-right-color: #db5b6d;
+	border-left: 0;
+	margin-top: -20px;
+	margin-left: -20px;
+} */
 }
 
 
@@ -872,13 +920,14 @@
     }    
 
     .faq__list .overflow-bg {
-    	display: none;
+    	height: 100%;
+    	min-height: initial;
     }
 
     .faq__list {
     	height: auto;
     	min-height: initial;    	
-    	background-image: linear-gradient(180deg, #ce586c 0%, #191659 100%);   
+    	background-image: linear-gradient(180deg, #ce586c 0%, #191659 100%);
     }    
 
     .faq-list {
@@ -968,6 +1017,13 @@
 		font-size: 40px;
 		letter-spacing: 2px;
 	}	
+
+	.contacts__content-md {		
+		width: 100%;
+		background-color: #2e2c34;
+		display: none;
+		padding: 35px 0px 90px 0px;
+	}
 }
 
 /* Large devices (laptops/desktops, 992px and up) .col-lg*/

@@ -17,6 +17,13 @@ $( document ).ready(function() {
 		return false;
 	});	
 
+
+	// animation smooth scrolling of the anchor in the address bar
+	$("a.faq-link").click(function(e) {
+		e.preventDefault();
+	})
+
+
 	// initial plugin slick slider
 	$('#sliderResults').slick({   
 	    dots: true,

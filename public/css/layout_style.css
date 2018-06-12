@@ -136,8 +136,7 @@ strong {
 
 .main__text_2 .lete-s {
 	z-index:99;
-	position:absolute;
-	top: 10px;
+	position:absolute;	
 }
 
 .main__text_2 .lete-k {
@@ -145,7 +144,7 @@ strong {
 }
 
 .main__text_3 {
-	padding-right: 3%;
+	padding-right: 3%;	
 }
 
 .main__text_3 p{
@@ -166,10 +165,10 @@ strong {
 }
 
 .main__text_4 p {
-	font-family:HelveticaLight; 
+	font-family:HelveticaLight;	
 	text-align:right; 
-	margin-top:20px;
-	margin-right:20px;
+	margin-top:22px;
+	margin-right:10px;
 	color:#fff;
 }
 
@@ -244,12 +243,15 @@ strong {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	align-items: center;
+	height: 55px;
 }
 
 .copyright__link {
 	display: inline-block;
 	color: #fff;
-	font-family: HelveticaLight;		
+	font-family: HelveticaLight;
+	line-height: 1;		
 }
 
 .copyright__link:hover {
@@ -269,7 +271,7 @@ strong {
 	height: 1px;
 	background-color: #fff;
 	opacity: 0.7;
-	margin-bottom: 10px;
+	margin-bottom: 12px;
 	margin-left: 20px;
 }
 
@@ -908,8 +910,8 @@ a.price-item__button {
 
 .block-otziv__close {
 	position: absolute;
-	top: 1rem;
-	right: 1rem;
+	top: 16px;
+	right: 16px;
 	color: #fff !important;
 	font-size: 30px;
 	opacity: 1;
@@ -1136,7 +1138,14 @@ a.price-item__button {
 	background-size: cover;
     background-attachment: scroll;
     background-color: #583940;
-    background-image: url(../img/fon-1.png);
+    background: rgba(103,61,68,1);
+background: -moz-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(103,61,68,1)), color-stop(20%, rgba(103,61,68,1)), color-stop(46%, rgba(62,45,52,1)), color-stop(68%, rgba(34,33,40,1)), color-stop(86%, rgba(34,33,40,1)), color-stop(100%, rgba(34,33,40,1)));
+background: -webkit-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
+background: -o-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
+background: -ms-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
+background: linear-gradient(135deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#673d44', endColorstr='#222128', GradientType=1 );
     background-position: center center;
     background-repeat: no-repeat;
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
@@ -1271,7 +1280,7 @@ a.price-item__button {
 	width: 100%;
 	background-color: #2e2c34;
 	display: none;
-	padding: 20px 0 60px 0;
+	padding: 35px 0px;
 }
 
 .contacts__content-md .contacts__third-text {
@@ -1361,7 +1370,7 @@ a.price-item__button {
 	position: absolute;
 	top: 0rem;
 	right: 0rem;
-	padding: 8px !important;
+	padding: 16px !important;
 	color: #fff !important;	
 	font-size: 30px;
 	opacity: 1;
