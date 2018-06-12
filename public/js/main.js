@@ -242,6 +242,107 @@ $( document ).ready(function() {
 	// end faq ---------------------------------------------------------
 
 
+	//animation results
+	var arrImgResults = ["./img/result1.jpg", 
+							"./img/result7.jpg", 
+							"./img/result6.jpg", 
+							"./img/result5.jpg", 
+							"./img/result4.jpg",
+							"./img/result3.jpg",
+							"./img/result2.jpg"
+						]
+	var countTestam = arrImgResults.length - 1;		
+	var counterResultG = 1;	
+	var counterResultV = 1;		
+
+
+	var blockWidthResult = parseInt(jQuery('.slick-dots li').css('width'));	
+	var blockHeightResult = parseInt(jQuery('.slick-dots li').css('height'));
+	var blockMarginLeftResult = parseInt(jQuery('.slick-dots li').css('margin-right'));	
+	var blockMarginBottomResult = parseInt(jQuery('.slick-dots li').css('margin-bottom'));	
+	var countTestamWidthLength = (arrImgResults.length * blockWidthResult) + (countTestam * blockMarginLeftResult);
+	var countTestamHeightLength = (arrImgResults.length * blockWidthResult) + (countTestam * blockMarginBottomResult);
+
+	var howplusResultG = blockWidthResult + blockMarginLeftResult;
+	var howplusResultV = blockHeightResult + blockMarginBottomResult;	
+	
+	var currentScrollPositionResultG = 0;
+	var currentScrollPositionResultV = 0;
+	$('.slick-dots li').click(function(){  	
+		if($(window).width() >= '992') {
+			if(counterResultV < countTestam) {
+				currentScrollPositionResultV = howplusResultV * $(this).index();					
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
+				counterResultV = $(this).index() + 1;
+			}	
+		} else {
+			if(counterResultG < countTestam) {
+				currentScrollPositionResultG = howplusResultG * $(this).index();					
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
+				counterResultG = $(this).index() + 1;
+			}	
+		}					
+	});
+
+	$('.slick-next').click(function(e){	
+		if($(window).width() >= '992') {
+			if(counterResultV < countTestam) {
+				if(counterResultV > 0) {
+					currentScrollPositionResultV += howplusResultV;
+				}						
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
+				counterResultV++;
+			} else {
+				currentScrollPositionResultV = -currentScrollPositionResultV;			
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 800);
+				currentScrollPositionResultV = 0;
+				counterResultV = 0;
+			}
+		} else {
+			if(counterResultG < countTestam) {
+				if(counterResultG > 0) {
+					currentScrollPositionResultG += howplusResultG;
+				}						
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
+				counterResultG++;
+			} else {
+				currentScrollPositionResultG = -currentScrollPositionResultG;			
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 800);
+				currentScrollPositionResultG = 0;
+				counterResultG = 0;
+			}
+		}	
+				
+	});
+
+	$('.slick-prev').click(function(e){	
+		if($(window).width() >= '992') {
+			if(counterResultV > 0 && currentScrollPositionResultV > 0){
+				currentScrollPositionResultV -= howplusResultV;			
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
+				counterResultV--;
+			} else {
+				currentScrollPositionResultV = countTestamHeightLength;			
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 800);			
+				counterResultV = countTestam;
+			}
+		} else {
+			if(counterResultG > 0 && currentScrollPositionResultG > 0){
+				currentScrollPositionResultG -= howplusResultG;			
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
+				counterResultG--;
+			} else {
+				currentScrollPositionResultG = countTestamWidthLength;			
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 800);			
+				counterResultG = countTestam;
+			}
+		}	
+		
+	});
+
+
+	//end animation results
+
 	
 
 });

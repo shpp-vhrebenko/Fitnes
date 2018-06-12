@@ -1013,13 +1013,13 @@ a.price-item__button {
 
 .slider-results .slick-dots {
 	display: flex;
-	height: 30%;
+	height: 35%;
+	overflow-y: hidden;
 	width: auto;
 	top: 0;
 	left: 780px;
 	bottom: initial;
-	flex-direction: column;
-	justify-content: space-between;
+	flex-direction: column;	
 	align-items: center;	
 	top: 50%;
   	transform: translateY(-50%);  	
@@ -1029,11 +1029,11 @@ a.price-item__button {
     font-weight: normal;
 }
 
-/* hiding all bullets by default */
-.slick-dots li {
+
+/* .slick-dots li {
     display: none
 }
-/* only displaying the active bullets and the 2 bullets next to it */
+
 .slick-dots li.slick-active,
 .slick-dots li.slick-active + li,
 .slick-dots li.slick-active + li + li,
@@ -1041,7 +1041,7 @@ a.price-item__button {
 .slick-dots li.slick-active + li + li + li + li {
     display: block;
 }
-/* displaying the last three bullets when slick-active class isn't applied to any li before them  */
+
 .slick-dots li:nth-last-child(1),
 .slick-dots li:nth-last-child(2),
 .slick-dots li:nth-last-child(3),
@@ -1049,7 +1049,7 @@ a.price-item__button {
 .slick-dots li:nth-last-child(5) {
     display: block;
 }
-/* hiding the last three bullets if slick-active exist before them */
+
 .slick-dots li.slick-active ~ li:nth-last-child(1),
 .slick-dots li.slick-active ~ li:nth-last-child(2),
 .slick-dots li.slick-active ~ li:nth-last-child(3),
@@ -1057,7 +1057,7 @@ a.price-item__button {
 .slick-dots li.slick-active ~ li:nth-last-child(5)  {
     display: none;
 }
-/* specific conditions to always display the last three bullets */
+
 .slick-dots li.slick-active + li + li + li:nth-last-child(5),
 .slick-dots li.slick-active + li + li + li:nth-last-child(4),
 .slick-dots li.slick-active + li + li + li:nth-last-child(3),
@@ -1078,15 +1078,18 @@ a.price-item__button {
 .slick-dots li.slick-active + li:nth-last-child(2),
 .slick-dots li.slick-active + li:nth-last-child(1) {
     display: block;
-}
+} */
 
 .slick-dots li {
-    position: relative;
-    
+    position: relative;    
     width: auto;
     height: auto;    
     padding: 0;
     cursor: pointer;
+}
+
+.slick-dots li:not(:last-child) {
+	margin-bottom: 60px;
 }
 
 .slider-results .slick-dots .slick-active {
@@ -1096,11 +1099,11 @@ a.price-item__button {
 }
 
 .slider-results .slick-prev {	
-	width: 10px;
+	width: 16px;
 	height: 100px;    
-	top: 25%;
+	top: 20%;
 	right: initial;
-	left: 788px;
+	left: 782px;
 	background-image: url(../img/arrow.png);
 	background-size: contain;
     background-repeat: no-repeat;
@@ -1112,12 +1115,12 @@ a.price-item__button {
 }
 
 .slider-results .slick-next {	
-	width: 10px;
+	width: 16px;
 	height: 100px;    
-	bottom: 15%;
+	bottom: 12%;
 	right: initial;
 	top: initial;
-	left: 788px;
+	left: 782px;
 	background-image: url(../img/arrow-second.png);
 	background-size: contain;
     background-repeat: no-repeat;
@@ -1139,13 +1142,13 @@ a.price-item__button {
     background-attachment: scroll;
     background-color: #583940;
     background: rgba(103,61,68,1);
-background: -moz-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
-background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(103,61,68,1)), color-stop(20%, rgba(103,61,68,1)), color-stop(46%, rgba(62,45,52,1)), color-stop(68%, rgba(34,33,40,1)), color-stop(86%, rgba(34,33,40,1)), color-stop(100%, rgba(34,33,40,1)));
-background: -webkit-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
-background: -o-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
-background: -ms-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
-background: linear-gradient(135deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#673d44', endColorstr='#222128', GradientType=1 );
+    background: -moz-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(103,61,68,1)), color-stop(20%, rgba(103,61,68,1)), color-stop(46%, rgba(62,45,52,1)), color-stop(68%, rgba(34,33,40,1)), color-stop(86%, rgba(34,33,40,1)), color-stop(100%, rgba(34,33,40,1)));
+    background: -webkit-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
+    background: -o-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
+    background: linear-gradient(135deg, rgba(103,61,68,1) 0%, rgba(103,61,68,1) 20%, rgba(62,45,52,1) 46%, rgba(34,33,40,1) 68%, rgba(34,33,40,1) 86%, rgba(34,33,40,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#673d44', endColorstr='#222128', GradientType=1 );
     background-position: center center;
     background-repeat: no-repeat;
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;

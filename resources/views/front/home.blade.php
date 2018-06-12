@@ -179,52 +179,32 @@
                     <div id="sliderResults" class="slider-results">
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(./img/result1.jpg);"></div>
+                            <img class="results-item__img img-responsive" src="./img/result1.jpg">                   
+                        </div> 
+                        <div class="results-item">
+                            <div class="content-overlay"></div>                                  
+                            <img class="results-item__img img-responsive" src="./img/result2.jpg">                   
+                        </div>   
+                        <div class="results-item">
+                            <div class="content-overlay"></div>                                  
+                            <img class="results-item__img img-responsive" src="./img/result3.jpg">                   
+                        </div>   
+                        <div class="results-item">
+                            <div class="content-overlay"></div>                                  
+                            <img class="results-item__img img-responsive" src="./img/result4.jpg">                   
                         </div>
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(./img/result2.jpg);"></div>
-                        </div>  
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                       
-                            <div class="results-item__img" style="background-image:url(./img/result3.jpg);"></div>
-                        </div>  
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(./img/result4.jpg);"></div>
-                        </div>  
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(./img/result5.jpg);"></div>
-                        </div>  
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(./img/result6.jpg);"></div>
-                        </div>  
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(./img/result7.jpg);"></div>
+                            <img class="results-item__img img-responsive" src="./img/result5.jpg">                   
                         </div>
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(./img/result1.jpg);"></div>
+                            <img class="results-item__img img-responsive" src="./img/result6.jpg">                   
                         </div>
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(./img/result2.jpg);"></div>
-                        </div>  
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                       
-                            <div class="results-item__img" style="background-image:url(./img/result3.jpg);"></div>
-                        </div>  
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(./img/result4.jpg);"></div>
-                        </div>
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <div class="results-item__img" style="background-image:url(./img/result5.jpg);"></div>
-                        </div>                                                                
+                            <img class="results-item__img img-responsive" src="./img/result7.jpg">                   
+                        </div>                                                                                         
                     </div>
                 </div>                
                 
