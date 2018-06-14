@@ -1,0 +1,182 @@
+.fixed-menu {
+	height: 22px;
+}
+
+.fixed-menu__title {   
+    margin-right: 5px;
+}
+
+
+.auth {
+	width: 100%;
+	height: 100vh;
+	min-height: 900px;
+	background: linear-gradient(to right, #a74f67 0%,#49375d 100%);
+}
+
+.auth__container {
+	height: 100%;
+}
+
+.auth__container .row {
+	height: 100%;
+}
+
+.login-card {
+
+}
+
+.login-card__header {
+	height: auto;
+	color: #fff;
+    font-size: 90px;
+    font-family: HelveticaBold;
+	text-align: center;
+	line-height: 1;
+	margin-bottom: 30px;
+}
+
+.login-card__body .form-group {
+	margin-bottom: 28px;
+}
+
+.form-login__input {
+	height: 40px;
+	line-height: 40px;
+    padding: 6px 12px;
+	background-color: transparent;
+    border: none;   
+    border-bottom: 1px solid #bfa2b1;
+    border-radius: 0;
+    color: #fff;
+    font-size: 21px;
+    letter-spacing: 4px;
+    font-family: HelveticaUltraLight;
+    text-align: center;
+}
+
+.form-login__input:focus {
+	color: #fff;
+    background-color: transparent;
+    border-color: transparent;
+    border: none;   
+    border-bottom: 1px solid #bfa2b1;
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-login__button {
+	padding: 1rem 2rem;
+	background-color: transparent;
+    border: 1px solid transparent;
+    color: #fff;
+    font-size: 21px;
+    letter-spacing: 1px;
+    font-family: HelveticaBold;
+    text-transform: uppercase;
+    transition: all .2s ease;
+}
+
+.form-login__button:hover {
+	border: 1px solid #fff;
+	cursor: pointer;
+}
+
+.form-login__label {	
+	color: #fff;
+	font-family: HelveticaLight;
+	font-size: 13px;
+	line-height: 1;
+	cursor: pointer;	
+}
+
+.form-login__input-remember {
+	margin-right: .5rem;
+	height: 15px;
+	width: 15px;
+}
+
+.form-login__button-link {
+	color: #fff;
+	font-family: HelveticaLight;
+	font-size: 13px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.form-login__button-link:hover {
+	color: #fff;
+}
+
+
+/* MODAL CONTACTS */
+.modal-block-contacts {
+	min-width: 60%;
+}
+
+.block-contacts {	
+	background-color: rgb(34, 33, 40);
+    padding:30px 70px;
+    color: #fff;
+    font-family: HelveticaNeue;
+    border-radius: 0;
+}
+
+.block-contacts__close {
+	position: absolute;
+	top: 0rem;
+	right: 0rem;
+	padding: 16px !important;
+	color: #fff !important;	
+	font-size: 30px;
+	opacity: 1;
+}
+
+.block-contacts__close:focus {
+	outline: none;
+}
+
+.form-contacts label{
+	font-family: HelveticaUltraLight ;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.form-contacts .form-control {
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #919094;	
+    color: #fff;      
+    font-family: HelveticaMedium ;
+}
+
+.form-contacts .form-control:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.form-contacts textarea {
+	resize: none;
+}
+
+.form-contacts__button {
+	display: block;
+	padding: 1rem 1.5rem;
+	margin: 0 auto;
+	background: none;
+	border: 1px solid transparent;
+	color: #fff;
+	font-family: HelveticaBold;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.form-contacts__button:hover {
+	cursor: pointer;
+	border: 1px solid #919094;
+}
+/* END MODAL CONTACTS */

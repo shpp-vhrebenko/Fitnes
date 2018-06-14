@@ -1,10 +1,10 @@
 $( document ).ready(function() {
 	// animation sidebar navigation
-    $("#fixed-menu div div").click(function(){    
-		$("#div-menu").stop(true , true).animate({right:"0"},500);				      
+    $("#button_open_sidebar-menu").click(function(){     	 
+		$("#sidebar-menu").stop(true , true).animate({right:"0"},500);				      
 	});				    
-	$("#div-menu .button-close").click(function(){				         	
-		$("#div-menu").stop(true , true).animate({right:"-325"},500);				      
+	$("#button_close_sidebar-menu").click(function(){				         	
+		$("#sidebar-menu").stop(true , true).animate({right:"-325"},500);				      
 	});
 
 	// animation smooth scrolling of the anchor in the address bar

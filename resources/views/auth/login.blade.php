@@ -1,69 +1,108 @@
-@extends('layouts.app')
+@extends('my_acount/layout/front')
+
+@section('header-styles')     
+    @parent
+    <link rel="stylesheet" href="{{ asset('css/my_acount_style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/media_my_acount_style.css') }}">         
+@endsection
+
+@section('header-scripts')
+   @parent
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<section class="auth">
+    <div class="container auth__container">
+        <div class="row justify-content-center align-items-center ">
+            <div class="col-md-10">
+                <div class="login-card">
+                    <div class="login-card__header">ЛИЧНЫЙ КАБИНЕТ</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+                    <div class="login-card__body">
+                        <form method="POST" action="{{ route('login') }}" class="form-login">
+                            @csrf
+                            <div class="form-group row justify-content-center">
+                                <div class="col-md-6">
+                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} form-login__input" name="email" value="{{ old('email') }}" required autofocus>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
-                                    </label>
+                                    @if ($errors->has('email'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
+                            <div class="form-group row justify-content-center">
+                                <div class="col-md-6">
+                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} form-login__input" name="password" required>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
+                                    @if ($errors->has('password'))
+                                        <span class="invalid-feedback">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                    </form>
+
+                            <div class="form-group row justify-content-center">                       
+                                <button type="submit" class="form-login__button">
+                                    Войти
+                                </button>                               
+                            </div>
+
+                            <div class="form-group row justify-content-center">                       
+                                <div class="checkbox">
+                                    <label class="form-login__label row align-items-center">
+                                        <input class="form-login__input-remember" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> ЗАПОМНИТЬ ПАРОЛЬ
+                                    </label>
+                                </div>                                
+                            </div>
+
+                            <div class="form-group row justify-content-center">
+                                <a class="btn btn-link form-login__button-link" href="{{ route('password.request') }}">
+                                    ЗАБЫЛИ ПАРОЛЬ?
+                                </a>
+                            </div>                            
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+@endsection
+
+@section('footer-scripts')    
+    @parent   
+@endsection
+
+@section('footer-modal')
+    <div class="modal fade" id="modalContacts" tabindex="-1" role="dialog" aria-labelledby="modalContactsTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-block-contacts" role="document">
+        <div class="modal-content block-contacts">
+            <button type="button" class="close block-contacts__close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">X</span>
+            </button>
+            <div class="modal-body">
+                <form action="#" class="form-contacts">
+                    <div class="form-group">
+                        <label for="name">имя</label>
+                        <input type="text" class="form-control" id="name"  placeholder="" required="true">             
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="" required="true">                        
+                    </div>
+                    <div class="form-group form-contacts__text">
+                        <label for="textMessage">текст сообщения</label>
+                        <textarea class="form-control" id="textMessage" rows="4"></textarea>
+                    </div>
+                    <button class="form-contacts__button" id="submitFormContacts">отправить</button>
+                </form>
+            </div>
+          
+        </div>
+      </div>
+    </div>  
 @endsection

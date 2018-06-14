@@ -1,11 +1,11 @@
 @include('front/partials/header')
 
-	@include('front/partials/navbar')
+	@include('my_acount/partials/navbar')
 	<main role="main">
 	@yield('content')
 	</main>
 
-@include('front/partials/footer')
+@include('my_acount/partials/footer')
 
 
 

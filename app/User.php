@@ -9,13 +9,24 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public static $userStatuses = [
+        'Активен',
+        'Выключен',
+        'Заблокирован'
+    ];
+
+    public static function getUserStatus()
+    {
+        return User::$userStatuses;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'phone', 'status_id', 'is_subscribe'
     ];
 
     /**
@@ -26,4 +37,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function getClientStatus($status_id)
+    {
+        return self::$userStatuses[$status_id];
+    }
+
+
+    public function roles() {
+        return $this->belongsToMany('App/Role');
+    }
+
 }

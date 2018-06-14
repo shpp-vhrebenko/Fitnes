@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name', 100);
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('telephone');
+            $table->string('phone', 100);
             $table->tinyInteger('status_id');
             $table->boolean('is_subscribe')->default(false);
             $table->rememberToken();
