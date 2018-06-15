@@ -16,25 +16,13 @@
     			<div class="main__sidebar">
       			<!-- BEGIN PROFILE SIDEBAR -->
       				<div id="profile-sidebar" class="profile-sidebar">         
-			          	<div class="profile-userpic text-center" id="profile_image_main">
-				            <div id="profile-data-menu">
-					            <span class="nick">
-					            Дэниел
-					            </span>  
-			      			</div>
-			        	</div>
-				        <!-- END SIDEBAR USERPIC -->
-				        <!-- SIDEBAR USER TITLE -->
-				       
-				       	<!-- END SIDEBAR USER TITLE -->
-				       	<!-- SIDEBAR BUTTONS -->
-				       
-				      	<!-- END SIDEBAR BUTTONS -->
-				      	<!-- SIDEBAR MENU -->
+			          	<div class="profile-sidebar__username">			            
+				            <span>Дэниел</span>			            		      			
+			        	</div>				        
 				      	<div class="profile-sidebar__usermenu usermenu">
 				            <ul>
 					        	<li class="">
-					          		<a class="usermenu__link" href="https://gizerskaya.com/">
+					          		<a class="usermenu__link" href="{{ route('index') }}">
 					            		Главная
 					            	</a>
 					         	</li>
@@ -80,7 +68,7 @@
 							    </li>
 					    	</ul>
 				  		</div>
-				  		<!-- END SIDEBAR MENU -->
+				  	<!-- END SIDEBAR MENU -->
  					</div>
  				</div>	
 				<div class="main__content">

@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Каталог
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    </a> -->
+                    <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <h6 class="dropdown-header">Товары</h6>
                         <a class="dropdown-item" href="#">Все товары</a>
                         <a class="dropdown-item" href="#">Категории</a>
@@ -31,12 +31,12 @@
                         <a class="dropdown-item" href="#">Статические страницы</a>
                         <a class="dropdown-item" href="#">Слайдер</a>
                         <a class="dropdown-item" href="#">Таблицы размеров</a>
-                    </div>
+                    </div> -->
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#">Заказы</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Клиенты</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="#">Заказы</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="{{ route('clients') }}">Клиенты</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Отчеты
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -50,9 +50,9 @@
                         <h6 class="dropdown-header">Покупатели</h6>
                         <a class="dropdown-item" href="#">Активность покупателей</a>
                         <a class="dropdown-item" href="#">Заказы</a>
-                    </div>
+                    </div> -->
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#">Настройки</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('settings') }}">Настройки</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Перейти на сайт</a></li>

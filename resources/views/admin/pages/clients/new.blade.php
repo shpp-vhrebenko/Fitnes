@@ -36,7 +36,7 @@
                         <div class="form-group row">
                             <label for="telephone" class="col-sm-2 col-form-label">Телефон</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="telephone" name="item[telephone]" @if(isset($client)) value="{{ $client->telephone }}" @endif>
+                                <input type="text" class="form-control" id="telephone" name="item[phone]" @if(isset($client)) value="{{ $client->phone }}" @endif>
                             </div>
                         </div>
                         <div class="form-group row">

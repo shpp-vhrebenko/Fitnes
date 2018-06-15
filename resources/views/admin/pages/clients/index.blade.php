@@ -12,20 +12,33 @@
     <div class="jumbotron jumbotron-fluid">
         <form class="form" action="{{ route('clients_filter') }}" method="get">
             <div class="form-row">
-                {!! input_generate('col-3', 'Имя покупателя', 'text', null, 'form-control mb-3', null, 'name') !!}
-                {!! input_generate('col-3', 'Группа покупателей', 'select', \App\Role::all_roles(), 'form-control mb-3', null, 'role_id') !!}
-                {!! input_generate('col-3', 'Одобрить', 'text', null, 'form-control mb-3', null, '???') !!}
-                {!! input_generate('col-3', 'Дата добавления', 'date', null, 'form-control mb-3', null, 'created_at') !!}
+                <div class="col-3">
+                    {!! Form::label('name', 'Имя клиента' ) !!}
+                    {!! Form::text('filter[name]', null, array('class' => 'form-control mb-3', 'id' => 'name' ) ) !!}                    
+                </div>
+                <div class="col-3">
+                    {!! Form::label('created_at', 'Дата добавления' ) !!}
+                    {!! Form::date('filter[created_at]', null, array('class' => 'form-control mb-3', 'id' => 'created_at' ) ) !!}                    
+                </div>
+                <div class="col-3">
+                    {!! Form::label('updated_at', 'Дата изменения' ) !!}
+                    {!! Form::date('filter[updated_at]', null, array('class' => 'form-control mb-3', 'id' => 'updated_at' ) ) !!}                    
+                </div>               
             </div>
             <div class="form-row">
-                {!! input_generate('col-3', 'E-Mail', 'text', null, 'form-control mb-2', null, 'email') !!}
-                {!! input_generate('col-3', 'Статус', 'select', \App\User::getUserStatus(), 'form-control mb-2', null, 'status_id') !!}
-                {!! input_generate('col-3', 'IP', 'text', null, 'form-control mb-2', null, 'ip') !!}
-                {!! input_generate('col-3', 'Дата изменения', 'date', null, 'form-control mb-2', null, 'updated_at') !!}
-            </div>
-            <div class="form-row">
-                {!! input_generate('col-3', 'Номер телефона', 'text', null, 'form-control mb-2', null, 'telephone') !!}
-            </div>
+                <div class="col-3">
+                    {!! Form::label('status_id', 'Статус пользователя' ) !!}
+                    {!! Form::select('filter[status_id]', \App\User::getUserStatus() , array('class' => 'form-control mb-3', 'id' => 'status_id' ) ) !!}                    
+                </div> 
+                <div class="col-3">
+                    {!! Form::label('email', 'E-mail' ) !!}
+                    {!! Form::email('filter[email]', null, array('class' => 'form-control mb-3', 'id' => 'email' ) ) !!}                    
+                </div>   
+                <div class="col-3">
+                    {!! Form::label('phone', 'Номер телефона' ) !!}
+                    {!! Form::text('filter[phone]', null, array('class' => 'form-control mb-3', 'id' => 'phone' ) ) !!}                    
+                </div>                
+            </div>            
             <button type="submit" class="btn btn-primary mt-3 mb-2">Применить фильтр</button>
             <a href="{{ route('clients') }}" class="btn btn-danger mt-3 mb-2 ml-3">Отменить фильтр</a>
         </form>
@@ -41,7 +54,7 @@
                     <th scope="col">Клиент</th>
                     <th scope="col">Почта</th>
                     <th scope="col">Роль</th>
-                    <th scope="col">IP</th>
+                    <th scope="col"></th>
                     <th scope="col">Статус</th>
                     <th scope="col">Просмотр</th>
                 </tr>
@@ -52,12 +65,12 @@
                         <th scope="row">{{ $client->id }}</th>
                         <td>{{ $client->name }}</td>
                         <td>{{ $client->email }}</td>
-                        <td>
+                        <td>                            
                             @foreach($client->roles as $role)
                                 {{ $role->name }}
                             @endforeach
                         </td>
-                        <td>{{ $client->ip }}</td>
+                        <td></td>
                         <td>{{ $client->getClientStatus($client->status_id) }}</td>
                         <td>
                             <ul class="camotek-form-links">

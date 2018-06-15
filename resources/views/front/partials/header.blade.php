@@ -7,6 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>gizerskaya &#8212; Фитнесс Тренер</title>
+
+	<link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
 	
 	@section('header-styles')	
 	<link rel="stylesheet" href="{{ asset('css/libs/font-awesome.min.css') }}">  

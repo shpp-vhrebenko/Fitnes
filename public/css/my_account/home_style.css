@@ -26,6 +26,18 @@
     padding-top: 66px;
 }
 
+.profile-sidebar__username {	
+	background-color: #2b2747;	
+    padding: 15px 20px;
+}
+
+.profile-sidebar__username span {
+	font-size: 16px;
+    color: #fff;
+    font-family: "HelveticaLight";
+    line-height: 28px;
+}
+
 .usermenu {	
     height: 900px;
     background-color: #312d50;
@@ -52,10 +64,10 @@
 .usermenu__link {
 	position: relative;
     display: block;
-    padding: 10px 15px;
+    padding: 10px 20px;
 	line-height: 28px;
     border: none;
-    font-size: 15px;
+    font-size: 16px;
     color: #d3c0de;
     font-family: "HelveticaLight";
     background-color: #312d50
