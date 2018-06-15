@@ -1,0 +1,12 @@
+/* NAVBAR MENU */
+@media only screen and (max-width: 576px) {
+	.fixed-menu__title {
+		display: none;
+	}		
+
+	.footer {
+		display: none;
+	}
+}
+
+/* END NAVBAR MENU */

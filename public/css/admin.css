@@ -1,0 +1,69 @@
+.camotek-admin-header .navbar{
+    padding: 5px 50px;
+}
+
+.required{
+    color: #ff0007 !important;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.camotek-admin-content{
+    padding: 50px;
+}
+
+.camotek-admin-index-modules{
+    margin-top: 25px;
+}
+
+.camotek-admin-table{
+    margin-bottom: 0;
+}
+
+.camotek-admin-table thead th{
+    background: #efefef;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.camotek-admin-table th, .camotek-admin-table td{
+    vertical-align: middle;
+}
+
+.camotek-admin-table .fixed-width-250{
+    width: 250px !important;
+}
+
+.camotek-form-links{
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.camotek-form-links li{
+    list-style-type: none;
+    display: inline-table;
+}
+
+.note-popover{
+    display: none;
+}
+
+.jumbotron{
+    padding: 15px 25px 8px 25px !important;
+}
+
+.jumbotron .row, .jumbotron .row input{
+    width: 100%;
+}
+
+select.form-control{
+    min-height: 200px !important;
+}
+
+.note-editor.note-frame .note-editing-area .note-editable{
+    padding: 40px 30px 10px 30px !important;
+}
+
+.dropdown-menu{
+    top: 30px !important;
+}

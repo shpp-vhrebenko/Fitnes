@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/_debugbar/assets/stylesheets', [
+/*Route::get('/_debugbar/assets/stylesheets', [
     'as' => 'debugbar-css',
     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
 ]);
@@ -24,19 +24,19 @@ Route::get('/_debugbar/assets/javascript', [
 Route::get('/_debugbar/open', [
     'as' => 'debugbar-open',
     'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
-]);
+]);*/
 
 
 Auth::routes();
 
 Route::group([], function() {
-	Route::get('/', 'TestController@index')->name('index');
+	Route::get('/', 'HomeController@index')->name('index');
 });
 
 Route::group(['prefix'=>'my-account','middleware'=>'auth'], function() {
-	Route::get('/', 'HomeController@index')->name('home');
+	Route::get('/', 'MyAccountController@index')->name('my-account');
 });
 
 Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
-	Route::get('/', 'HomeController@index')->name('home');
+	Route::get('/', 'AdminController@index')->name('admin');
 });

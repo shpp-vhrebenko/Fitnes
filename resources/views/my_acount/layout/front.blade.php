@@ -1,4 +1,4 @@
-@include('front/partials/header')
+@include('my_acount/partials/header')
 
 	@include('my_acount/partials/navbar')
 	<main role="main">

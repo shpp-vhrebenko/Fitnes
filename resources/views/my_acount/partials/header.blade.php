@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-	<title>gizerskaya &#8212; Фитнесс Тренер</title>
+	<title>My Account — gizerskaya</title>
 	
 	@section('header-styles')	
 	<link rel="stylesheet" href="{{ asset('css/libs/font-awesome.min.css') }}">  
@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="{{ asset('css/libs/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/libs/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/libs/slick-theme.css') }}">  	
-	<link rel="stylesheet" href="{{ asset('css/layout_style.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/media_layout_style.css') }}">			
+	<link rel="stylesheet" href="{{ asset('css/my_account/layout_style.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/my_account/media_layout_style.css') }}">			
 	@show
 
 	@section('header-scripts')

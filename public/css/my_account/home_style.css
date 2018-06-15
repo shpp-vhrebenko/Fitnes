@@ -1,0 +1,62 @@
+.main {
+	height: 100vh;
+}
+
+.main__box {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width :100%;
+	height: 100%;	
+}
+
+.main__content {
+	max-width: 1200px;    
+    width: 90%;
+}
+
+.profile-sidebar {
+	height: 100%;
+    position: fixed;
+    top: 0;  
+    left: -265px;  
+    z-index: 1;
+    width: 265px;
+    background-color: #2b2747;
+    padding-top: 66px;
+}
+
+.usermenu {	
+    height: 900px;
+    background-color: #312d50;
+}
+
+.usermenu ul {
+	list-style: none;
+	margin-bottom: 0;
+    padding-left: 0;
+}
+
+.usermenu li {
+	display: block;
+	position: relative;
+	width: 100%;
+}
+
+.usermenu li.active .usermenu__link, .usermenu li:hover .usermenu__link {
+    background: linear-gradient(to right, #ff5b77 0%, #613d7c 100%);
+    color: #fff;
+    text-decoration: none;
+}
+
+.usermenu__link {
+	position: relative;
+    display: block;
+    padding: 10px 15px;
+	line-height: 28px;
+    border: none;
+    font-size: 15px;
+    color: #d3c0de;
+    font-family: "HelveticaLight";
+    background-color: #312d50
+}

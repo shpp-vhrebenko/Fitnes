@@ -2,8 +2,8 @@
 
 @section('header-styles')     
     @parent
-    <link rel="stylesheet" href="{{ asset('css/my_acount_style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/media_my_acount_style.css') }}">         
+    <link rel="stylesheet" href="{{ asset('css/auth/auth_style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth/auth_style.css') }}">         
 @endsection
 
 @section('header-scripts')
