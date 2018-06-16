@@ -22,10 +22,6 @@
 	height: 100%;
 }
 
-.login-card {
-
-}
-
 .login-card__header {
 	height: auto;
 	color: #fff;
@@ -106,6 +102,11 @@
 
 .form-login__button-link:hover {
 	color: #fff;
+}
+
+.form-login input::placeholder {
+  color: #fff;
+  text-transform: uppercase;
 }
 
 

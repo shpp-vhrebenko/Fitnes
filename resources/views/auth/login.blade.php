@@ -1,9 +1,9 @@
-@extends('my_acount/layout/front')
+@extends('auth/layout/front')
 
 @section('header-styles')     
     @parent
     <link rel="stylesheet" href="{{ asset('css/auth/auth_style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/auth/auth_style.css') }}">         
+    <link rel="stylesheet" href="{{ asset('css/auth/media_auth_style.css') }}">         
 @endsection
 
 @section('header-scripts')
@@ -23,7 +23,7 @@
                             @csrf
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} form-login__input" name="email" value="{{ old('email') }}" required autofocus>
+                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} form-login__input" name="email" value="{{ old('email') }}" required autofocus placeholder="Логин">
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback">
@@ -35,7 +35,7 @@
 
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} form-login__input" name="password" required>
+                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} form-login__input" name="password" required placeholder="Пароль">
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback">
@@ -87,16 +87,16 @@
             <div class="modal-body">
                 <form action="#" class="form-contacts">
                     <div class="form-group">
-                        <label for="name">имя</label>
-                        <input type="text" class="form-control" id="name"  placeholder="" required="true">             
+                        <label for="user-name">имя</label>
+                        <input type="text" class="form-control" id="user-name"  placeholder="" required="true">             
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="" required="true">                        
+                        <label for="user-email">Email</label>
+                        <input type="email" class="form-control" id="user-email" placeholder="" required="true">                        
                     </div>
                     <div class="form-group form-contacts__text">
-                        <label for="textMessage">текст сообщения</label>
-                        <textarea class="form-control" id="textMessage" rows="4"></textarea>
+                        <label for="user-textMessage">текст сообщения</label>
+                        <textarea class="form-control" id="user-textMessage" rows="4"></textarea>
                     </div>
                     <button class="form-contacts__button" id="submitFormContacts">отправить</button>
                 </form>
