@@ -24,7 +24,7 @@
                         {!! Form::file('logo', array('class' => 'filestyle', 'data-value'=> $settings->logo, 'data-buttonText' => 'Выбрать файл', 'data-buttonName' => 'btn-primary', 'data-icon' => 'false', 'name' => 'logo' ) ) !!}                        
                     </div>                  
                     <div class="col-sm-4" style="margin: 8px 0">
-                        <div class="bg-image" style="background-color: grey; padding: 1rem;">
+                        <div class="bg-image">
                             <img src="/uploads/logo/{{$settings->logo}}">
                         </div>                        
                         <p>Рекомендуемые размеры логотипа <span class="badge badge-secondary">186 x 30</span></p>

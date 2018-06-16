@@ -6,7 +6,6 @@
         <div class="camotek-admin-content">
             @yield('content')
         </div>
-        @include('admin/partials/footer')
-        @yield('footer-scripts')
+        @include('admin/partials/footer')              
     </body>
 </html>

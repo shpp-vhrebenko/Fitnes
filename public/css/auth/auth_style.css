@@ -61,11 +61,12 @@
     box-shadow: none;
 }
 
-.form-login__button {
+.form-login__button,
+a.form-login__button {
 	padding: 1rem 2rem;
 	background-color: transparent;
     border: 1px solid transparent;
-    color: #fff;
+    color: #fff !important;
     font-size: 21px;
     letter-spacing: 1px;
     font-family: HelveticaBold;
@@ -73,7 +74,8 @@
     transition: all .2s ease;
 }
 
-.form-login__button:hover {
+.form-login__button:hover,
+a.form-login__button:hover {
 	border: 1px solid #fff;
 	cursor: pointer;
 }

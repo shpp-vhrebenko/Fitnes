@@ -67,3 +67,9 @@ select.form-control{
 .dropdown-menu{
     top: 30px !important;
 }
+
+.bg-image {
+    background-color: grey;
+    padding: 1rem;
+    width: auto;
+}

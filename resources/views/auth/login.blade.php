@@ -45,7 +45,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row justify-content-center">                       
+                            <div class="form-group row justify-content-center">             
                                 <button type="submit" class="form-login__button">
                                     Войти
                                 </button>                               

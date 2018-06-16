@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-md fixed-top header-navbar">
   <a class="navbar-brand" href="{{ route('index') }}">
-    <img src="https://gizerskaya.com/wp-content/uploads/2018/03/Rectangle-2.png" class="attachment-medium size-medium" alt="" />
+    @if (  isset( $settings->logo ) )
+    <img src="./uploads/logo/{{ $settings->logo }}" class="attachment-medium size-medium" alt="" />
+    @endif
   </a>
   <div id='fixed-menu' class="fixed-menu">  
     <a href="{{ route('my-account') }}">

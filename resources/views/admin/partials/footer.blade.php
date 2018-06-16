@@ -1,10 +1,10 @@
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+@section('footer-scripts')  
+  <script  src="{{asset('js/lib/popper.min.js') }}"></script>
+  <script  src="{{asset('js/lib/bootstrap.min.js') }}"></script>
+@show
 
-<script  src="{{asset('js/lib/popper.min.js') }}"></script>
-<script  src="{{asset('js/lib/bootstrap.min.js') }}"></script>
-
-<!-- include summernote css/js -->
+@section('footer-assets')
+  <!-- include summernote css/js -->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 
@@ -27,3 +27,4 @@
     });
   });
 </script>
+@show
