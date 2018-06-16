@@ -51,4 +51,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
     Route::post('/client/{id}/edit', 'AdminController@client_update')->name('update_client');
     Route::delete('/client/{id}/destroy', 'AdminController@client_destroy')->name('destroy_client');
     Route::get('/clients/filter', 'AdminController@clients_filter')->name('clients_filter');
+    Route::get('/clients/new_client', 'AdminController@client_new')->name('new_client');
+    Route::post('/clients/client_store', 'AdminController@client_store')->name('client_store');
+    Route::post('/clients/client_message', 'AdminController@client_sendMessage')->name('send_message_client');
+
+
 });

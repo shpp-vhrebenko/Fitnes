@@ -46,7 +46,10 @@
 
     @if(isset($clients) && $clients->count() > 0)
         <div class="card">
-            <div class="card-header">Клиенты</div>
+            <div class="card-header">
+                <span class="pull-left">Клиенты</span>
+                <a href="{{ route('new_client') }}" class="btn btn-success pull-right">Создать клиента</a>
+            </div>
             <table class="table camotek-admin-table">
                 <thead>
                 <tr>
@@ -74,13 +77,21 @@
                         <td>{{ $client->getClientStatus($client->status_id) }}</td>
                         <td>
                             <ul class="camotek-form-links">
-                            <li><a href="{{ route('show_client', $client->id) }}" class="btn btn-light">Просмотр</a></li>
-                                <li><a href="{{ route('edit_client', $client->id) }}" class="btn btn-primary">Редактировать</a></li>
-                                <li><form class="delete" action="{{ route('destroy_client', $client->id) }}" method="POST">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                <input class="btn btn-danger" type="submit" value="Удалить">
-                            </form></li>
+                                <li>
+                                    <a href="{{ route('show_client', $client->id) }}" class="btn btn-light">Просмотр</a></li>
+                                <li>
+                                    <a href="{{ route('edit_client', $client->id) }}" class="btn btn-primary">Редактировать</a>
+                                </li>
+                                <li>
+                                    <form class="delete" action="{{ route('destroy_client', $client->id) }}" method="POST">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                        <input class="btn btn-danger" type="submit" value="Удалить">
+                                    </form>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#SendMessageModal" data-id-user="{{$client->id}}"><i class="fa fa-envelope" style="color: #fff"></i></button>
+                                </li>
                             </ul>
                         </td>
                     </tr>
@@ -96,11 +107,51 @@
 @endsection
 
 @section('footer-scripts')
+    @parent
     <script>
-      $(document).ready(function () {
-        $('.delete').on("submit", function () {
-          return confirm('Вы действительно хотите удалить пользователя и его заказы?');
+        $(document).ready(function () {
+            $('.delete').on("submit", function () {
+              return confirm('Вы действительно хотите удалить пользователя и его заказы?');
+            });
+
+            $('#SendMessageModal').on('show.bs.modal', function (event) {
+              var button = $(event.relatedTarget);
+              var recipient = button.data('idUser');
+              console.log(recipient);
+              var modal = $(this);
+              var $inputUserId = modal.find('#user_id');
+              $inputUserId.attr('value',recipient);          
+            })
         });
-      });
+        
     </script>
+
+@endsection
+
+@section('footer-modal')
+<!-- Modal -->
+<div class="modal fade" id="SendMessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form class="modal-content" action="{{ route('send_message_client') }}" method="POST"> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Отправить сообщение клиенту</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+         <input type="hidden" name="user_id" id="user_id">
+         <div class="form-group ">
+            <label for="messageUser">Текст сообщения</label>
+            <textarea class="form-control" id="messageUser" rows="4" name="messageUser"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" type="reset">Очистить</button>
+        <button type="submit" class="btn btn-success">Отправить</button>
+      </div>
+    </form>
+  </div>
+</div>
 @endsection

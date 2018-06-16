@@ -56,4 +56,11 @@ class User extends Authenticatable
         return null !== $this->roles()->where('role_id', $id_role)->first();
     }
 
+     public function updateRole($role_id)
+    {
+        \DB::table('role_user')->where('user_id', $this->id)->update(['role_id' => $role_id]);
+        return $this;
+    }
+
+
 }

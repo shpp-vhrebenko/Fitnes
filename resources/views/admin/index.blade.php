@@ -52,7 +52,7 @@
 @endsection
 
 @section('footer-scripts')
-    @parent
+    @parent    
 @endsection
 
 

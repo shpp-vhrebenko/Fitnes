@@ -1,6 +1,7 @@
-@section('footer-scripts')  
-  <script  src="{{asset('js/lib/popper.min.js') }}"></script>
-  <script  src="{{asset('js/lib/bootstrap.min.js') }}"></script>
+
+@section('footer-scripts')
+<script src="{{asset('js/lib/popper.min.js') }}"></script>
+<script  src="{{asset('js/lib/bootstrap.min.js') }}"></script>
 @show
 
 @section('footer-assets')
@@ -27,4 +28,7 @@
     });
   });
 </script>
+@show
+
+@section('footer-modal')
 @show

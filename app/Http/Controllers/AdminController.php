@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSettingsRequest;
+use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\EditClientRequest;
 
 use App\Repositories\UsersRepositoryInterface;
 
@@ -121,7 +123,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function client_update($id, Request $request)
+    public function client_update($id, EditClientRequest $request)
     {
         $client = $this->users->find($id);
         if (!isset($client)) {
@@ -132,6 +134,39 @@ class AdminController extends Controller
             $client->updateRole($request->get('item')['role_id']);
         }
         Session::flash('success', 'Клиент успешно изменен!');
+        return redirect()->back();
+    }
+
+    public function client_new()
+    {              
+        $roles = Role::all();
+        $statuses = User::$userStatuses;
+        return view('admin/pages/clients/new')->with([
+            'title' => 'Coздание клиента',            
+            'roles' => $roles,
+            'statuses' => $statuses
+        ]);
+    }
+
+     public function client_store(StoreClientRequest $request)
+    {
+        $settings = Settings::first(); 
+        $item = $request->get('item');        
+        $item['remember_token'] = $request->get('_token');       
+        $newUserPass = str_random(8);
+        $item['password'] = bcrypt($newUserPass);             
+        $user = $this->users->create($item);        
+        $user->roles()->attach([
+            $item['role_id']
+        ]);   
+
+        mail($item['email'],
+            "gizerskaya - Фитнесс Тренер",
+            "Спасибо, что нас выбрали. \nВаши данные для входа в Ваш Личный Кабинет:\nЛогин: " . $item['email'] . "\nПароль: " . $newUserPass . "",
+            "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());
+
+        Session::flash('success', 'Клиент успешно создан!'); 
+
         return redirect()->back();
     }
 
@@ -201,6 +236,22 @@ class AdminController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    public function client_sendMessage(Request $request) {
+        $message = $request->get('messageUser');
+        $userId = $request->get('user_id');
+        $settings = Settings::first();                      
+        $user = $this->users->find($userId);        
+
+        mail($user->email,
+            "gizerskaya - Фитнесс Тренер",
+            $message,
+            "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());
+
+        Session::flash('success', 'Клиенту "'.$user->name.'" успешно отправленно сообщение!'); 
+
+        return redirect()->back();
     }
 
     // END CLIENTS    
