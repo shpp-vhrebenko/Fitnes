@@ -37,9 +37,7 @@ class AdminController extends Controller
             'users' => $this->users->count()
         ];       
 
-        return view('admin/index')->with([   
-            'stats' => $stats         
-        ]);
+        return view('admin/index', compact(['stats']));
     }
 
     // SETTINGS
@@ -255,4 +253,126 @@ class AdminController extends Controller
     }
 
     // END CLIENTS    
+
+    // CATEGORY
+
+     public function categories()
+    {
+        $this->setTitle('Список родительских категорий');
+        $categories = $this->item_categories->order('sort_order', 'asc')->get()->load('locales');
+        return view('admin/pages/items/categories')->with(['categories' => $categories]);
+    }
+
+    public function categories_new($id = null)
+    {
+        $this->setTitle('Создание категории');
+        $categories = ItemCategory::with(['subcategories.locales', 'subcategories.subcategories.locales'])->where('is_active', true)->get();
+        $count_categories = ItemCategory::all()->count();
+        //$categories = $this->item_categories->all()->load('subcategories');
+        return view('admin/pages/items/categories-new')->with(['categories' => $categories, 'count_categories' => $count_categories, 'current_category' => $id]);
+    }
+
+    public function categories_store(StoreItemCategoryRequest $request)
+    {
+        $item_request = $request->get('item');
+        $item_request_preview = $request->file('item.preview');
+        if (isset($item_request_preview)) {
+            $preview_id = $this->imageUpload($request, 'item.preview')->id;
+            $item_request['preview_id'] = $preview_id;
+        }
+
+        $item_request_poster = $request->file('item.poster');
+        if (isset($item_request_poster)) {
+            $poster_id = $this->imageUpload($request, 'item.poster')->id;
+            $item_request['poster_id'] = $poster_id;
+        }
+
+        $category = $this->item_categories->create($item_request);
+        if ($request->get('item_locales')) {
+            foreach($request->get('item_locales') as $key => $item)
+            {
+                if (isset($item['name']))
+                {
+                    if (!isset($item['slug']))
+                    {
+                        $item['slug'] = str_slug('c-' . $category->id . '-' . $key . '-' . $item['name'], '-', 'en');
+                    }
+                    $item['category_id'] = $category->id;
+                    $item['locale'] = $key;
+                    ItemCategoriesTranslation::create($item);
+                }
+            }
+        }
+        Session::flash('success', 'Категория успешно создана!');
+        return redirect()->back();
+    }
+
+    public function edit_category($id)
+    {
+        $category = ItemCategory::find($id);
+        if (!isset($category))
+        {
+            return abort('404');
+        }
+        $this->setTitle('Изменение категории');
+        $categories = ItemCategory::with(['subcategories.locales', 'subcategories.subcategories.locales'])->where('is_active', true)->get();
+        //$categories = $this->item_categories->all()->load('subcategories');
+        return view('admin/pages/items/categories-new')->with(['categories' => $categories, 'category' => $category]);
+    }
+
+    public function update_category($id, StoreItemCategoryRequest $request)
+    {
+        $category = $this->item_categories->find($id);
+        if (!isset($category))
+        {
+            return abort('404');
+        }
+        $category->update($request->get('item'));
+        $category_locales = ItemCategoriesTranslation::where('category_id', $id)->get();
+        if (isset($category_locales) && count($category_locales) > 0)
+        {
+            if ($request->get('item_locales'))
+            {
+                $index = 0;
+                foreach ($request->get('item_locales') as $key => $item)
+                {
+                    if ($category_locales[$index]->locale == $key)
+                    {
+                        $category_locales[$index]->update($item);
+                    }
+                    $index++;
+                }
+            }
+        }
+
+        $item_request_preview = $request->file('item.preview');
+        if (isset($item_request_preview)) {
+            $preview_id = $this->imageUpload($request, 'item.preview')->id;
+            $category->update(['preview_id' => $preview_id]);
+        }
+
+        $item_request_poster = $request->file('item.poster');
+        if (isset($item_request_poster)) {
+            $poster_id = $this->imageUpload($request, 'item.poster')->id;
+            $category->update(['poster_id' => $poster_id]);
+        }
+
+        Session::flash('success', 'Категория успешно изменена!');
+        return redirect()->back();
+    }
+
+    public function destroy_category($id)
+    {
+        $category = $this->item_categories->find($id);
+        if (!isset($category))
+        {
+            return abort('404');
+        }
+        $category->delete();
+        Session::flash('success', 'Категория успешно удалена!');
+        return redirect()->route('admin_items_categories');
+    }
+
+
+    // END CATEGORY
 }

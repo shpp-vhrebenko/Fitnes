@@ -80,13 +80,17 @@
                                 <li>
                                     <a href="{{ route('show_client', $client->id) }}" class="btn btn-light">Просмотр</a></li>
                                 <li>
+                                    @if($client->id != 1)
                                     <a href="{{ route('edit_client', $client->id) }}" class="btn btn-primary">Редактировать</a>
+                                    @endif
                                 </li>
                                 <li>
                                     <form class="delete" action="{{ route('destroy_client', $client->id) }}" method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                        @if($client->id != 1)
                                         <input class="btn btn-danger" type="submit" value="Удалить">
+                                        @endif
                                     </form>
                                 </li>
                                 <li>

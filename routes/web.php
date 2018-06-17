@@ -11,7 +11,7 @@
 |
 */
 
-/*Route::get('/_debugbar/assets/stylesheets', [
+Route::get('/_debugbar/assets/stylesheets', [
     'as' => 'debugbar-css',
     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
 ]);
@@ -25,7 +25,7 @@ Route::get('/_debugbar/open', [
     'as' => 'debugbar-open',
     'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
 ]);
-*/
+
 
 Auth::routes();
 
@@ -54,6 +54,15 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
     Route::get('/clients/new_client', 'AdminController@client_new')->name('new_client');
     Route::post('/clients/client_store', 'AdminController@client_store')->name('client_store');
     Route::post('/clients/client_message', 'AdminController@client_sendMessage')->name('send_message_client');
+
+    // Route category
+    Route::get('/categories', 'AdminController@categories')->name('categories');
+    Route::get('/categories/new', 'AdminController@categories_new')->name('categories_new');
+    Route::post('/categories/new', 'AdminController@categories_store')->name('categories_store');
+    Route::get('/category/{id}', 'AdminController@show_category')->name('show_category');
+    Route::get('/category/{id}/edit', 'AdminController@edit_category')->name('edit_category');
+    Route::put('/category/{id}/edit', 'AdminController@update_category')->name('update_category');
+    Route::delete('/category/{id}/destroy', 'AdminController@destroy_category')->name('destroy_category');
 
 
 });
