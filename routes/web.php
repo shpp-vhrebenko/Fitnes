@@ -11,7 +11,7 @@
 |
 */
 
-/*Route::get('/_debugbar/assets/stylesheets', [
+Route::get('/_debugbar/assets/stylesheets', [
     'as' => 'debugbar-css',
     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
 ]);
@@ -25,7 +25,7 @@ Route::get('/_debugbar/open', [
     'as' => 'debugbar-open',
     'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
 ]);
-*/
+
 
 Auth::routes();
 
@@ -63,4 +63,14 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
     Route::get('/category/{id}/edit', 'AdminController@edit_category')->name('edit_category');
     Route::put('/category/{id}/edit', 'AdminController@update_category')->name('update_category');
     Route::delete('/category/{id}/destroy', 'AdminController@destroy_category')->name('destroy_category');
+
+    // Route items
+    Route::get('/items', 'AdminController@items')->name('admin_items');
+    Route::get('/items/new', 'AdminController@items_new')->name('items_new');
+    Route::post('/items/new', 'AdminController@items_store')->name('items_store');
+//    Route::get('/item/{id}', 'AdminController@item')->name('admin_item');
+    Route::get('/item/{id}/edit', 'AdminController@item_edit')->name('edit_item');
+    Route::put('/item/{id}/edit', 'AdminController@item_update')->name('update_item');
+    Route::delete('/item/{id}/destroy', 'AdminController@item_destroy')->name('destroy_item');
+    Route::get('/items/filter', 'AdminController@items_filter')->name('items_filter');
 });

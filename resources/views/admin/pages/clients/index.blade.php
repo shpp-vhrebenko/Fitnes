@@ -56,10 +56,9 @@
                     <th scope="col">ID</th>
                     <th scope="col">Клиент</th>
                     <th scope="col">Почта</th>
-                    <th scope="col">Роль</th>
-                    <th scope="col"></th>
+                    <th scope="col">Роль</th>                    
                     <th scope="col">Статус</th>
-                    <th scope="col">Просмотр</th>
+                    <th scope="col">Действия</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -72,13 +71,12 @@
                             @foreach($client->roles as $role)
                                 {{ $role->name }}
                             @endforeach
-                        </td>
-                        <td></td>
+                        </td>                        
                         <td>{{ $client->getClientStatus($client->status_id) }}</td>
                         <td>
                             <ul class="camotek-form-links">
                                 <li>
-                                    <a href="{{ route('show_client', $client->id) }}" class="btn btn-light">Просмотр</a></li>
+                                    <a href="{{ route('show_client', $client->id) }}" class="btn btn-secondary">Просмотр</a></li>
                                 <li>
                                     @if($client->id != 1)
                                     <a href="{{ route('edit_client', $client->id) }}" class="btn btn-primary">Редактировать</a>

@@ -24,8 +24,8 @@ class StoreSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'settings.logo' => 'required|image',
-            'settings.favicon' => 'required|image',
+            'settings.logo' => 'image',
+            'settings.favicon' => 'image',
             'settings.title' => 'required',            
             'settings.title_site' => 'required',
             'settings.owner' => 'required',            

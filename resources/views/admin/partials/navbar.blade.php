@@ -12,9 +12,8 @@
                         Контент
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <h6 class="dropdown-header"></h6>                        
-                        <a class="dropdown-item" href="{{ route('categories') }}">Категории</a>
-                        <a class="dropdown-item" href="#">Записи</a>                        
+                      <a class="dropdown-item" href="{{ route('categories') }}">Категории</a>
+                      <a class="dropdown-item" href="{{ route('admin_items') }}">Записи</a>                        
                        <!--  <div class="dropdown-divider"></div>
                        <h6 class="dropdown-header">Технологии</h6>
                        <a class="dropdown-item" href="#">Все технологии</a>
