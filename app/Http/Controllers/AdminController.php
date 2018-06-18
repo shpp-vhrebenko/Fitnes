@@ -417,129 +417,19 @@ class AdminController extends Controller
         return view('admin/pages/items/new', compact(['title', 'categories']));
     }
 
-      public function items_store(ItemRequest $request)
+      public function items_store(Request $request)
     {
-        $item_request = $request->get('item');
-        $item_request_preview = $request->file('item.preview');
-        if (isset($item_request_preview)) {
-            $preview_id = $this->imageUpload($request, 'item.preview')->id;
-            $item_request['preview_id'] = $preview_id;
-        }
-        $i = $this->items->create($item_request);
 
-        if (isset($i)) {
-
-            for ($j = 1; $j <= 15; $j++)
-            {
-                $image_gallery = $request->file('photo_' . $j);
-                if (isset($image_gallery))
-                {
-                    $this->imageGalleryUpload($request, 'photo_' . $j, $j, $i->id);
-                }
-            }
-
+        $item = $request->get('item');    
+     
+        if( $image = $request->file('item.image') )
+        {            
+            $item['image'] = Item::saveImage( $image );                 
         }
 
+        $this->items->create($item);        
 
-        if ($request->get('item_locales')) {
-            foreach($request->get('item_locales') as $key => $item)
-            {
-                if (isset($item['name']))
-                {
-                    if (!isset($item['slug']))
-                    {
-                        $item['slug'] = str_slug('i-' . $i->id . '-' . $key . '-' . $item['name'], '-', 'en');
-                    }
-                    $item['item_id'] = $i->id;
-                    $item['locale'] = $key;
-                    ItemTranslation::create($item);
-                }
-            }
-        }
-
-        if ($request->get('categories')) {
-            $categories = $request->get('categories');
-            if (isset($categories)) {
-                foreach ($categories as $category)
-                {
-                    ItemMultiCategory::create([
-                        'item_id' => $i->id,
-                        'category_id' => $category
-                    ]);
-                }
-            }
-        }
-
-        if ($request->get('items_related')) {
-            $items_related = $request->get('items_related');
-            if (isset($items_related) && isset($i)) {
-                foreach ($items_related as $item_rel)
-                {
-                    RecommendedItem::create([
-                        'item_id' => $i->id,
-                        'recommended_id' => $item_rel
-                    ]);
-                }
-            }
-        }
-
-        if ($request->get('terms')) {
-            $terms = $request->get('terms');
-            if (isset($terms)) {
-                foreach ($terms as $term)
-                {
-                    ItemTerms::create([
-                        'item_id' => $i->id,
-                        'term_id' => $term
-                    ]);
-                }
-            }
-        }
-
-        if ($request->get('characteristics')) {
-            $characteristics = $request->get('characteristics');
-            if (isset($characteristics)) {
-                foreach ($characteristics as $key => $characteristic)
-                {
-                    foreach ($characteristic as $key2 => $item){
-                        if (isset($item)) {
-                            CharacteristicsChildTranslations::create([
-                                'item_id' => $i->id,
-                                'ch_id' => $key,
-                                'locale' => $key2,
-                                //'value' => serialize(str_replace(' ', '', $item))
-                                'value' => serialize($item)
-                            ]);
-                        }
-                    }
-                }
-            }
-        }
-
-        if ($request->get('technologies')) {
-            $technologies = $request->get('technologies');
-            if (isset($technologies)) {
-                foreach ($technologies as $technology)
-                {
-                    ItemTechnology::create([
-                        'item_id' => $i->id,
-                        'technology_id' => $technology
-                    ]);
-                }
-            }
-        }
-
-        if ($request->get('table_size')) {
-            $table_size = $request->get('table_size');
-            if (isset($table_size)) {
-                ItemTableSize::create([
-                    'item_id' => $i->id,
-                    'table_id' => $table_size
-                ]);
-            }
-        }
-
-        Session::flash('success', 'Товар успешно создан!');
+        Session::flash('success', 'Запись успешно создана!');
         return redirect()->back();
     }
 

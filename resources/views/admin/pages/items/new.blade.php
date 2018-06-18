@@ -48,9 +48,9 @@
                             </div>
                             </div>                            
                             <div class="form-group row">
-                                <label for="description" class="col-sm-2 col-form-label">Контент записи</label>
+                                <label for="text" class="col-sm-2 col-form-label">Контент записи</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control summernote" id="description" name="item[description]" rows="3">{{ isset($item) ? $item->description : old('item[description]') }}</textarea>
+                                    <textarea class="form-control summernote" id="description" name="item[text]" rows="3" id="text">{{ isset($item) ? $item->text : old('item[text]') }}</textarea>
                                 </div>
                             </div>             
                         </div>
@@ -58,9 +58,9 @@
                 </div>
                 <div class="tab-pane fade" id="categories" role="tabpanel" aria-labelledby="data-tab">
                     <div class="form-group row">
-                        <label for="terms" class="col-sm-2 col-form-label">Категория</label>
+                        <label for="category_id" class="col-sm-2 col-form-label">Категория</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="store_subtract" name="item[is_sale]">
+                            <select class="form-control" id="store_subtract" name="item[category_id]" id="category_id">
                                 <option value="">-- Не выбрано --</option>
                                 @if(isset($categories) && count($categories) > 0)
                                     @foreach($categories as $category)                                        

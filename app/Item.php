@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\App;
 
 use App\Category;
 
+use Image;
+
 class Item extends Model
 {
     protected $fillable = [
@@ -29,5 +31,14 @@ class Item extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public static function saveImage( $image ){
+        $filename  = time() . '.' . $image->getClientOriginalExtension();
+        $img = Image::make($image->getRealPath());        
+        $img->heighten(300);
+        $img->save( public_path('uploads/items/' . $filename) );        
+
+        return $filename;
     }
 }

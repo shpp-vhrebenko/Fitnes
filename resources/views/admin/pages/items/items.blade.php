@@ -56,7 +56,7 @@
                         <th scope="row">{{ $item->id }}</th>
                         <td>
                             @if(isset($item->image))
-                                <div style="width: 50px; height: 50px; background-image: url('{{ asset($item->image) }}')"/>
+                                <div style="width: 150px; height: 150px; background-image: url('/uploads/items/{{ $item->image }}'); background-size: cover; "/>
                             @endif
                         </td> 
                         <td>
@@ -66,8 +66,8 @@
                         </td>                        
                         <td>
                             @if(isset($item->category_id))
-                                $currentCategory = $item->category();                                 
-                                {{ $currentCategory->name }}                               
+                                                                 
+                                {{  $item->category->name }}                               
                             @endif    
                         </td>                       
                         <td>
