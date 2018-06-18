@@ -3,10 +3,10 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="copyright pull-left">			      
-		        	<a href="https://instagram.com/NGIZERSKAYA" class="copyright__link copyright__link-insta">
+		        	<a href="{{ $instagram->link }}" class="copyright__link copyright__link-insta">
 			            <i class="fa fa-instagram"></i>
 			        </a>      
-		        	<a href="https://instagram.com/NGIZERSKAYA" class="copyright__link copyright__link-copyr">© 2018 ANASTASIA GIZERSKAYA</a>		            
+		        	<a href="{{ $instagram->link }}" class="copyright__link copyright__link-copyr">© 2018 ANASTASIA GIZERSKAYA</a>		            
 			    </div> 
 			</div>
 			<div class="col-md-6">

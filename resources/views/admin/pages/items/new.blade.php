@@ -1,9 +1,5 @@
 @extends('admin/layout/admin')
 
-<?php
-    $locales = ['ru', 'ua', 'en'];
-?>
-
 @section('content')
     <h1>{{ $title }}</h1>
     @if (Session::has('success'))

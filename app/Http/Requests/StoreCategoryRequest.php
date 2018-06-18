@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreItemCategoryRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,17 @@ class StoreItemCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'item_locales.ru.name' => 'required',
-            'item_locales.ua.name' => 'required',
-            'item_locales.en.name' => 'required'
+            'item.name' => 'required',
+            'item.slug' => 'required',
+            'item.description' => 'required'
+        ];
+    }
+
+    public function messages() {
+        return [
+            'item.name.required' => 'Необходимо ввести Название Категории',
+            'item.slug.required' => 'Необходимо ввести ЧПУ Категории',
+            'item.description.required' => 'Необходимо ввести Описание Категории'            
         ];
     }
 }

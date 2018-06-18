@@ -3,7 +3,7 @@
 @section('content')
     <div class="title clearfix">
         <div class="text-left"><h1>{{ $title }}</h1></div>
-        <div class="text-right"><a href="{{ route('admin_categories_new') }}" class="btn btn-warning" style="color: #fff;">Создать</a></div>
+        <div class="text-right"><a href="{{ route('categories_new') }}" class="btn btn-warning" style="color: #fff;">Создать</a></div>
     </div>
     @if (Session::has('success'))
         <div class="alert alert-success" role="alert">
@@ -17,37 +17,32 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Название категории</th>
-                    <th scope="col" class="text-center">Порядок сортировки</th>
-                    <th scope="col">Дата создания</th>
-                    <th scope="col">Активация</th>
-                    <th scope="col">Действие</th>
+                    <th scope="col">Название категории</th>                    
+                    <th scope="col">Дата создания</th>    
+                    <th scope="col">Действия</th>                
                 </tr>
                 </thead>
                 <tbody>
                 <?php $index = 0; ?>
-                @foreach($categories as $category)
-                    @if(!isset($category->parent_id))
-                        <tr>
-                            <th scope="row">{{ ++$index }}</th>
-                            <td>@if($category->subcategories->count() > 0)<a href="{{ route('show_category_subcategories', $category->id) }}">{{ $category->locales[0]->name }}@else{{ $category->locales[0]->name }}@endif</a></td>
-                            <td class="text-center">{{ $category->sort_order }}</td>
-                            <td>{{ $category->created_at->format('d-m-Y') }}</td>
-                            <td>{{ $category->is_active ? 'Да' : 'Нет' }}</td>
-                            <td>
-                                <ul class="camotek-form-links">
-                                    <li><a href="{{ route('edit_items_category', $category->id) }}" class="btn btn-primary">Изменить</a></li>
-                                    <li>
-                                        <form class="delete" action="{{ route('destroy_items_category', $category->id) }}" method="POST">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                            <input class="btn btn-danger" type="submit" value="Удалить">
-                                        </form>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    @endif
+                @foreach($categories as $category)                    
+                    <tr>
+                        <th scope="row">{{ ++$index }}</th>
+                        <td>{{ $category->name }}</td>               
+                        <td>{{ $category->created_at->format('d-m-Y') }}</td>                
+                        <td>
+                            <ul class="camotek-form-links">
+                                <li><a href="{{ route('edit_category', $category->id) }}" class="btn btn-primary">Изменить</a></li>
+                                <li>
+                                    <form class="delete" action="{{ route('destroy_category', $category->id) }}" method="POST">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                        <input class="btn btn-danger" type="submit" value="Удалить">
+                                    </form>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    
                 @endforeach
                 </tbody>
             </table>

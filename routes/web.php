@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/_debugbar/assets/stylesheets', [
+/*Route::get('/_debugbar/assets/stylesheets', [
     'as' => 'debugbar-css',
     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
 ]);
@@ -25,7 +25,7 @@ Route::get('/_debugbar/open', [
     'as' => 'debugbar-open',
     'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
 ]);
-
+*/
 
 Auth::routes();
 
@@ -63,6 +63,4 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
     Route::get('/category/{id}/edit', 'AdminController@edit_category')->name('edit_category');
     Route::put('/category/{id}/edit', 'AdminController@update_category')->name('update_category');
     Route::delete('/category/{id}/destroy', 'AdminController@destroy_category')->name('destroy_category');
-
-
 });
