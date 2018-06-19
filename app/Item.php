@@ -20,13 +20,30 @@ class Item extends Model
                 'is_active'
             ];
 
-    public $statuses = ['Не активна', 'Активена'];
+    public static $ItemStatuses = [ 
+        'Не активна',
+        'Активна'
+    ];
 
-    public static function get_statuses()
+    public static $ItemTrainingStatuses = [ 
+        'Не выходной',
+        'Выходной'        
+    ];
+
+    public static $TrainingSettings = [
+        'maxWeek' => 2,
+        'maxDay' => 14,
+    ];   
+
+    public function getItemTrainingStatus($status_id)
     {
-        $item = new Item();
-        return $item->statuses;
-    }    
+        return self::$ItemTrainingStatuses[$status_id];
+    } 
+
+    public function getItemStatus($status_id)
+    {
+        return self::$ItemStatuses[$status_id];
+    } 
 
     public function category()
     {
@@ -36,8 +53,10 @@ class Item extends Model
     public static function saveImage( $image ){
         $filename  = time() . '.' . $image->getClientOriginalExtension();
         $img = Image::make($image->getRealPath());        
-        $img->heighten(300);
-        $img->save( public_path('uploads/items/' . $filename) );        
+        $img->resize(null, 300, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $img->save( public_path('uploads/items/' . $filename), 45);        
 
         return $filename;
     }

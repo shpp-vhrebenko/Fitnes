@@ -25,19 +25,24 @@ class ItemRequest extends FormRequest
     public function rules(Request $request)
     {
         return [
-            'item_locales.ru.name' => 'required',
-            'item_locales.ua.name' => 'required',
-            'item_locales.en.name' => 'required',
-            'item.code' => 'required|unique:items,code,' . Request::get('item_id'),
-            'item.price' => 'required|numeric',
-            'item.whs_price' => 'sometimes|nullable|numeric',
-            'item.old_price' => 'sometimes|nullable|numeric',
-            'item.qty' => 'required|numeric',
-            'item.min_qty' => 'sometimes|nullable|numeric',
-            'item.max_qty' => 'sometimes|nullable|numeric',
-            'categories' => 'required',
-            'item.duration_sale' => 'sometimes|nullable|date_format:"Y-m-d"',
-            'item.duration_new' => 'sometimes|nullable|date_format:"Y-m-d"'
+            'item.title' => 'required|max:190',
+            'item.text' => 'required',
+            'item.image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'item.category_id' => 'required',
+            //'item.course_id' => 'required',
+            'item.is_active' => 'required',            
+        ];
+    }
+
+    public function messages() {
+        return [
+            'item.title.required' => 'Необходимо ввести Заголовок Записи',
+            'item.title.max' => 'Максимальное количество символов Заголовка 190',
+            'item.text.required' => 'Необходимо ввести  Текст Записи',
+            'item.image.image' => 'Изображение записи должно быть в формате изображения',
+            'item.image.mimes' => 'Изображение записи должно быть в формате jpeg,png,jpg,gif,svg',
+            'item.category_id.required' => 'Необходимо выбрать Категорию Записи',
+            'item.is_active.required' => 'Необходимо указать Статус Записи',            
         ];
     }
 }

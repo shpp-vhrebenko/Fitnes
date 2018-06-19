@@ -10,7 +10,15 @@
    @parent
 @endsection
 
-@section('content')    
+@section('content')	
+	<div class="container-fluid">
+		<header class="row item-header">
+			<h4 class="item-header__title col-sm-12">{{$item->title}}</h4>		
+		</header>
+		<div class="row item-content">
+			{!! $item->text !!}
+		</div>  
+	</div>	 
 @endsection
 
 

@@ -73,3 +73,13 @@ select.form-control{
     padding: 1rem;
     width: auto;
 }
+
+.item-preview {
+    display: block;
+    width: 150px;
+    height: 150px; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 10px;
+}

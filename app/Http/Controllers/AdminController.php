@@ -279,13 +279,11 @@ class AdminController extends Controller
         return view('admin/pages/items/categories', compact(['title', 'categories']));
     }
 
-    public function categories_new($id = null)
+    public function categories_new()
     {
         $title = 'Создание категории';
-        $current_category = $id;       
-        $count_categories = Category::all()->count();
-        //$categories = $this->item_categories->all()->load('subcategories');
-        return view('admin/pages/items/categories-new', compact(['title', 'categories', 'count_categories', 'current_category']));
+
+        return view('admin/pages/items/categories-new', compact(['title']));
     }
 
     public function categories_store(StoreCategoryRequest $request)
@@ -323,8 +321,12 @@ class AdminController extends Controller
     public function destroy_category($id)
     {
         $category = $this->categories->find($id);
-        if (!isset($category))
-        {
+        $itemsCategory = $category->items();
+        if($itemsCategory->count() > 0) {
+            Session::flash('danger', 'Категория не можит быть удалена так как в ней есть записи! Необходимо удалить все записи данной категории или назначить для них другую категорию!');
+            return redirect()->route('categories');
+        }
+        if (!isset($category)) {
             return abort('404');
         }
         $category->delete();
@@ -413,8 +415,13 @@ class AdminController extends Controller
     {
         $title = 'Создание записи';
         $categories = $this->categories->all();   
+        $statuses = Item::$ItemStatuses;
+        $statusesDays = Item::$ItemTrainingStatuses;
+        $trainingSettings = Item::$TrainingSettings;
+        $countWeek = $trainingSettings['maxWeek'];
+        $countDay = $trainingSettings['maxDay'];
 
-        return view('admin/pages/items/new', compact(['title', 'categories']));
+        return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'statusesDays', 'countWeek', 'countDay']));
     }
 
       public function items_store(Request $request)
@@ -440,40 +447,19 @@ class AdminController extends Controller
         {
             return abort(404);
         }
-        $this->setTitle('Редактирование товара');
+        $title = 'Редактирование Записи';
+        $categories = $this->categories->all(); 
+        $statuses = Item::$ItemStatuses;
+        $statusesDays = Item::$ItemTrainingStatuses;
+        $trainingSettings = Item::$TrainingSettings;
+        $countWeek = $trainingSettings['maxWeek'];
+        $countDay = $trainingSettings['maxDay'];
 
-        $categories = ItemCategory::with(['locales', 'subcategories.locales', 'subcategories.subcategories.locales'])->get();
-        //$categories = $this->item_categories->all()->load('subcategories');
-
-        $attributes = ItemAttribute::whereHas('terms_list', function ($query) {
-            $query->where('is_active', true);
-        })->with(['locales', 'terms_list.locales'])->get();
-        //$attributes = $this->item_attributes->all();
-
-        $characteristics = ItemCharacteristic::where('is_active', true)->get();
-        $characteristics->load('locales');
-
-        $table_size = TableSize::all();
-        $table_size->load('locales');
-
-        $technologies = Technology::all();
-        $technologies->load('locales');
-
-        $items_related = Item::where('id', '!=', $item->id)->get();
-
-        $technologies_exist = [];
-        $itech = ItemTechnology::where('item_id', $item->id)->get();
-        foreach ($itech as $v)
-        {
-            array_push($technologies_exist, $v->technology->id);
-        }
-        return view('admin/pages/items/new')->with(['categories' => $categories, 'item' => $item, 'attributes' => $attributes, 'characteristics' => $characteristics, 'table_size' => $table_size, 'technologies' => $technologies, 'technologies_exist' => $technologies_exist, 'items_related' => $items_related]);
+        return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'item','statusesDays', 'countWeek', 'countDay']));
     }
 
     public function item_update(ItemRequest $request, $id)
-    {
-
-        //dd($request->all());
+    {       
 
         $item = $this->items->find($id);
         if (!isset($item))
@@ -481,177 +467,15 @@ class AdminController extends Controller
             return abort('404');
         }
         $item->update($request->get('item'));
-        $item_locales = ItemTranslation::where('item_id', $id)->get();
-        if (isset($item_locales) && count($item_locales) > 0)
+
+        if( $image = $request->file('item.image') )
         {
-            if ($request->get('item_locales'))
-            {
-                $index = 0;
-                foreach ($request->get('item_locales') as $key => $iteml)
-                {
-                    if ($item_locales[$index]->locale == $key)
-                    {
-                        $item_locales[$index]->update($iteml);
-                    }
-                    $index++;
-                }
-            }
-        }
+            File::delete( public_path('uploads/items/'. $item->image ));
+            $newImage = Item::saveImage( $image );
+            $item->update(['image' => $newImage]);       
+        }        
 
-        if ($request->get('categories'))
-        {
-            $categories = $request->get('categories');
-            ItemMultiCategory::where('item_id', $item->id)->delete();
-            foreach ($categories as $category)
-            {
-                if (isset($category) && $category != null)
-                {
-                    ItemMultiCategory::create([
-                        'item_id' => $item->id,
-                        'category_id' => $category
-                    ]);
-                }
-            }
-        }
-
-        if ($request->get('terms'))
-        {
-            $terms_arr = $request->get('terms');
-            ItemTerms::where('item_id', $item->id)->delete();
-            foreach ($terms_arr as $t_arr)
-            {
-                if (isset($t_arr) && $t_arr != null) {
-                    ItemTerms::create([
-                        'item_id' => $item->id,
-                        'term_id' => $t_arr
-                    ]);
-                }
-            }
-        }
-
-        if ($request->get('items_related'))
-        {
-            $items_related_arr = $request->get('items_related');
-            RecommendedItem::where('item_id', $item->id)->delete();
-            foreach ($items_related_arr as $item_r_arr)
-            {
-                if (isset($item_r_arr) && $item_r_arr != null) {
-                    RecommendedItem::create([
-                        'item_id' => $item->id,
-                        'recommended_id' => $item_r_arr
-                    ]);
-                }
-            }
-        }
-
-        if ($request->get('technologies'))
-        {
-            $technologies_arr = $request->get('technologies');
-            ItemTechnology::where('item_id', $item->id)->delete();
-            foreach ($technologies_arr as $technology)
-            {
-                if (isset($technology) && $technology != null) {
-                    ItemTechnology::create([
-                        'item_id' => $item->id,
-                        'technology_id' => $technology
-                    ]);
-                }
-            }
-        }
-
-        if ($request->get('item_ch'))
-        {
-            $item_ch = $request->get('item_ch');
-
-            if (isset($item_ch)) {
-                foreach ($item_ch as $key => $c)
-                {
-                    if (isset($c) && $c != null) {
-                        $ct = CharacteristicsChildTranslations::where('id', $key);
-                        if ($ct->first()['value'] != serialize($c)) {
-                            CharacteristicsChildTranslations::where('id', $key)->update([
-                                'value' => serialize($c)
-                            ]);
-                        }
-                    } else {
-                        CharacteristicsChildTranslations::where('id', $key)->delete();
-                    }
-                }
-            }
-        }
-
-        if ($request->get('characteristics')) {
-            $characteristics = $request->get('characteristics');
-
-            if (isset($characteristics)) {
-                foreach ($characteristics as $key => $characteristic)
-                {
-                    foreach ($characteristic as $key2 => $itemz){
-                        if (isset($itemz)) {
-                            CharacteristicsChildTranslations::create([
-                                'item_id' => $item->id,
-                                'ch_id' => $key,
-                                'locale' => $key2,
-                                'value' => serialize(str_replace(' ', '', $itemz))
-                            ]);
-                        }
-                    }
-                }
-            }
-        }
-
-
-        $item_request_preview = $request->file('item.preview');
-        if (isset($item_request_preview)) {
-            $preview_id = $this->imageUpload($request, 'item.preview')->id;
-
-            if (isset($preview_id)) {
-                if (isset($item->preview_id)) {
-                    $img = Image::find($item->preview_id);
-                    File::delete(public_path() . $img->path);
-                    $img->delete();
-                }
-            }
-
-            $item->update([
-                'preview_id' => $preview_id
-            ]);
-        }
-
-        if (isset($item)) {
-
-            for ($j = 1; $j <= 15; $j++)
-            {
-                $image_gallery = $request->file('photo_' . $j);
-                if (isset($image_gallery))
-                {
-                    $this->imageGalleryUpload($request, 'photo_' . $j, $j, $item->id);
-                }
-            }
-
-        }
-
-
-        if ($request->get('table_size')) {
-            $table_size = $request->get('table_size');
-
-            if (isset($item->table_size) && count($item->table_size) && $item->table_size[0]->id != $table_size)
-            {
-                ItemTableSize::where('item_id', $item->id)->update(['table_id' => $table_size]);
-            } else {
-                ItemTableSize::create([
-                    'item_id' => $item->id,
-                    'table_id' => $table_size
-                ]);
-            }
-
-        }
-
-        if (!$request->get('table_size') && isset($item->table_size)) {
-            ItemTableSize::where('item_id', $item->id)->delete();
-        }
-
-        Session::flash('success', 'Товар успешно изменен!');
+        Session::flash('success', 'Запись успешно изменена!');
         return redirect()->back();
     }
 

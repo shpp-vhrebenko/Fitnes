@@ -45,7 +45,8 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Изображение</th>
-                    <th scope="col">Заголовок записи</th>                    
+                    <th scope="col">Заголовок записи</th>   
+                    <th scope="col">Статус</th>                 
                     <th scope="col">Категория</th>                   
                     <th scope="col">Действие</th>
                 </tr>
@@ -56,12 +57,18 @@
                         <th scope="row">{{ $item->id }}</th>
                         <td>
                             @if(isset($item->image))
-                                <div style="width: 150px; height: 150px; background-image: url('/uploads/items/{{ $item->image }}'); background-size: cover; "/>
+                                <a href="/uploads/items/{{ $item->image }}" class="item-preview" style="background-image: url('/uploads/items/{{ $item->image }}');">
+                                </a>    
                             @endif
                         </td> 
                         <td>
                             @if(isset($item->title))
                                 {{ $item->title }}
+                            @endif
+                        </td> 
+                        <td>
+                            @if(isset($item->is_active))
+                                {{ $item->getItemStatus($item->is_active) }}
                             @endif
                         </td>                        
                         <td>

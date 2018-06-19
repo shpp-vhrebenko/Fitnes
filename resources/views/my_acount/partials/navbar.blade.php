@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md fixed-top header-navbar">
   <a class="navbar-brand" href="{{ route('index') }}">
-    <img src="./img/logo_ag.png" class="attachment-medium size-medium" alt="" />
+    <img src="/uploads/logo/{{$settings->logo}}" class="attachment-medium size-medium" alt="" />
   </a>
   @if(Auth::check())
   <div id="open-sidebar" class="navbar__open-sidebar">

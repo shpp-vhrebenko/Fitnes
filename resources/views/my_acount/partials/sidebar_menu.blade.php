@@ -1,13 +1,45 @@
-<!-- <div id='sidebar-menu' class="sidebar-menu">
-  <span class='button-close' id="button_close_sidebar-menu">X</span>
-	<ul class="sidebar-menu__list">
-		<li><a href='#main' class="anchor-link">Главная</a></li>
-	  	<li><a href='#about' class="anchor-link">О проекте</a></li>
-	  	<li><a href='#price' class="anchor-link">Пакеты</a></li>
-	  	<li><a href='#review' class="anchor-link">Отзывы</a></li>
-	  	<li><a href='#results' class="anchor-link">Результаты</a></li>
-	  	<li><a href='#faq' class="anchor-link">Вопросы</a></li>
-		<li><a href='#contacts' class="anchor-link">Контакты</a></li>	  	
-		<li><a href='./doc/ПОЛИТИКА_КОНФИДЕНЦИАЛЬНОСТИ_ИП_Гизерская.pdf' target='_blank'>Политика конфиденциальности</a></li>
-	</ul>
-<div> -->
+<div class="main__sidebar">
+	<div id="profile-sidebar" class="profile-sidebar">         
+	  	<div class="profile-sidebar__username">			            
+	        <span>{{ Auth::user()->name }}</span>			            		      			
+		</div>				        
+	  	<div class="profile-sidebar__usermenu usermenu">
+	        <ul>
+	        	<li class="">
+	          		<a class="usermenu__link" href="{{ route('index') }}">
+	            		Главная
+	            	</a>
+	         	</li>
+	            <li class="">
+		            <a class="usermenu__link" href="https://gizerskaya.com/my-account/?&amp;profile=records">
+		            	Результаты
+		            </a>
+	            </li>	
+	            @if(isset($categories) && count($categories) > 0)
+	                @foreach($categories as $category) 
+	                <li class="">
+	                    <a class="usermenu__link" href="{{route('show_category_items', $category->slug)}}" .="">				
+							{{$category->name}}
+						</a>                       
+	                </li>    
+	                @endforeach
+	            @endif							
+			    <li class=" ">
+			  		<a class="usermenu__link" href="https://gizerskaya.com/my-account/?&amp;profile=statii" .="">						
+						FAQ
+					</a>
+			    </li>
+			    <li class=" ">
+			  		<a class="usermenu__link" href="https://gizerskaya.com/my-account/?&amp;profile=statii" .="">						
+						Чат
+					</a>
+			    </li>
+			    <li class=" ">
+			  		<a class="usermenu__link" href="https://gizerskaya.com/my-account/?&amp;profile=statii" .="">						
+						Выйти
+					</a>
+			    </li>
+	    	</ul>
+		</div>	
+	</div>
+</div>	

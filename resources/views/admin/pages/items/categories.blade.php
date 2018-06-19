@@ -5,11 +5,13 @@
         <div class="text-left"><h1>{{ $title }}</h1></div>
         <div class="text-right"><a href="{{ route('categories_new') }}" class="btn btn-warning" style="color: #fff;">Создать</a></div>
     </div>
-    @if (Session::has('success'))
-        <div class="alert alert-success" role="alert">
-            {{ Session::get('success') }}
-        </div>
-    @endif
+    <div class="flash-message">
+      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if(Session::has($msg))
+        <p class="alert alert-{{ $msg }}">{{ Session::get($msg) }}</p>
+        @endif
+      @endforeach
+    </div>    
     @if(isset($categories) && $categories->count() > 0)
         <div class="card">
             <div class="card-header">Категории</div>
@@ -32,6 +34,7 @@
                         <td>
                             <ul class="camotek-form-links">
                                 <li><a href="{{ route('edit_category', $category->id) }}" class="btn btn-primary">Изменить</a></li>
+                                @if($category->id != 1)
                                 <li>
                                     <form class="delete" action="{{ route('destroy_category', $category->id) }}" method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
@@ -39,6 +42,7 @@
                                         <input class="btn btn-danger" type="submit" value="Удалить">
                                     </form>
                                 </li>
+                                @endif
                             </ul>
                         </td>
                     </tr>

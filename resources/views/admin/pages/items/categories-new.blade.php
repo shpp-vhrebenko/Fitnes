@@ -1,9 +1,5 @@
 @extends('admin/layout/admin')
 
-<?php
-$locales = ['ru', 'ua', 'en'];
-?>
-
 @section('content')
     <h1>{{ $title }}</h1>
     @if (Session::has('success'))
@@ -39,17 +35,27 @@ $locales = ['ru', 'ua', 'en'];
                                 <div class="form-group row">
                                     <label for="name" class="col-sm-2 col-form-label">Название<sup class="required">*</sup></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="name" name="item[name]" value="{{ isset($category) ? $category->name : old('item[name]') }}">
+                                        <input type="text"
+                                                class="form-control"
+                                                id="name"
+                                                name="item[name]"
+                                                value="{{ isset($category) ? $category->name : old('item[name]') }}"
+                                                {{ (isset($category) && ($category->id == 1)) ? 'disabled' : '' }}>
                                 </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="slug" class="col-sm-2 col-form-label">ЧПУ</label>
+                                    <label for="slug" class="col-sm-2 col-form-label">ЧПУ<sup class="required">*</sup></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="slug" name="item[slug]" value="{{ isset($category) ? $category->slug : old('item[slug]') }}">
+                                        <input type="text" 
+                                                class="form-control"
+                                                id="slug" 
+                                                name="item[slug]" 
+                                                value="{{ isset($category) ? $category->slug : old('item[slug]') }}"
+                                                {{ (isset($category) && ($category->id == 1)) ? 'disabled' : '' }}>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="description" class="col-sm-2 col-form-label">Описание</label>
+                                    <label for="description" class="col-sm-2 col-form-label">Описание<sup class="required">*</sup></label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control summernote" id="description" name="item[description]" rows="3">{{ isset($category) ? $category->description : old('item[description]') }}</textarea>
                                     </div>

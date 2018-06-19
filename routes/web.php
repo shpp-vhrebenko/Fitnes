@@ -35,6 +35,8 @@ Route::group([], function() {
 
 Route::group(['prefix'=>'my-account','middleware'=>'auth'], function() {
 	Route::get('/', 'MyAccountController@index')->name('my-account');
+    Route::get('/category/{slug}', 'MyAccountController@show_category_items')->name('show_category_items');
+    Route::get('/category/{slug}/{id}', 'MyAccountController@show_item')->name('show_item');
 });
 
 Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
@@ -68,7 +70,6 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
     Route::get('/items', 'AdminController@items')->name('admin_items');
     Route::get('/items/new', 'AdminController@items_new')->name('items_new');
     Route::post('/items/new', 'AdminController@items_store')->name('items_store');
-//    Route::get('/item/{id}', 'AdminController@item')->name('admin_item');
     Route::get('/item/{id}/edit', 'AdminController@item_edit')->name('edit_item');
     Route::put('/item/{id}/edit', 'AdminController@item_update')->name('update_item');
     Route::delete('/item/{id}/destroy', 'AdminController@item_destroy')->name('destroy_item');
