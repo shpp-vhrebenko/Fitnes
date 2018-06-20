@@ -23,12 +23,12 @@ class ItemRequest extends FormRequest
      * @return array
      */
     public function rules(Request $request)
-    {
+    {        
         return [
             'item.title' => 'required|max:190',
             'item.text' => 'required',
             'item.image' => 'image|mimes:jpeg,png,jpg,gif,svg',
-            'item.category_id' => 'required',
+            'item.category_id' => 'required|not_in:0',
             //'item.course_id' => 'required',
             'item.is_active' => 'required',            
         ];
@@ -42,6 +42,7 @@ class ItemRequest extends FormRequest
             'item.image.image' => 'Изображение записи должно быть в формате изображения',
             'item.image.mimes' => 'Изображение записи должно быть в формате jpeg,png,jpg,gif,svg',
             'item.category_id.required' => 'Необходимо выбрать Категорию Записи',
+            'item.category_id.not_in' => 'Необходимо выбрать Категорию Записи',
             'item.is_active.required' => 'Необходимо указать Статус Записи',            
         ];
     }

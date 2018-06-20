@@ -424,7 +424,7 @@ class AdminController extends Controller
         return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'statusesDays', 'countWeek', 'countDay']));
     }
 
-      public function items_store(Request $request)
+      public function items_store(ItemRequest $request)
     {
 
         $item = $request->get('item');    

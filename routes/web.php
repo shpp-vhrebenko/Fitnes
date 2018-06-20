@@ -34,9 +34,20 @@ Route::group([], function() {
 });
 
 Route::group(['prefix'=>'my-account','middleware'=>'auth'], function() {
+
 	Route::get('/', 'MyAccountController@index')->name('my-account');
+
+    // Route categories
     Route::get('/category/{slug}', 'MyAccountController@show_category_items')->name('show_category_items');
     Route::get('/category/{slug}/{id}', 'MyAccountController@show_item')->name('show_item');
+
+    // Route results
+    Route::get('/results', 'MyAccountController@show_results')->name('show_results');
+    Route::post('/results/user', 'MyAccountController@get_results')->name('get_results');
+    Route::get('/results/new', 'MyAccountController@add_result')->name('add_result');    
+    Route::post('/results/new', 'MyAccountController@result_store')->name('result_store');
+    Route::get('/result/{id}/edit', 'AdminController@result_edit')->name('edit_result');
+    Route::put('/result/{id}/edit', 'AdminController@result_update')->name('update_result');
 });
 
 Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {

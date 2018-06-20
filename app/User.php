@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Role;
+use Result;
 
 class User extends Authenticatable
 {
@@ -49,6 +50,10 @@ class User extends Authenticatable
 
     public function roles() {
         return $this->belongsToMany('App\Role');
+    }
+
+    public function results() {
+        return $this->hasMany('App\Result');
     }
 
     public function hasRole($id_role)

@@ -11,7 +11,7 @@
 	            	</a>
 	         	</li>
 	            <li class="">
-		            <a class="usermenu__link" href="https://gizerskaya.com/my-account/?&amp;profile=records">
+		            <a class="usermenu__link" href="{{ route('show_results') }}">
 		            	Результаты
 		            </a>
 	            </li>	
