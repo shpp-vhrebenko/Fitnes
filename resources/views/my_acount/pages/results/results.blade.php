@@ -23,19 +23,19 @@
 			 <div id='grafik-results' class="results-grafik">
                 <ul class="nav nav-tabs">
 					<li class="nav-item" >
-	          			<a class="nav-link active" href="#tab_1_1" data-toggle="tab1">Вес </a>
+	          			<a class="nav-link active grafik-link" href="#tab_1_1" data-toggle="tab1">Вес </a>
 	        		</li>
 	        		<li class="nav-item" >
-	          			<a class="nav-link" href="#tab_1_2" data-toggle="tab2">Рост </a>
+	          			<a class="nav-link grafik-link" href="#tab_1_2" data-toggle="tab2">Рост </a>
 	        		</li>
 	        		<li class="nav-item">
-	          			<a class="nav-link" href="#tab_1_4" data-toggle="tab4">Грудь </a>
+	          			<a class="nav-link grafik-link" href="#tab_1_4" data-toggle="tab4">Грудь </a>
 	        		</li>
 	        		<li class="nav-item">
-	         			<a class="nav-link" href="#tab_1_5" data-toggle="tab5">Бедра </a>
+	         			<a class="nav-link grafik-link" href="#tab_1_5" data-toggle="tab5">Бедра </a>
 	        		</li>
 	        		<li class="nav-item">
-	          			<a class="nav-link" href="#tab_1_3" data-toggle="tab3">Талия </a>
+	          			<a class="nav-link grafik-link" href="#tab_1_3" data-toggle="tab3">Талия </a>
 	        		</li>	        
 				</ul>
                 <canvas id="myChart"></canvas>
@@ -129,6 +129,10 @@
 	            console.log("xhr=" + xhr + " b=" + b + " c=" + c);
 	        }
         });	
+
+        $("a.grafik-link").click(function(e) {
+			e.preventDefault();
+		})
         							
 		$('#grafik-results li a[data-toggle="tab1"]').click(function(){			
 			$('#grafik-results li a').each(function(){

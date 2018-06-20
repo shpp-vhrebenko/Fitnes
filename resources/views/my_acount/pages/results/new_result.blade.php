@@ -65,12 +65,7 @@
                 		<input type="number" class="form-control result-form__input" id="result_taliya" name="result[taliya]" value="{{ isset($result) ? $result->taliya : old('result[taliya]') }}" placeholder="Обхват талии">  
                 	</div> 
                 	<button type="submit" class="btn btn-default result-form__button">@if(Route::is('edit_result')) Изменить @else Сохранить @endif</button>      
-                </div>
-                <div class="col-md-4 result-image">                	
-            		@if(isset($result->image))                       
-                    <img src="/uploads/results/{{$result->image}}" class="img-fluid">      
-                    @endif                	
-                </div>
+                </div>               
                 <div class="col-md-4 result-message">
                 	@if (Session::has('success'))
 				        <div class="alert alert-success alert-success_custom" role="alert">

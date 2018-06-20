@@ -37,9 +37,10 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $results->links() }} 
             </div>
         </div> 
-              
+            
     </section>
 
 @endsection
