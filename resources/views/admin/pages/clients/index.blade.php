@@ -76,7 +76,11 @@
                         <td>
                             <ul class="camotek-form-links">
                                 <li>
-                                    <a href="{{ route('show_client', $client->id) }}" class="btn btn-secondary">Просмотр</a></li>
+                                    <a href="{{ route('show_client', $client->id) }}" class="btn btn-secondary">Просмотр</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin_results', $client->id) }}" class="btn btn-secondary">Просмотр результатов</a>
+                                </li>
                                 <li>
                                     @if($client->id != 1)
                                     <a href="{{ route('edit_client', $client->id) }}" class="btn btn-primary">Редактировать</a>

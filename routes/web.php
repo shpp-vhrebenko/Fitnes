@@ -85,4 +85,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
     Route::put('/item/{id}/edit', 'AdminController@item_update')->name('update_item');
     Route::delete('/item/{id}/destroy', 'AdminController@item_destroy')->name('destroy_item');
     Route::get('/items/filter', 'AdminController@items_filter')->name('items_filter');
+
+    // Route results
+    Route::get('results/{id}', 'AdminController@results')->name('admin_results');
 });

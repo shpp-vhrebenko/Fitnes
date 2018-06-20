@@ -12,6 +12,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Repositories\UsersRepositoryInterface;
 use App\Repositories\CategoriesRepositoryInterface;
 use App\Repositories\ItemsRepositoryInterface;
+use App\Repositories\ResultsRepositoryInterface;
 
 use App\User;
 use App\Settings;
@@ -19,6 +20,7 @@ use App\Social;
 use App\Role;
 use App\Category;
 use App\Item;
+use App\Result;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -36,7 +38,8 @@ class AdminController extends Controller
 
         ItemsRepositoryInterface                    $itemsRepository,
         UsersRepositoryInterface                    $usersRepository,
-        CategoriesRepositoryInterface           $categoriesRepository     
+        CategoriesRepositoryInterface           $categoriesRepository,
+         ResultsRepositoryInterface              $resultsRepository       
 
     )
     {        
@@ -492,4 +495,14 @@ class AdminController extends Controller
     }
 
     // END ITEMS
+
+    // RESULTS
+    public function results($user_id)
+    {
+        $client = $this->users->find($user_id);
+        $title = 'Результаты пользователя '.$client->name;
+        $results = $client->results()->paginate(10); 
+        return view('admin/pages/results/results', compact(['title', 'results']));
+    }
+    // END RESULTS
 }
