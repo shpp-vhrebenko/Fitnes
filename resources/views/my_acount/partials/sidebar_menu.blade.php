@@ -10,14 +10,14 @@
 	            		Главная
 	            	</a>
 	         	</li>
-	            <li class="">
+	            <li class="@if(Request::url() == route('show_results')) active @endif">
 		            <a class="usermenu__link" href="{{ route('show_results') }}">
 		            	Результаты
 		            </a>
 	            </li>	
 	            @if(isset($categories) && count($categories) > 0)
 	                @foreach($categories as $category) 
-	                <li class="">
+	                <li class="@if(Request::url() == route('show_category_items', $category->slug)) active @endif">
 	                    <a class="usermenu__link" href="{{route('show_category_items', $category->slug)}}" .="">				
 							{{$category->name}}
 						</a>                       
