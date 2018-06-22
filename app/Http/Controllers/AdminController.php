@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSettingsRequest;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\EditClientRequest;
-
 use App\Http\Requests\ItemRequest;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\StoreCoursRequest;
 
 use App\Repositories\UsersRepositoryInterface;
 use App\Repositories\CategoriesRepositoryInterface;
 use App\Repositories\ItemsRepositoryInterface;
 use App\Repositories\ResultsRepositoryInterface;
+use App\Repositories\CoursesRepositoryInterface;
 
 use App\User;
 use App\Settings;
@@ -21,6 +22,7 @@ use App\Role;
 use App\Category;
 use App\Item;
 use App\Result;
+use App\Courses;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -39,13 +41,15 @@ class AdminController extends Controller
         ItemsRepositoryInterface                    $itemsRepository,
         UsersRepositoryInterface                    $usersRepository,
         CategoriesRepositoryInterface           $categoriesRepository,
-         ResultsRepositoryInterface              $resultsRepository       
+        ResultsRepositoryInterface              $resultsRepository,     
+        CoursesRepositoryInterface              $coursesRepository       
 
     )
     {        
         $this->items = $itemsRepository;
         $this->users = $usersRepository;        
         $this->categories = $categoriesRepository;
+        $this->courses = $coursesRepository;
     }
 
     public function index()
@@ -505,4 +509,97 @@ class AdminController extends Controller
         return view('admin/pages/results/results', compact(['title', 'results']));
     }
     // END RESULTS
+
+    // COURSES
+    public function show_courses() 
+    {   
+        $title = "Курсы";
+        $courses = $this->courses->all();
+        return view('admin/pages/courses/index', compact(['title', 'courses']));
+    }
+
+    public function show_cours() 
+    {   
+        
+    }
+
+    public function courses_filter()
+    {
+
+    }
+
+    public function new_cours()
+    {       
+        $title = 'Создание курса';      
+        $statuses = Courses::$coursStatuses;        
+        return view('admin/pages/courses/new', compact(['title', 'statuses']));
+    }
+
+    public function cours_store(StoreCoursRequest $request)
+    {       
+        $item = $request->get('item');    
+     
+        if( $image = $request->file('item.icon') )
+        {            
+            $item['icon'] = Courses::saveIcon( $image );                 
+        }
+
+        $this->courses->create($item);        
+
+        Session::flash('success', 'Курс успешно создана!');
+        return redirect()->back();
+    }
+
+    public function cours_edit()
+    {
+
+    }
+
+    public function cours_update()
+    {
+        
+    }
+
+    public function cours_destroy()
+    {
+        
+    }
+    // END COURSES
+
+    // MARATHONES
+    public function show_marathons() 
+    {   
+        
+    }
+
+    public function show_marathon() 
+    {   
+        
+    }
+
+    public function marathons_filter()
+    {
+
+    }
+
+    public function new_marathon()
+    {
+
+    }
+
+    public function marathon_store()
+    {
+
+    }
+
+    public function edit_marathon()
+    {
+
+    }
+
+    public function update_marathon()
+    {
+        
+    }
+    // END MARATHONES
 }

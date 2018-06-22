@@ -45,9 +45,8 @@ Route::group(['prefix'=>'my-account','middleware'=>'auth'], function() {
     Route::get('/results', 'MyAccountController@show_results')->name('show_results');
     Route::post('/results/user', 'MyAccountController@get_results')->name('get_results');
     Route::get('/results/new', 'MyAccountController@add_result')->name('add_result');    
-    Route::post('/results/new', 'MyAccountController@result_store')->name('result_store');
-    Route::get('/result/{id}/edit', 'AdminController@result_edit')->name('edit_result');
-    Route::put('/result/{id}/edit', 'AdminController@result_update')->name('update_result');
+    Route::post('/results/new', 'MyAccountController@result_store')->name('result_store');    
+    
 });
 
 Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
@@ -88,4 +87,23 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
 
     // Route results
     Route::get('results/{id}', 'AdminController@results')->name('admin_results');
+
+    // Route courses
+    Route::get('/courses', 'AdminController@show_courses')->name('show_courses');   
+    Route::get('/courses/filter', 'AdminController@courses_filter')->name('courses_filter'); 
+    Route::get('/cours/{id}', 'AdminController@show_cours')->name('show_cours');    
+    Route::get('/courses/new', 'AdminController@new_cours')->name('new_cours');
+    Route::post('/cours/new', 'AdminController@cours_store')->name('cours_store');
+    Route::get('/cours/{id}/edit', 'AdminController@cours_edit')->name('edit_cours');
+    Route::put('/cours/{id}/edit', 'AdminController@cours_update')->name('update_cours');
+     Route::delete('/cours/{id}/destroy', 'AdminController@cours_destroy')->name('destroy_cours');
+
+    // Route courses
+    Route::get('/marathons', 'MyAccountController@show_marathons')->name('show_marathons');
+    Route::get('/marathons', 'MyAccountController@marathons_filter')->name('marathons_filter');
+    Route::get('/marathon/{id}', 'MyAccountController@show_marathon')->name('show_marathon');    
+    Route::get('/marathon/new', 'MyAccountController@new_marathon')->name('new_marathon');
+    Route::post('/marathon/new', 'MyAccountController@marathon_store')->name('marathon_store');
+    Route::get('/marathon/{id}/edit', 'AdminController@marathon_edit')->name('edit_marathon');
+    Route::put('/marathon/{id}/edit', 'AdminController@marathon_update')->name('update_marathon');
 });

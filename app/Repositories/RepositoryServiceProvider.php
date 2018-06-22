@@ -5,6 +5,7 @@ use App\User;
 use App\Category;
 use App\Item;
 use App\Result;
+use App\Courses;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +25,9 @@ class RepositoryServiceProvider extends ServiceProvider
         });
         $this->app->bind(ResultsRepositoryInterface::class, function($app) {
             return new ResultsModel(new Result());
+        });
+        $this->app->bind(CoursesRepositoryInterface::class, function($app) {
+            return new CoursesModel(new Courses());
         });
     }
 

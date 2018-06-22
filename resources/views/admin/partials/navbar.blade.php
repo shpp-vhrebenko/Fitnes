@@ -14,26 +14,15 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" href="{{ route('categories') }}">Категории</a>
                       <a class="dropdown-item" href="{{ route('admin_items') }}">Записи</a>
-                       <!--  <div class="dropdown-divider"></div>
-                       <h6 class="dropdown-header">Технологии</h6>
-                       <a class="dropdown-item" href="#">Все технологии</a>
-                       <a class="dropdown-item" href="#">Категории</a>
-                       <div class="dropdown-divider"></div>
-                       <h6 class="dropdown-header">Новости и статьи</h6>
-                       <a class="dropdown-item" href="#">Все материалы</a>
-                       <a class="dropdown-item" href="#">Категории</a>
-                       <div class="dropdown-divider"></div>
-                       <h6 class="dropdown-header">Прочее</h6>
-                       <a class="dropdown-item" href="#">Отзывы</a>
-                       <a class="dropdown-item" href="#">Статические страницы</a>
-                       <a class="dropdown-item" href="#">Слайдер</a>
-                       <a class="dropdown-item" href="#">Таблицы размеров</a> -->
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{{ route('show_courses') }}">Курсы</a>
+                      <a class="dropdown-item" href="#">Марафоны</a>                       
                     </div>
-                </li>
-                <!-- <li class="nav-item"><a class="nav-link" href="#">Заказы</a></li> -->
-                <li class="nav-item"><a class="nav-link" href="{{ route('clients') }}">Клиенты</a></li>
-                <li class="nav-item dropdown">
-                    <!-- <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </li>               
+                <li class="nav-item"><a class="nav-link" href="{{ route('clients') }}">Клиенты</a></li>                
+                <li class="nav-item"><a class="nav-link" href="{{ route('settings') }}">Настройки</a></li>
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Отчеты
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -47,9 +36,8 @@
                         <h6 class="dropdown-header">Покупатели</h6>
                         <a class="dropdown-item" href="#">Активность покупателей</a>
                         <a class="dropdown-item" href="#">Заказы</a>
-                    </div> -->
-                </li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('settings') }}">Настройки</a></li>
+                    </div>
+                </li> -->
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('index') }}">Перейти на сайт</a></li>
