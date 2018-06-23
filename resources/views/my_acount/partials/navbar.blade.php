@@ -8,6 +8,11 @@
     МЕНЮ
   </div>  
   <div id='fixed-menu' class="fixed-menu">
+    @if(Auth::user()->hasRole(1) == true))
+    <a href="{{ route('admin') }}" class="fixed-menu__link">   
+      Перейти в админбар    
+    </a>
+    @endif
   	<span class="fixed-menu__user-name">  		
         {{ Auth::user()->name }}      
   	</span>

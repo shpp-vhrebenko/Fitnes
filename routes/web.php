@@ -11,7 +11,7 @@
 |
 */
 
-/*Route::get('/_debugbar/assets/stylesheets', [
+Route::get('/_debugbar/assets/stylesheets', [
     'as' => 'debugbar-css',
     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
 ]);
@@ -24,7 +24,7 @@ Route::get('/_debugbar/assets/javascript', [
 Route::get('/_debugbar/open', [
     'as' => 'debugbar-open',
     'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
-]);*/
+]);
 
 
 Auth::routes();
@@ -49,7 +49,7 @@ Route::group(['prefix'=>'my-account','middleware'=>['auth','web'] ], function() 
     
 });
 
-Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
+Route::group(['prefix'=>'admin','middleware' => 'isAdmin'], function() {
 	Route::get('/', 'AdminController@index')->name('admin');
 
 	// Route settings
