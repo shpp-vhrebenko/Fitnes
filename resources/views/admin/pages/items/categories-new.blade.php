@@ -39,7 +39,7 @@
                                                 class="form-control"
                                                 id="name"
                                                 name="item[name]"
-                                                value="{{ isset($category) ? $category->name : old('item[name]') }}"
+                                                value="{{ isset($category) ? $category->name : old('item.name') }}"
                                                 {{ (isset($category) && ($category->id == 1)) ? 'disabled' : '' }}>
                                 </div>
                                 </div>
@@ -50,14 +50,14 @@
                                                 class="form-control"
                                                 id="slug" 
                                                 name="item[slug]" 
-                                                value="{{ isset($category) ? $category->slug : old('item[slug]') }}"
+                                                value="{{ isset($category) ? $category->slug : old('item.slug') }}"
                                                 {{ (isset($category) && ($category->id == 1)) ? 'disabled' : '' }}>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="description" class="col-sm-2 col-form-label">Описание<sup class="required">*</sup></label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control summernote" id="description" name="item[description]" rows="3">{{ isset($category) ? $category->description : old('item[description]') }}</textarea>
+                                        <textarea class="form-control summernote" id="description" name="item[description]" rows="3">{{ isset($category) ? $category->description : old('item.description') }}</textarea>
                                     </div>
                                 </div>                                           
                             </div>

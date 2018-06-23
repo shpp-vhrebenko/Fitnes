@@ -15,7 +15,6 @@ use App\Repositories\CategoriesRepositoryInterface;
 use App\Repositories\ItemsRepositoryInterface;
 use App\Repositories\ResultsRepositoryInterface;
 use App\Repositories\CoursesRepositoryInterface;
-use App\Repositories\MarathonsRepositoryInterface;
 
 use App\User;
 use App\Settings;
@@ -25,7 +24,6 @@ use App\Category;
 use App\Item;
 use App\Result;
 use App\Courses;
-use App\Marathons;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -45,16 +43,14 @@ class AdminController extends Controller
         UsersRepositoryInterface                    $usersRepository,
         CategoriesRepositoryInterface           $categoriesRepository,
         ResultsRepositoryInterface              $resultsRepository,     
-        CoursesRepositoryInterface              $coursesRepository,
-        MarathonsRepositoryInterface              $marathonsRepository       
+        CoursesRepositoryInterface              $coursesRepository          
 
     )
     {        
         $this->items = $itemsRepository;
         $this->users = $usersRepository;        
         $this->categories = $categoriesRepository;
-        $this->courses = $coursesRepository;
-        $this->marathons = $marathonsRepository;
+        $this->courses = $coursesRepository;       
     }
 
     public function index()
@@ -333,10 +329,12 @@ class AdminController extends Controller
     public function destroy_category($id)
     {
         $category = $this->categories->find($id);
-        $itemsCategory = $category->items();
-        if($itemsCategory->count() > 0) {
-            Session::flash('danger', 'Категория не можит быть удалена так как в ней есть записи! Необходимо удалить все записи данной категории или назначить для них другую категорию!');
-            return redirect()->route('categories');
+        $itemsCategory = $category->items();       
+        if(isset($itemsCategory)) {
+            if($itemsCategory->count() > 0){
+               Session::flash('danger', 'Категория не можит быть удалена так как в ней есть записи! Необходимо удалить все записи данной категории или назначить для них другую категорию!');
+                return redirect()->route('categories'); 
+            }            
         }
         if (!isset($category)) {
             return abort('404');
@@ -426,20 +424,29 @@ class AdminController extends Controller
     public function items_new()
     {
         $title = 'Создание записи';
-        $categories = $this->categories->all();   
+        $categories = $this->categories->all(); 
+        if($categories->count() == 0) {
+            Session::flash('danger', 'Чтобы создать запись необходимо создать Категорию!!!');
+            return redirect()->back();
+        }
+        $courses = $this->courses->findWithParams(['is_active' => true])->get(); 
+        if($courses->count() == 0) {
+            Session::flash('danger', 'Чтобы создать запись необходимо создать Курс или Марафон!!!');
+            return redirect()->back();
+        }
         $statuses = Item::$ItemStatuses;
         $statusesDays = Item::$ItemTrainingStatuses;
         $trainingSettings = Item::$TrainingSettings;
         $countWeek = $trainingSettings['maxWeek'];
-        $countDay = $trainingSettings['maxDay'];
+        $countDay = $trainingSettings['maxDay'];        
 
-        return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'statusesDays', 'countWeek', 'countDay']));
+        return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'statusesDays', 'countWeek', 'countDay', 'courses']));
     }
 
       public function items_store(ItemRequest $request)
     {
 
-        $item = $request->get('item');    
+        $item = $request->get('item'); 
      
         if( $image = $request->file('item.image') )
         {            
@@ -519,7 +526,7 @@ class AdminController extends Controller
     public function show_courses() 
     {   
         $title = "Курсы";
-        $courses = $this->courses->all();
+        $courses = $this->courses->findWithParams(['type' => 'cours'])->get();      
         return view('admin/pages/courses/index', compact(['title', 'courses']));
     }  
 
@@ -543,6 +550,7 @@ class AdminController extends Controller
         {            
             $item['icon'] = Courses::saveIcon( $image );                 
         }
+        $item['type'] = 'cours';
 
         $this->courses->create($item);        
 
@@ -586,7 +594,7 @@ class AdminController extends Controller
     public function cours_destroy($id)
     {
         $cours = $this->courses->find($id);
-        $itemsCours = $cours->items();        
+        $itemsCours = $cours->items();       
         if($itemsCours->count() > 0) {
             Session::flash('danger', 'Курс не можит быть удалена так как в ней есть тренировки и записи! Необходимо удалить или переназначить все записи в данном курсе или назначить для них другой курс!');
             return redirect()->route('show_courses');
@@ -603,8 +611,8 @@ class AdminController extends Controller
     // MARATHONES
     public function show_marathons() 
     {   
-        $title = "Марафоны";
-        $marathons = $this->marathons->all();
+        $title = "Марафоны";        
+        $marathons = $this->courses->findWithParams(['type' => 'marathon'])->get();      
         return view('admin/pages/marathons/index', compact(['title', 'marathons']));
     }
 
@@ -616,7 +624,7 @@ class AdminController extends Controller
     public function new_marathon()
     {        
         $title = 'Создание марафона';      
-        $statuses = Marathons::$marathonStatuses;        
+        $statuses = Courses::$coursStatuses;        
         return view('admin/pages/marathons/new', compact(['title', 'statuses']));
     }
 
@@ -626,10 +634,10 @@ class AdminController extends Controller
      
         if( $image = $request->file('item.icon') )
         {            
-            $item['icon'] = Marathons::saveIcon( $image );                 
+            $item['icon'] = Courses::saveIcon( $image );                 
         }
-
-        $this->marathons->create($item);        
+        $item['type'] = 'marathon';
+        $this->courses->create($item);        
 
         Session::flash('success', 'Марафон успешно создана!');
         return redirect()->back();
@@ -637,20 +645,20 @@ class AdminController extends Controller
 
     public function edit_marathon($id)
     {
-        $marathon = $this->marathons->find($id);
+        $marathon = $this->courses->find($id);
         if (!isset($marathon))
         {
             return abort(404);
         }
         $title = 'Редактирование Марафона';        
-        $statuses = Marathons::$marathonStatuses;        
+        $statuses = Courses::$coursStatuses;       
 
         return view('admin/pages/marathons/new', compact(['title', 'statuses', 'marathon']));
     }
 
     public function update_marathon(StoreMarathonsRequest $request, $id)
     {
-        $marathon = $this->marathons->find($id);   
+        $marathon = $this->courses->find($id);   
         if (!isset($marathon))
         {
             return abort('404');
@@ -660,7 +668,7 @@ class AdminController extends Controller
         if( $icon = $request->file('item.icon') )
         {
             File::delete( public_path('uploads/icons/'. $cours->icon ));
-            $newIcon = Marathons::saveIcon( $icon );
+            $newIcon = Courses::saveIcon( $icon );
             $marathon->update(['icon' => $newIcon]);       
         }          
 
@@ -670,11 +678,13 @@ class AdminController extends Controller
 
     public function marathon_destroy($id)
     {
-        $marathon = $this->marathons->find($id);
-        $itemsMarathon = $marathon->items();        
-        if($itemsMarathon->count() > 0) {
-            Session::flash('danger', 'Марафон не можит быть удалена так как в ней есть тренировки и записи! Необходимо удалить или переназначить все записи в данном марафон или назначить для них другой марафон!');
-            return redirect()->route('show_marathons');
+        $marathon = $this->courses->find($id);
+        $itemsMarathon = $marathon->items();          
+        if(isset($itemsMarathon)) {
+            if($itemsMarathon->count() > 0) {
+                Session::flash('danger', 'Марафон не можит быть удалена так как в ней есть тренировки и записи! Необходимо удалить или переназначить все записи в данном марафон или назначить для них другой марафон!');
+                return redirect()->route('show_marathons');
+            }            
         }
         if (!isset($marathon)) {
             return abort('404');

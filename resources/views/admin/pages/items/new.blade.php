@@ -41,14 +41,14 @@
                             <div class="form-group row">
                                 <label for="title" class="col-sm-2 col-form-label">Заголовок записи<sup class="required">*</sup></label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" name="item[title]" value="{{ isset($item) ? $item->title : old('item[title]') }}">
+                                    <input type="text" class="form-control" id="name" name="item[title]" value="{{ isset($item) ? $item->title : old('item.title') }}">
                                     <p>Максимальное количество символов заголовка записи <span class="badge badge-secondary">150</span></p>
                             </div>
                             </div>                            
                             <div class="form-group row">
                                 <label for="text" class="col-sm-2 col-form-label">Контент записи<sup class="required">*</sup></label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control summernote" id="text" name="item[text]" rows="3" id="text">{{ isset($item) ? $item->text : old('item[text]') }}</textarea>
+                                    <textarea class="form-control summernote" id="text" name="item[text]" rows="3" id="text">{{ isset($item) ? $item->text : old('item.text') }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -85,8 +85,13 @@
                         <div class="form-group col-sm-6" >
                             <label for="week" class="col-sm-12 col-form-label">Курс<sup class="required">*</sup></label>
                             <div class="col-sm-12">                            
-                                <select class="form-control" id="week" name="item[course_id]">
-                                    <option value="1" selected>-- Не выбрано --</option>          
+                                <select class="form-control" id="week" name="item[course_id]">  
+                                    <option value="0">-- Не выбрано --</option>   
+                                    @if(isset($courses) && count($courses) > 0)
+                                        @foreach($courses as $course)                                        
+                                            <option value="{{ $course->id }}" @if(isset($item->course_id) && ($item->course_id == $course->id)) selected @endif>{{ $course->name }}</option>
+                                        @endforeach
+                                    @endif        
                                 </select>
                             </div>                 
                         </div>                         

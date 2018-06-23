@@ -30,8 +30,8 @@ class HomeController extends Controller
     {
         $instagram = Social::firstOrFail();             
         $settings = Settings::first();  
-        $cours = Courses::where('is_active', true)->firstOrFail();    
-        $marathon = Marathons::where('is_active', true)->firstOrFail();    
+        $cours = Courses::where('is_active', true)->where('type', 'cours')->firstOrFail();    
+        $marathon = Courses::where('is_active', true)->where('type', 'marathon')->firstOrFail();    
         return view('front.home', compact(['settings', 'instagram', 'cours', 'marathon']));
     }
 }

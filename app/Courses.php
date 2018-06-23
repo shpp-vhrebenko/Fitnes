@@ -13,6 +13,9 @@ class Courses extends Model
         'name',
         'description',
         'price', 
+        'date_start_selection',
+        'date_end_selection',
+        'type',
         'period', 
         'icon', 
         'is_active'       
@@ -29,7 +32,7 @@ class Courses extends Model
     }
 
     public function items() {
-    	return $this->hasMany(Item::class);
+    	return $this->hasMany(Item::class, 'course_id');
     }
 
     public static function saveIcon( $image ){

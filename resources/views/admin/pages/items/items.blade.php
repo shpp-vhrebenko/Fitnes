@@ -5,11 +5,13 @@
         <div class="text-left"><h1>{{ $title }}</h1></div>
         <div class="text-right"><a href="{{ route('items_new') }}" class="btn btn-warning" style="color: #fff;">Создать</a></div>
     </div>
-    @if (Session::has('success'))
-        <div class="alert alert-success" role="alert">
-            {{ Session::get('success') }}
-        </div>
-    @endif
+    <div class="flash-message">
+      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if(Session::has($msg))
+        <p class="alert alert-{{ $msg }}">{{ Session::get($msg) }}</p>
+        @endif
+      @endforeach
+    </div> 
 
     <div class="jumbotron jumbotron-fluid">
         <form class="form" action="{{ route('items_filter') }}" method="get">

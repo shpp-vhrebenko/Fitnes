@@ -19,6 +19,9 @@ class CreateCoursesTable extends Migration
             $table->text('description');
             $table->string('icon')->default('icon_course.png');
             $table->integer('price')->unsigned()->default(1);
+            $table->date('date_start_selection')->nullable();
+            $table->date('date_end_selection')->nullable();
+            $table->string('type')->default('cours');
             $table->integer('period');
             $table->boolean('is_active')->default(true);       
             $table->timestamps();

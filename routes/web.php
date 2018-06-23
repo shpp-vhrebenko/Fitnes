@@ -106,5 +106,5 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
     Route::post('/marathon/new', 'AdminController@marathon_store')->name('marathon_store');
     Route::get('/marathon/{id}/edit', 'AdminController@edit_marathon')->name('edit_marathon');
     Route::put('/marathon/{id}/edit', 'AdminController@update_marathon')->name('update_marathon');
-    Route::delete('/cours/{id}/destroy', 'AdminController@marathon_destroy')->name('destroy_marathon');
+    Route::delete('/marathon/{id}/destroy', 'AdminController@marathon_destroy')->name('destroy_marathon');
 });

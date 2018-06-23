@@ -56,7 +56,7 @@
                         <td>{{ $marathon->period }}</td>                            
                         <td>                           
                             @if(isset($marathon->is_active))
-                                {{ $marathon->getMarathonStatus($marathon->is_active) }}
+                                {{ $marathon->getCoursStatus($marathon->is_active) }}
                             @endif
                         </td>
                         <td>
