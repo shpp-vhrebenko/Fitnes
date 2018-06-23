@@ -8,12 +8,14 @@ use App\Http\Requests\EditClientRequest;
 use App\Http\Requests\ItemRequest;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\StoreCoursRequest;
+use App\Http\Requests\StoreMarathonsRequest;
 
 use App\Repositories\UsersRepositoryInterface;
 use App\Repositories\CategoriesRepositoryInterface;
 use App\Repositories\ItemsRepositoryInterface;
 use App\Repositories\ResultsRepositoryInterface;
 use App\Repositories\CoursesRepositoryInterface;
+use App\Repositories\MarathonsRepositoryInterface;
 
 use App\User;
 use App\Settings;
@@ -23,6 +25,7 @@ use App\Category;
 use App\Item;
 use App\Result;
 use App\Courses;
+use App\Marathons;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -42,7 +45,8 @@ class AdminController extends Controller
         UsersRepositoryInterface                    $usersRepository,
         CategoriesRepositoryInterface           $categoriesRepository,
         ResultsRepositoryInterface              $resultsRepository,     
-        CoursesRepositoryInterface              $coursesRepository       
+        CoursesRepositoryInterface              $coursesRepository,
+        MarathonsRepositoryInterface              $marathonsRepository       
 
     )
     {        
@@ -50,6 +54,7 @@ class AdminController extends Controller
         $this->users = $usersRepository;        
         $this->categories = $categoriesRepository;
         $this->courses = $coursesRepository;
+        $this->marathons = $marathonsRepository;
     }
 
     public function index()
@@ -516,12 +521,7 @@ class AdminController extends Controller
         $title = "Курсы";
         $courses = $this->courses->all();
         return view('admin/pages/courses/index', compact(['title', 'courses']));
-    }
-
-    public function show_cours() 
-    {   
-        
-    }
+    }  
 
     public function courses_filter()
     {
@@ -550,56 +550,138 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function cours_edit()
+    public function cours_edit($id)
     {
+        $cours = $this->courses->find($id);
+        if (!isset($cours))
+        {
+            return abort(404);
+        }
+        $title = 'Редактирование Курса';        
+        $statuses = Courses::$coursStatuses;        
 
+        return view('admin/pages/courses/new', compact(['title', 'statuses', 'cours']));
     }
 
-    public function cours_update()
+    public function cours_update(StoreCoursRequest $request, $id)
     {
-        
+        $cours = $this->courses->find($id);   
+        if (!isset($cours))
+        {
+            return abort('404');
+        }
+        $cours->update($request->get('item'));
+     
+        if( $icon = $request->file('item.icon') )
+        {
+            File::delete( public_path('uploads/icons/'. $cours->icon ));
+            $newIcon = Courses::saveIcon( $icon );
+            $cours->update(['icon' => $newIcon]);       
+        }          
+
+        Session::flash('success', 'Курс успешно изменен!');
+        return redirect()->back();
     }
 
-    public function cours_destroy()
+    public function cours_destroy($id)
     {
-        
+        $cours = $this->courses->find($id);
+        $itemsCours = $cours->items();        
+        if($itemsCours->count() > 0) {
+            Session::flash('danger', 'Курс не можит быть удалена так как в ней есть тренировки и записи! Необходимо удалить или переназначить все записи в данном курсе или назначить для них другой курс!');
+            return redirect()->route('show_courses');
+        }
+        if (!isset($cours)) {
+            return abort('404');
+        }
+        $cours->delete();
+        Session::flash('success', 'Курс успешно удален!');
+        return redirect()->route('show_courses');
     }
     // END COURSES
 
     // MARATHONES
     public function show_marathons() 
     {   
-        
-    }
-
-    public function show_marathon() 
-    {   
-        
+        $title = "Марафоны";
+        $marathons = $this->marathons->all();
+        return view('admin/pages/marathons/index', compact(['title', 'marathons']));
     }
 
     public function marathons_filter()
     {
-
+        
     }
 
     public function new_marathon()
-    {
-
+    {        
+        $title = 'Создание марафона';      
+        $statuses = Marathons::$marathonStatuses;        
+        return view('admin/pages/marathons/new', compact(['title', 'statuses']));
     }
 
-    public function marathon_store()
+    public function marathon_store(StoreMarathonsRequest $request)
     {
+        $item = $request->get('item');    
+     
+        if( $image = $request->file('item.icon') )
+        {            
+            $item['icon'] = Marathons::saveIcon( $image );                 
+        }
 
+        $this->marathons->create($item);        
+
+        Session::flash('success', 'Марафон успешно создана!');
+        return redirect()->back();
     }
 
-    public function edit_marathon()
+    public function edit_marathon($id)
     {
+        $marathon = $this->marathons->find($id);
+        if (!isset($marathon))
+        {
+            return abort(404);
+        }
+        $title = 'Редактирование Марафона';        
+        $statuses = Marathons::$marathonStatuses;        
 
+        return view('admin/pages/marathons/new', compact(['title', 'statuses', 'marathon']));
     }
 
-    public function update_marathon()
+    public function update_marathon(StoreMarathonsRequest $request, $id)
     {
-        
+        $marathon = $this->marathons->find($id);   
+        if (!isset($marathon))
+        {
+            return abort('404');
+        }
+        $marathon->update($request->get('item'));
+     
+        if( $icon = $request->file('item.icon') )
+        {
+            File::delete( public_path('uploads/icons/'. $cours->icon ));
+            $newIcon = Marathons::saveIcon( $icon );
+            $marathon->update(['icon' => $newIcon]);       
+        }          
+
+        Session::flash('success', 'Марафон успешно изменен!');
+        return redirect()->back();
+    }
+
+    public function marathon_destroy($id)
+    {
+        $marathon = $this->marathons->find($id);
+        $itemsMarathon = $marathon->items();        
+        if($itemsMarathon->count() > 0) {
+            Session::flash('danger', 'Марафон не можит быть удалена так как в ней есть тренировки и записи! Необходимо удалить или переназначить все записи в данном марафон или назначить для них другой марафон!');
+            return redirect()->route('show_marathons');
+        }
+        if (!isset($marathon)) {
+            return abort('404');
+        }
+        $marathon->delete();
+        Session::flash('success', 'Марафон успешно удален!');
+        return redirect()->route('show_marathons');
     }
     // END MARATHONES
 }

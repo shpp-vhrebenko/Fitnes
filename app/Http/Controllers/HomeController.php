@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Settings;
 use App\Social;
+use App\Courses;
+use App\Marathons;
 
 class HomeController extends Controller
 {
@@ -28,6 +30,8 @@ class HomeController extends Controller
     {
         $instagram = Social::firstOrFail();             
         $settings = Settings::first();  
-        return view('front.home', compact(['settings', 'instagram']));
+        $cours = Courses::where('is_active', true)->firstOrFail();    
+        $marathon = Marathons::where('is_active', true)->firstOrFail();    
+        return view('front.home', compact(['settings', 'instagram', 'cours', 'marathon']));
     }
 }

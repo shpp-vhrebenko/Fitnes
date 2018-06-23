@@ -309,14 +309,14 @@
     margin-bottom: 28px;
 }
 
-.price-item__list {		
+.price-item ul {		
 	padding-left: 24px;
 	border-bottom: 2px solid #374c77;	
 	margin: 0 auto;
 	margin-bottom: 24px;
 }
 
-.price-item__list li {	
+.price-item ul li {	
 	list-style-image: url(https://gizerskaya.com/wp-content/uploads/2018/05/icon-pay-list.png);
     margin-bottom: 30px;
     color: #cbcbcb;

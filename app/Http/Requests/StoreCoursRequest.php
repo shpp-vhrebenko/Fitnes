@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use App\User;
 
 class StoreCoursRequest extends FormRequest
 {
@@ -38,8 +37,8 @@ class StoreCoursRequest extends FormRequest
         return [
             'item.name.required' => 'Необходимо ввести Название Курса',
             'item.description.required' => 'Необходимо ввести Содержание Курса',
-            'item.price' => 'Необходимо ввести цену Курса',
-            'item.period' => 'Необходимо ввести Продолжительность Курса',
+            'item.price.required' => 'Необходимо ввести цену Курса',
+            'item.period.required' => 'Необходимо ввести Продолжительность Курса',
             'item.icon.image' => 'Иконка курса должна быть в формате изображения',
             'item.icon.mimes' => 'Иконка курса должна быть в формате png, svg',
         ];

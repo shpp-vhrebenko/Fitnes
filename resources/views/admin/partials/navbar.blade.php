@@ -16,7 +16,7 @@
                       <a class="dropdown-item" href="{{ route('admin_items') }}">Записи</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="{{ route('show_courses') }}">Курсы</a>
-                      <a class="dropdown-item" href="#">Марафоны</a>                       
+                      <a class="dropdown-item" href="{{ route('show_marathons') }}">Марафоны</a>                       
                     </div>
                 </li>               
                 <li class="nav-item"><a class="nav-link" href="{{ route('clients') }}">Клиенты</a></li>                

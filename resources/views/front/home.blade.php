@@ -80,49 +80,41 @@
                 <p class="price__sub-title">Направление курса</p>
             </div>       
             <div class="price__box row">
+                @if(isset($marathon))
                 <div class="col-sm-12 col-md-12 col-lg-6 price-item" id="price_marafon">
-                    <h3 class="price-item__title">МАРАФОН<br>ОБЩЕЕ ПОХУДЕНИЕ</h3>
-                    <p class="price-item__subtitle">ВСЕГО ЗА 1990 РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
-                    <div class="price-item__icon" style="background-image: url('./img/weight-clock-icon.png');">                        
+                    <h3 class="price-item__title">{!! $marathon->name !!}</h3>
+                    <p class="price-item__subtitle">ВСЕГО ЗА {{$marathon->price}} {{ Lang::choice('messages.price', $marathon->price) }} ВЫ ПОЛУЧИТЕ:</p>
+                    <div class="price-item__icon" style="background-image: url('./uploads/icons/{{$marathon->icon}}');">                        
                     </div>
-                    <ul class="price-item__list">
-                        <li>Программу тренировок на 2 недели</li>
-                        <li>План питания с подробными рецептами</li>
-                        <li>Чат с участницами и мной в WhatsApp</li>
-                        <li>Моя поддержка 24/7</li>
-                        <li>Раздел с полезными советами статьями</li>
-                    </ul>
+                    {!! $marathon->description !!} 
                     <div class="price-item__val">
-                        <p>1990</p>
-                        <p>рублей</p>
+                        <p>{{$marathon->price}}</p>
+                        <p>{{ Lang::choice('messages.price', $marathon->price) }}</p>
                     </div>
                     <a class="price-item__button">
                         купить курс
                     </a>
-                    <p class="price-item__message">Cтарт марафона 11 июня</p>
+                    <p class="price-item__message">Cтарт марафона {{ Carbon\Carbon::parse($marathon->date_start_selection)->format('d.m.Y')}}</p>
                 </div>
+                @endif
+                @if(isset($cours))
                 <div class="col-sm-12 col-md-12 col-lg-6 price-item" id="price_curs">
-                    <h3 class="price-item__title">СТРОЙНОЕ ТЕЛО<br>ЗА 30 ДНЕЙ</h3>
-                    <p class="price-item__subtitle">ВСЕГО ЗА 2990 РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
-                    <div class="price-item__icon" style="background-image:url('./img/polotence-icon.png')">
+                    <h3 class="price-item__title">{!! $cours->name !!}</h3>
+                    <p class="price-item__subtitle">ВСЕГО ЗА {{$cours->price}} {{ Lang::choice('messages.price', $cours->price) }} РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
+                    <div class="price-item__icon" style="background-image:url('./uploads/icons/{{$cours->icon}}')">
                         
                     </div>
-                    <ul class="price-item__list">
-                        <li>Программу тренировок на месяц</li>
-                        <li>План питания с подробными рецептами</li>
-                        <li>Чат с участницами и мной в WhatsApp</li>
-                        <li>Моя поддержка 24/7</li>
-                        <li>Раздел с полезными советами статьями</li>
-                    </ul>
+                    {!! $cours->description !!}                    
                     <div class="price-item__val">
-                        <p>2990</p>
-                        <p>рублей</p>
+                        <p>{{$cours->price}}</p>
+                        <p>{{ Lang::choice('messages.price', $cours->price) }}</p>
                     </div>
                     <a class="price-item__button">
                         купить курс
                     </a>
                     <p class="price-item__message"></p>
                 </div>
+                @endif
             </div> 
         </div>
                 

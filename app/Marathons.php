@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Item;
 use Image;
 
-class Courses extends Model
+class Marathons extends Model
 {
     protected $fillable = [
         'name',
@@ -15,17 +15,19 @@ class Courses extends Model
         'price', 
         'period', 
         'icon', 
-        'is_active'       
+        'is_active',
+        'date_start_selection',
+        'date_end_selection'      
     ];
 
-    public static $coursStatuses = [ 
+    public static $marathonStatuses = [ 
         'Не активен',
         'Активен'
     ];
 
-    public function getCoursStatus($status_id)
+    public function getMarathonStatus($status_id)
     {
-        return self::$coursStatuses[$status_id];
+        return self::$marathonStatuses[$status_id];
     }
 
     public function items() {

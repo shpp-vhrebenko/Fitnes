@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/_debugbar/assets/stylesheets', [
+/*Route::get('/_debugbar/assets/stylesheets', [
     'as' => 'debugbar-css',
     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
 ]);
@@ -24,7 +24,7 @@ Route::get('/_debugbar/assets/javascript', [
 Route::get('/_debugbar/open', [
     'as' => 'debugbar-open',
     'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
-]);
+]);*/
 
 
 Auth::routes();
@@ -33,7 +33,7 @@ Route::group([], function() {
 	Route::get('/', 'HomeController@index')->name('index');
 });
 
-Route::group(['prefix'=>'my-account','middleware'=>'auth'], function() {
+Route::group(['prefix'=>'my-account','middleware'=>['auth','web'] ], function() {
 
 	Route::get('/', 'MyAccountController@index')->name('my-account');
 
@@ -96,14 +96,15 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function() {
     Route::post('/cours/new', 'AdminController@cours_store')->name('cours_store');
     Route::get('/cours/{id}/edit', 'AdminController@cours_edit')->name('edit_cours');
     Route::put('/cours/{id}/edit', 'AdminController@cours_update')->name('update_cours');
-     Route::delete('/cours/{id}/destroy', 'AdminController@cours_destroy')->name('destroy_cours');
+    Route::delete('/cours/{id}/destroy', 'AdminController@cours_destroy')->name('destroy_cours');
 
     // Route courses
-    Route::get('/marathons', 'MyAccountController@show_marathons')->name('show_marathons');
-    Route::get('/marathons', 'MyAccountController@marathons_filter')->name('marathons_filter');
-    Route::get('/marathon/{id}', 'MyAccountController@show_marathon')->name('show_marathon');    
-    Route::get('/marathon/new', 'MyAccountController@new_marathon')->name('new_marathon');
-    Route::post('/marathon/new', 'MyAccountController@marathon_store')->name('marathon_store');
-    Route::get('/marathon/{id}/edit', 'AdminController@marathon_edit')->name('edit_marathon');
-    Route::put('/marathon/{id}/edit', 'AdminController@marathon_update')->name('update_marathon');
+    Route::get('/marathons', 'AdminController@show_marathons')->name('show_marathons');
+    Route::get('/marathons/filter', 'AdminController@marathons_filter')->name('marathons_filter');
+    Route::get('/marathon/{id}', 'AdminController@show_marathon')->name('show_marathon');    
+    Route::get('/marathons/new', 'AdminController@new_marathon')->name('new_marathon');
+    Route::post('/marathon/new', 'AdminController@marathon_store')->name('marathon_store');
+    Route::get('/marathon/{id}/edit', 'AdminController@edit_marathon')->name('edit_marathon');
+    Route::put('/marathon/{id}/edit', 'AdminController@update_marathon')->name('update_marathon');
+    Route::delete('/cours/{id}/destroy', 'AdminController@marathon_destroy')->name('destroy_marathon');
 });
