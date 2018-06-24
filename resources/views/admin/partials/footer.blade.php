@@ -11,6 +11,7 @@
 
 <link href="{{ asset('css/datepicker.min.css') }}" rel="stylesheet">
 <script src="{{ asset('js/datepicker.min.js') }}"></script>
+<script src="{{ asset('js/lib/bootstrap.min.js') }}"></script>
 
 <style>
   .dropdown:hover>.dropdown-menu {
