@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>My Account &#8212; gizerskaya</title>
 
-	<link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon/{{ $settings->favicon }}">
 	
 	@section('header-styles')	
 	<link rel="stylesheet" href="{{ asset('css/libs/font-awesome.min.css') }}">  

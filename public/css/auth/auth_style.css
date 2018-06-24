@@ -22,6 +22,15 @@
 	height: 100%;
 }
 
+.register-card__header {	
+	text-align: center;
+	color: #fff;
+    font-size: 60px;
+    font-family: HelveticaBold;	
+	line-height: 1;
+	margin-bottom: 30px;
+}
+
 .login-card__header {
 	height: auto;
 	color: #fff;
@@ -88,11 +97,18 @@ a.form-login__button:hover {
 	cursor: pointer;	
 }
 
+.form-login__label-terms {
+	font-size: 20px;
+
+}
+
 .form-login__input-remember {
 	margin-right: .5rem;
 	height: 15px;
 	width: 15px;
 }
+
+
 
 .form-login__button-link {
 	color: #fff;
@@ -109,6 +125,52 @@ a.form-login__button:hover {
 .form-login input::placeholder {
   color: #fff;
   text-transform: uppercase;
+}
+
+.form-description {
+	text-align: center;
+}
+
+.form-description h3{
+	color: #fff;
+    font-size: 60px;
+    font-family: HelveticaBold;	
+	line-height: 1;
+	margin-bottom: 30px;
+	text-transform: uppercase;
+}
+
+.form-description p {
+	color: #fff;
+	font-size: 20px;
+	font-family: "HelveticaLight";
+}
+
+.arrow {
+	display: inline-block;
+	position: relative;	
+	width: 86px;
+    height: 2px;
+    background: #fff;
+	line-height: 2px;
+	margin-top: 30px;
+	margin-right: 1rem;
+}
+.arrow:before,
+.arrow:after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 12px solid transparent; 
+	border-right: 0;
+}
+
+.arrow:after {
+    top: -10px;
+    right: -10px;
+    border-left-color: #fff;
 }
 
 

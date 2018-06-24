@@ -18,7 +18,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        
+        $settings = Settings::first();     
+        view()->share(compact([ 'settings'])); 
     }
 
     /**
@@ -33,5 +34,11 @@ class HomeController extends Controller
         $cours = Courses::where('is_active', true)->where('type', 'cours')->firstOrFail();    
         $marathon = Courses::where('is_active', true)->where('type', 'marathon')->firstOrFail();    
         return view('front.home', compact(['settings', 'instagram', 'cours', 'marathon']));
+    }
+
+    public function register_user($id_cours)
+    {      
+        $course = Courses::where('id', $id_cours)->firstOrFail();  
+        return view('auth.register', compact(['course']));
     }
 }
