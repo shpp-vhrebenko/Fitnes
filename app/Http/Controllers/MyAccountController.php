@@ -71,8 +71,10 @@ class MyAccountController extends Controller
     }
 
     public function show_results(Request $request)
-    {          
-        return view('my_acount/pages/results/results');
+    {   
+        $currentUser = Auth::user();
+        $results = $currentUser->results;       
+        return view('my_acount/pages/results/results', compact(['results']));
     }   
 
     public function get_results(Request $request)

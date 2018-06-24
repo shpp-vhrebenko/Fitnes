@@ -20,7 +20,7 @@
 			</a>
 		</header>
 		<div class="row results-content">
-			 <div id='grafik-results' class="results-grafik">
+			 <div id='grafik-results' class="results-grafik col-md-12">
                 <ul class="nav nav-tabs">
 					<li class="nav-item" >
 	          			<a class="nav-link active grafik-link" href="#tab_1_1" data-toggle="tab1">Вес </a>
@@ -38,8 +38,28 @@
 	          			<a class="nav-link grafik-link" href="#tab_1_3" data-toggle="tab3">Талия </a>
 	        		</li>	        
 				</ul>
-                <canvas id="myChart"></canvas>
+                <canvas id="myChart"></canvas>                
             </div>
+            <div class="col-md-12">
+            	<div class="row results-items">
+                	@foreach ($results as $result)
+                	<div class="col-md-6 result-item">
+                		<div class="result-item__image">
+                			<div class="bg-image" style="background-image: url(/uploads/results/{{$result->image}})" >
+                			</div>
+                		</div>		
+                		<div class="result-item__description">
+                			<p><strong>Дата: </strong>{{$result->created_at}}</p>
+                			<p><strong>Ваш вес: </strong>{{$result->weight}}</p>
+                			<p><strong>Ваш рост: </strong>{{$result->height}}</p>
+                			<p><strong>Обхват груди: </strong>{{$result->grud}}</p>
+                			<p><strong>Обхват бедер: </strong>{{$result->bedra}}</p>
+                			<p><strong>Обхват талии: </strong>{{$result->taliya}}</p>
+                		</div>
+                	</div>
+                	@endforeach
+                </div>
+			</div>
 		</div> 
 	</div>	  
 @endsection

@@ -283,8 +283,44 @@
     justify-content: center;
 }
 
-.results-grafik {
-    width: 100%;
+.results-grafik {    
     height: auto;
+    margin-bottom: 2rem;
+}
+
+.results-items {
+    border: 1px solid #8e647a;   
+    font-family: "HelveticaLight";
+    background-color: #9e7289;
+    padding: 2rem;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.result-item {
+    display: flex;
+    flex-direction: row;
+}
+
+.result-item__image {     
+    padding: 1rem;
+}
+
+.result-item__image .bg-image {
+    width: 150px;
+    height: 150px;
+    background-position: center center;
+    background-size: cover;
+}
+
+.result-item__description {
+    padding: 1rem;
+}
+
+.result-item__description p {    
+    font-size: 14px;
+    font-family: HelveticaUltraLight;
+    color: #fff;
+    margin-bottom: .7rem;
 }
 /* END RESULTS */
