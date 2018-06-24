@@ -19,7 +19,7 @@
                     <div class="register-card__header">ВАШИ ДАННЫЕ</div>
 
                     <div class="login-card__body">
-                        <form method="POST" action="{{ route('store_user', $course->id) }}" class="form-login">
+                        <form method="POST" action="{{ route('store_user', $course->id) }}" class="form-login" id="register-form">
                             @csrf
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-8">
@@ -59,7 +59,7 @@
                             <div class="form-description col justify-content-center">
                                 <h3 class="form-description__title">Ваш заказ</h3>
                                 <p>Абонемент: {!! strip_tags($course->name) !!}</p>
-                                <p>Цена: {{ $course->price }}</p>
+                                <p>Цена: {{ $course->price }} RUB</p>
                             </div> 
                             <div class="form-group row justify-content-center">                       
                                 <div class="checkbox">
@@ -82,7 +82,83 @@
 @endsection
 
 @section('footer-scripts')    
-    @parent   
+    @parent  
+    <script  src="{{asset('js/lib/jquery.validate.min.js') }}"></script> 
+    <script>
+        $(document).ready(function() {
+                           
+            //VALIDATE USER EMAIL
+            $.validator.addMethod("validateUserEmail", function(value, element)
+            {
+                var inputElem = $('#register-form :input[name="email"]'),               
+                    eReport = ''; //error report                
+
+                $.ajax(
+                {
+                    url: '{{ route('validate_email_user') }}',
+                    type: 'post',
+                    data: {
+                       email : inputElem.val(),
+                      _token: $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    success: function(data)
+                    {                                            
+                        if (data.result == 0)
+                        {                           
+                          return true;
+                        }
+                        else
+                        {                          
+                           return false;
+                        }
+                    },
+                    error: function (xhr, b, c) {
+                        console.log("xhr=" + xhr + " b=" + b + " c=" + c);
+                        return false;
+                    }
+                });
+
+            }, '');
+
+            
+    
+    
+    
+            $("#register-form").validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 2
+                        }, 
+                    phone: "required", 
+                    email:  {                         
+                        required: true,
+                        email: true,
+                        validateUserEmail: true
+                    }          
+                },
+                messages:{
+                    name:{
+                        required: "Поле не заполнено",
+                        minlength: "в поле должно быть минимум 2 символа",
+                    },            
+                    phone: "Поле не заполнено", 
+                    email:{                        
+                        required: "Поле не заполнено",
+                        email: "Необходимо указать Email",
+                        validateUserEmail: 'Пользователь с таким Email уже зарегистрирован'
+                    }           
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("name") == "name") error.insertAfter($("input[name=name]"));
+                    
+                    if (element.attr("name") == "phone") error.insertAfter($("input[name=phone]"));   
+
+                    if (element.attr("name") == "email") error.insertAfter($("input[name=email]"));    
+                }   
+            });
+        })
+    </script>
 @endsection
 
 @section('footer-modal')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -38,6 +39,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $settings = Settings::first();     
+        view()->share(compact([ 'settings']));
     }
 
     /**

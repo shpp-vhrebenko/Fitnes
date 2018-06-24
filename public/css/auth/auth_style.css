@@ -168,9 +168,20 @@ a.form-login__button:hover {
 }
 
 .arrow:after {
-    top: -10px;
+    top: -5px;
     right: -10px;
     border-left-color: #fff;
+    border-width: 6px 0 6px 26px;
+}
+
+label.error {
+	width: 100%;
+	text-align: center;
+	background-color: #b92034;    
+    color: #fff ;
+    text-transform: uppercase ;
+    font-family: HelveticaLight;
+    padding: 15px;
 }
 
 

@@ -24,7 +24,6 @@
 	<script  src="{{asset('js/lib/bootstrap.min.js') }}"></script>
 @show
 @section('footer-modal')
-@include('front/partials/sidebar_menu')
 @show
 
 </body>

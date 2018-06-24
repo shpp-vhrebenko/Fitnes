@@ -8,6 +8,7 @@ use App\Settings;
 use App\Social;
 use App\Courses;
 use App\Marathons;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -40,5 +41,25 @@ class HomeController extends Controller
     {      
         $course = Courses::where('id', $id_cours)->firstOrFail();  
         return view('auth.register', compact(['course']));
+    }
+
+    public function validate_email_user(Request $request)
+    {
+        $curEmail = $request->get('email');
+        $users = User::where('email', $curEmail)->get();
+        $response = array(
+            'status' => 'success'                     
+        );
+         
+        
+           
+       
+            $response['result'] = $users->count();
+        
+        return response()->json($response);      
+    }
+
+    public function user_store() {
+        
     }
 }

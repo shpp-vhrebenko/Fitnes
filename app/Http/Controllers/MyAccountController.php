@@ -79,17 +79,16 @@ class MyAccountController extends Controller
 
     public function get_results(Request $request)
     {   
-                   
+        $curEmail = $request->get('email');          
         $currentUser = Auth::user();
         $results = $currentUser->results;
         $response = array(
             'status' => 'success',
-            'results' => $results,
+            'results' => 'hi',
         );
         return response()->json($response);            
                 
     }   
-
 
     public function add_result()
     {

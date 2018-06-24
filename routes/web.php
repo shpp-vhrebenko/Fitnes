@@ -32,7 +32,9 @@ Auth::routes();
 Route::group([], function() {
 	Route::get('/', 'HomeController@index')->name('index');
     Route::get('/register/{id}', 'HomeController@register_user')->name('register_user');
-    Route::post('/register/{id}', 'HomeController@user_store')->name('store_user');
+    Route::post('/register/store', 'HomeController@user_store')->name('store_user');
+    Route::post('/register/users', 'HomeController@validate_email_user')->name('validate_email_user');  
+
 });
 
 Route::group(['prefix'=>'my-account','middleware'=>['auth','web'] ], function() {
@@ -47,7 +49,8 @@ Route::group(['prefix'=>'my-account','middleware'=>['auth','web'] ], function() 
     Route::get('/results', 'MyAccountController@show_results')->name('show_results');
     Route::post('/results/user', 'MyAccountController@get_results')->name('get_results');
     Route::get('/results/new', 'MyAccountController@add_result')->name('add_result');    
-    Route::post('/results/new', 'MyAccountController@result_store')->name('result_store');    
+    Route::post('/results/new', 'MyAccountController@result_store')->name('result_store');
+
     
 });
 
