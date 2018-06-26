@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-/*Route::get('/_debugbar/assets/stylesheets', [
+/*
+Route::get('/_debugbar/assets/stylesheets', [
     'as' => 'debugbar-css',
     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
 ]);
@@ -41,7 +41,7 @@ Route::group([], function() {
 
 });
 
-Route::group(['prefix'=>'my-account','middleware'=>['auth','web'] ], function() {
+Route::group(['prefix'=>'my-account','middleware'=>['auth','isActiveUser'] ], function() {
 
 	Route::get('/', 'MyAccountController@index')->name('my-account');
 

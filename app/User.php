@@ -12,9 +12,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public static $userStatuses = [
-        'Активен',
+    public static $userStatuses = [        
         'Выключен',
+        'Активен',
         'Заблокирован'
     ];
 
