@@ -1150,3 +1150,93 @@ a.price-item__button {
 	border: 1px solid #919094;
 }
 /* END MODAL CONTACTS */
+
+/* MESSAGES PAGES */
+.oplata {
+	width: 100%;
+    height: 100vh;    
+    background: linear-gradient(to right, #a74f67 0%,#49375d 100%);
+}
+
+.oplata__container,
+.oplata__container .row {
+	height: 100%;
+}
+
+.oplata__container hr{
+	border-top: 1px solid rgba(255,255,255,.2)
+}
+
+.oplata__header {
+	text-align: center;
+    color: #fff;
+    font-size: 60px;
+    font-family: HelveticaBold;
+    line-height: 1;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.oplata__subheader {
+	text-align: center;
+    color: #fff;
+    font-size: 20px;
+    font-family: HelveticaBold;
+    line-height: 1;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.oplata_description {
+	text-align: center;
+    color: #fff;
+    font-size: 16px;
+    font-family: HelveticaLight;
+    line-height: 1.2;
+    margin-bottom: 30px;    
+}
+
+.arrow {
+    display: inline-block;
+    position: relative;
+    width: 86px;
+    height: 2px;
+    background: #fff;
+    line-height: 2px;
+    margin-top: 30px;
+    margin-right: 1rem;
+}
+
+.arrow:before, .arrow:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
+    border-right: 0;
+}
+
+.arrow:after {
+    top: -5px;
+    right: -10px;
+    border-left-color: #fff;
+    border-width: 6px 0 6px 26px;
+}
+
+.oplata__button {
+    padding: 1rem 2rem;
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #fff !important;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-family: HelveticaBold;
+    text-transform: uppercase;
+    transition: all .2s ease;
+}
+
+.oplata__button:hover {
+	border: 1px solid #fff;
+}
+/* END MESSAGES PAGES */

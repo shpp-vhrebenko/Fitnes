@@ -35,7 +35,7 @@
 
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-8">
-                                    <input id="phone" type="tel" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }} form-login__input" minlength="11" name="phone" value="{{ old('phone') }}" required placeholder="ТЕЛЕФОН ДЛЯ WHATSAPP">
+                                    <input id="phone" type="tel" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }} form-login__input" minlength="11" name="phone" value="{{ old('phone') }}" pattern="^[\+?0-9]+$" title="+ХХХХХХХХХХХ или ХХХХХХХХХХХ" required placeholder="ТЕЛЕФОН ДЛЯ WHATSAPP">
 
                                     @if ($errors->has('phone'))
                                         <span class="invalid-feedback">
@@ -64,13 +64,13 @@
                             <div class="form-group row justify-content-center">                       
                                 <div class="checkbox">
                                     <label class="form-login__label form-login__label-terms row align-items-center">
-                                        <input class="form-login__input-remember" type="checkbox" name="check_terms" {{ old('check_terms') ? 'checked' : '' }}> Я подтверждаю <a style="color:#fff; text-decoration:underline;" target="_blank" href="/doc/offer5.pdf"> Пользовательское соглашение</a>
+                                        <input class="form-login__input-remember" type="checkbox" name="check_terms" {{ old('check_terms') ? 'checked' : '' }}> Я подтверждаю <a style="color:#fff; text-decoration:underline;" target="_blank" href="/doc/offer5.pdf" required> Пользовательское соглашение</a>
                                     </label>
                                 </div>                                
                             </div>
                             <div class="row justify-content-center">
                                 <div class="arrow"></div>
-                                <button id="submit_form_register" type="submit" class="btn form-login__button">ОФОРМИТЬ ЗАКАЗ  </button>
+                                <button id="submit_form_register" type="submit" class="btn form-login__button">ОФОРМИТЬ ЗАКАЗ</button>
                             </div>                      
                         </form>
                     </div>
@@ -85,76 +85,61 @@
     @parent  
     <script  src="{{asset('js/lib/jquery.validate.min.js') }}"></script> 
     <script>
-        $(document).ready(function() {
-                           
-            //VALIDATE USER EMAIL
-            $.validator.addMethod("validateUserEmail", function(value, element)
-            {
-                var inputElem = $('#register-form :input[name="email"]'),               
-                    eReport = ''; //error report                
-
-                $.ajax(
-                {
-                    url: '{{ route('validate_email_user') }}',
-                    type: 'post',
-                    data: {
-                       email : inputElem.val(),
-                      _token: $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    success: function(data)
-                    {                                            
-                        if (data.result == 0)
-                        {                           
-                          return true;
-                        }
-                        else
-                        {                          
-                           return false;
-                        }
-                    },
-                    error: function (xhr, b, c) {
-                        console.log("xhr=" + xhr + " b=" + b + " c=" + c);
-                        return false;
-                    }
-                });
-
-            }, '');
-
-            
-    
-    
-    
+        $(document).ready(function() {   
             $("#register-form").validate({
                 rules: {
                     name: {
                         required: true,
                         minlength: 2
                         }, 
-                    phone: "required", 
+                    phone: {
+                        required: true
+                    },
                     email:  {                         
                         required: true,
                         email: true,
-                        validateUserEmail: true
-                    }          
+                        remote : {
+                            url: '{{ route('validate_email_user') }}',
+                            type: 'post',
+                            data: {
+                                email: function()
+                                {
+                                    return $('#register-form :input[name="email"]').val();
+                                },
+                                _token: $('meta[name="csrf-token"]').attr('content'),
+                            },
+                         
+                        }
+                    },
+                    check_terms: {
+                        required: true
+                    }  
+
                 },
                 messages:{
                     name:{
                         required: "Поле не заполнено",
                         minlength: "в поле должно быть минимум 2 символа",
                     },            
-                    phone: "Поле не заполнено", 
+                    phone:{
+                        required: "Поле не заполнено"
+                    },
                     email:{                        
                         required: "Поле не заполнено",
                         email: "Необходимо указать Email",
-                        validateUserEmail: 'Пользователь с таким Email уже зарегистрирован'
-                    }           
+                        remote: 'Пользователь с таким Email уже зарегистрирован'    
+                    },   
+                    check_terms: {
+                        required: "Необхлдимо ознакомится и подтвердить Пользовательское соглашение"
+                    }        
                 },
                 errorPlacement: function(error, element) {
                     if (element.attr("name") == "name") error.insertAfter($("input[name=name]"));
                     
                     if (element.attr("name") == "phone") error.insertAfter($("input[name=phone]"));   
 
-                    if (element.attr("name") == "email") error.insertAfter($("input[name=email]"));    
+                    if (element.attr("name") == "email") error.insertAfter($("input[name=email]")); 
+                    if (element.attr("name") == "check_terms") error.insertAfter($(".form-login__label-terms"));     
                 }   
             });
         })

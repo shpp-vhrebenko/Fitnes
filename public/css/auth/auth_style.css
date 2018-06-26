@@ -184,6 +184,10 @@ label.error {
     padding: 15px;
 }
 
+.form-login__label-terms {
+	height: auto !important;
+}
+
 
 /* MODAL CONTACTS */
 .modal-block-contacts {
