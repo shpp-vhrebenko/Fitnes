@@ -114,7 +114,7 @@ class AdminController extends Controller
 
     public function clients(Request $request)
     {            
-            $clients = $this->users->all();
+            $clients = $this->users->paginate(10);
             return view('admin/pages/clients/index')->with(['title' => 'Список клиентов', 'clients' => $clients]);
     }
 
@@ -193,12 +193,11 @@ class AdminController extends Controller
     public function client_destroy($id)
     {
         $client = $this->users->find($id);
-        $client->roles()->detach([
-            $client['role_id']
-        ]);  
         if (!isset($client)) {
             return abort(404);
-        }
+        }        
+        $client->roles()->detach($client['role_id']);        
+        $client->results()->delete();
         $client->delete();
         Session::flash('success', 'Клиент успешно удален!');
         return redirect()->route('clients');
@@ -227,7 +226,8 @@ class AdminController extends Controller
                         $clients->whereDate($key, $filter);
                     }
                     elseif ($key == 'name') {
-                        $clients->where('name', 'like', '%'. $filter .'%');
+                        $clients->where('name', 'like', '%'. $filter .'%')
+                                ->orWhere('email', 'like', '%'. $filter .'%');
                     }
                     elseif ($key == 'company') {
                         $clients->where('company', 'like', '%'. $filter .'%');
@@ -251,11 +251,9 @@ class AdminController extends Controller
                 {
                     $paginate->appends('filter[' . $key . ']', $p_f);
                 }
-            }
+            }          
 
-            $this->setTitle('Фильтр клиентов');
-
-            return view('admin/pages/clients/index')->with(['clients' => $paginate]);
+            return view('admin/pages/clients/index')->with(['clients' => $paginate, 'title' => 'Список клиентов']);
         } else {
             return redirect()->back();
         }
@@ -265,14 +263,21 @@ class AdminController extends Controller
         $message = $request->get('messageUser');
         $userId = $request->get('user_id');
         $settings = Settings::first();                      
-        $user = $this->users->find($userId);        
+        $user = $this->users->find($userId); 
+
+        $newUserPass = str_random(8);
+        $hashNewPass = bcrypt($newUserPass); 
+        $user->update(['password' => $hashNewPass]); 
+
+        $currentMessage = "Ваш пароль обновлен. \nВаши данные для входа в Ваш Личный Кабинет:\nЛогин: " . $user->email . "\nПароль: " . $newUserPass . " ";     
+        $currentMessage = $currentMessage . "\n" . $message;
 
         mail($user->email,
             "gizerskaya - Фитнесс Тренер",
-            $message,
+            $currentMessage,
             "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());
 
-        Session::flash('success', 'Клиенту "'.$user->name.'" успешно отправленно сообщение!'); 
+        Session::flash('success', 'Клиенту "'.$user->name.'" успешно отправленно сообщение и задан новый пароль!'); 
 
         return redirect()->back();
     }

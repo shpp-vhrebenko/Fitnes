@@ -26,6 +26,6 @@ class Result extends Model
         $img->save( public_path('uploads/results/' . $filename), 60);        
 
         return $filename;
-    }
+    }   
    
 }

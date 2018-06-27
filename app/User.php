@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function results() {
         return $this->hasMany('App\Result');
-    }
+    }   
 
     public function hasRole($id_role)
     {

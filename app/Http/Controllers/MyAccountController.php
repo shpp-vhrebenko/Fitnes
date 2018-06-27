@@ -113,13 +113,15 @@ class MyAccountController extends Controller
         $curentUser = $this->users->find($result['user_id']);    
 
         $lastResult = $curentUser->results()->orderBy('id', 'desc')->first();  
-        $lastResultDate = $lastResult->created_at;      
-        $currentDate = Carbon::now();   
-        $diffHours = $lastResultDate->diffInHours($currentDate, false);
-        
-        if($diffHours < 24) {
-            Session::flash('error', 'Отчет нильзя добавлять больше одного раза в 24 часа !');
-            return redirect()->back(); 
+        if(isset($lastResult->created_at)) {
+            $lastResultDate = $lastResult->created_at;
+            $currentDate = Carbon::now();   
+            $diffHours = $lastResultDate->diffInHours($currentDate, false);
+
+            if($diffHours < 24) {
+                Session::flash('error', 'Отчет нильзя добавлять больше одного раза в 24 часа !');
+                return redirect()->back(); 
+            }
         }
         
         if($curentUser->status_id == 0) {

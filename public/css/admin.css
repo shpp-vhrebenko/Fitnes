@@ -102,3 +102,7 @@ select.form-control{
    right: 0;
    float: none; */
 }
+
+.card {
+    margin-bottom: 1rem;
+}

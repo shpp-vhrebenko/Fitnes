@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\User;
 
-class IsFirstЕntrance
+class IsActive
 {
     /**
      * Handle an incoming request.

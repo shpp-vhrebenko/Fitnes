@@ -13,32 +13,10 @@
         <form class="form" action="{{ route('clients_filter') }}" method="get">
             <div class="form-row">
                 <div class="col-3">
-                    {!! Form::label('name', 'Имя клиента' ) !!}
+                    {!! Form::label('name', 'Имя клиента или Email' ) !!}
                     {!! Form::text('filter[name]', null, array('class' => 'form-control mb-3', 'id' => 'name' ) ) !!}                    
-                </div>
-                <div class="col-3">
-                    {!! Form::label('created_at', 'Дата добавления' ) !!}
-                    {!! Form::date('filter[created_at]', null, array('class' => 'form-control mb-3', 'id' => 'created_at' ) ) !!}                    
-                </div>
-                <div class="col-3">
-                    {!! Form::label('updated_at', 'Дата изменения' ) !!}
-                    {!! Form::date('filter[updated_at]', null, array('class' => 'form-control mb-3', 'id' => 'updated_at' ) ) !!}                    
-                </div>               
-            </div>
-            <div class="form-row">
-                <div class="col-3">
-                    {!! Form::label('status_id', 'Статус пользователя' ) !!}
-                    {!! Form::select('filter[status_id]', \App\User::getUserStatus() , array('class' => 'form-control mb-3', 'id' => 'status_id' ) ) !!}                    
-                </div> 
-                <div class="col-3">
-                    {!! Form::label('email', 'E-mail' ) !!}
-                    {!! Form::email('filter[email]', null, array('class' => 'form-control mb-3', 'id' => 'email' ) ) !!}                    
-                </div>   
-                <div class="col-3">
-                    {!! Form::label('phone', 'Номер телефона' ) !!}
-                    {!! Form::text('filter[phone]', null, array('class' => 'form-control mb-3', 'id' => 'phone' ) ) !!}                    
-                </div>                
-            </div>            
+                </div>                             
+            </div>                       
             <button type="submit" class="btn btn-primary mt-3 mb-2">Применить фильтр</button>
             <a href="{{ route('clients') }}" class="btn btn-danger mt-3 mb-2 ml-3">Отменить фильтр</a>
         </form>
@@ -79,11 +57,11 @@
                                     <a href="{{ route('show_client', $client->id) }}" class="btn btn-secondary">Просмотр</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('admin_results', $client->id) }}" class="btn btn-secondary">Просмотр результатов</a>
+                                    <a href="{{ route('admin_results', $client->id) }}" class="btn btn-secondary fa fa-line-chart" data-toggle="tooltip" data-placement="top" title="Просмотр результатов"></a>
                                 </li>
                                 <li>
                                     @if($client->id != 1)
-                                    <a href="{{ route('edit_client', $client->id) }}" class="btn btn-primary">Редактировать</a>
+                                    <a href="{{ route('edit_client', $client->id) }}" class="btn btn-primary fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Редактировать"></a>
                                     @endif
                                 </li>
                                 <li>
@@ -91,12 +69,12 @@
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                         @if($client->id != 1)
-                                        <input class="btn btn-danger" type="submit" value="Удалить">
+                                        <button class="btn btn-danger fa fa-trash-o" type="submit" data-toggle="tooltip" data-placement="top" title="Удалить"></button>
                                         @endif
                                     </form>
                                 </li>
                                 <li>
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#SendMessageModal" data-id-user="{{$client->id}}"><i class="fa fa-envelope" style="color: #fff"></i></button>
+                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#SendMessageModal" data-id-user="{{$client->id}}"><i class="fa fa-envelope" data-toggle="tooltip" data-placement="top" title="Сбросить пароль и отправить сообщение" style="color: #fff"></i></button>
                                 </li>
                             </ul>
                         </td>
@@ -105,6 +83,10 @@
                 </tbody>
             </table>
         </div>
+        <div class="row justify-content-center">
+            {{ $clients->links() }}
+        </div>
+        
     @else
         <div class="alert alert-danger" role="alert">
             Нет клиентов!

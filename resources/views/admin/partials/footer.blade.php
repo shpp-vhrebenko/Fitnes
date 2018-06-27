@@ -27,6 +27,7 @@
     $('[data-toggle="datepicker"]').datepicker({
       format: 'yyyy-mm-dd'
     });
+    $('[data-toggle="tooltip"]').tooltip();
   });
 </script>
 @show
