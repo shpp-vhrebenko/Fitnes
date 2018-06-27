@@ -21,17 +21,26 @@
                     <input type="text" class="form-control mb-3" placeholder="" name="filter[title]" id="title">
                 </div>
                 <div class="col-3">
-                    <label for="category">Категория</label>
-                    <input type="text" class="form-control mb-3" placeholder="" name="filter[category_id]" id="category">
+                    <label for="categoryId">Категория</label>
+                    <select class="form-control" id="categoryId" name="filter[category_id]" id="category_id">                        
+                        @if(isset($categories) && count($categories) > 0)
+                            @foreach($categories as $category)                                        
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>                    
                 </div>
                 <div class="col-3">
                     <label for="courseId">Название курса или марафона</label>
-                    <input type="text" class="form-control mb-3" placeholder="" name="filter[course_id]" id="courseId">
+                    <select class="form-control" id="courseId" name="filter[course_id]">       
+                        @if(isset($courses) && count($courses) > 0)
+                            @foreach($courses as $course)                                        
+                                <option value="{{ $course->id }}">{{ $course->name }}</option>
+                            @endforeach
+                        @endif        
+                    </select>            
                 </div>   
-                <div class="col-3">
-                    <label for="dateCreatedAt">Дата добавления</label>
-                    <input data-toggle="datepicker" type="text" class="form-control mb-3" placeholder="" name="filter[created_at]" id="dateCreatedAt">
-                </div>          
+                       
             </div>                       
             <button type="submit" class="btn btn-primary mt-3 mb-2">Применить фильтр</button>
             <a href="{{ route('admin_items') }}" class="btn btn-danger mt-3 mb-2 ml-3">Отменить фильтр</a>
@@ -94,7 +103,9 @@
                     </tr>
                 @endforeach
                 </tbody>
-            </table>
+            </table>            
+        </div>
+        <div class="row justify-content-center">
             {{ $items->links() }}
         </div>
     @else

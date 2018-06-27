@@ -245,13 +245,13 @@ class AdminController extends Controller
 
             $paginate = $clients->paginate(10);
 
-            foreach ($filter_request as $key => $p_f)
+          /*  foreach ($filter_request as $key => $p_f)
             {
                 if ($p_f != null)
                 {
                     $paginate->appends('filter[' . $key . ']', $p_f);
                 }
-            }          
+            }     */     
 
             return view('admin/pages/clients/index')->with(['clients' => $paginate, 'title' => 'Список клиентов']);
         } else {
@@ -288,7 +288,7 @@ class AdminController extends Controller
      public function categories()
     {
         $title = 'Список категорий';
-        $categories = $this->categories->all();
+        $categories = $this->categories->paginate(10);
         return view('admin/pages/items/categories', compact(['title', 'categories']));
     }
 
@@ -356,7 +356,9 @@ class AdminController extends Controller
             $title = 'Список записей';
             $items = $this->items->order('category_id', 'asc')->paginate(10);
             $items->load('category');
-            return view('admin/pages/items/items', compact(['title', 'items']));
+            $categories = $this->categories->all(); 
+            $courses = $this->courses->findWithParams(['is_active' => true])->get(); 
+            return view('admin/pages/items/items', compact(['title', 'items', 'categories', 'courses']));
     }
 
     public function items_filter(Request $request)
@@ -380,47 +382,34 @@ class AdminController extends Controller
                     {
                         $items->whereDate($key, $filter);
                     }
-                    elseif ($key == 'name') {
-                        $items->where('name', 'like', '%'. $filter .'%');
+                    elseif ($key == 'title') {
+                        $items->where('title', 'like', '%'. $filter .'%');
                     }
-                    elseif ($key == 'price_min') {
-                        $items->where('price', '>=', $filter);
+                    elseif ($key == 'category_id') {
+                        $items->where('category_id', $filter);
                     }
-                    elseif ($key == 'price_max') {
-                        $items->where('price', '<=', $filter);
-                    }
-                    elseif ($key == 'qty_min') {
-                        $items->where('qty', '>=', $filter);
-                    }
-                    elseif ($key == 'qty_max') {
-                        $items->where('qty', '<=', $filter);
-                    }
-                    elseif ($key == 'company') {
-                        $items->where('company', 'like', '%'. $filter .'%');
-                    }
-                    elseif ($key == 'role_id') {
-                        $items->whereHas('roles', function ($q) use ($filter) {
-                            $q->where('roles.id', $filter);
-                        });
-                    }
+                    elseif ($key == 'course_id') {
+                        $items->where('course_id',$filter);
+                    }                    
                     else {
                         $items->where($key, $filter);
                     }
                 }
             }
-//            dd($orders);
             $paginate = $items->paginate(10);
 
-            foreach ($filter_request as $key => $p_f)
+           /* foreach ($filter_request as $key => $p_f)
             {
                 if ($p_f != null)
                 {
                     $paginate->appends('filter[' . $key . ']', $p_f);
                 }
-            }
+            }*/
+            $categories = $this->categories->all(); 
+            $courses = $this->courses->findWithParams(['is_active' => true])->get(); 
+            $title = 'Список записей';
+            return view('admin/pages/items/items')->with(['items' => $paginate , 'title' => $title, 'categories' => $categories, 'courses' => $courses]);
 
-            $this->setTitle('Фильтр товаров');
-            return view('admin/pages/items/items')->with(['items' => $paginate]);
         } else {
             return redirect()->back();
         }
