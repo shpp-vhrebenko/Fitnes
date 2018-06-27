@@ -526,7 +526,7 @@ class AdminController extends Controller
 
     public function courses_filter()
     {
-
+        
     }
 
     public function new_cours()
