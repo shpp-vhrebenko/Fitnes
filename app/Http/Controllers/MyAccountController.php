@@ -10,13 +10,16 @@ use App\Http\Requests\StoreResultRequest;
 use App\Repositories\CategoriesRepositoryInterface;
 use App\Repositories\ItemsRepositoryInterface;
 use App\Repositories\ResultsRepositoryInterface;
+use App\Repositories\UsersRepositoryInterface;
 
 use Auth;
+use Carbon\Carbon;
 
 use App\Category;
 use App\Item;
 use App\Settings;
 use App\Result;
+use App\User;
 
 use Illuminate\Support\Facades\Session;
 
@@ -31,12 +34,14 @@ class MyAccountController extends Controller
     (
         ItemsRepositoryInterface                    $itemsRepository,        
         CategoriesRepositoryInterface           $categoriesRepository,
-        ResultsRepositoryInterface              $resultsRepository  
+        ResultsRepositoryInterface              $resultsRepository,
+        UsersRepositoryInterface                $usersRepository 
     )
     {
         $this->items = $itemsRepository;              
         $this->categories = $categoriesRepository;
         $this->results = $resultsRepository;
+        $this->users = $usersRepository;
         $categories = $this->categories->all();
         $settings = Settings::first();      
         view()->share(compact([ 'settings', 'categories']));        
@@ -84,7 +89,7 @@ class MyAccountController extends Controller
         $results = $currentUser->results;
         $response = array(
             'status' => 'success',
-            'results' => 'hi',
+            'results' => $results
         );
         return response()->json($response);            
                 
@@ -96,12 +101,30 @@ class MyAccountController extends Controller
     }
 
     public function result_store(StoreResultRequest $request)
-    {        
+    {       
+
         if(!Auth::check()) {
             return redirect('/login');
         }
-        $result = $request->get('result');        
-        $result['user_id'] = Auth::id();     
+
+        $result = $request->get('result');  
+
+        $result['user_id'] = Auth::id(); 
+        $curentUser = $this->users->find($result['user_id']);    
+
+        $lastResult = $curentUser->results()->orderBy('id', 'desc')->first();  
+        $lastResultDate = $lastResult->created_at;      
+        $currentDate = Carbon::now();   
+        $diffHours = $lastResultDate->diffInHours($currentDate, false);
+        
+        if($diffHours < 24) {
+            Session::flash('error', 'Отчет нильзя добавлять больше одного раза в 24 часа !');
+            return redirect()->back(); 
+        }
+        
+        if($curentUser->status_id == 0) {
+            $curentUser->update(['status_id' => 1]);
+        }
         
         if( $image = $request->file('result.image') )
         {            

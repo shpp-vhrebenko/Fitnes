@@ -21,8 +21,8 @@ class IsFirstЕntrance
     {
        
         if (Auth::user()) {
-            $curentUser = User::find(Auth::id());            
-            if($curentUser->getClientStatus($curentUser->status_id) == 1) {
+            $curentUser = User::find(Auth::id());                      
+            if($curentUser->status_id == 1 || Route::currentRouteName() == 'result_store') {
                 return $next($request);
             } else {
                 if(Route::currentRouteName() != 'add_result') {

@@ -72,6 +72,11 @@
 				            {{ Session::get('success') }}
 				        </div>
 				    @endif
+                    @if (Session::has('error'))
+                        <div class="alert alert-danger alert-danger_custom" role="alert">
+                            {{ Session::get('error') }}
+                        </div>
+                    @endif  
 				    @if($errors)
 				        @foreach ($errors->all() as $error)
 				            <div class="alert alert-danger alert-danger_custom" role="alert">
