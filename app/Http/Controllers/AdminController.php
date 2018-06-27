@@ -15,6 +15,7 @@ use App\Repositories\CategoriesRepositoryInterface;
 use App\Repositories\ItemsRepositoryInterface;
 use App\Repositories\ResultsRepositoryInterface;
 use App\Repositories\CoursesRepositoryInterface;
+use App\Repositories\TrainingScheduleRepositoryInterface;
 
 use App\User;
 use App\Settings;
@@ -24,6 +25,7 @@ use App\Category;
 use App\Item;
 use App\Result;
 use App\Courses;
+use App\TrainingSchedule;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -43,14 +45,16 @@ class AdminController extends Controller
         UsersRepositoryInterface                    $usersRepository,
         CategoriesRepositoryInterface           $categoriesRepository,
         ResultsRepositoryInterface              $resultsRepository,     
-        CoursesRepositoryInterface              $coursesRepository          
+        CoursesRepositoryInterface              $coursesRepository,
+        TrainingScheduleRepositoryInterface     $trainingScheduleRepository        
 
     )
     {        
         $this->items = $itemsRepository;
         $this->users = $usersRepository;        
         $this->categories = $categoriesRepository;
-        $this->courses = $coursesRepository;       
+        $this->courses = $coursesRepository; 
+        $this->trainingSchedule = $trainingScheduleRepository;     
     }
 
     public function index()
@@ -432,7 +436,9 @@ class AdminController extends Controller
         $statusesDays = Item::$ItemTrainingStatuses;
         $trainingSettings = Item::$TrainingSettings;
         $countWeek = $trainingSettings['maxWeek'];
-        $countDay = $trainingSettings['maxDay'];        
+        $countDay = $trainingSettings['maxDay']; 
+
+        dd(TrainingSchedule::get_training_schedule_course(1));       
 
         return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'statusesDays', 'countWeek', 'countDay', 'courses']));
     }
@@ -445,9 +451,18 @@ class AdminController extends Controller
         if( $image = $request->file('item.image') )
         {            
             $item['image'] = Item::saveImage( $image );                 
-        }
+        }        
 
-        $this->items->create($item);        
+        $newItem = $this->items->create($item);  
+
+        if($item['category_id'] == 1) {
+            TrainingSchedule::create([
+                'course_id' => $item['course_id'],
+                'item_id' => $newItem->id,
+                'week' => $item['week'],
+                'day' => $item['day']
+            ]);
+        }    
 
         Session::flash('success', 'Запись успешно создана!');
         return redirect()->back();

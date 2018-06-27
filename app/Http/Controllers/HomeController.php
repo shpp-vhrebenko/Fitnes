@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Repositories\TrainingScheduleRepositoryInterface;
+
 use App\Settings;
 use App\Social;
 use App\Courses;
 use App\Marathons;
 use App\User;
 use App\UserSoul;
+use App\TrainingSchedule;
 use Session;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -19,8 +23,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(
+        TrainingScheduleRepositoryInterface     $trainingScheduleRepository, 
+    )
     {
+        $this->trainingSchedule = $trainingScheduleRepository;
         $settings = Settings::first();     
         view()->share(compact([ 'settings'])); 
     }
@@ -89,7 +96,9 @@ class HomeController extends Controller
             $new_user['role_id'] = 3; 
             $new_user['name'] = $user_soul->name;
             $new_user['phone'] = $user_soul->phone;
-            $new_user['email'] = $user_soul->email;                 
+            $new_user['email'] = $user_soul->email; 
+            $new_user['course_id']  = $user_soul->course_id;
+            $new_user['data_start_course']  = Carbon::now();              
             $user = User::create($new_user);  
             $user_soul->delete();      
             $user->roles()->attach([

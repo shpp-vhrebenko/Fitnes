@@ -20,7 +20,7 @@ class User extends Authenticatable
 
     public static function getUserStatus()
     {
-        return User::$userStatuses;
+        return self::$userStatuses;
     }
 
     /**
@@ -29,7 +29,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'status_id', 'is_subscribe'
+        'name', 
+        'email', 
+        'password', 
+        'phone', 
+        'status_id', 
+        'is_subscribe',
+        'course_id',
+        'data_start_course',
     ];
 
     /**
