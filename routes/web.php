@@ -100,12 +100,19 @@ Route::group(['prefix'=>'admin','middleware' => 'isAdmin'], function() {
     // Route courses
     Route::get('/courses', 'AdminController@show_courses')->name('show_courses');   
     Route::get('/courses/filter', 'AdminController@courses_filter')->name('courses_filter'); 
-    Route::get('/cours/{id}', 'AdminController@show_cours')->name('show_cours');    
+    Route::get('/course/{id}', 'AdminController@show_cours')->name('show_cours');    
     Route::get('/courses/new', 'AdminController@new_cours')->name('new_cours');
-    Route::post('/cours/new', 'AdminController@cours_store')->name('cours_store');
-    Route::get('/cours/{id}/edit', 'AdminController@cours_edit')->name('edit_cours');
-    Route::put('/cours/{id}/edit', 'AdminController@cours_update')->name('update_cours');
-    Route::delete('/cours/{id}/destroy', 'AdminController@cours_destroy')->name('destroy_cours');
+    Route::post('/course/new', 'AdminController@cours_store')->name('cours_store');
+    Route::get('/course/{id}/edit', 'AdminController@cours_edit')->name('edit_cours');
+    Route::put('/course/{id}/edit', 'AdminController@cours_update')->name('update_cours');
+    Route::delete('/course/{id}/destroy', 'AdminController@cours_destroy')->name('destroy_cours');
+
+    // Route course trainings
+    Route::get('/courses/trainings/{id}', 'AdminController@course_trainings')->name('course_trainings');
+    Route::get('/courses/training/{course_id}/{number_day}/new', 'AdminController@new_training')->name('new_training');
+    Route::post('/courses/training/new', 'AdminController@training_store')->name('training_store');
+    Route::get('/courses/training/{id}/edit', 'AdminController@training_edit')->name('edit_training');
+    Route::put('/courses/training/{id}/edit', 'AdminController@training_update')->name('update_training');
 
     // Route courses
     Route::get('/marathons', 'AdminController@show_marathons')->name('show_marathons');

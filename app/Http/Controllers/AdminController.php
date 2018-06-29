@@ -436,9 +436,7 @@ class AdminController extends Controller
         $statusesDays = Item::$ItemTrainingStatuses;
         $trainingSettings = Item::$TrainingSettings;
         $countWeek = $trainingSettings['maxWeek'];
-        $countDay = $trainingSettings['maxDay']; 
-
-        dd(TrainingSchedule::get_training_schedule_course(1));       
+        $countDay = $trainingSettings['maxDay'];            
 
         return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'statusesDays', 'countWeek', 'countDay', 'courses']));
     }
@@ -453,16 +451,7 @@ class AdminController extends Controller
             $item['image'] = Item::saveImage( $image );                 
         }        
 
-        $newItem = $this->items->create($item);  
-
-        if($item['category_id'] == 1) {
-            TrainingSchedule::create([
-                'course_id' => $item['course_id'],
-                'item_id' => $newItem->id,
-                'week' => $item['week'],
-                'day' => $item['day']
-            ]);
-        }    
+        $newItem = $this->items->create($item);       
 
         Session::flash('success', 'Запись успешно создана!');
         return redirect()->back();
@@ -551,6 +540,17 @@ class AdminController extends Controller
         return view('admin/pages/courses/new', compact(['title', 'statuses']));
     }
 
+    public function course_trainings($id_course)
+    {
+        $curentCourse = $this->courses->find($id_course);  
+            
+        $trainings = $curentCourse->training_schedule;
+       
+        $title = 'Создание тренировок';     
+            
+        return view('admin/pages/courses/trainings', compact(['title', 'trainings', 'id_course']));
+    }    
+
     public function cours_store(StoreCoursRequest $request)
     {       
         $item = $request->get('item');    
@@ -559,13 +559,86 @@ class AdminController extends Controller
         {            
             $item['icon'] = Courses::saveIcon( $image );                 
         }
+
         $item['type'] = 'cours';
 
-        $this->courses->create($item);        
+        $trainings = [];         
+        for ($i=0; $i < $item['period']; $i++) { 
+            $dayNumber = $i + 1;
+            $trainings['day_'.$dayNumber.''] = [
+                'item_id' => 0,
+                'is_holiday' => false
+            ];                  
+        }
 
-        Session::flash('success', 'Курс успешно создана!');
+        $item['training_schedule'] = $trainings;
+   
+       /* $training = array();
+        for($i = 0; $i < $item['period']; $i++) {
+            $curday = $i + 1;
+            $training['day_'.$curday] = 0;
+        }
+        $item['training_schedule'] = $training;*/
+     
+        $id_new_course = $this->courses->create($item);       
+
+        Session::flash('success', 'Курс успешно создан!');
+        return redirect()->route('course_trainings', ['id_course' => $id_new_course]);
+        /*return redirect()->back();*/
+    }
+
+    public function new_training($id_course, $numberDay)
+    {
+        $title = 'Создание тренировки';       
+        $item = new Item;
+        $statuses = Item::$ItemStatuses;
+        $item['course_id'] = $id_course;
+        $item['category_id'] = 1;                    
+
+        return view('admin/pages/courses/new_trainings', compact(['title', 'item', 'statuses', 'numberDay']));
+    }
+
+    public function training_store(ItemRequest $request)
+    {
+        $numberDay = $request->get('numberDay');
+       
+        $item = $request->get('item'); 
+        
+        $course = $this->courses->find($item['course_id']);
+        $training_schedule = $course->training_schedule;
+
+        
+       
+        if( $image = $request->file('item.image') )
+        {            
+            $item['image'] = Item::saveImage( $image );                 
+        }        
+
+        $newItem = $this->items->create($item);  
+
+        $training_schedule['day_'.$numberDay] = [
+            'item_id' => $newItem->id,
+            'is_holiday' => false
+        ];
+
+        $course->update(['training_schedule' => $training_schedule]); 
+
+        Session::flash('success', 'Тренировка успешно создана!');
         return redirect()->back();
     }
+
+    
+
+    public function training_edit()
+    {
+
+    }
+
+    public function training_update($id_item) {
+
+    }
+
+
 
     public function cours_edit($id)
     {
@@ -615,6 +688,9 @@ class AdminController extends Controller
         Session::flash('success', 'Курс успешно удален!');
         return redirect()->route('show_courses');
     }
+
+    
+
     // END COURSES
 
     // MARATHONES

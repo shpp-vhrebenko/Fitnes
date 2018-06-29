@@ -24,7 +24,7 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct(
-        TrainingScheduleRepositoryInterface     $trainingScheduleRepository, 
+        TrainingScheduleRepositoryInterface     $trainingScheduleRepository
     )
     {
         $this->trainingSchedule = $trainingScheduleRepository;

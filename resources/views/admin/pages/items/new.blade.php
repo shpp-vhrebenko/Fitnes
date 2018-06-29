@@ -73,8 +73,10 @@
                             <select class="form-control" id="category_id" name="item[category_id]" id="category_id">
                                 <option value="0">-- Не выбрано --</option>
                                 @if(isset($categories) && count($categories) > 0)
-                                    @foreach($categories as $category)                                        
-                                        <option value="{{ $category->id }}" @if(isset($item->category_id) && ($item->category_id == $category->id)) selected @endif>{{ $category->name }}</option>
+                                    @foreach($categories as $category) 
+                                        @if($category->id != 1)
+                                            <option value="{{ $category->id }}" @if(isset($item->category_id) && ($item->category_id == $category->id)) selected @endif>{{ $category->name }}</option>
+                                        @endif                                 
                                     @endforeach
                                 @endif
                             </select>
@@ -96,7 +98,7 @@
                             </div>                 
                         </div>                         
                     </div> 
-                    <div id="item_training" class="row d-none" >                   
+                   <!--  <div id="item_training" class="row d-none" >                   
                         <div class="form-group col-sm-4" >
                             <label for="week" class="col-sm-12 col-form-label">Неделя<sup class="required">*</sup></label>
                             <div class="col-sm-12">                            
@@ -141,7 +143,7 @@
                                 </select>
                             </div>
                         </div>  
-                    </div>                    
+                    </div>     -->                
                 </div>               
                 <div class="tab-pane fade" id="media" role="tabpanel" aria-labelledby="relations2-tab">
                     <div class="form-group row">
@@ -195,24 +197,18 @@
 
         $( "#category_id" ).change(function() {
             var id_category = $( "#category_id option:selected" ).val();
-            var $itemCourse = $('#item_course');
-            var $itemTraining = $('#item_training');
+            var $itemCourse = $('#item_course');            
             if(id_category == 1) {
                 // display course select
                 show_box($itemCourse);                
                 // display training settings
-                show_box($itemTraining);  
+              
             } else if (id_category == 0) {
                 hide_box($itemCourse); 
-                hide_box($itemTraining); 
+              
             } else {
                 // display course select
-                show_box($itemCourse); 
-
-                // hide training settings
-                if(!$('#item_training').hasClass('d-none')) {
-                    hide_box($itemTraining); 
-                }
+                show_box($itemCourse);               
             }
         });
 
