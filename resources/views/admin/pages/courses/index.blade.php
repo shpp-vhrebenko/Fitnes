@@ -57,7 +57,10 @@
                             @endif
                         </td>
                         <td>
-                            <ul class="camotek-form-links">                                    
+                            <ul class="camotek-form-links">
+                                <li>
+                                   <a href="{{ route('course_trainings', $cours->id) }}" class="btn btn-primary" >Тренировки</a> 
+                                </li>                                    
                                 <li>                                   
                                     <a href="{{ route('edit_cours', $cours->id) }}" class="btn btn-primary fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Редактировать"></a>         
                                 </li>

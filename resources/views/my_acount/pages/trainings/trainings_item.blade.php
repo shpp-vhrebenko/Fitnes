@@ -10,12 +10,17 @@
    @parent
 @endsection
 
-@section('content')   
+@section('content')	
 	<div class="container-fluid">
-		<header class="row category-header">
-			<h4 class="category-header__title col-sm-12">{{$title}}</h4>			
-		</header>		
-	</div>	
+		<header class="row item-header">
+			<h4 class="item-header__title col-sm-12">День {{$numberDay}} | Неделя {{ceil($numberDay/7)}}</h4>		
+		</header>
+		<div class="row item-content ">
+			<div class="col-12 flex-direction-column">
+				{!! $item->text !!}
+			</div>			
+		</div>  
+	</div>	 
 @endsection
 
 

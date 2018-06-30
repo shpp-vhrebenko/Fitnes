@@ -17,7 +17,9 @@ class Item extends Model
                 'text',
                 'category_id',
                 'course_id',
-                'is_active'
+                'is_active',
+                'is_holiday',
+                'slug'
             ];
 
     public static $ItemStatuses = [ 

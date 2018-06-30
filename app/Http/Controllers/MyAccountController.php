@@ -11,8 +11,10 @@ use App\Repositories\CategoriesRepositoryInterface;
 use App\Repositories\ItemsRepositoryInterface;
 use App\Repositories\ResultsRepositoryInterface;
 use App\Repositories\UsersRepositoryInterface;
+use App\Repositories\CoursesRepositoryInterface;
 
 use Auth;
+
 use Carbon\Carbon;
 
 use App\Category;
@@ -20,6 +22,7 @@ use App\Item;
 use App\Settings;
 use App\Result;
 use App\User;
+use App\Courses;
 
 use Illuminate\Support\Facades\Session;
 
@@ -35,13 +38,15 @@ class MyAccountController extends Controller
         ItemsRepositoryInterface                    $itemsRepository,        
         CategoriesRepositoryInterface           $categoriesRepository,
         ResultsRepositoryInterface              $resultsRepository,
-        UsersRepositoryInterface                $usersRepository 
+        UsersRepositoryInterface                $usersRepository,
+        CoursesRepositoryInterface              $coursesRepository
     )
     {
         $this->items = $itemsRepository;              
         $this->categories = $categoriesRepository;
         $this->results = $resultsRepository;
         $this->users = $usersRepository;
+        $this->courses = $coursesRepository;
         $categories = $this->categories->all();
         $settings = Settings::first();      
         view()->share(compact([ 'settings', 'categories']));        
@@ -53,24 +58,80 @@ class MyAccountController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        $currentUser = Auth::user();    
+        if($currentUser->course_id != 0) {
+            return redirect()->route('show_trainings');
+        } else {
+            $title = 'Купите Курс';
+            return view('my_acount.home', compact(['title']));
+        } 
+        
+    }
+
+    public function show_trainings()
     {        
-        return view('my_acount.home');
+        $currentUser = Auth::user(); 
+        $course_id = $currentUser->course_id;
+        $course = $this->courses->find($course_id);
+        $training_schedule = $course->training_schedule;   
+
+        $currentDate = Carbon::now();       
+        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->data_start_course);       
+        $diffDays = $dataStartCourse->diffInDays($currentDate, false);       
+        
+        $category = Category::where('id', 1)->firstOrFail(); 
+        $items = $category->items()->where('course_id',$course_id)->get();
+
+        $trainingItems = [];
+        for ($i=0; $i < $diffDays; $i++) {
+            $curDay = $i + 1;
+            $curTraining = $training_schedule['day_'.$curDay];
+            $curItem = null;
+            foreach ($items as $key => $value) {
+                if($value['id'] == $curTraining['item_id']) {
+                    $curItem = $items[$key];
+                    $curItem['day'] = $curDay;
+                }
+            }
+           array_push( $trainingItems,$curItem);
+        }
+        $title = 'Тренировки';
+        $description = 'Выберите интересующий вас день тренировки';
+        return view('my_acount/pages/trainings/trainings', compact(['trainingItems', 'title', 'description']));
+
+    }
+
+    public function show_training($item_slug)
+    {
+        $item = $this->items->findWithParams(['slug' => $item_slug])->firstOrFail();
+        $course = $this->courses->find($item->course_id);
+        $training_schedule = $course->training_schedule; 
+        $numberDay = null;
+        foreach ($training_schedule as $key => $value) {
+            if($value['item_id'] == $item->id) {
+                $numberDay = str_replace('day_','',$key); 
+            }
+        }
+
+        return view('my_acount/pages/trainings/trainings_item', compact(['item', 'numberDay']));
     }
 
     public function show_category_items($category_slug)
-    {
-        
-        /*$category = $this->categories->findWithParams('id', 1)->get();  */
+    {     
+        $currentUser = Auth::user(); 
+        $course_id = $currentUser->course_id;
         $category = Category::where('slug', $category_slug)->firstOrFail();       
-        $items = $category->items;
+        $items = $category->items()->where('course_id',$course_id)->get();
+
         $title = $category->name;
         $description = $category->description;
         return view('my_acount/pages/items/categories_items', compact(['category', 'items', 'title', 'description']));
     }
 
-    public function show_item($category_slug, $item_id)
+    public function show_item($category_slug, $item_slug)
     {        
-        $item = $this->items->find($item_id);        
+        $item = $this->items->findWithParams(['slug' => $item_slug])->firstOrFail();        
         return view('my_acount/pages/items/item', compact([ 'item']));
     }
 

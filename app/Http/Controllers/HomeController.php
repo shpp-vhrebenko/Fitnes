@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Repositories\TrainingScheduleRepositoryInterface;
-
 use App\Settings;
 use App\Social;
 use App\Courses;
 use App\Marathons;
 use App\User;
 use App\UserSoul;
-use App\TrainingSchedule;
 use Session;
 use Carbon\Carbon;
 
@@ -24,10 +21,9 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct(
-        TrainingScheduleRepositoryInterface     $trainingScheduleRepository
+        
     )
     {
-        $this->trainingSchedule = $trainingScheduleRepository;
         $settings = Settings::first();     
         view()->share(compact([ 'settings'])); 
     }

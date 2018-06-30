@@ -97,53 +97,7 @@
                                 </select>
                             </div>                 
                         </div>                         
-                    </div> 
-                   <!--  <div id="item_training" class="row d-none" >                   
-                        <div class="form-group col-sm-4" >
-                            <label for="week" class="col-sm-12 col-form-label">Неделя<sup class="required">*</sup></label>
-                            <div class="col-sm-12">                            
-                                <select class="form-control" id="week" name="item[week]">
-                                    @for($i = 0; $i < $countWeek; $i++) 
-                                        {{ $numberWeek = $i + 1 }}       
-                                        <option value="{{$numberWeek}}"
-                                        @if(isset($item->week) && ($item->week == $numberWeek)) 
-                                            selected 
-                                        @endif>
-                                        {{$numberWeek}}
-                                        </option>                               
-                                     @endfor
-                                </select>
-                            </div>                 
-                        </div>
-                        <div class="form-group col-sm-4" >
-                            <label for="day" class="col-sm-12 col-form-label">День<sup class="required">*</sup></label>
-                            <div class="col-sm-12">                            
-                                <select class="form-control" id="day" name="item[day]">
-                                    @for($i = 0; $i < $countDay; $i++) 
-                                        {{ $numberDay = $i + 1 }}       
-                                        <option value="{{$numberDay}}"
-                                        @if(isset($item->day) && ($item->day == $numberDay)) 
-                                            selected 
-                                        @endif>
-                                        {{$numberDay}}
-                                        </option>                               
-                                     @endfor
-                                </select>
-                            </div>                 
-                        </div> 
-                        <div class="form-group row col-sm-4">
-                            <label for="is_holiday" class="col-sm-12 col-form-label">Статус дня<sup class="required">*</sup></label>
-                            <div class="col-sm-12">
-                                <select class="form-control" id="is_holiday" name="item[is_holiday]">                                    
-                                    @if(isset($statusesDays))
-                                        @foreach($statusesDays as $key => $statusDay)
-                                            <option value="{{ $key }}" @if(isset($item) && ($item->is_holiday == $key)) dd($item->is_holiday) @endif>{{ $statusDay }}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>  
-                    </div>     -->                
+                    </div>                                 
                 </div>               
                 <div class="tab-pane fade" id="media" role="tabpanel" aria-labelledby="relations2-tab">
                     <div class="form-group row">

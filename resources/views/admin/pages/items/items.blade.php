@@ -24,8 +24,10 @@
                     <label for="categoryId">Категория</label>
                     <select class="form-control" id="categoryId" name="filter[category_id]" id="category_id">                        
                         @if(isset($categories) && count($categories) > 0)
-                            @foreach($categories as $category)                                        
+                            @foreach($categories as $category) 
+                                @if($category->id != 1)                                       
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endif
                             @endforeach
                         @endif
                     </select>                    

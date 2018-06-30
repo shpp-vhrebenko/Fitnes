@@ -11,20 +11,20 @@
 |
 */
 
-Route::get('/_debugbar/assets/stylesheets', [
-    'as' => 'debugbar-css',
-    'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
-]);
+// Route::get('/_debugbar/assets/stylesheets', [
+//     'as' => 'debugbar-css',
+//     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
+// ]);
 
-Route::get('/_debugbar/assets/javascript', [
-    'as' => 'debugbar-js',
-    'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@js'
-]);
+// Route::get('/_debugbar/assets/javascript', [
+//     'as' => 'debugbar-js',
+//     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@js'
+// ]);
 
-Route::get('/_debugbar/open', [
-    'as' => 'debugbar-open',
-    'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
-]);
+// Route::get('/_debugbar/open', [
+//     'as' => 'debugbar-open',
+//     'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
+// ]);
 
 
 Auth::routes();
@@ -44,10 +44,13 @@ Route::group([], function() {
 Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive'] ], function() {
 
 	Route::get('/', 'MyAccountController@index')->name('my-account');
+    // Route trainings
+    Route::get('/trainings', 'MyAccountController@show_trainings')->name('show_trainings');
+    Route::get('/training/{id}', 'MyAccountController@show_training')->name('show_training');
 
     // Route categories
     Route::get('/category/{slug}', 'MyAccountController@show_category_items')->name('show_category_items');
-    Route::get('/category/{slug}/{id}', 'MyAccountController@show_item')->name('show_item');
+    Route::get('/category/{category_slug}/{item_slug}', 'MyAccountController@show_item')->name('show_item');
 
     // Route results
     Route::get('/results', 'MyAccountController@show_results')->name('show_results');

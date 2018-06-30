@@ -6,7 +6,6 @@ use App\Category;
 use App\Item;
 use App\Result;
 use App\Courses;
-use App\TrainingSchedule;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -29,10 +28,7 @@ class RepositoryServiceProvider extends ServiceProvider
         });
         $this->app->bind(CoursesRepositoryInterface::class, function($app) {
             return new CoursesModel(new Courses());
-        });        
-        $this->app->bind(TrainingScheduleRepositoryInterface::class, function($app) {
-            return new TrainingScheduleModel(new TrainingSchedule());
-        });
+        });       
     }
 
 }

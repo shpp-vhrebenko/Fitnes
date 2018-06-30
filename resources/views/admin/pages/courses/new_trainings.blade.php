@@ -21,9 +21,8 @@
             <input type="hidden" name="item[category_id]" value="{{ $item->category_id }}">
             @if(Route::is('edit_training')) 
             <input type="hidden" name="_method" value="put">
-            @else
-            <input type="hidden" name="numberDay" value="{{ $numberDay }}">
-            @endif           
+            @endif
+            <input type="hidden" name="numberDay" value="{{ $numberDay }}">            
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
@@ -51,19 +50,33 @@
                                 <div class="col-sm-10">
                                     <textarea class="form-control summernote" id="text" name="item[text]" rows="3" id="text">{{ isset($item->text) ? $item->text : old('item.text') }}</textarea>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="status_id" class="col-sm-2 col-form-label">Cтатус Записи<sup class="required">*</sup></label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" id="status_id" name="item[is_active]">
-                                        @if(isset($statuses))
-                                            @foreach($statuses as $key => $status)
-                                                <option value="{{ $key }}" @if(isset($item->is_active) && $item->is_active == $key) selected @endif>{{ $status }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>             
+                            </div>                
+                                <!-- <div class="form-group col-sm-6">
+                                    <label for="status_id" class="col-sm-12 col-form-label">Cтатус Записи<sup class="required">*</sup></label>
+                                    <div class="col-sm-12">
+                                        <select class="form-control" id="status_id" name="item[is_active]">
+                                            @if(isset($statuses))
+                                                @foreach($statuses as $key => $status)
+                                                    <option value="{{ $key }}" @if(isset($item->is_active) && $item->is_active == $key) selected @endif>{{ $status }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div> -->
+                                <div class="form-group row">
+                                    <label for="is_holiday" class="col-sm-2 col-form-label">Статус дня<sup class="required">*</sup></label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="is_holiday" name="item[is_holiday]">
+                                            @if(isset($statusesDays))
+                                                @foreach($statusesDays as $key => $statusDay)
+                                                    <option value="{{ $key }}" @if(
+                                                    isset($item) && ($item->is_holiday == $key)) selected @endif>{{ $statusDay }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>                     
+                                       
                         </div>
                     </div>
                 </div>                            
