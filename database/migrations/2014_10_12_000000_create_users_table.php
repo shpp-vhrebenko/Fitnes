@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('phone', 100);
             $table->tinyInteger('status_id');
             $table->boolean('is_subscribe')->default(false);
+            $table->date('data_start_course')->nullable();
+            $table->integer('course_id')->unsigned()->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

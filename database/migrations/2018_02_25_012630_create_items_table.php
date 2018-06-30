@@ -19,9 +19,7 @@ class CreateItemsTable extends Migration
             $table->string('image');
             $table->text('text');
             $table->integer('category_id')->unsigned()->default(1);
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->integer('week')->unsigned()->default(1);
-            $table->integer('day')->unsigned()->default(1);
+            $table->foreign('category_id')->references('id')->on('categories');            
             $table->integer('course_id')->unsigned()->default(1);            
             $table->boolean('is_active')->default(true); 
             $table->boolean('is_holiday')->default(false);               
