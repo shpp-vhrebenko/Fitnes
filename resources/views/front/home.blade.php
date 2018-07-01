@@ -91,25 +91,25 @@
                         <p>{{$marathon->price}}</p>
                         <p>{{ Lang::choice('messages.price', $marathon->price) }}</p>
                     </div>
-                    <a class="price-item__button" href="{{route('register_user', $cours->id)}}">
+                    <a class="price-item__button" href="{{route('register_user', $marathon->id)}}">
                         купить курс
                     </a>
                     <p class="price-item__message">Cтарт марафона {{ Carbon\Carbon::parse($marathon->date_start_selection)->format('d.m.Y')}}</p>
                 </div>
                 @endif
-                @if(isset($cours))
+                @if(isset($course))
                 <div class="col-sm-12 col-md-12 col-lg-6 price-item" id="price_curs">
-                    <h3 class="price-item__title">{!! $cours->name !!}</h3>
-                    <p class="price-item__subtitle">ВСЕГО ЗА {{$cours->price}} {{ Lang::choice('messages.price', $cours->price) }} РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
-                    <div class="price-item__icon" style="background-image:url('./uploads/icons/{{$cours->icon}}')">
+                    <h3 class="price-item__title">{!! $course->name !!}</h3>
+                    <p class="price-item__subtitle">ВСЕГО ЗА {{$course->price}} {{ Lang::choice('messages.price', $course->price) }} РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
+                    <div class="price-item__icon" style="background-image:url('./uploads/icons/{{$course->icon}}')">
                         
                     </div>
-                    {!! $cours->description !!}                    
+                    {!! $course->description !!}                    
                     <div class="price-item__val">
-                        <p>{{$cours->price}}</p>
-                        <p>{{ Lang::choice('messages.price', $cours->price) }}</p>
+                        <p>{{$course->price}}</p>
+                        <p>{{ Lang::choice('messages.price', $course->price) }}</p>
                     </div>
-                    <a class="price-item__button" href="{{route('register_user', $cours->id)}}">
+                    <a class="price-item__button" href="{{route('register_user', $course->id)}}">
                         купить курс
                     </a>
                     <p class="price-item__message"></p>

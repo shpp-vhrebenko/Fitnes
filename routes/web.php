@@ -11,20 +11,20 @@
 |
 */
 
-// Route::get('/_debugbar/assets/stylesheets', [
-//     'as' => 'debugbar-css',
-//     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
-// ]);
+/*Route::get('/_debugbar/assets/stylesheets', [
+    'as' => 'debugbar-css',
+    'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
+]);
 
-// Route::get('/_debugbar/assets/javascript', [
-//     'as' => 'debugbar-js',
-//     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@js'
-// ]);
+Route::get('/_debugbar/assets/javascript', [
+    'as' => 'debugbar-js',
+    'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@js'
+]);
 
-// Route::get('/_debugbar/open', [
-//     'as' => 'debugbar-open',
-//     'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
-// ]);
+Route::get('/_debugbar/open', [
+    'as' => 'debugbar-open',
+    'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
+]);*/
 
 
 Auth::routes();
@@ -60,6 +60,8 @@ Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveC
 
     Route::get('/courses','MyAccountController@show_courses')->name('courses_list');   
     Route::post('/courses','MyAccountController@by_course')->name('by_course'); 
+
+    Route::get('/marathon/{id}', 'MyAccountController@marathon_select')->name('marathon_select');
 });
 
 Route::group(['prefix'=>'admin','middleware' => 'isAdmin'], function() {

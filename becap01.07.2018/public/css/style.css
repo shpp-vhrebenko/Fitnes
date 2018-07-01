@@ -1,0 +1,50 @@
+.user-menu.header-drop, .lang.header-drop {
+	display: none;
+}
+
+.scroll {
+	overflow: auto;
+}
+
+.sliding-menu {
+	z-index: 4;
+}
+
+.home-carousel_vertical .home-carousel__stage li {
+	height: 100vh;
+}
+
+.home-carousel__stage {
+    height: 100vh;
+}
+
+.tabs__cnt.is-open {
+	top: 0;
+}
+
+.sliding-menu .tabs:before {
+	display: none;
+}
+
+.scroll::-webkit-scrollbar {
+	width: 3px;
+	margin-right: 3px;
+}
+
+.scroll::-webkit-scrollbar-button {
+	display: none;
+}
+
+.scroll::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+	background: rgba(255,255,255,0.4);
+	border-radius: 5px;
+}
+
+.accordion__head.accordion__head_group, .cart-list,
+.cart-modal {
+	display: none;
+}

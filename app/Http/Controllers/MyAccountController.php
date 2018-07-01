@@ -72,6 +72,17 @@ class MyAccountController extends Controller
         return redirect()->route('show_trainings');       
     }
 
+    public function marathon_select($id)
+    {
+        $course = Courses::find($id);
+        $currentDate = Carbon::now();
+        $dataStartMarathon = Carbon::createFromFormat('Y-m-d H:i:s', $course->date_end_selection); 
+        $diffDays = $currentDate->diffInDays($dataStartMarathon, false);
+        $title = $course->name;
+
+        return view('my_acount/pages/courses/marathon_message', compact(['title', 'course', 'diffDays']));        
+    }
+
     public function show_courses()
     {
         $courses = Courses::where('is_active', true)->get();
@@ -84,12 +95,16 @@ class MyAccountController extends Controller
     {        
         $currentUser = Auth::user(); 
         $course_id = $currentUser->course_id;     
-        $course = $this->courses->find($course_id);
-        $training_schedule = $course->training_schedule;   
-
+        $course = $this->courses->find($course_id);        
+        $training_schedule = $course->training_schedule;
         $currentDate = Carbon::now();       
-        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->data_start_course);       
-        $diffDays = $dataStartCourse->diffInDays($currentDate, false);        
+        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->data_start_course);  
+        $diffDays = $dataStartCourse->diffInDays($currentDate, false);    
+        $diffMinutes = $dataStartCourse->diffInMinutes($currentDate, false);        
+        if($course->type == 'marathon' && ($diffMinutes <= 0)) {
+            return redirect()->route('marathon_select', $course_id);
+        }
+             
         if($diffDays <= $course->period) {
             if($diffDays == 0) {
                 $diffDays = 1;
@@ -116,10 +131,7 @@ class MyAccountController extends Controller
         } else {
             $currentUser->update(['course_id' => 0]);
             return redirect()->route('courses_list');  
-        }
-        
-       
-        
+        }       
 
     }
 

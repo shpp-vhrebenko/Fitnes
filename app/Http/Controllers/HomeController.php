@@ -37,9 +37,9 @@ class HomeController extends Controller
     {
         $instagram = Social::firstOrFail();             
         $settings = Settings::first();  
-        $cours = Courses::where('is_active', true)->where('type', 'cours')->firstOrFail();    
-        $marathon = Courses::where('is_active', true)->where('type', 'marathon')->firstOrFail();    
-        return view('front.home', compact(['settings', 'instagram', 'cours', 'marathon']));
+        $course = Courses::where('is_active', true)->where('type', 'cours')->first();    
+        $marathon = Courses::where('is_active', true)->where('type', 'marathon')->first();    
+        return view('front.home', compact(['settings', 'instagram', 'course', 'marathon']));
     }
 
     public function register_user($id_cours)
@@ -94,7 +94,14 @@ class HomeController extends Controller
             $new_user['phone'] = $user_soul->phone;
             $new_user['email'] = $user_soul->email; 
             $new_user['course_id']  = $user_soul->course_id;
-            $new_user['data_start_course']  = Carbon::now();              
+            $currentCourse = Courses::where(['id' => $user_soul->course_id])->first();
+            if(isset($currentCourse)) {
+                if($currentCourse->type == 'cours') {
+                    $new_user['data_start_course']  = Carbon::now();   
+                } elseif ($currentCourse->type == 'marathon') {
+                    $new_user['data_start_course']  = $currentCourse->date_end_selection;                     
+                } 
+            }                         
             $user = User::create($new_user);  
             $user_soul->delete();      
             $user->roles()->attach([

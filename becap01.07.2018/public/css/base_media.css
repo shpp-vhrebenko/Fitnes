@@ -1,0 +1,24 @@
+/* Extra small devices (phones, 600px and down) .col */
+@media only screen and (max-width: 576px) {
+    .example {background: red;}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) .col-sm*/
+@media only screen and (min-width: 576px) {
+    .example {background: green;}
+}
+
+/* Medium devices (landscape tablets, 768px and up) .col-md*/
+@media only screen and (min-width: 768px) {
+    .example {background: blue;}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) .col-lg*/
+@media only screen and (min-width: 992px) {
+    .example {background: orange;}
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) .col-xl*/
+@media only screen and (min-width: 1200px) {
+    .example {background: pink;}
+}

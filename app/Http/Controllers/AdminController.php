@@ -773,7 +773,7 @@ class AdminController extends Controller
         $cours = $this->courses->find($id);
         $itemsCours = $cours->items();       
         if($itemsCours->count() > 0) {
-            Session::flash('danger', 'Курс не можит быть удалена так как в ней есть тренировки и записи! Необходимо удалить или переназначить все записи в данном курсе или назначить для них другой курс!');
+            Session::flash('danger', 'Курс не можит быть удален так как в нем есть тренировки и записи! Необходимо удалить или переназначить все записи в данном курсе или назначить для них другой курс!');
             return redirect()->route('show_courses');
         }
         if (!isset($cours)) {
@@ -816,11 +816,26 @@ class AdminController extends Controller
         {            
             $item['icon'] = Courses::saveIcon( $image );                 
         }
+
         $item['type'] = 'marathon';
-        $this->courses->create($item);        
+
+        $trainings = [];         
+        for ($i=0; $i < $item['period']; $i++) { 
+            $dayNumber = $i + 1;
+            $trainings['day_'.$dayNumber.''] = [
+                'item_id' => 0,
+                'is_holiday' => false,
+                'image' => 'no-image.png',
+                'title' => ''
+            ];                  
+        }
+
+        $item['training_schedule'] = $trainings;  
+
+        $id_new_course = $this->courses->create($item);       
 
         Session::flash('success', 'Марафон успешно создана!');
-        return redirect()->back();
+        return redirect()->route('course_trainings', ['id_course' => $id_new_course]);
     }
 
     public function edit_marathon($id)

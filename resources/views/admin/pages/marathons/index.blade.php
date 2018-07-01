@@ -40,7 +40,7 @@
                     <th scope="col">Цена</th>             
                     <th scope="col">Начало отбора</th>
                     <th scope="col">Конец отбора</th>
-                    <th scope="col">Продолжительность (дней)</th>
+                    <th scope="col">Период (дней)</th>
                     <th scope="col">Статус</th>
                     <th scope="col">Действия</th>
                 </tr>
@@ -48,8 +48,8 @@
                 <tbody>
                 @foreach($marathons as $marathon)                
                     <tr>
-                        <th scope="row">{{ $marathon->id }}</th>
-                        <td>{{ $marathon->name }}</td> 
+                        <th scope="row">{{$marathon->id }}</th>
+                        <td>{!! $marathon->name !!}</td> 
                         <td>{{ $marathon->price }}</td> 
                         <td>{{ Carbon\Carbon::parse($marathon->date_start_selection)->format('d-m-Y') }}</td>
                         <td>{{ Carbon\Carbon::parse($marathon->date_end_selection)->format('d-m-Y') }}</td>
@@ -60,7 +60,10 @@
                             @endif
                         </td>
                         <td>
-                            <ul class="camotek-form-links">                                  
+                            <ul class="camotek-form-links"> 
+                               <li>
+                                   <a href="{{ route('course_trainings', $marathon->id) }}" class="btn btn-primary" >Тренировки</a> 
+                                </li>                               
                                 <li>                                   
                                     <a href="{{ route('edit_marathon', $marathon->id) }}" class="btn btn-primary fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Редактировать"></a>         
                                 </li>
@@ -68,7 +71,7 @@
                                     <form class="delete" action="{{ route('destroy_marathon', $marathon->id) }}" method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />                                       
-                                        <button class="btn btn-danger fa fa-trash-o" type="submit" data-toggle="tooltip" data-placement="top" title="Удалить"></button>                                   
+                                      <!--   <button class="btn btn-danger fa fa-trash-o" type="submit" data-toggle="tooltip" data-placement="top" title="Удалить"></button> -->                                   
                                     </form>
                                 </li>                                
                             </ul>
