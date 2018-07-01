@@ -41,7 +41,7 @@ Route::group([], function() {
 
 });
 
-Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive'] ], function() {
+Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveCourse'] ], function() {
 
 	Route::get('/', 'MyAccountController@index')->name('my-account');
     // Route trainings
@@ -58,7 +58,7 @@ Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive'] ], functi
     Route::get('/results/new', 'MyAccountController@add_result')->name('add_result');    
     Route::post('/results/new', 'MyAccountController@result_store')->name('result_store');
 
-    Route::get('/courses','MyAccountController@show_courses')->name('show_courses');   
+    Route::get('/courses','MyAccountController@show_courses')->name('courses_list');   
     Route::post('/courses','MyAccountController@by_course')->name('by_course'); 
 });
 

@@ -17,23 +17,21 @@
 			<div class="courses-header__description col-sm-12">{{$description}}</div>
 		</header>
 		<div class="row courses-content">
-			<form action="{{ route('by_course') }}" method="post">
+			<form action="{{ route('by_course') }}" method="post" class="courses-form">
         	{{ csrf_field() }}
-        	 <div class="row">                          
-                <div class="form-group col-sm-6" >                    
-                    <div class="col-sm-6">                            
-                        <select class="form-control" id="week" name="course_id">  
-                            <option value="0">-- Не выбрано --</option>   
-                            @if(isset($courses) && count($courses) > 0)
-                                @foreach($courses as $course)                                        
-                                    <option value="{{ $course->id }}">{{ $course->name }}</option>
-                                @endforeach
-                            @endif        
-                        </select>
-                    </div>                 
-                </div>  
-                <button type="submit" class="btn btn-success pull-right">Выбрать</button>               
-            </div>
+	        	<div class="row">                          
+	                <div class="form-group col-sm-12" >                                           
+	                    <select class="form-control" id="week" name="course_id">  
+	                        <option value="0">-- Не выбрано --</option>   
+	                        @if(isset($courses) && count($courses) > 0)
+	                            @foreach($courses as $course)                                        
+	                                <option value="{{ $course->id }}">{{ $course->name }}</option>
+	                            @endforeach
+	                        @endif        
+	                    </select>                                 
+	                </div>         
+	            </div>
+	            <button type="submit" class="btn btn-success">Выбрать</button> 
         	</form>
 		</div> 
 	</div>	  

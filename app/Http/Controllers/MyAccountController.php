@@ -47,7 +47,17 @@ class MyAccountController extends Controller
         $this->results = $resultsRepository;
         $this->users = $usersRepository;
         $this->courses = $coursesRepository;
-        $categories = $this->categories->all();
+        $currentUser = Auth::user();    
+        if(Auth::user()) {
+            if(Auth::user()->course_id) {
+                $categories = $this->categories->all();
+            } else {
+                $categories = null;
+            }
+        } else {
+            $categories = null;
+        }
+              
         $settings = Settings::first();      
         view()->share(compact([ 'settings', 'categories']));        
     }
@@ -58,15 +68,8 @@ class MyAccountController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $currentUser = Auth::user();    
-        if($currentUser->course_id != 0) {
-            return redirect()->route('show_trainings');
-        } else {
-            $title = 'Купите Курс';
-            return view('my_acount.home', compact(['title']));
-        } 
-        
+    {  
+        return redirect()->route('show_trainings');       
     }
 
     public function show_courses()
@@ -80,14 +83,17 @@ class MyAccountController extends Controller
     public function show_trainings()
     {        
         $currentUser = Auth::user(); 
-        $course_id = $currentUser->course_id;
-        if($course_id != 0) {
-            $course = $this->courses->find($course_id);
-            $training_schedule = $course->training_schedule;   
+        $course_id = $currentUser->course_id;     
+        $course = $this->courses->find($course_id);
+        $training_schedule = $course->training_schedule;   
 
-            $currentDate = Carbon::now();       
-            $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->data_start_course);       
-            $diffDays = $dataStartCourse->diffInDays($currentDate, false);
+        $currentDate = Carbon::now();       
+        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->data_start_course);       
+        $diffDays = $dataStartCourse->diffInDays($currentDate, false);        
+        if($diffDays <= $course->period) {
+            if($diffDays == 0) {
+                $diffDays = 1;
+            }
             $category = Category::where('id', 1)->firstOrFail(); 
             $items = $category->items()->where('course_id',$course_id)->get();
 
@@ -108,8 +114,11 @@ class MyAccountController extends Controller
             $description = 'Выберите интересующий вас день тренировки';
             return view('my_acount/pages/trainings/trainings', compact(['trainingItems', 'title', 'description']));
         } else {
-            return redirect()->route('show_courses');
+            $currentUser->update(['course_id' => 0]);
+            return redirect()->route('courses_list');  
         }
+        
+       
         
 
     }
