@@ -18,6 +18,7 @@
 		</header>
 		<div class="row category-content">
 			@foreach($trainingItems as $item)
+				@if (isset($item))
 				<div class="col-md-4 col-sm-12 item">
 					
 					<a class="item__image" href="{{route('show_training', ['id' => $item->id])}}" style="background-image: url('/uploads/items/{{$item->image}}')">			
@@ -27,6 +28,7 @@
 						<a href="{{route('show_training', ['slug' => $item->slug])}}">День {{$item->day}} | Неделя {{ceil($item->day/7)}}</a>
 					</div>
 				</div>
+				@endif
 			@endforeach
 		</div> 
 	</div>	  

@@ -2,11 +2,13 @@
 
 @section('content')
     <h1>{{ $title }}</h1>
-    @if (Session::has('success'))
-        <div class="alert alert-success" role="alert">
-            {{ Session::get('success') }}
-        </div>
-    @endif
+    <div class="flash-message">
+      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if(Session::has($msg))
+        <p class="alert alert-{{ $msg }}">{{ Session::get($msg) }}</p>
+        @endif
+      @endforeach
+    </div>  
     @if($errors)
         @foreach ($errors->all() as $error)
             <div class="alert alert-danger" role="alert">
@@ -83,7 +85,7 @@
                         </div>
                         <hr style="width: 100%;">
                     </div> 
-                    <div id="item_course" class="row d-none">                          
+                    <div id="item_course" class="row">                          
                         <div class="form-group col-sm-6" >
                             <label for="week" class="col-sm-12 col-form-label">Курс<sup class="required">*</sup></label>
                             <div class="col-sm-12">                            
@@ -149,7 +151,8 @@
           return confirm('Вы действительно хотите отменить?');
         });
 
-        $( "#category_id" ).change(function() {
+        /*$( "#category_id" ).change(function() {
+            console.log('hi');
             var id_category = $( "#category_id option:selected" ).val();
             var $itemCourse = $('#item_course');            
             if(id_category == 1) {
@@ -164,9 +167,9 @@
                 // display course select
                 show_box($itemCourse);               
             }
-        });
+        });*/
 
-        function show_box($item) {
+       /* function show_box($item) {
             $item.addClass('d-flex');
             $item.removeClass('d-none');
         }
@@ -174,7 +177,7 @@
         function hide_box($item) {
             $item.addClass('d-none');
             $item.removeClass('d-flex');
-        }
+        }*/
     });
     </script>
 @endsection

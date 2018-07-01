@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSettingsRequest;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\EditClientRequest;
 use App\Http\Requests\ItemRequest;
+use App\Http\Requests\ItemUpdateRequest;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\StoreCoursRequest;
 use App\Http\Requests\StoreMarathonsRequest;
@@ -434,7 +435,7 @@ class AdminController extends Controller
         return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'courses']));
     }
 
-      public function items_store(ItemRequest $request)
+    public function items_store(ItemRequest $request)
     {
 
         $item = $request->get('item'); 
@@ -444,7 +445,7 @@ class AdminController extends Controller
             $item['image'] = Item::saveImage( $image );                 
         }        
 
-        $newItem = $this->items->create($item);       
+        $this->items->create($item);       
 
         Session::flash('success', 'Запись успешно создана!');
         return redirect()->back();
@@ -460,15 +461,12 @@ class AdminController extends Controller
         $title = 'Редактирование Записи';
         $categories = $this->categories->all(); 
         $statuses = Item::$ItemStatuses;
-        $statusesDays = Item::$ItemTrainingStatuses;
-        $trainingSettings = Item::$TrainingSettings;
-        $countWeek = $trainingSettings['maxWeek'];
-        $countDay = $trainingSettings['maxDay'];
+        $courses = $this->courses->findWithParams(['is_active' => true])->get();        
 
-        return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'item','statusesDays', 'countWeek', 'countDay']));
+        return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'item', 'courses']));
     }
 
-    public function item_update(ItemRequest $request, $id)
+    public function item_update(ItemUpdateRequest $request, $id)
     {       
 
         $item = $this->items->find($id);
@@ -476,17 +474,37 @@ class AdminController extends Controller
         {
             return abort('404');
         }
-        $item->update($request->get('item'));
-
-        if( $image = $request->file('item.image') )
-        {
-            File::delete( public_path('uploads/items/'. $item->image ));
-            $newImage = Item::saveImage( $image );
-            $item->update(['image' => $newImage]);       
-        }        
-
-        Session::flash('success', 'Запись успешно изменена!');
-        return redirect()->back();
+        $newItem = $request->get('item');
+        $searchItem = $this->items->findWithParams(['title' => $newItem['title']])->first();
+       
+        if(isset($searchItem)) {
+            if($searchItem->id == $id) {
+                $item->update($newItem);
+                if( $image = $request->file('item.image') )
+                {
+                    File::delete( public_path('uploads/items/'. $item->image ));
+                    $newImage = Item::saveImage( $image );
+                    $item->update(['image' => $newImage]);       
+                }
+                Session::flash('success', 'Запись успешно изменена!');
+                return redirect()->back();
+            } else {
+                Session::flash('danger', 'Запись с таким Названием уже есть!');
+                return redirect()->back();
+            }
+        } else {
+            $newItem['slug'] = str_slug($newItem['title']);
+            $item->update($newItem);
+            if( $image = $request->file('item.image') )
+            {
+                File::delete( public_path('uploads/items/'. $item->image ));
+                $newImage = Item::saveImage( $image );
+                $item->update(['image' => $newImage]);       
+            }
+            Session::flash('success', 'Запись успешно изменена!');
+            return redirect()->back();
+        }
+        
     }
 
     public function item_destroy($id)
@@ -592,9 +610,11 @@ class AdminController extends Controller
 
     public function training_store(ItemRequest $request)
     {
-        $numberDay = $request->get('numberDay');       
+              
         $item = $request->get('item'); 
+        $numberDay = $request->get('numberDay'); 
         $item['slug'] = str_slug($item['title']);
+        $item['number_day'] = $numberDay; 
         
         $course = $this->courses->find($item['course_id']);
         $training_schedule = $course->training_schedule;
@@ -608,7 +628,9 @@ class AdminController extends Controller
         }  
 
         // default value for item property is_active
-        $item['is_active'] = true;   
+        $item['is_active'] = true; 
+
+       
 
         $newItem = $this->items->create($item);  
 
@@ -633,52 +655,82 @@ class AdminController extends Controller
         if (!isset($item))
         {
             return abort(404);
-        }
-      
-        $course = $this->courses->find($item->course_id);
-        $training_schedule = $course->training_schedule;
-        $numberDay = '';
-        foreach ($training_schedule as $key => $value) {
-            if($value['item_id'] == $id) {
-                $numberDay = str_replace('day_','',$key);
-            }
-        }
+        }         
+       
         $title = 'Редактирование тренировки';        
         $statuses = Item::$ItemStatuses;  
         $statusesDays = Item::$ItemTrainingStatuses;   
+        $numberDay = $item->number_day;
         
         return view('admin/pages/courses/new_trainings', compact(['title', 'statuses', 'item', 'statusesDays', 'numberDay']));
     }
 
-    public function training_update(ItemRequest $request, $id) {
+    public function training_update(ItemUpdateRequest $request, $id) {
         $item = $this->items->find($id);
         $numberDay = $request->get('numberDay');
         if (!isset($item))
         {
             return abort('404');
         }
+
+        $newItem = $request->get('item');
+        $searchItem = $this->items->findWithParams(['title' => $newItem['title']])->first();
+
         $course = $this->courses->find($item->course_id);
         $training_schedule = $course->training_schedule;
-        $item->update($request->get('item'));
 
-        if( $image = $request->file('item.image') )
-        {
-            File::delete( public_path('uploads/items/'. $item->image ));
-            $newImage = Item::saveImage( $image );
-            $item->update(['image' => $newImage]);       
-        } 
+        if(isset($searchItem)) {
+            if($searchItem->id == $id) {                
+                
+                $item->update($newItem);
 
-        $training_schedule['day_'.$numberDay] = [
-            'item_id' => $item->id,
-            'is_holiday' => $item->is_holiday,  
-            'image' => $item->image,   
-            'title' => $item->title       
-        ];    
+                if( $image = $request->file('item.image') )
+                {
+                    File::delete( public_path('uploads/items/'. $item->image ));
+                    $newImage = Item::saveImage( $image );
+                    $item->update(['image' => $newImage]);       
+                } 
 
-        $course->update(['training_schedule' => $training_schedule]); 
+                $training_schedule['day_'.$numberDay] = [
+                    'item_id' => $item->id,
+                    'is_holiday' => $item->is_holiday,  
+                    'image' => $item->image,   
+                    'title' => $item->title       
+                ];    
 
-        Session::flash('success', 'Тренировка успешно изменена!');
-        return redirect()->route('course_trainings', ['id_course' => $item->course_id]); 
+                $course->update(['training_schedule' => $training_schedule]); 
+
+                Session::flash('success', 'Тренировка успешно изменена!');
+               /* return redirect()->route('course_trainings', ['id_course' => $item->course_id]); */
+                return redirect()->back();
+            } else {
+                Session::flash('danger', 'Тренировка с таким Названием уже есть!');
+                return redirect()->back();
+            }
+        } else {         
+            $newItem['slug'] = str_slug($newItem['title']);
+            $item->update($newItem);
+
+            if( $image = $request->file('item.image') )
+            {
+                File::delete( public_path('uploads/items/'. $item->image ));
+                $newImage = Item::saveImage( $image );
+                $item->update(['image' => $newImage]);       
+            }
+
+            $training_schedule['day_'.$numberDay] = [
+                'item_id' => $item->id,
+                'is_holiday' => $item->is_holiday,  
+                'image' => $item->image,   
+                'title' => $item->title       
+            ];    
+
+            $course->update(['training_schedule' => $training_schedule]); 
+
+            Session::flash('success', 'Тренировка успешно изменена!');
+           /* return redirect()->route('course_trainings', ['id_course' => $item->course_id]); */
+            return redirect()->back();
+        }      
     }
 
 

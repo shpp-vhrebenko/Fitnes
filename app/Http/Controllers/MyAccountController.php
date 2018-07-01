@@ -69,36 +69,48 @@ class MyAccountController extends Controller
         
     }
 
+    public function show_courses()
+    {
+        $courses = Courses::where('is_active', true)->get();
+        $title = 'Курсы';
+        $description = 'У Вас закончился абонемент на текущий Курс. Вам необходимо оплатить  новый Курс или Марафон.';
+        return view('my_acount/pages/courses/courses', compact(['title', 'description', 'courses']));
+    }
+
     public function show_trainings()
     {        
         $currentUser = Auth::user(); 
         $course_id = $currentUser->course_id;
-        $course = $this->courses->find($course_id);
-        $training_schedule = $course->training_schedule;   
+        if($course_id != 0) {
+            $course = $this->courses->find($course_id);
+            $training_schedule = $course->training_schedule;   
 
-        $currentDate = Carbon::now();       
-        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->data_start_course);       
-        $diffDays = $dataStartCourse->diffInDays($currentDate, false);       
-        
-        $category = Category::where('id', 1)->firstOrFail(); 
-        $items = $category->items()->where('course_id',$course_id)->get();
+            $currentDate = Carbon::now();       
+            $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->data_start_course);       
+            $diffDays = $dataStartCourse->diffInDays($currentDate, false);
+            $category = Category::where('id', 1)->firstOrFail(); 
+            $items = $category->items()->where('course_id',$course_id)->get();
 
-        $trainingItems = [];
-        for ($i=0; $i < $diffDays; $i++) {
-            $curDay = $i + 1;
-            $curTraining = $training_schedule['day_'.$curDay];
-            $curItem = null;
-            foreach ($items as $key => $value) {
-                if($value['id'] == $curTraining['item_id']) {
-                    $curItem = $items[$key];
-                    $curItem['day'] = $curDay;
+            $trainingItems = [];
+            for ($i=0; $i < $diffDays; $i++) {
+                $curDay = $i + 1;
+                $curTraining = $training_schedule['day_'.$curDay];
+                $curItem = null;
+                foreach ($items as $key => $value) {
+                    if($value['id'] == $curTraining['item_id']) {
+                        $curItem = $items[$key];
+                        $curItem['day'] = $curDay;
+                    }
                 }
-            }
-           array_push( $trainingItems,$curItem);
+               array_push( $trainingItems,$curItem);
+            }        
+            $title = 'Тренировки';
+            $description = 'Выберите интересующий вас день тренировки';
+            return view('my_acount/pages/trainings/trainings', compact(['trainingItems', 'title', 'description']));
+        } else {
+            return redirect()->route('show_courses');
         }
-        $title = 'Тренировки';
-        $description = 'Выберите интересующий вас день тренировки';
-        return view('my_acount/pages/trainings/trainings', compact(['trainingItems', 'title', 'description']));
+        
 
     }
 

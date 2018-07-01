@@ -19,6 +19,7 @@ class Item extends Model
                 'course_id',
                 'is_active',
                 'is_holiday',
+                'number_day',
                 'slug'
             ];
 

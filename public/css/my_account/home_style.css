@@ -324,3 +324,26 @@
     margin-bottom: .7rem;
 }
 /* END RESULTS */
+
+/* COURSES */
+
+/* ITEMS */
+.courses-header,
+.courses-content {
+    padding: 2rem 0;
+}
+
+.courses-header__title {    
+    font-family: "HelveticaLight";
+    font-size: 1.75rem;
+    margin-bottom: 40px;
+    color: #fff;
+}
+
+.courses-header__description {    
+    color: #f3ccf8;
+    font-size: 1rem;
+    font-family: "HelveticaLight";
+    letter-spacing: 3px;
+}
+/* END COURSES */
