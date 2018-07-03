@@ -39,13 +39,27 @@ class HomeController extends Controller
         $instagram = Social::firstOrFail();             
         $settings = Settings::first();  
         $course = Courses::where('is_active', true)->where('type', 'cours')->first();    
-        $marathon = Courses::where('is_active', true)->where('type', 'marathon')->first();    
-        return view('front.home', compact(['settings', 'instagram', 'course', 'marathon', 'monthes']));
+        $marathon = Courses::where('is_active', true)->where('type', 'marathon')->first(); 
+        $marathon_message = '';        
+         
+        if(isset($marathon)) {
+            $currentDate = Carbon::now();  
+            $dataStarttMarathon = Carbon::createFromFormat('Y-m-d', $marathon->date_end_selection);
+            $diffDays = $currentDate->diffInDays($dataStarttMarathon, false);            
+            if($diffDays > 0) {
+                $dt = Carbon::parse($marathon->date_end_selection);
+                $marathon_message = 'Cтарт марафона ' . $dt->day ." ".$monthes[$dt->month];
+            }            
+        }  
+        
+        
+        return view('front.home', compact(['settings', 'instagram', 'course', 'marathon' ,'marathon_message']));
+
     }
 
-    public function register_user($id_cours)
+    public function register_user($slug)
     {      
-        $course = Courses::where('id', $id_cours)->firstOrFail();  
+        $course = Courses::where('slug', $slug)->firstOrFail();  
         return view('auth.register', compact(['course']));
     }
 
@@ -63,13 +77,13 @@ class HomeController extends Controller
         }       
     }
 
-    public function user_store(Request $request, $id) {
-        
+    public function user_store(Request $request, $slug) {
+        $course = Courses::where('slug', $slug)->first();         
         $newSoulUser = UserSoul::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),            
             'phone' => $request->get('phone'),
-            'course_id' => $id           
+            'course_id' => $course->id,           
         ]);       
         $request->session()->put('id_soul_user', $newSoulUser->id);
 

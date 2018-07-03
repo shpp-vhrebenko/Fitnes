@@ -19,7 +19,7 @@
                     <div class="register-card__header">ВАШИ ДАННЫЕ</div>
 
                     <div class="login-card__body">
-                        <form method="POST" action="{{ route('store_user', $course->id) }}" class="form-login" id="register-form">
+                        <form method="POST" action="{{ route('store_user', $course->slug) }}" class="form-login" id="register-form">
                             @csrf
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-8">

@@ -78,7 +78,7 @@ class MyAccountController extends Controller
     {
         $courses = Courses::where('is_active', true)->get();
         $title = 'Курсы';
-        $description = 'У Вас закончился абонемент на текущий Курс. Вам необходимо оплатить  новый Курс или Марафон.';
+        $description = 'Закончился текущий Курс. Вам необходимо оплатить  новый Курс или Марафон.';
         return view('my_acount/pages/courses/courses', compact(['title', 'description', 'courses']));
     }
 
@@ -93,11 +93,11 @@ class MyAccountController extends Controller
         $diffDays = $dataStartCourse->diffInDays($currentDate, false);    
         
 
-        if($course->type == 'marathon') {
-            $dataStartSelect = Carbon::createFromFormat('Y-m-d H:i:s', $course->date_start_selection);
-            $diffMinutesStartCourse = $currentDate->diffInMinutes($dataStartCourse, false);      
-            $diffMinutesStartSelect = $currentDate->diffInMinutes($dataStartSelect, false);
+        if($course->type == 'marathon') {            
+            $diffMinutesStartCourse = $currentDate->diffInMinutes($dataStartCourse, false); 
 
+            /*$dataStartSelect = Carbon::createFromFormat('Y-m-d', $course->date_start_selection);
+            $diffMinutesStartSelect = $currentDate->diffInMinutes($dataStartSelect, false);
             if($diffMinutesStartSelect > 0 && $diffMinutesStartSelect > 1140) {
                 $diffDaysStartSelectMarathon = $currentDate->diffInDays($dataStartSelect, false);
                 $title = $course->name;
@@ -112,7 +112,7 @@ class MyAccountController extends Controller
                 $message = 'До начала отбора на марафон осталось '. $diffHoursStartSelectMarathon." ".$hoursCount ;
                 
                 return view('my_acount/pages/courses/marathon_message')->with(array('title' => $title, 'message' => $message, 'course' => $course)); 
-            } 
+            } */
 
             if($diffMinutesStartCourse > 0 && $diffMinutesStartCourse > 1140) {
                 $diffDaysStartMarathon = $currentDate->diffInDays($dataStartCourse, false); 

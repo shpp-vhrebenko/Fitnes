@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class StoreCoursRequest extends FormRequest
+class CourseUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class StoreCoursRequest extends FormRequest
     public function rules()
     {
         return [
-            'item.name' => 'required|unique:courses,name',
+            'item.name' => 'required',
             'item.description' => 'required',
             'item.price' => 'required|numeric',            
             'item.period' => 'required|numeric',
@@ -35,8 +35,7 @@ class StoreCoursRequest extends FormRequest
 
     public function messages() {
         return [
-            'item.name.required' => 'Необходимо ввести Название Курса',
-            'item.name.unique' => 'Курс с таким названием уже есть',
+            'item.name.required' => 'Необходимо ввести Название Курса',            
             'item.description.required' => 'Необходимо ввести Содержание Курса',
             'item.price.required' => 'Необходимо ввести цену Курса',
             'item.period.required' => 'Необходимо ввести Продолжительность Курса',

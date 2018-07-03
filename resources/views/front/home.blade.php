@@ -91,11 +91,10 @@
                         <p>{{$marathon->price}}</p>
                         <p>{{ Lang::choice('messages.price', $marathon->price) }}</p>
                     </div>
-                    <a class="price-item__button" href="{{route('register_user', $marathon->id)}}">
+                    <a class="price-item__button" href="{{route('register_user', $marathon->slug)}}">
                         купить курс
-                    </a>
-                    {{ $dt = Carbon\Carbon::parse($marathon->date_start_selection)}}
-                    <p class="price-item__message">Cтарт марафона {{$dt->day}} {{$monthes[$dt->month]}}</p>
+                    </a>                    
+                    <p class="price-item__message">{{$marathon_message}}</p>
                 </div>
                 @endif
                 @if(isset($course))
@@ -110,7 +109,7 @@
                         <p>{{$course->price}}</p>
                         <p>{{ Lang::choice('messages.price', $course->price) }}</p>
                     </div>
-                    <a class="price-item__button" href="{{route('register_user', $course->id)}}">
+                    <a class="price-item__button" href="{{route('register_user', $course->slug)}}">
                         купить курс
                     </a>
                     <p class="price-item__message"></p>

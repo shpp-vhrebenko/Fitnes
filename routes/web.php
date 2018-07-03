@@ -31,8 +31,8 @@ Auth::routes();
 
 Route::group([], function() {
 	Route::get('/', 'HomeController@index')->name('index');
-    Route::get('/register/{id}', 'HomeController@register_user')->name('register_user');
-    Route::post('/register/store/{id}', 'HomeController@user_store')->name('store_user');
+    Route::get('/register/{slug}', 'HomeController@register_user')->name('register_user');
+    Route::post('/register/store/{slug}', 'HomeController@user_store')->name('store_user');
     Route::post('/register/users', 'HomeController@validate_email_user')->name('validate_email_user');  
     Route::get('/oplata', 'HomeController@oplata')->name('oplata');
     Route::post('/oplata', 'HomeController@oplata_course')->name('oplata_course');
