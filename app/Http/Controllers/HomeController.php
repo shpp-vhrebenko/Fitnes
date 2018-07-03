@@ -11,7 +11,9 @@ use App\Marathons;
 use App\User;
 use App\UserSoul;
 use Session;
+use Mail;
 use Carbon\Carbon;
+
 
 class HomeController extends Controller
 {
@@ -55,6 +57,17 @@ class HomeController extends Controller
         
         return view('front.home', compact(['settings', 'instagram', 'course', 'marathon' ,'marathon_message']));
 
+    }
+
+    public function test_message()
+    {
+        Mail::send('emails.welcome',array('body' =>'body', 'title'=>'title'), function($message)
+        {
+            $message->from('test@gmail.com', 'vova');
+
+            $message->to('vhrebenko@gmail.com');
+
+        });
     }
 
     public function register_user($slug)

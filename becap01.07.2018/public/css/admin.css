@@ -94,15 +94,83 @@ select.form-control{
 
 .btn-close {
     text-align: right;
-    line-height: .8;
-   /*  display: block;
-   position: absolute;
-   padding: 1rem;
-   top: 0;
-   right: 0;
-   float: none; */
+    line-height: .8;   
 }
 
 .card {
     margin-bottom: 1rem;
+}
+
+.trainings {
+
+}
+
+.trainings__item {   
+    position: relative;
+    height: 200px;
+    background-position: center center;
+    background-size: cover;
+}
+
+.btn-add-training,
+.btn-edit-training {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.trainings__header {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.trainings__header h4 {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    padding: .5rem 0 0 .5rem;
+    margin-bottom: .5rem;    
+}
+
+.trainings__header p {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    padding-left: .5rem;   
+}
+
+.trainings-status {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+.trainings__item-holiday {
+    background-color: rgba(215, 44, 44, 0.3);
+}
+
+.trainings__item-work {
+    background-color: rgba(0, 148, 101, 0.3);
+}
+
+.trainings__item-empty {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-back {
+    margin-left: 1rem;
+    font-size: 2rem;
+}
+
+.btn-back:hover {
+    cursor: pointer;
+    text-decoration: none;
 }

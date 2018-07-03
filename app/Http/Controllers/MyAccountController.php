@@ -15,6 +15,7 @@ use App\Repositories\CoursesRepositoryInterface;
 
 use Auth;
 use Lang;
+use Mail;
 
 use Carbon\Carbon;
 
@@ -69,7 +70,12 @@ class MyAccountController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
+    {     
+        Mail::send('emails.welcome', [], function ($m) {
+            $m->from('sender@test.com', 'Sender');
+            $m->to('receiver@test.com', 'Receiver')->subject('Тестовое письмо с HTML');
+            $m->cc('copy@test.com', '');
+        });
         return redirect()->route('show_trainings');       
     }
 

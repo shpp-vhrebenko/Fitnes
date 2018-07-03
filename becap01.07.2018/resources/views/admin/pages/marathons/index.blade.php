@@ -14,7 +14,7 @@
       @endforeach
     </div> 
 
-    <div class="jumbotron jumbotron-fluid">
+    <!-- <div class="jumbotron jumbotron-fluid">
         <form class="form" action="{{ route('marathons_filter') }}" method="get">
             <div class="form-row">
                 <div class="col-3">
@@ -25,7 +25,7 @@
             <button type="submit" class="btn btn-primary mt-3 mb-2">Применить фильтр</button>
             <a href="{{ route('show_marathons') }}" class="btn btn-danger mt-3 mb-2 ml-3">Отменить фильтр</a>
         </form>
-    </div>
+    </div> -->
 
     @if(isset($marathons) && $marathons->count() > 0)
 
@@ -62,13 +62,13 @@
                         <td>
                             <ul class="camotek-form-links">                                  
                                 <li>                                   
-                                    <a href="{{ route('edit_marathon', $marathon->id) }}" class="btn btn-primary">Редактировать</a>         
+                                    <a href="{{ route('edit_marathon', $marathon->id) }}" class="btn btn-primary fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Редактировать"></a>         
                                 </li>
                                 <li>
                                     <form class="delete" action="{{ route('destroy_marathon', $marathon->id) }}" method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />                                       
-                                        <input class="btn btn-danger" type="submit" value="Удалить">                                       
+                                        <button class="btn btn-danger fa fa-trash-o" type="submit" data-toggle="tooltip" data-placement="top" title="Удалить"></button>                                   
                                     </form>
                                 </li>                                
                             </ul>

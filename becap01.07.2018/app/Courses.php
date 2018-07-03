@@ -18,7 +18,12 @@ class Courses extends Model
         'type',
         'period', 
         'icon', 
-        'is_active'       
+        'is_active',
+        'training_schedule',       
+    ];
+
+    protected $casts = [
+        'training_schedule' => 'array'
     ];
 
     public static $coursStatuses = [ 

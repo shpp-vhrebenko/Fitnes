@@ -25,7 +25,7 @@
 	                        <option value="0">-- Не выбрано --</option>   
 	                        @if(isset($courses) && count($courses) > 0)
 	                            @foreach($courses as $course)                                        
-	                                <option value="{{ $course->slug }}">{!! $course->name !!}</option>
+	                                <option value="{{ $course->id }}">{{ $course->name }}</option>
 	                            @endforeach
 	                        @endif        
 	                    </select>                                 

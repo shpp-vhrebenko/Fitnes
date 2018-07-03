@@ -23,7 +23,8 @@ class CreateCoursesTable extends Migration
             $table->date('date_end_selection')->nullable();
             $table->string('type')->default('cours');
             $table->integer('period');
-            $table->boolean('is_active')->default(true);       
+            $table->string('slug')->nullable(); 
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

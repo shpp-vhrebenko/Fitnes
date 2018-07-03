@@ -2,11 +2,13 @@
 
 @section('content')
     <h1>{{ $title }}</h1>
-    @if (Session::has('success'))
-        <div class="alert alert-success" role="alert">
-            {{ Session::get('success') }}
-        </div>
-    @endif
+    <div class="flash-message">
+      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if(Session::has($msg))
+        <p class="alert alert-{{ $msg }}">{{ Session::get($msg) }}</p>
+        @endif
+      @endforeach
+    </div>  
     @if($errors)
         @foreach ($errors->all() as $error)
             <div class="alert alert-danger" role="alert">
@@ -73,15 +75,17 @@
                             <select class="form-control" id="category_id" name="item[category_id]" id="category_id">
                                 <option value="0">-- Не выбрано --</option>
                                 @if(isset($categories) && count($categories) > 0)
-                                    @foreach($categories as $category)                                        
-                                        <option value="{{ $category->id }}" @if(isset($item->category_id) && ($item->category_id == $category->id)) selected @endif>{{ $category->name }}</option>
+                                    @foreach($categories as $category) 
+                                        @if($category->id != 1)
+                                            <option value="{{ $category->id }}" @if(isset($item->category_id) && ($item->category_id == $category->id)) selected @endif>{{ $category->name }}</option>
+                                        @endif                                 
                                     @endforeach
                                 @endif
                             </select>
                         </div>
                         <hr style="width: 100%;">
                     </div> 
-                    <div id="item_course" class="row d-none">                          
+                    <div id="item_course" class="row">                          
                         <div class="form-group col-sm-6" >
                             <label for="week" class="col-sm-12 col-form-label">Курс<sup class="required">*</sup></label>
                             <div class="col-sm-12">                            
@@ -95,53 +99,7 @@
                                 </select>
                             </div>                 
                         </div>                         
-                    </div> 
-                    <div id="item_training" class="row d-none" >                   
-                        <div class="form-group col-sm-4" >
-                            <label for="week" class="col-sm-12 col-form-label">Неделя<sup class="required">*</sup></label>
-                            <div class="col-sm-12">                            
-                                <select class="form-control" id="week" name="item[week]">
-                                    @for($i = 0; $i < $countWeek; $i++) 
-                                        {{ $numberWeek = $i + 1 }}       
-                                        <option value="{{$numberWeek}}"
-                                        @if(isset($item->week) && ($item->week == $numberWeek)) 
-                                            selected 
-                                        @endif>
-                                        {{$numberWeek}}
-                                        </option>                               
-                                     @endfor
-                                </select>
-                            </div>                 
-                        </div>
-                        <div class="form-group col-sm-4" >
-                            <label for="day" class="col-sm-12 col-form-label">День<sup class="required">*</sup></label>
-                            <div class="col-sm-12">                            
-                                <select class="form-control" id="day" name="item[day]">
-                                    @for($i = 0; $i < $countDay; $i++) 
-                                        {{ $numberDay = $i + 1 }}       
-                                        <option value="{{$numberDay}}"
-                                        @if(isset($item->day) && ($item->day == $numberDay)) 
-                                            selected 
-                                        @endif>
-                                        {{$numberDay}}
-                                        </option>                               
-                                     @endfor
-                                </select>
-                            </div>                 
-                        </div> 
-                        <div class="form-group row col-sm-4">
-                            <label for="is_holiday" class="col-sm-12 col-form-label">Статус дня<sup class="required">*</sup></label>
-                            <div class="col-sm-12">
-                                <select class="form-control" id="is_holiday" name="item[is_holiday]">                                    
-                                    @if(isset($statusesDays))
-                                        @foreach($statusesDays as $key => $statusDay)
-                                            <option value="{{ $key }}" @if(isset($item) && ($item->is_holiday == $key)) dd($item->is_holiday) @endif>{{ $statusDay }}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>  
-                    </div>                    
+                    </div>                                 
                 </div>               
                 <div class="tab-pane fade" id="media" role="tabpanel" aria-labelledby="relations2-tab">
                     <div class="form-group row">
@@ -193,30 +151,25 @@
           return confirm('Вы действительно хотите отменить?');
         });
 
-        $( "#category_id" ).change(function() {
+        /*$( "#category_id" ).change(function() {
+            console.log('hi');
             var id_category = $( "#category_id option:selected" ).val();
-            var $itemCourse = $('#item_course');
-            var $itemTraining = $('#item_training');
+            var $itemCourse = $('#item_course');            
             if(id_category == 1) {
                 // display course select
                 show_box($itemCourse);                
                 // display training settings
-                show_box($itemTraining);  
+              
             } else if (id_category == 0) {
                 hide_box($itemCourse); 
-                hide_box($itemTraining); 
+              
             } else {
                 // display course select
-                show_box($itemCourse); 
-
-                // hide training settings
-                if(!$('#item_training').hasClass('d-none')) {
-                    hide_box($itemTraining); 
-                }
+                show_box($itemCourse);               
             }
-        });
+        });*/
 
-        function show_box($item) {
+       /* function show_box($item) {
             $item.addClass('d-flex');
             $item.removeClass('d-none');
         }
@@ -224,7 +177,7 @@
         function hide_box($item) {
             $item.addClass('d-none');
             $item.removeClass('d-flex');
-        }
+        }*/
     });
     </script>
 @endsection

@@ -11,7 +11,7 @@
 |
 */
 
-/*Route::get('/_debugbar/assets/stylesheets', [
+Route::get('/_debugbar/assets/stylesheets', [
     'as' => 'debugbar-css',
     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
 ]);
@@ -24,7 +24,7 @@ Route::get('/_debugbar/assets/javascript', [
 Route::get('/_debugbar/open', [
     'as' => 'debugbar-open',
     'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
-]);*/
+]);
 
 
 Auth::routes();
@@ -36,8 +36,9 @@ Route::group([], function() {
     Route::post('/register/users', 'HomeController@validate_email_user')->name('validate_email_user');  
     Route::get('/oplata', 'HomeController@oplata')->name('oplata');
     Route::post('/oplata', 'HomeController@oplata_course')->name('oplata_course');
-    Route::get('oplata/success', 'HomeController@success_oplata')->name('success_oplata');
-    Route::get('oplata/error', 'HomeController@error_oplata')->name('error_oplata');
+    Route::get('/oplata/success', 'HomeController@success_oplata')->name('success_oplata');
+    Route::get('/oplata/error', 'HomeController@error_oplata')->name('error_oplata');
+    Route::get('/test_message', 'HomeController@test_message')->name('test_message');
 
 });
 

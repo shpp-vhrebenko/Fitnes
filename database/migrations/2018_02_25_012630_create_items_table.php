@@ -22,7 +22,8 @@ class CreateItemsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');            
             $table->integer('course_id')->unsigned()->default(1);            
             $table->boolean('is_active')->default(true); 
-            $table->boolean('is_holiday')->default(false);               
+            $table->boolean('is_holiday')->default(false); 
+            $table->string('slug')->nullable();             
             $table->timestamps();
         });        
     }

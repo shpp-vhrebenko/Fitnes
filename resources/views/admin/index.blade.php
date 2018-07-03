@@ -22,21 +22,7 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="camotek-admin-index-modules">
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        Google Аналитика
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title">код гугла</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </section>    
     <section class="camotek-admin-index-modules">
         <div class="row">
             <div class="col">

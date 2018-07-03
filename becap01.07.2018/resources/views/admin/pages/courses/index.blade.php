@@ -14,7 +14,7 @@
       @endforeach
     </div> 
 
-    <div class="jumbotron jumbotron-fluid">
+    <!-- <div class="jumbotron jumbotron-fluid">
         <form class="form" action="{{ route('courses_filter') }}" method="get">
             <div class="form-row">
                 <div class="col-3">
@@ -25,7 +25,7 @@
             <button type="submit" class="btn btn-primary mt-3 mb-2">Применить фильтр</button>
             <a href="{{ route('show_courses') }}" class="btn btn-danger mt-3 mb-2 ml-3">Отменить фильтр</a>
         </form>
-    </div>
+    </div> -->
 
     @if(isset($courses) && $courses->count() > 0)
         <div class="card">
@@ -57,15 +57,18 @@
                             @endif
                         </td>
                         <td>
-                            <ul class="camotek-form-links">                                    
+                            <ul class="camotek-form-links">
+                                <li>
+                                   <a href="{{ route('course_trainings', $cours->id) }}" class="btn btn-primary" >Тренировки</a> 
+                                </li>                                    
                                 <li>                                   
-                                    <a href="{{ route('edit_cours', $cours->id) }}" class="btn btn-primary">Редактировать</a>         
+                                    <a href="{{ route('edit_cours', $cours->id) }}" class="btn btn-primary fa fa-pencil-square-o" data-toggle="tooltip" data-placement="top" title="Редактировать"></a>         
                                 </li>
                                 <li>
                                     <form class="delete" action="{{ route('destroy_cours', $cours->id) }}" method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />                                       
-                                        <input class="btn btn-danger" type="submit" value="Удалить">                                       
+                                        <button class="btn btn-danger fa fa-trash-o" type="submit" data-toggle="tooltip" data-placement="top" title="Удалить"></button>                                       
                                     </form>
                                 </li>                                
                             </ul>
