@@ -14,6 +14,7 @@ use App\Repositories\UsersRepositoryInterface;
 use App\Repositories\CoursesRepositoryInterface;
 
 use Auth;
+use Lang;
 
 use Carbon\Carbon;
 
@@ -72,17 +73,7 @@ class MyAccountController extends Controller
         return redirect()->route('show_trainings');       
     }
 
-    public function marathon_select($id)
-    {
-        $course = Courses::find($id);
-        $currentDate = Carbon::now();
-        $dataStartMarathon = Carbon::createFromFormat('Y-m-d H:i:s', $course->date_end_selection); 
-        $diffDays = $currentDate->diffInDays($dataStartMarathon, false);
-        $title = $course->name;
-
-        return view('my_acount/pages/courses/marathon_message', compact(['title', 'course', 'diffDays']));        
-    }
-
+  
     public function show_courses()
     {
         $courses = Courses::where('is_active', true)->get();
@@ -98,11 +89,45 @@ class MyAccountController extends Controller
         $course = $this->courses->find($course_id);        
         $training_schedule = $course->training_schedule;
         $currentDate = Carbon::now();       
-        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->data_start_course);  
+        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->data_start_course);
         $diffDays = $dataStartCourse->diffInDays($currentDate, false);    
-        $diffMinutes = $dataStartCourse->diffInMinutes($currentDate, false);        
-        if($course->type == 'marathon' && ($diffMinutes <= 0)) {
-            return redirect()->route('marathon_select', $course_id);
+        
+
+        if($course->type == 'marathon') {
+            $dataStartSelect = Carbon::createFromFormat('Y-m-d H:i:s', $course->date_start_selection);
+            $diffMinutesStartCourse = $currentDate->diffInMinutes($dataStartCourse, false);      
+            $diffMinutesStartSelect = $currentDate->diffInMinutes($dataStartSelect, false);
+
+            if($diffMinutesStartSelect > 0 && $diffMinutesStartSelect > 1140) {
+                $diffDaysStartSelectMarathon = $currentDate->diffInDays($dataStartSelect, false);
+                $title = $course->name;
+                $daysCount = Lang::choice('messages.days', $diffDaysStartSelectMarathon);
+                $message = 'До начала отбора на марафон осталось '. $diffDaysStartSelectMarathon ." ".$daysCount ;
+                
+                return view('my_acount/pages/courses/marathon_message')->with(array('title' => $title, 'message' => $message, 'course' => $course)); 
+            } elseif ($diffMinutesStartSelect > 0 && $diffMinutesStartSelect < 1140) {
+                $diffHoursStartSelectMarathon = $currentDate->diffInHours($dataStartSelect, false);
+                $title = $course->name;
+                $hoursCount = Lang::choice('messages.hours', $diffHoursStartSelectMarathon);
+                $message = 'До начала отбора на марафон осталось '. $diffHoursStartSelectMarathon." ".$hoursCount ;
+                
+                return view('my_acount/pages/courses/marathon_message')->with(array('title' => $title, 'message' => $message, 'course' => $course)); 
+            } 
+
+            if($diffMinutesStartCourse > 0 && $diffMinutesStartCourse > 1140) {
+                $diffDaysStartMarathon = $currentDate->diffInDays($dataStartCourse, false); 
+                $title = $course->name;
+                $daysCount = Lang::choice('messages.days', $diffDaysStartMarathon);
+                $message = 'До начала марафона сталось '. $diffDaysStartMarathon." ".$daysCount;
+                return view('my_acount/pages/courses/marathon_message')->with(array('title' => $title, 'message' => $message, 'course' => $course));
+            }  elseif ($diffMinutesStartCourse > 0 && $diffMinutesStartCourse < 1140) {
+                $diffHoursStartMarathon = $currentDate->diffInHours($dataStartCourse, false);
+                $title = $course->name;
+                $hoursCount = Lang::choice('messages.hours', $diffHoursStartMarathon);
+                $message = 'До начала марафона осталось '. $diffHoursStartMarathon." ".$hoursCount ;
+                
+                return view('my_acount/pages/courses/marathon_message')->with(array('title' => $title, 'message' => $message, 'course' => $course)); 
+            }   
         }
              
         if($diffDays <= $course->period) {

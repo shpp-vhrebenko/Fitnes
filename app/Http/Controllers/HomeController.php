@@ -35,11 +35,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $monthes = array("Нулября","Января","Февраля","Марта","Апреля","Мая","Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря");
         $instagram = Social::firstOrFail();             
         $settings = Settings::first();  
         $course = Courses::where('is_active', true)->where('type', 'cours')->first();    
         $marathon = Courses::where('is_active', true)->where('type', 'marathon')->first();    
-        return view('front.home', compact(['settings', 'instagram', 'course', 'marathon']));
+        return view('front.home', compact(['settings', 'instagram', 'course', 'marathon', 'monthes']));
     }
 
     public function register_user($id_cours)

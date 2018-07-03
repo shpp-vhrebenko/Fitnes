@@ -94,7 +94,8 @@
                     <a class="price-item__button" href="{{route('register_user', $marathon->id)}}">
                         купить курс
                     </a>
-                    <p class="price-item__message">Cтарт марафона {{ Carbon\Carbon::parse($marathon->date_start_selection)->format('d.m.Y')}}</p>
+                    {{ $dt = Carbon\Carbon::parse($marathon->date_start_selection)}}
+                    <p class="price-item__message">Cтарт марафона {{$dt->day}} {{$monthes[$dt->month]}}</p>
                 </div>
                 @endif
                 @if(isset($course))

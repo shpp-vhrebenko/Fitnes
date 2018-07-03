@@ -58,10 +58,10 @@ Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveC
     Route::get('/results/new', 'MyAccountController@add_result')->name('add_result');    
     Route::post('/results/new', 'MyAccountController@result_store')->name('result_store');
 
+    // Route courses
     Route::get('/courses','MyAccountController@show_courses')->name('courses_list');   
     Route::post('/courses','MyAccountController@by_course')->name('by_course'); 
-
-    Route::get('/marathon/{id}', 'MyAccountController@marathon_select')->name('marathon_select');
+    
 });
 
 Route::group(['prefix'=>'admin','middleware' => 'isAdmin'], function() {
