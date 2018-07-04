@@ -113,7 +113,7 @@ class HomeController extends Controller
             $id_soul_user = $request->session()->get('id_soul_user');
             $user_soul = UserSoul::find($id_soul_user);
             $new_user = array();
-            $new_user['status_id'] = 1;                            
+            $new_user['status_id'] = 0;                            
             $new_user['remember_token'] = $request->get('_token');       
             $newUserPass = str_random(8);
             $new_user['password'] = bcrypt($newUserPass);   

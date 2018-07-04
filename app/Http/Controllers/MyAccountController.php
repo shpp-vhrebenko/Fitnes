@@ -71,11 +71,11 @@ class MyAccountController extends Controller
      */
     public function index()
     {     
-        Mail::send('emails.welcome', [], function ($m) {
+        /*Mail::send('emails.welcome', [], function ($m) {
             $m->from('sender@test.com', 'Sender');
             $m->to('receiver@test.com', 'Receiver')->subject('Тестовое письмо с HTML');
             $m->cc('copy@test.com', '');
-        });
+        });*/
         return redirect()->route('show_trainings');       
     }
 
@@ -248,8 +248,13 @@ class MyAccountController extends Controller
             }
         }
         
-        if($curentUser->status_id == 0) {
+        if($curentUser->status_id == 0) {            
             $curentUser->update(['status_id' => 1]);
+            $currentDate = Carbon::now();
+            $userCourse = $this->courses->find($curentUser->course_id);
+            if($userCourse->type == 'cours') {
+                $curentUser->update(['data_start_course' => $currentDate]);
+            }
         }
         
         if( $image = $request->file('result.image') )

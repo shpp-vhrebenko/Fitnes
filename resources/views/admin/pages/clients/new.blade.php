@@ -1,7 +1,7 @@
 @extends('admin/layout/admin')
 
 @section('content')
-    <h1>{{ $title }} <a href="{{ URL::previous() }}" class="fa fa-arrow-left btn-back" data-toggle="tooltip" data-placement="top" title="Вернутся назад"></a></h1>
+    <h1>{{ $title }} <a href="{{ route('clients') }}" class="fa fa-arrow-left btn-back" data-toggle="tooltip" data-placement="top" title="Вернутся назад"></a></h1>
     @if (Session::has('success'))
         <div class="alert alert-success" role="alert">
             {{ Session::get('success') }}

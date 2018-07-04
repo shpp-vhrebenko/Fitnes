@@ -620,10 +620,15 @@ class AdminController extends Controller
             return abort('404');
         }
         $newCourse = $request->get('item');
+        $newPeriod = $newCourse['period'];
+        $curPeriod = $course->period;
         $searchCourse = $this->courses->findWithParams(['name' => $newCourse['name']])->first(); 
 
         if(isset($searchCourse)) {
-            if($searchCourse->id == $id) {
+            if($searchCourse->id == $id) {                
+                if($newPeriod != $curPeriod ) {
+                    self::restoreCountTrainingsCourse($course, $curPeriod, $newPeriod);
+                }  
                 $course->update($newCourse);
                 if( $icon = $request->file('item.icon') )
                 {
@@ -639,6 +644,9 @@ class AdminController extends Controller
             }
         } else {
             $newCourse['slug'] = str_slug($newCourse['name']);
+            if($newPeriod != $curPeriod ) {
+                self::restoreCountTrainingsCourse($course, $curPeriod, $newPeriod);
+            }  
             $course->update($newCourse);
             if( $icon = $request->file('item.icon') )
             {
@@ -649,6 +657,51 @@ class AdminController extends Controller
             Session::flash('success', 'Курс успешно изменен!');
             return redirect()->back();
         }     
+    }
+
+    protected static function  restoreCountTrainingsCourse($course, $curPeriod, $newPeriod)
+    {
+        $training_schedule = $course->training_schedule;
+        if($newPeriod > $curPeriod) {
+            $indexPeriod = $newPeriod - $curPeriod;
+            $countTrainings = count($training_schedule);
+            
+            for ($i=0; $i < $indexPeriod; $i++) { 
+                $dayNumber = $countTrainings + ($i + 1);
+                $training_schedule['day_'.$dayNumber.''] = [
+                    'item_id' => 0,
+                    'is_holiday' => false,
+                    'image' => 'no-image.png',
+                    'title' => ''
+                ];                  
+            }
+            $course->update(['training_schedule' => $training_schedule]);
+
+        } elseif($newPeriod < $curPeriod) {
+            $indexPeriod = $curPeriod - $newPeriod;
+            $countTrainings = count($training_schedule);
+            $dayNumber = $countTrainings;
+            for ($i=0; $i < $indexPeriod; $i++) {                 
+                $popTraining = array_pop($training_schedule);                
+                if($popTraining['item_id'] != 0) {
+                    $id = $popTraining['item_id'];
+                    $item = Item::find($id);
+                    if (!isset($item))
+                    {
+                        return abort(404);
+                    }
+                    if( $item->image != 'no-image.png')
+                    {
+                        File::delete( public_path('uploads/items/'. $item->image ));           
+                    }  
+                    $item->delete();
+                }
+                $dayNumber = $countTrainings - $i;                 
+            }
+            $course->update(['training_schedule' => $training_schedule]);
+            
+        }
+
     }
 
     public function cours_destroy($id)
@@ -752,8 +805,7 @@ class AdminController extends Controller
         $training_schedule = $course->training_schedule;
 
         if(isset($searchItem)) {
-            if($searchItem->id == $id) {                
-                
+            if($searchItem->id == $id) {          
                 $item->update($newItem);
 
                 if( $image = $request->file('item.image') )
@@ -804,6 +856,8 @@ class AdminController extends Controller
             return redirect()->back();
         }      
     }
+
+    
 
     /*END TRAININGS*/
 
@@ -884,10 +938,15 @@ class AdminController extends Controller
         }
 
         $newMarathon = $request->get('item');
+        $newPeriod = $newMarathon['period'];
+        $curPeriod = $marathon->period;
         $searchMarathon = $this->courses->findWithParams(['name' => $newMarathon['name']])->first(); 
 
         if(isset($searchMarathon)) {
             if($searchMarathon->id == $id) {
+                if($newPeriod != $curPeriod ) {
+                    self::restoreCountTrainingsCourse($marathon, $curPeriod, $newPeriod);
+                }  
                 $marathon->update($newMarathon);
                 if( $icon = $request->file('item.icon') )
                 {
@@ -903,6 +962,9 @@ class AdminController extends Controller
             }
         } else {
             $newMarathon['slug'] = str_slug($newMarathon['name']);
+            if($newPeriod != $curPeriod ) {
+                self::restoreCountTrainingsCourse($marathon, $curPeriod, $newPeriod);
+            }  
             $marathon->update($newMarathon);
             if( $icon = $request->file('item.icon') )
             {
