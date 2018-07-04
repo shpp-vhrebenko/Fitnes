@@ -132,6 +132,7 @@
 .category-content .item {
     width: 100%;
     height: 500px;
+    margin-bottom: 2rem;
 }
 
 .item__image {
@@ -172,20 +173,16 @@
 }
 
 .item-content {
+    min-height: 600px;
     padding: 25px 25px 70px 25px;
     padding-bottom: 70px;
     font-size: 1rem;
     line-height: 20px;
     border: 1px solid #8e647a;
     background-color: #9e7289;
-    font-family: "HelveticaLight";
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #fff;
     height: auto;
-}
-
-.item-content {
-    color: #fff;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .item-content p {

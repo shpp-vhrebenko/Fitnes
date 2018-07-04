@@ -19,7 +19,8 @@ class Courses extends Model
         'period', 
         'icon', 
         'is_active',
-        'training_schedule',       
+        'training_schedule',
+        'slug',       
     ];
 
     protected $casts = [

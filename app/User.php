@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Role;
 use Result;
+use App\Courses;
 
 class User extends Authenticatable
 {
@@ -62,6 +63,11 @@ class User extends Authenticatable
     public function results() {
         return $this->hasMany('App\Result');
     }   
+
+     public function course()
+    {
+        return $this->belongsTo(Courses::class, 'course_id', 'id');
+    } 
 
     public function hasRole($id_role)
     {

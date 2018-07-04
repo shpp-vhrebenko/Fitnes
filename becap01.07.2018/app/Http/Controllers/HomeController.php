@@ -35,16 +35,31 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $monthes = array("Нулября","Января","Февраля","Марта","Апреля","Мая","Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря");
         $instagram = Social::firstOrFail();             
         $settings = Settings::first();  
-        $cours = Courses::where('is_active', true)->where('type', 'cours')->firstOrFail();    
-        $marathon = Courses::where('is_active', true)->where('type', 'marathon')->firstOrFail();    
-        return view('front.home', compact(['settings', 'instagram', 'cours', 'marathon']));
+        $course = Courses::where('is_active', true)->where('type', 'cours')->first();    
+        $marathon = Courses::where('is_active', true)->where('type', 'marathon')->first(); 
+        $marathon_message = '';        
+         
+        if(isset($marathon)) {
+            $currentDate = Carbon::now();  
+            $dataStarttMarathon = Carbon::createFromFormat('Y-m-d', $marathon->date_end_selection);
+            $diffDays = $currentDate->diffInDays($dataStarttMarathon, false);            
+            if($diffDays > 0) {
+                $dt = Carbon::parse($marathon->date_end_selection);
+                $marathon_message = 'Cтарт марафона ' . $dt->day ." ".$monthes[$dt->month];
+            }            
+        }  
+        
+        
+        return view('front.home', compact(['settings', 'instagram', 'course', 'marathon' ,'marathon_message']));
+
     }
 
-    public function register_user($id_cours)
+    public function register_user($slug)
     {      
-        $course = Courses::where('id', $id_cours)->firstOrFail();  
+        $course = Courses::where('slug', $slug)->firstOrFail();  
         return view('auth.register', compact(['course']));
     }
 
@@ -62,13 +77,13 @@ class HomeController extends Controller
         }       
     }
 
-    public function user_store(Request $request, $id) {
-        
+    public function user_store(Request $request, $slug) {
+        $course = Courses::where('slug', $slug)->first();         
         $newSoulUser = UserSoul::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),            
             'phone' => $request->get('phone'),
-            'course_id' => $id           
+            'course_id' => $course->id,           
         ]);       
         $request->session()->put('id_soul_user', $newSoulUser->id);
 
@@ -94,7 +109,14 @@ class HomeController extends Controller
             $new_user['phone'] = $user_soul->phone;
             $new_user['email'] = $user_soul->email; 
             $new_user['course_id']  = $user_soul->course_id;
-            $new_user['data_start_course']  = Carbon::now();              
+            $currentCourse = Courses::where(['id' => $user_soul->course_id])->first();
+            if(isset($currentCourse)) {
+                if($currentCourse->type == 'cours') {
+                    $new_user['data_start_course']  = Carbon::now();   
+                } elseif ($currentCourse->type == 'marathon') {
+                    $new_user['data_start_course']  = $currentCourse->date_end_selection;                     
+                } 
+            }                         
             $user = User::create($new_user);  
             $user_soul->delete();      
             $user->roles()->attach([

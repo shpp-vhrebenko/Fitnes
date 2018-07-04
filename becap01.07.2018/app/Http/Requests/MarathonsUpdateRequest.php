@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
 
-class StoreMarathonsRequest extends FormRequest
+class MarathonsUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class StoreMarathonsRequest extends FormRequest
     {
        
         return [
-            'item.name' => 'required|unique:courses,name',
+            'item.name' => 'required',
             'item.description' => 'required',                       
             'item.period' => 'required|numeric',
             'item.date_end_selection' => 'required|date|date_format:Y-m-d|after:item.date_start_selection',
@@ -40,7 +40,6 @@ class StoreMarathonsRequest extends FormRequest
     public function messages() {
         return [
             'item.name.required' => 'Необходимо ввести Название Марафона',
-            'item.name.unique' => 'Марафон с таким названием уже есть',
             'item.description.required' => 'Необходимо ввести Содержание Марафона',            
             'item.period.required' => 'Необходимо ввести Продолжительность Марафона',
             'item.date_start_selection.required' => 'Необходимо ввести дату Начала отбора',

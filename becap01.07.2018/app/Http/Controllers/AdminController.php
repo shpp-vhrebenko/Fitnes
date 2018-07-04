@@ -9,7 +9,9 @@ use App\Http\Requests\ItemRequest;
 use App\Http\Requests\ItemUpdateRequest;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\StoreCoursRequest;
+use App\Http\Requests\CourseUpdateRequest;
 use App\Http\Requests\StoreMarathonsRequest;
+use App\Http\Requests\MarathonsUpdateRequest;
 
 use App\Repositories\UsersRepositoryInterface;
 use App\Repositories\CategoriesRepositoryInterface;
@@ -588,7 +590,8 @@ class AdminController extends Controller
             ];                  
         }
 
-        $item['training_schedule'] = $trainings;    
+        $item['training_schedule'] = $trainings;   
+        $item['slug'] = str_slug($item['name']);
      
         $id_new_course = $this->courses->create($item);       
 
@@ -596,6 +599,75 @@ class AdminController extends Controller
         return redirect()->route('course_trainings', ['id_course' => $id_new_course]);      
     }
 
+    public function cours_edit($id)
+    {
+        $cours = $this->courses->find($id);
+        if (!isset($cours))
+        {
+            return abort(404);
+        }
+        $title = 'Редактирование Курса';        
+        $statuses = Courses::$coursStatuses;        
+
+        return view('admin/pages/courses/new', compact(['title', 'statuses', 'cours']));
+    }
+
+    public function cours_update(CourseUpdateRequest $request, $id)
+    {
+        $course = $this->courses->find($id); 
+        if (!isset($course))
+        {
+            return abort('404');
+        }
+        $newCourse = $request->get('item');
+        $searchCourse = $this->courses->findWithParams(['name' => $newCourse['name']])->first(); 
+
+        if(isset($searchCourse)) {
+            if($searchCourse->id == $id) {
+                $course->update($newCourse);
+                if( $icon = $request->file('item.icon') )
+                {
+                    File::delete( public_path('uploads/icons/'. $course->icon ));
+                    $newIcon = Courses::saveIcon( $icon );
+                    $course->update(['icon' => $newIcon]);       
+                } 
+                Session::flash('success', 'Курс успешно изменен!');
+                return redirect()->back();
+            } else {
+                Session::flash('danger', 'Курс с таким Названием уже есть!');
+                return redirect()->back();
+            }
+        } else {
+            $newCourse['slug'] = str_slug($newCourse['name']);
+            $course->update($newCourse);
+            if( $icon = $request->file('item.icon') )
+            {
+                File::delete( public_path('uploads/icons/'. $course->icon ));
+                $newIcon = Courses::saveIcon( $icon );
+                $course->update(['icon' => $newIcon]);       
+            } 
+            Session::flash('success', 'Курс успешно изменен!');
+            return redirect()->back();
+        }     
+    }
+
+    public function cours_destroy($id)
+    {
+        $cours = $this->courses->find($id);
+        $itemsCours = $cours->items();       
+        if($itemsCours->count() > 0) {
+            Session::flash('danger', 'Курс не можит быть удален так как в нем есть тренировки и записи! Необходимо удалить или переназначить все записи в данном курсе или назначить для них другой курс!');
+            return redirect()->route('show_courses');
+        }
+        if (!isset($cours)) {
+            return abort('404');
+        }
+        $cours->delete();
+        Session::flash('success', 'Курс успешно удален!');
+        return redirect()->route('show_courses');
+    }
+
+    /*TRAININGS*/
     public function new_training($id_course, $numberDay)
     {
         $title = 'Создание тренировки';       
@@ -733,56 +805,7 @@ class AdminController extends Controller
         }      
     }
 
-
-
-    public function cours_edit($id)
-    {
-        $cours = $this->courses->find($id);
-        if (!isset($cours))
-        {
-            return abort(404);
-        }
-        $title = 'Редактирование Курса';        
-        $statuses = Courses::$coursStatuses;        
-
-        return view('admin/pages/courses/new', compact(['title', 'statuses', 'cours']));
-    }
-
-    public function cours_update(StoreCoursRequest $request, $id)
-    {
-        $cours = $this->courses->find($id);   
-        if (!isset($cours))
-        {
-            return abort('404');
-        }
-        $cours->update($request->get('item'));
-     
-        if( $icon = $request->file('item.icon') )
-        {
-            File::delete( public_path('uploads/icons/'. $cours->icon ));
-            $newIcon = Courses::saveIcon( $icon );
-            $cours->update(['icon' => $newIcon]);       
-        }          
-
-        Session::flash('success', 'Курс успешно изменен!');
-        return redirect()->back();
-    }
-
-    public function cours_destroy($id)
-    {
-        $cours = $this->courses->find($id);
-        $itemsCours = $cours->items();       
-        if($itemsCours->count() > 0) {
-            Session::flash('danger', 'Курс не можит быть удалена так как в ней есть тренировки и записи! Необходимо удалить или переназначить все записи в данном курсе или назначить для них другой курс!');
-            return redirect()->route('show_courses');
-        }
-        if (!isset($cours)) {
-            return abort('404');
-        }
-        $cours->delete();
-        Session::flash('success', 'Курс успешно удален!');
-        return redirect()->route('show_courses');
-    }
+    /*END TRAININGS*/
 
     
 
@@ -816,11 +839,27 @@ class AdminController extends Controller
         {            
             $item['icon'] = Courses::saveIcon( $image );                 
         }
+
         $item['type'] = 'marathon';
-        $this->courses->create($item);        
+
+        $trainings = [];         
+        for ($i=0; $i < $item['period']; $i++) { 
+            $dayNumber = $i + 1;
+            $trainings['day_'.$dayNumber.''] = [
+                'item_id' => 0,
+                'is_holiday' => false,
+                'image' => 'no-image.png',
+                'title' => ''
+            ];                  
+        }
+
+        $item['training_schedule'] = $trainings;  
+        $item['slug'] = str_slug($item['name']);
+
+        $id_new_course = $this->courses->create($item);       
 
         Session::flash('success', 'Марафон успешно создана!');
-        return redirect()->back();
+        return redirect()->route('course_trainings', ['id_course' => $id_new_course]);
     }
 
     public function edit_marathon($id)
@@ -836,24 +875,44 @@ class AdminController extends Controller
         return view('admin/pages/marathons/new', compact(['title', 'statuses', 'marathon']));
     }
 
-    public function update_marathon(StoreMarathonsRequest $request, $id)
+    public function update_marathon(MarathonsUpdateRequest $request, $id)
     {
         $marathon = $this->courses->find($id);   
         if (!isset($marathon))
         {
             return abort('404');
         }
-        $marathon->update($request->get('item'));
-     
-        if( $icon = $request->file('item.icon') )
-        {
-            File::delete( public_path('uploads/icons/'. $cours->icon ));
-            $newIcon = Courses::saveIcon( $icon );
-            $marathon->update(['icon' => $newIcon]);       
-        }          
 
-        Session::flash('success', 'Марафон успешно изменен!');
-        return redirect()->back();
+        $newMarathon = $request->get('item');
+        $searchMarathon = $this->courses->findWithParams(['name' => $newMarathon['name']])->first(); 
+
+        if(isset($searchMarathon)) {
+            if($searchMarathon->id == $id) {
+                $marathon->update($newMarathon);
+                if( $icon = $request->file('item.icon') )
+                {
+                    File::delete( public_path('uploads/icons/'. $course->icon ));
+                    $newIcon = Courses::saveIcon( $icon );
+                    $marathon->update(['icon' => $newIcon]);       
+                } 
+                Session::flash('success', 'Марафон успешно изменен!');
+                return redirect()->back();
+            } else {
+                Session::flash('danger', 'Марафон с таким Названием уже есть!');
+                return redirect()->back();
+            }
+        } else {
+            $newMarathon['slug'] = str_slug($newMarathon['name']);
+            $marathon->update($newMarathon);
+            if( $icon = $request->file('item.icon') )
+            {
+                File::delete( public_path('uploads/icons/'. $course->icon ));
+                $newIcon = Courses::saveIcon( $icon );
+                $marathon->update(['icon' => $newIcon]);       
+            } 
+            Session::flash('success', 'Марафон успешно изменен!');
+            return redirect()->back();
+        }     
     }
 
     public function marathon_destroy($id)

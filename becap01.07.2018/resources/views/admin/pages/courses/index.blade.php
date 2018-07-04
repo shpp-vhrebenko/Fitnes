@@ -37,7 +37,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Название</th>                    
                     <th scope="col">Цена</th> 
-                    <th scope="col">Продолжительность (дней)</th>                   
+                    <th scope="col">Период (дней)</th>                   
                     <th scope="col">Статус</th>
                     <th scope="col">Действия</th>
                 </tr>
@@ -46,7 +46,7 @@
                 @foreach($courses as $cours)
                     <tr>
                         <th scope="row">{{ $cours->id }}</th>
-                        <td>{{ $cours->name }}</td> 
+                        <td>{!! $cours->name !!}</td> 
                         <td>{{ $cours->price }}</td>   
                         <td>{{ $cours->period }}</td>                           
                         <td>
@@ -68,7 +68,7 @@
                                     <form class="delete" action="{{ route('destroy_cours', $cours->id) }}" method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />                                       
-                                        <button class="btn btn-danger fa fa-trash-o" type="submit" data-toggle="tooltip" data-placement="top" title="Удалить"></button>                                       
+                                      <!--   <button class="btn btn-danger fa fa-trash-o" type="submit" data-toggle="tooltip" data-placement="top" title="Удалить"></button> -->                                       
                                     </form>
                                 </li>                                
                             </ul>

@@ -1,7 +1,7 @@
 @extends('admin/layout/admin')
 
 @section('content')
-    <h1>{{ $title }}</h1>
+    <h1>{{ $title }} <a href="{{ URL::previous() }}" class="fa fa-arrow-left btn-back" data-toggle="tooltip" data-placement="top" title="Вернутся назад"></a> </h1>
     <div class="flash-message">
       @foreach (['danger', 'warning', 'success', 'info'] as $msg)
         @if(Session::has($msg))

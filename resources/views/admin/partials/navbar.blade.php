@@ -18,7 +18,8 @@
                       <a class="dropdown-item" href="{{ route('show_courses') }}">Курсы</a>
                       <a class="dropdown-item" href="{{ route('show_marathons') }}">Марафоны</a>                       
                     </div>
-                </li>               
+                </li> 
+                <li class="nav-item"><a class="nav-link" href="{{ route('orders') }}">Заказы</a></li>              
                 <li class="nav-item"><a class="nav-link" href="{{ route('clients') }}">Клиенты</a></li>                
                 <li class="nav-item"><a class="nav-link" href="{{ route('settings') }}">Настройки</a></li>
                 <!-- <li class="nav-item dropdown">

@@ -10,6 +10,7 @@ use App\Courses;
 use App\Marathons;
 use App\User;
 use App\UserSoul;
+use App\Order;
 use Session;
 use Mail;
 use Carbon\Carbon;
@@ -97,7 +98,8 @@ class HomeController extends Controller
             'email' => $request->get('email'),            
             'phone' => $request->get('phone'),
             'course_id' => $course->id,           
-        ]);       
+        ]);
+
         $request->session()->put('id_soul_user', $newSoulUser->id);
 
         return redirect()->route('oplata');
@@ -134,6 +136,12 @@ class HomeController extends Controller
             $user_soul->delete();      
             $user->roles()->attach([
                 $new_user['role_id']
+            ]);   
+
+            Order::create([
+                'user_id' => $user->id,
+                'status_id' => 1,            
+                'total' => $currentCourse->price                
             ]);   
 
             $settings = Settings::first(); 

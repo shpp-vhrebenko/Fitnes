@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/_debugbar/assets/stylesheets', [
+/*Route::get('/_debugbar/assets/stylesheets', [
     'as' => 'debugbar-css',
     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
 ]);
@@ -24,7 +24,7 @@ Route::get('/_debugbar/assets/javascript', [
 Route::get('/_debugbar/open', [
     'as' => 'debugbar-open',
     'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
-]);
+]);*/
 
 
 Auth::routes();
@@ -71,6 +71,14 @@ Route::group(['prefix'=>'admin','middleware' => 'isAdmin'], function() {
 	// Route settings
 	Route::get('/settings', 'AdminController@settings')->name('settings');
     Route::post('/settings', 'AdminController@settings_update')->name('settings_update');
+
+    // Route orders
+    Route::get('/orders', 'AdminController@orders')->name('orders');
+    Route::get('/order/{id}', 'AdminController@order')->name('show_order');
+    Route::get('/order/{id}/edit', 'AdminController@edit_order')->name('edit_order');
+    Route::put('/order/{id}/edit', 'AdminController@update_order')->name('update_order');
+    Route::delete('/order/{id}/delete', 'AdminController@destroy_order')->name('destroy_order');
+    Route::get('/orders/filter', 'AdminController@orders_filter')->name('orders_filter');
 
     // Route clients
     Route::get('/clients', 'AdminController@clients')->name('clients');

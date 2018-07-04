@@ -18,6 +18,7 @@ use App\Repositories\CategoriesRepositoryInterface;
 use App\Repositories\ItemsRepositoryInterface;
 use App\Repositories\ResultsRepositoryInterface;
 use App\Repositories\CoursesRepositoryInterface;
+use App\Repositories\OrdersRepositoryInterface;
 
 use App\User;
 use App\Settings;
@@ -27,6 +28,7 @@ use App\Category;
 use App\Item;
 use App\Result;
 use App\Courses;
+use App\Order;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -46,24 +48,28 @@ class AdminController extends Controller
         UsersRepositoryInterface                    $usersRepository,
         CategoriesRepositoryInterface           $categoriesRepository,
         ResultsRepositoryInterface              $resultsRepository,     
-        CoursesRepositoryInterface              $coursesRepository
-             
+        CoursesRepositoryInterface              $coursesRepository,
+        OrdersRepositoryInterface               $ordersRepository
 
     )
     {        
         $this->items = $itemsRepository;
         $this->users = $usersRepository;        
         $this->categories = $categoriesRepository;
-        $this->courses = $coursesRepository;           
+        $this->courses = $coursesRepository;  
+        $this->orders = $ordersRepository;         
     }
 
     public function index()
     {
         $stats = [            
-            'users' => $this->users->count()
+            'users' => $this->users->count(),
+            'orders' => $this->orders->count(),
         ];       
 
-        return view('admin/index', compact(['stats']));
+        $latest_orders = $this->orders->latest(5)->get();       
+
+        return view('admin/index', compact(['stats', 'latest_orders']));
     }
 
     // SETTINGS
@@ -113,6 +119,107 @@ class AdminController extends Controller
     }
 
     // END SETTINGS
+
+    // ORDERS
+    public function orders()
+    {
+        $title = 'Список заказов';
+        $orders = $this->orders->order('id', 'desc')->paginate(10);
+        $ordersStatuses = Order::getAllOrderStatuses();        
+        return view('admin/pages/orders/index', compact(['orders', 'ordersStatuses', 'title']));
+    }
+
+    public function orders_filter(Request $request)
+    {
+        $filter_request = $request->get('filter');
+        $c_filter = 0;
+
+        foreach ($filter_request as $f_r)
+        {
+            if ($f_r != null)
+            {
+                $c_filter++;
+            }
+        }
+
+        if (isset($filter_request) && $filter_request != null && $c_filter) {
+            $orders = Order::query();
+            foreach ($filter_request as $key => $filter) {
+                if (isset($filter)) {
+                    if ($key == 'created_at' || $key == 'updated_at') {
+                        $orders->whereDate($key, $filter);
+                    } elseif ($key == 'user_name') {
+                        $orders->whereHas('client', function ($q) use ($filter) {
+                            $q->where('name', 'like', '%' . $filter . '%');
+                        });
+                    } else {
+                        $orders->where($key, $filter);
+                    }
+                }
+            }
+
+            $paginate = $orders->paginate(10);
+
+             foreach ($filter_request as $key => $p_f)
+            {
+                if ($p_f != null)
+                {
+                    $paginate->appends('filter[' . $key . ']', $p_f);
+                }
+            }
+
+            $this->setTitle('Фильтр заказов');
+            $ordersStatuses = Order::getAllOrderStatuses();
+            return view('admin/pages/orders/index')->with(['orders' => $paginate, 'ordersStatuses' => $ordersStatuses]);
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function order($id)
+    {
+        $order = $this->orders->find($id);              
+        if (!isset($order)) {
+            return abort('404');
+        }
+        $course = $order->client->course;  
+        $this->setTitle('Просмотр заказа');
+        return view('admin/pages/orders/show')->with(['order' => $order, 'course' => $course]);
+    }
+
+    public function edit_order($id)
+    {
+        $order = $this->orders->find($id);
+        if (!isset($order)) {
+            return abort('404');
+        }
+        $this->setTitle('Редактирование заказа');        
+        return view('admin/pages/orders/edit')->with(['item' => $order]);
+    }
+
+    public function update_order(Request $request, $id)
+    {
+        $order = $this->orders->find($id);
+        if (!isset($order)) {
+            return abort('404');
+        }
+        $order->update($request->get('item'));
+        Session::flash('success', 'Заказ успешно изменен!');
+        return redirect()->back();
+    }
+
+    public function destroy_order($id)
+    {
+        $order = $this->orders->find($id);
+        if (!isset($order))
+        {
+            return abort(404);
+        }
+        $order->delete();
+        Session::flash('success', 'Заказ успешно удален!');
+        return redirect()->route('orders');
+    }
+    // END ORDERS
 
     // CLIENTS
 
@@ -538,6 +645,17 @@ class AdminController extends Controller
     // END RESULTS
 
     // COURSES
+    public function show_cours($id) 
+    {      
+        $course = $this->courses->find($id);
+        if (!isset($course))
+        {
+            return abort(404);
+        }
+        $title = $course->name;                
+        return view('admin/pages/courses/show', compact(['title', 'course']));
+    } 
+
     public function show_courses() 
     {   
         $title = "Курсы";
@@ -866,6 +984,18 @@ class AdminController extends Controller
     // END COURSES
 
     // MARATHONES
+    public function show_marathon($id)
+    {
+        $marathon = $this->courses->find($id);
+        if (!isset($marathon))
+        {
+            return abort(404);
+        }
+        $title = $marathon->name;             
+
+        return view('admin/pages/marathons/show', compact(['title', 'marathon']));
+    }
+
     public function show_marathons() 
     {   
         $title = "Марафоны";        

@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-3">
                     <label for="categoryId">Категория</label>
-                    <select class="form-control" id="categoryId" name="filter[category_id]" id="category_id">                        
+                    <select class="form-control" id="categoryId" name="filter[category_id]">                        
                         @if(isset($categories) && count($categories) > 0)
                             @foreach($categories as $category) 
                                 @if($category->id != 1)                                       
