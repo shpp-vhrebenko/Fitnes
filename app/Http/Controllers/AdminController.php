@@ -677,13 +677,14 @@ class AdminController extends Controller
 
     public function course_trainings($id_course)
     {
-        $curentCourse = $this->courses->find($id_course);  
+        $curentCourse = $this->courses->find($id_course);
+        $typeCourse = $curentCourse->type;  
             
         $trainings = $curentCourse->training_schedule;
        
         $title = 'Создание тренировок';     
             
-        return view('admin/pages/courses/trainings', compact(['title', 'trainings', 'id_course']));
+        return view('admin/pages/courses/trainings', compact(['title', 'trainings', 'id_course','typeCourse']));
     }    
 
     public function cours_store(StoreCoursRequest $request)

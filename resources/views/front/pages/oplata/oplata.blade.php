@@ -16,25 +16,40 @@
         <div class="row justify-content-center align-items-center ">
             <div class="col-md-10">
                 <div class="login-card">
-                    <div class="register-card__header">Симулятор Оплати</div>
+                    <div class="register-card__header card-header">
+                        <h3 class="card-header__title">ВАШ ЗАКАЗ</h3>
+                        <p class="card-header__description">{!! $course->name !!}</p>
+                        <p class="card-header__price">ИТОГО: <span class="fa fa-rub"></span>  {{$price}}</p>
+                    </div>
 
                     <div class="login-card__body">
-                        <form method="POST" action="{{ route('oplata_course') }}" class="form-login" id="register-form">
-                            @csrf
-                                         
-                           
-                            <div class="form-group row justify-content-center">          
-                                <div class="checkbox">
-                                    <label class="form-login__label form-login__label-terms row align-items-center">
-                                        <input class="form-login__input-remember" type="checkbox" name="check_course" {{ old('check_course') ? 'checked' : '' }}> Я подтверждаю оплату
-                                    </label>
-                                </div>                                
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="arrow"></div>
-                                <button id="submit_form_register" type="submit" class="btn form-login__button">ОПЛАТИТЬ ЗАКАЗ</button>
-                            </div>                      
+                        <form method="post" action="https://wl.walletone.com/checkout/checkout/Index" class="form-succes-oplata">
+                          <input name="WMI_MERCHANT_ID"    value="117327853980" type="hidden"/> 
+                          <input name="WMI_PAYMENT_AMOUNT" value="{{$price}}" type="hidden"/>
+                          <input name="WMI_CURRENCY_ID"    value="643" type="hidden"/>  
+                          <input name="WMI_DESCRIPTION"    value="Оплата Курса {{strip_tags($course->name)}}" type="hidden"/>
+                          <input name="WMI_SUCCESS_URL"    value="{{route('success_oplata')}}" type="hidden"/>
+                          <input name="WMI_FAIL_URL"       value="{{route('error_oplata')}}" type="hidden"/>
+                          <input type="hidden" name="WMI_EXPIRED_DATE" value="{{$date}}">
+                          <input name="WMI_SIGNATURE" value="{{$signature}}" type="hidden">
+                          <input type="submit" value="Подтвердить" class="btn form-login__button btn-center "/>
                         </form>
+                       <!--  <form method="POST" action="{{ route('oplata_course') }}" class="form-login" id="register-form">
+                           @csrf
+                                        
+                          
+                           <div class="form-group row justify-content-center">          
+                               <div class="checkbox">
+                                   <label class="form-login__label form-login__label-terms row align-items-center">
+                                       <input class="form-login__input-remember" type="checkbox" name="check_course" {{ old('check_course') ? 'checked' : '' }}> Я подтверждаю оплату
+                                   </label>
+                               </div>                                
+                           </div>
+                           <div class="row justify-content-center">
+                               <div class="arrow"></div>
+                               <button id="submit_form_register" type="submit" class="btn form-login__button">ОПЛАТИТЬ ЗАКАЗ</button>
+                           </div>                      
+                       </form> -->
                     </div>
                 </div>
             </div>

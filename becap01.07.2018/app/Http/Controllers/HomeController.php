@@ -10,8 +10,11 @@ use App\Courses;
 use App\Marathons;
 use App\User;
 use App\UserSoul;
+use App\Order;
 use Session;
+use Mail;
 use Carbon\Carbon;
+
 
 class HomeController extends Controller
 {
@@ -57,6 +60,17 @@ class HomeController extends Controller
 
     }
 
+    public function test_message()
+    {
+        Mail::send('emails.welcome',array('body' =>'body', 'title'=>'title'), function($message)
+        {
+            $message->from('test@gmail.com', 'vova');
+
+            $message->to('vhrebenko@gmail.com');
+
+        });
+    }
+
     public function register_user($slug)
     {      
         $course = Courses::where('slug', $slug)->firstOrFail();  
@@ -84,7 +98,8 @@ class HomeController extends Controller
             'email' => $request->get('email'),            
             'phone' => $request->get('phone'),
             'course_id' => $course->id,           
-        ]);       
+        ]);
+
         $request->session()->put('id_soul_user', $newSoulUser->id);
 
         return redirect()->route('oplata');
@@ -100,7 +115,7 @@ class HomeController extends Controller
             $id_soul_user = $request->session()->get('id_soul_user');
             $user_soul = UserSoul::find($id_soul_user);
             $new_user = array();
-            $new_user['status_id'] = 1;                            
+            $new_user['status_id'] = 0;                            
             $new_user['remember_token'] = $request->get('_token');       
             $newUserPass = str_random(8);
             $new_user['password'] = bcrypt($newUserPass);   
@@ -121,6 +136,12 @@ class HomeController extends Controller
             $user_soul->delete();      
             $user->roles()->attach([
                 $new_user['role_id']
+            ]);   
+
+            Order::create([
+                'user_id' => $user->id,
+                'status_id' => 1,            
+                'total' => $currentCourse->price                
             ]);   
 
             $settings = Settings::first(); 

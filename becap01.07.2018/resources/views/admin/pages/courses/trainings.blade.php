@@ -2,7 +2,14 @@
 
 @section('content')
     <div class="title clearfix">
-        <div class="text-left"><h1>{{ $title }}</h1></div>        
+        <div class="text-left"><h1>{{ $title }}    
+        @if($typeCourse == 'cours')
+            <a href="{{ route('show_courses') }}" class="fa fa-arrow-left btn-back" data-toggle="tooltip" data-placement="top" title="Вернутся назад"></a>
+        @else
+            <a href="{{ route('show_marathons') }}" class="fa fa-arrow-left btn-back" data-toggle="tooltip" data-placement="top" title="Вернутся назад"></a>
+        @endif 
+        </h1>
+        </div>    
     </div>    
 
     <div class="flash-message">

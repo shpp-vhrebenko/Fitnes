@@ -12,15 +12,29 @@
     <div class="jumbotron jumbotron-fluid">
         <form class="form" action="{{ route('orders_filter') }}" method="get">
             <div class="form-row">
-                {!! input_generate('col-4', '№ Заказа', 'text', null, 'form-control mb-3', null, 'id') !!}
-                {!! input_generate('col-4', 'Статус', 'select', \App\Order::getAllOrderStatuses(), 'form-control mb-3', null, 'status_id') !!}
-                {!! input_generate('col-4', 'Дата добавления', 'date', null, 'form-control mb-3', null, 'created_at') !!}
-            </div>
-            <div class="form-row">
-                {!! input_generate('col-4', 'Покупатель', 'text', null, 'form-control mb-2', null, 'client_id') !!}
-                {!! input_generate('col-4', 'Итого', 'text', null, 'form-control mb-2', null, 'total') !!}
-                {!! input_generate('col-4', 'Дата обновления', 'date', null, 'form-control mb-2', null, 'updated_at') !!}
-            </div>
+                <div class="col-3">
+                    <label for="number_order">№ Заказа</label>
+                    <input type="text" class="form-control mb-3" placeholder="" name="filter[id]" id="number_order">
+                </div>
+                <div class="col-3">
+                    <label for="orderStatus">Статус Заказа</label>
+                    <select class="form-control" id="orderStatus" name="filter[status_id]">                      
+                        @if(isset($ordersStatuses) && count($ordersStatuses) > 0)
+                            @foreach($ordersStatuses as $key => $value)                                                              
+                                <option value="{{ $key }}">{{ $value }}</option>                          
+                            @endforeach
+                        @endif
+                    </select>                    
+                </div>
+                <div class="col-3">
+                    <label for="user_name">Покупатель</label>
+                    <input type="text" class="form-control mb-3" placeholder="" name="filter[user_name]" id="user_name">
+                </div>  
+                <div class="col-3">
+                    <label for="date">Дата добавления</label>
+                    <input type="date" class="form-control mb-3" placeholder="" name="filter[created_at]" id="date">
+                </div>                         
+            </div>            
             <button type="submit" class="btn btn-primary mt-3 mb-2">Применить фильтр</button>
             <a href="{{ route('orders') }}" class="btn btn-danger mt-3 mb-2 ml-3">Отменить фильтр</a>
         </form>
@@ -44,14 +58,17 @@
                 @foreach($orders as $order)
                     <tr>
                         <th scope="row">{{ $order->id }}</th>
-                        <td>{{ isset($order->client) ? $order->client->name : 'Гость'}}</td>
+                        <td>@if(isset($order->client)) 
+                            {{$order->client->email}}
+                            @endif
+                        </td>
                         <td>{{ $order->getOrderStatus($order->status_id) }}</td>
                         <td>{{ $order->created_at->format('d-m-Y') }}</td>
-                        <td>{{ $order->total }} грн.</td>
+                        <td>{{ $order->total }} рубл.</td>
                         <td>
                             <ul class="camotek-form-links">
                                 <li><a href="{{ route('show_order', $order->id) }}" class="btn btn-light">Просмотр</a></li>
-                                <li><a href="{{ route('edit_order', $order->id) }}" class="btn btn-primary">Изменить</a></li>
+                                <!-- <li><a href="{{ route('edit_order', $order->id) }}" class="btn btn-primary">Изменить</a></li> -->
                                 <li>
                                     <form class="delete" action="{{ route('destroy_order', $order->id) }}" method="POST">
                                         <input type="hidden" name="_method" value="DELETE">

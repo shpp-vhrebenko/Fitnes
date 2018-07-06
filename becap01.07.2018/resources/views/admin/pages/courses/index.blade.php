@@ -50,11 +50,7 @@
                         <td>{{ $cours->price }}</td>   
                         <td>{{ $cours->period }}</td>                           
                         <td>
-                            @if($cours->is_active)
-                            Активный 
-                            @else
-                            Не активный 
-                            @endif
+                            {{$cours->getCoursStatus($cours->is_active)}}
                         </td>
                         <td>
                             <ul class="camotek-form-links">

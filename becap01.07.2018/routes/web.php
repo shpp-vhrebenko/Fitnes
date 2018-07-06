@@ -36,8 +36,9 @@ Route::group([], function() {
     Route::post('/register/users', 'HomeController@validate_email_user')->name('validate_email_user');  
     Route::get('/oplata', 'HomeController@oplata')->name('oplata');
     Route::post('/oplata', 'HomeController@oplata_course')->name('oplata_course');
-    Route::get('oplata/success', 'HomeController@success_oplata')->name('success_oplata');
-    Route::get('oplata/error', 'HomeController@error_oplata')->name('error_oplata');
+    Route::get('/oplata/success', 'HomeController@success_oplata')->name('success_oplata');
+    Route::get('/oplata/error', 'HomeController@error_oplata')->name('error_oplata');
+    Route::get('/test_message', 'HomeController@test_message')->name('test_message');
 
 });
 
@@ -70,6 +71,14 @@ Route::group(['prefix'=>'admin','middleware' => 'isAdmin'], function() {
 	// Route settings
 	Route::get('/settings', 'AdminController@settings')->name('settings');
     Route::post('/settings', 'AdminController@settings_update')->name('settings_update');
+
+    // Route orders
+    Route::get('/orders', 'AdminController@orders')->name('orders');
+    Route::get('/order/{id}', 'AdminController@order')->name('show_order');
+    Route::get('/order/{id}/edit', 'AdminController@edit_order')->name('edit_order');
+    Route::put('/order/{id}/edit', 'AdminController@update_order')->name('update_order');
+    Route::delete('/order/{id}/delete', 'AdminController@destroy_order')->name('destroy_order');
+    Route::get('/orders/filter', 'AdminController@orders_filter')->name('orders_filter');
 
     // Route clients
     Route::get('/clients', 'AdminController@clients')->name('clients');
