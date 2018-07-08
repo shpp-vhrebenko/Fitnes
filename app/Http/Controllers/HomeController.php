@@ -65,7 +65,10 @@ class HomeController extends Controller
 
     public function test_message()
     {
-        Mail::send('emails.welcome',array('body' =>'body', 'title'=>'title'), function($message)
+        $user_name = 'vova';
+        $newUserPass = 3243432;
+        $currentMessage = "Ваш пароль обновлен. ";
+         Mail::send('emails.reset_password',array('user_name' =>$user_name, 'user_password'=> $newUserPass, 'curMessage' => $currentMessage), function($message)
         {
             $message->from('test@gmail.com', 'vova');
 
@@ -215,15 +218,30 @@ class HomeController extends Controller
             ]);   
 
             $settings = Settings::first(); 
-            mail($new_user['email'],
+
+            Mail::send('emails.user',array('user_name' =>$new_user['email'], 'user_password'=>$newUserPass), function($message)
+            {
+                $message->from($settings->email, 'gizerskaya - Фитнесс Тренер');
+                $message->to($new_user['email']);
+
+            });
+
+           /* mail($new_user['email'],
                 "gizerskaya - Фитнесс Тренер",
                 "Спасибо, что нас выбрали. \nВаши данные для входа в Ваш Личный Кабинет:\nЛогин: " . $new_user['email'] . "\nПароль: " . $newUserPass . "",
-                "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());
+                "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());*/
 
-            mail($settings->email,
+            Mail::send('emails.admin',array('user_name' =>$new_user['email'], 'user_email'=>$new_user['email'], 'user_tel' => $new_user['phone']), function($message)
+            {
+                $message->from('gizerskaya - Фитнесс Тренер', 'gizerskaya - Фитнесс Тренер');
+                $message->to($settings->email);
+
+            });    
+
+            /*mail($settings->email,
                 "gizerskaya - Фитнесс Тренер",
                 "У Вас появился новичок : " . $new_user['email'],
-                "From:"."gizerskaya - Фитнесс Тренер"."\r\n"."X-Mailer: PHP/" . phpversion());
+                "From:"."gizerskaya - Фитнесс Тренер"."\r\n"."X-Mailer: PHP/" . phpversion());*/
 
             $request->session()->flush();
             return redirect()->route('success_oplata');
@@ -293,7 +311,7 @@ class HomeController extends Controller
     public function oplata_result() 
     {
       Log::info('Результат оплаты');
-      dd('result');
+      
        // Секретный ключ интернет-магазина (настраивается в кабинете)
  
   $skey = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";

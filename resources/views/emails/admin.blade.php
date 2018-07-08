@@ -92,17 +92,17 @@ background:linear-gradient(to right, #ff5b77 0%, #613d7c 100%) !important;
                                 <tr>
                                   <td style="text-align:left; vertical-align:middle; word-wrap:break-word;">Имя:<br>
                                     <small></small></td>
-                                  <td style="text-align:left; vertical-align:middle; "><span class="amount">[user_name]</span></td>
+                                  <td style="text-align:left; vertical-align:middle; "><span class="amount">{{$user_name}}</span></td>
                                 </tr>
                               </tbody>
                                <tr>
                                   <td style="text-align:left; vertical-align:middle; word-wrap:break-word;">Email:<br>
                                     <small></small></td>
-                                  <td style="text-align:left; vertical-align:middle; "><span class="amount">[iv_member_user_name]</span></td>
+                                  <td style="text-align:left; vertical-align:middle; "><span class="amount">{{$user_email}}</span></td>
                                 </tr>
                               <tr>
                                 <td bgcolor="#efefef" style="text-align:left; " scope="row">Телефон:</td>
-                                <td bgcolor="#efefef" style="text-align:left; vertical-align:middle; "><span class="amount">[iv_member_tel]</span></td>
+                                <td bgcolor="#efefef" style="text-align:left; vertical-align:middle; "><span class="amount">{{$user_tel}}</span></td>
                               </tr>
                               
                             </table>
