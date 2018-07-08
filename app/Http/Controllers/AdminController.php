@@ -35,6 +35,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
+use Mail;
+
 /**
  
  * @property UsersRepositoryInterface users 
@@ -289,12 +291,16 @@ class AdminController extends Controller
         $user = $this->users->create($item);        
         $user->roles()->attach([
             $item['role_id']
-        ]);         
+        ]);       
 
-        Mail::send('emails.user',array('user_name' =>$item['email'], 'user_password'=>$newUserPass), function($message)
+        $params = array();
+        $params['user_email'] = $item['email'];
+        $params['admin_email'] = $settings->email;  
+
+        Mail::send('emails.user',array('user_name' =>$item['email'], 'user_password'=>$newUserPass), function($message) use ($params)
         {
-            $message->from($settings->email, 'gizerskaya - Фитнесс Тренер');
-            $message->to($item['email']);
+            $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
+            $message->to($params['user_email'] );
 
         });
 
@@ -390,11 +396,15 @@ class AdminController extends Controller
         $currentMessage = "Ваш пароль обновлен. ";     
         $currentMessage = $currentMessage . "\n" . $message;
 
-        Mail::send('emails.reset_password',array('user_name' =>$user->email, 'user_password'=>$newUserPass, 'curMessage' => $currentMessage), function($message)
-        {
-            $message->from($settings->email, 'gizerskaya - Фитнесс Тренер');
+        $params = array();
+        $params['user_email'] = $user->email;
+        $params['admin_email'] = $settings->email;  
 
-            $message->to($user->email);
+        Mail::send('emails.reset_password',array('user_name' =>$user->email, 'user_password'=>$newUserPass, 'curMessage' => $currentMessage), function($message) use($params)
+        {
+            $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
+
+            $message->to($params['user_email']);
 
         });
 

@@ -258,13 +258,14 @@ class HomeController extends Controller
                 if(isset($_POST["WMI_PAYMENT_NO"]))
                 {
                     $id_user_order = $_POST["WMI_PAYMENT_NO"];
+                    Log::info('Заказ № '. $_POST["WMI_PAYMENT_NO"] .' оплачен');
                     $currentOrder = Order::find($id_user_order);      
-                    if($currentOrder->user_status)
+                    if(isset($currentOrder->user_status) && $currentOrder->user_status)
                     { 
                         self::succesOplataRegisteredUser($currentOrder->user_id, $currentOrder->course_id, $currentOrder); 
                         Log::info('Заказ № '. $_POST["WMI_PAYMENT_NO"] .' оплачен');
                         exit(); 
-                    } else {          
+                    } else if (isset($currentOrder->user_status) && !$currentOrder->user_status) {                         
 
                         self::succesOplataNotRegisteredUser($currentOrder->user_id, $currentOrder->course_id, $currentOrder);
                         Log::info('Заказ № '. $_POST["WMI_PAYMENT_NO"] .' оплачен');
@@ -316,10 +317,14 @@ class HomeController extends Controller
             $new_user['role_id']
         ]);  
 
-        Mail::send('emails.user',array('user_name' =>$new_user['email'], 'user_password'=>$newUserPass), function($message)
+        $params = array();
+        $params['user_email'] = $new_user['email'];
+        $params['admin_email'] = $settings->email; 
+
+        Mail::send('emails.user',array('user_name' =>$new_user['email'], 'user_password'=>$newUserPass), function($message) use ($params)
         {
-            $message->from($settings->email, 'gizerskaya - Фитнесс Тренер');
-            $message->to($new_user['email']);
+            $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
+            $message->to($params['user_email'])->subject('gizerskaya - Фитнесс Тренер');
         });
 
          /* mail($new_user['email'],
@@ -327,10 +332,10 @@ class HomeController extends Controller
           "Спасибо, что нас выбрали. \nВаши данные для входа в Ваш Личный Кабинет:\nЛогин: " . $new_user['email'] . "\nПароль: " . $newUserPass . "",
           "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());*/
 
-        Mail::send('emails.admin',array('user_name' =>$new_user['email'], 'user_email'=>$new_user['email'], 'user_tel' => $new_user['phone']), function($message)
+        Mail::send('emails.admin',array('user_name' =>$new_user['name'], 'user_email'=>$new_user['email'], 'user_tel' => $new_user['phone']), function($message) use ($params)
         {
-            $message->from('gizerskaya - Фитнесс Тренер', 'gizerskaya - Фитнесс Тренер');
-            $message->to($settings->email);
+            $message->from('site@gizerskaya.com', 'gizerskaya - Фитнесс Тренер');
+            $message->to($params['admin_email'])->subject('gizerskaya - Фитнесс Тренер');
 
         }); 
 
@@ -350,9 +355,9 @@ class HomeController extends Controller
         if(isset($currentCourse)) {
             if($currentCourse->type == 'cours') {
                 $currentDate = Carbon::now();
-                $user->update(['data_start_course' => $currentDate]);              
+                $currentUser->update(['data_start_course' => $currentDate]);              
             } elseif ($currentCourse->type == 'marathon') {
-                $user->update(['data_start_course' => $currentCourse->date_end_selection]);        
+                $currentUser->update(['data_start_course' => $currentCourse->date_end_selection]);        
             } 
         }
     }

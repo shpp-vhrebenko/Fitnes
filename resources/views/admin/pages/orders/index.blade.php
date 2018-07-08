@@ -48,6 +48,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Клиент</th>
+                    <th scope="col">Курс</th>
                     <th scope="col">Статус</th>
                     <th scope="col">Дата заказа</th>
                     <th scope="col">Всего</th>
@@ -62,6 +63,7 @@
                             {{$order->client->email}}
                             @endif
                         </td>
+                        <td>@if(isset($order->course)) {!! $order->course->name !!}@endif</td>
                         <td>{{ $order->getOrderStatus($order->status_id) }}</td>
                         <td>{{ $order->created_at->format('d-m-Y') }}</td>
                         <td>{{ $order->total }} рубл.</td>

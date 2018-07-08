@@ -16,8 +16,9 @@
         <div class="row justify-content-center align-items-center ">
             <div class="col-md-10">
                 <div class="login-card">
-                    <div class="register-card__header">ВАШИ ДАННЫЕ</div>
-
+                    <div class="register-card__header">
+                        <h3>ВАШИ ДАННЫЕ</h3>
+                    </div>
                     <div class="login-card__body">
                         <form method="POST" action="{{ route('store_user', $course->slug) }}" class="form-login" id="register-form">
                             @csrf
