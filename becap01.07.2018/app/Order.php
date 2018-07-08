@@ -14,7 +14,13 @@ class Order extends Model
 
     protected $orderStatuses = [
         'Не оплочено',
-        'Оплачено'
+        'Оплачено',
+        'Ожидает оплаты',
+    ];
+
+    protected $userStatuses = [
+        'Зарегистрирован',
+        'Не зарегистрирован',
     ];
 
     public static function getAllOrderStatuses()

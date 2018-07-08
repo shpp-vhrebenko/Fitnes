@@ -17,9 +17,7 @@ class CreateSoulUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('phone');
-            $table->string('email');
-            $table->tinyInteger('status_id');
-            $table->integer('course_id')->unsigned()->default(0); 
+            $table->string('email');            
             $table->timestamps();
         });
     }

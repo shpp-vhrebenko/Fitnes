@@ -22,13 +22,25 @@
 	height: 100%;
 }
 
-.register-card__header {	
+.register-card__header{	
 	text-align: center;
-	color: #fff;
-    font-size: 60px;
+	color: #fff;    
     font-family: HelveticaBold;	
 	line-height: 1;
 	margin-bottom: 30px;
+}
+
+.register-card__header h3 {
+	font-size: 60px;
+}
+
+.register-card__header p {
+	font-size: 30px;
+}
+
+span.rur {
+    font-family: rub-arial-regular;
+    text-transform: uppercase;
 }
 
 .login-card__header {
@@ -87,6 +99,10 @@ a.form-login__button {
 a.form-login__button:hover {
 	border: 1px solid #fff;
 	cursor: pointer;
+}
+
+.btn-center {
+	margin: 0 auto;
 }
 
 .form-login__label {	
@@ -186,6 +202,13 @@ label.error {
 
 .form-login__label-terms {
 	height: auto !important;
+}
+
+.form-succes-oplata {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 

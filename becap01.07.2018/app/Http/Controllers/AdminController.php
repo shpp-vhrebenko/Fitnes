@@ -289,12 +289,19 @@ class AdminController extends Controller
         $user = $this->users->create($item);        
         $user->roles()->attach([
             $item['role_id']
-        ]);   
+        ]);         
 
-        mail($item['email'],
+        Mail::send('emails.user',array('user_name' =>$item['email'], 'user_password'=>$newUserPass), function($message)
+        {
+            $message->from($settings->email, 'gizerskaya - Фитнесс Тренер');
+            $message->to($item['email']);
+
+        });
+
+        /*mail($item['email'],
             "gizerskaya - Фитнесс Тренер",
             "Спасибо, что нас выбрали. \nВаши данные для входа в Ваш Личный Кабинет:\nЛогин: " . $item['email'] . "\nПароль: " . $newUserPass . "",
-            "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());
+            "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());*/
 
         Session::flash('success', 'Клиент успешно создан!'); 
 
@@ -380,13 +387,23 @@ class AdminController extends Controller
         $hashNewPass = bcrypt($newUserPass); 
         $user->update(['password' => $hashNewPass]); 
 
-        $currentMessage = "Ваш пароль обновлен. \nВаши данные для входа в Ваш Личный Кабинет:\nЛогин: " . $user->email . "\nПароль: " . $newUserPass . " ";     
+        $currentMessage = "Ваш пароль обновлен. ";     
         $currentMessage = $currentMessage . "\n" . $message;
+
+        Mail::send('emails.reset_password',array('user_name' =>$user->email, 'user_password'=>$newUserPass, 'curMessage' => $currentMessage), function($message)
+        {
+            $message->from($settings->email, 'gizerskaya - Фитнесс Тренер');
+
+            $message->to($user->email);
+
+        });
+
+        /* $currentMessage = "Ваш пароль обновлен. \nВаши данные для входа в Ваш Личный Кабинет:\nЛогин: " . $user->email . "\nПароль: " . $newUserPass . " "; 
 
         mail($user->email,
             "gizerskaya - Фитнесс Тренер",
             $currentMessage,
-            "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());
+            "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());*/
 
         Session::flash('success', 'Клиенту "'.$user->name.'" успешно отправленно сообщение и задан новый пароль!'); 
 

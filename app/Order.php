@@ -9,13 +9,22 @@ use App\User;
 class Order extends Model
 {
     protected $fillable = [
-        'user_id', 'status_id', 'total'
+        'user_id',
+        'course_id',
+        'status_id',
+        'user_status',
+        'total'
     ];
 
     protected $orderStatuses = [
         'Не оплочено',
         'Оплачено',
         'Ожидает оплаты',
+    ];
+
+    protected $userStatuses = [
+        'Зарегистрирован',
+        'Не зарегистрирован',
     ];
 
     public static function getAllOrderStatuses()
