@@ -20,7 +20,7 @@
 	            </li>	
 	            @if(isset($categories) && count($categories) > 0)
 	                @foreach($categories as $category) 
-		                @if($category->id != 1)
+		                @if($category->id != 1 && $category->is_active != 0)
 		                <li class="@if(Request::url() == route('show_category_items', $category->slug)) active @endif">
 		                    <a class="usermenu__link" href="{{route('show_category_items', $category->slug)}}" .="">		{{$category->name}}
 							</a>                       
@@ -34,7 +34,7 @@
 					</a>
 			    </li>
 			    <li class=" ">
-			  		<a class="usermenu__link" href="https://gizerskaya.com/my-account/?&amp;profile=statii" .="">						
+			  		<a class="usermenu__link" href="https://chat.whatsapp.com/invite/JkjncLy1iNS4bcE1GanLEY" target="_blank">						
 						Чат
 					</a>
 			    </li>

@@ -26,7 +26,8 @@ class StoreCategoryRequest extends FormRequest
         return [
             'item.name' => 'required',
             'item.slug' => 'required',
-            'item.description' => 'required'
+            'item.description' => 'required',
+            'item.is_active' => 'required',
         ];
     }
 
@@ -34,7 +35,8 @@ class StoreCategoryRequest extends FormRequest
         return [
             'item.name.required' => 'Необходимо ввести Название Категории',
             'item.slug.required' => 'Необходимо ввести ЧПУ Категории',
-            'item.description.required' => 'Необходимо ввести Описание Категории'            
+            'item.description.required' => 'Необходимо ввести Описание Категории',
+            'item.is_active.required' => 'Необходимо указать статус Категории',           
         ];
     }
 }

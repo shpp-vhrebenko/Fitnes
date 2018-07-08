@@ -18,35 +18,42 @@
             <table class="table camotek-admin-table">
                 <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Название категории</th>                    
+                    <th scope="col">№</th>
+                    <th scope="col">Название категории</th> 
+                    <th scope="col">Статус категории</th>                   
                     <th scope="col">Дата создания</th>    
                     <th scope="col">Действия</th>                
                 </tr>
                 </thead>
                 <tbody>
                 <?php $index = 0; ?>
-                @foreach($categories as $category)                    
-                    <tr>
-                        <th scope="row">{{ ++$index }}</th>
-                        <td>{{ $category->name }}</td>               
-                        <td>{{ $category->created_at->format('d-m-Y') }}</td>                
-                        <td>
-                            <ul class="camotek-form-links">
-                                <li><a href="{{ route('edit_category', $category->id) }}" class="btn btn-primary">Изменить</a></li>
-                                @if($category->id != 1)
-                                <li>
-                                    <form class="delete" action="{{ route('destroy_category', $category->id) }}" method="POST">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                        <input class="btn btn-danger" type="submit" value="Удалить">
-                                    </form>
-                                </li>
+                @foreach($categories as $category)
+                    @if(isset($category) && $category->id != 1) 
+                        <tr>
+                            <th scope="row">{{ ++$index }}</th>
+                            <td>{{ $category->name }}</td> 
+                            <td>
+                                @if(isset($category->is_active))
+                                    {{ $category->getCategoryStatus($category->is_active) }}
                                 @endif
-                            </ul>
-                        </td>
-                    </tr>
-                    
+                            </td>               
+                            <td>{{ $category->created_at->format('d-m-Y') }}</td>                    
+                            <td>
+                                <ul class="camotek-form-links">
+                                    <li><a href="{{ route('edit_category', $category->id) }}" class="btn btn-primary">Изменить</a></li>
+                                    @if($category->id != 1)
+                                    <li>
+                                        <form class="delete" action="{{ route('destroy_category', $category->id) }}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                            <input class="btn btn-danger" type="submit" value="Удалить">
+                                        </form>
+                                    </li>
+                                    @endif
+                                </ul>
+                            </td>
+                        </tr>  
+                    @endif                                       
                 @endforeach
                 </tbody>
             </table>

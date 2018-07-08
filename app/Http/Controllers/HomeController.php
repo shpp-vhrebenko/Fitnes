@@ -124,13 +124,7 @@ class HomeController extends Controller
 
     public function oplata(Request $request) {
       $id_user_order = $request->session()->get('id_user_order');
-      $currentOrder = Order::find($id_user_order); 
-      $user = null;
-      if($currentOrder->user_status) {
-        $user = User::find($currentOrder->user_id);
-      } else {
-        $user = UserSoul::find($currentOrder->user_id);
-      }
+      $currentOrder = Order::find($id_user_order);       
        
       $course = Courses::find($currentOrder->course_id);
       $price = number_format((float)$course->price, 2, '.', '');   

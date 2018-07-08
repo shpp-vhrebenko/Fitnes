@@ -96,9 +96,9 @@ a.form-login__button {
 }
 
 .form-login__button:hover,
-a.form-login__button:hover {
-	border: 1px solid #fff;
+a.form-login__button:hover {	
 	cursor: pointer;
+	text-decoration: none;
 }
 
 .btn-center {
@@ -136,6 +136,7 @@ a.form-login__button:hover {
 
 .form-login__button-link:hover {
 	color: #fff;
+	text-decoration: none;
 }
 
 .form-login input::placeholder {
@@ -211,6 +212,32 @@ label.error {
 	align-items: center;
 }
 
+.alert.alert-danger.alert-danger_custom {
+	width: 100%;
+    text-align: center;
+    background-color: #b92034;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: HelveticaLight;
+    padding: 15px;
+    font-size: 16px;
+    margin-top: 0px;
+    border-color: initial;
+    border: none;
+}
+
+.alert.alert-success.alert-success_custom {
+    background-color: #11b939;
+    border: none ;
+    color: #fff;    
+    font-family: HelveticaLight;
+    border-radius: initial;
+    font-size: 1rem;
+    border: none;
+    border-color: initial;
+}
+
+
 
 /* MODAL CONTACTS */
 .modal-block-contacts {
@@ -279,7 +306,6 @@ label.error {
 }
 
 .form-contacts__button:hover {
-	cursor: pointer;
-	border: 1px solid #919094;
+	cursor: pointer;	
 }
 /* END MODAL CONTACTS */

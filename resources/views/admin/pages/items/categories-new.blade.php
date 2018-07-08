@@ -55,6 +55,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label for="status_id" class="col-sm-2 col-form-label">Cтатус Категории<sup class="required">*</sup></label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="status_id" name="item[is_active]">
+                                            @if(isset($statuses))
+                                                @foreach($statuses as $key => $status)
+                                                    <option value="{{ $key }}" @if(isset($category) && $category->is_active == $key) selected @endif>{{ $status }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div> 
+                                <div class="form-group row">
                                     <label for="description" class="col-sm-2 col-form-label">Описание<sup class="required">*</sup></label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control summernote" id="description" name="item[description]" rows="3">{{ isset($category) ? $category->description : old('item.description') }}</textarea>

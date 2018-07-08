@@ -362,6 +362,34 @@
     margin-right: 0;
     margin-left: 0;
 }
+
+.courses-form__button {
+    background-color: #2c3059!important;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.25;
+    border-radius: 0.25rem;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.courses-form__input {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #2c3059;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.25;
+    border-radius: initial;
+    margin-bottom: 25px;
+}
+
+.courses-form__input:focus {
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #2c3059;
+}
 /* END COURSES */
 
 /* TABS */

@@ -71,13 +71,13 @@
                             <ul class="camotek-form-links">
                                 <li><a href="{{ route('show_order', $order->id) }}" class="btn btn-light">Просмотр</a></li>
                                 <!-- <li><a href="{{ route('edit_order', $order->id) }}" class="btn btn-primary">Изменить</a></li> -->
-                                <li>
+                                <!-- <li>
                                     <form class="delete" action="{{ route('destroy_order', $order->id) }}" method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                         <input class="btn btn-danger" type="submit" value="Удалить">
                                     </form>
-                                </li>
+                                </li> -->
                             </ul>
                         </td>
                     </tr>

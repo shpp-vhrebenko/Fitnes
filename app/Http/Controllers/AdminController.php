@@ -433,8 +433,8 @@ class AdminController extends Controller
     public function categories_new()
     {
         $title = 'Создание категории';
-
-        return view('admin/pages/items/categories-new', compact(['title']));
+        $statuses = Category::$CategoryStatuses;
+        return view('admin/pages/items/categories-new', compact(['title', 'statuses']));
     }
 
     public function categories_store(StoreCategoryRequest $request)
@@ -448,12 +448,13 @@ class AdminController extends Controller
     public function edit_category($id)
     {
         $category = Category::find($id);
+        $statuses = Category::$CategoryStatuses;
         if (!isset($category))
         {
             return abort('404');
         }
         $title = 'Изменение категории';        
-        return view('admin/pages/items/categories-new', compact(['title', 'category']));
+        return view('admin/pages/items/categories-new', compact(['title', 'category', 'statuses']));
     }
 
     public function update_category($id, StoreCategoryRequest $request)

@@ -31,12 +31,7 @@ class Item extends Model
     public static $ItemTrainingStatuses = [ 
         'Не выходной',
         'Выходной'        
-    ];
-
-    public static $TrainingSettings = [
-        'maxWeek' => 2,
-        'maxDay' => 14,
-    ];   
+    ];    
 
     public function getItemTrainingStatus($status_id)
     {

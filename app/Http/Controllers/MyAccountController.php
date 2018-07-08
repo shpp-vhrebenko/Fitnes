@@ -25,6 +25,7 @@ use App\Settings;
 use App\Result;
 use App\User;
 use App\Courses;
+use App\Order;
 
 use Illuminate\Support\Facades\Session;
 
@@ -48,18 +49,8 @@ class MyAccountController extends Controller
         $this->categories = $categoriesRepository;
         $this->results = $resultsRepository;
         $this->users = $usersRepository;
-        $this->courses = $coursesRepository;
-        $currentUser = Auth::user();    
-        if(Auth::user()) {
-            if(Auth::user()->course_id) {
-                $categories = $this->categories->all();
-            } else {
-                $categories = null;
-            }
-        } else {
-            $categories = null;
-        }
-              
+        $this->courses = $coursesRepository;            
+        $categories = $this->categories->all();              
         $settings = Settings::first();      
         view()->share(compact([ 'settings', 'categories']));        
     }
@@ -70,12 +61,7 @@ class MyAccountController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {     
-        /*Mail::send('emails.welcome', [], function ($m) {
-            $m->from('sender@test.com', 'Sender');
-            $m->to('receiver@test.com', 'Receiver')->subject('Тестовое письмо с HTML');
-            $m->cc('copy@test.com', '');
-        });*/
+    {         
         return redirect()->route('show_trainings');       
     }
 
@@ -86,6 +72,32 @@ class MyAccountController extends Controller
         $title = 'Курсы';
         $description = 'Закончился текущий Курс. Вам необходимо оплатить  новый Курс или Марафон.';
         return view('my_acount/pages/courses/courses', compact(['title', 'description', 'courses']));
+    }
+
+    public function by_course(Request $request)
+    {
+        $slug = $request->get('course_slug');
+
+        if(isset($slug) && $slug != NULL) {                       
+            $course = Courses::where('slug', $slug)->first();  
+            $currentUser = Auth::user();        
+
+            $newUserOrder = Order::create([
+                'user_id' => $currentUser->id,
+                'course_id' => $course->id,
+                'status_id' => 2, // В ожидании оплаты    
+                'user_status' => 1, // Пользователь не зарегистрирован
+                'total' => $course->price,                
+            ]); 
+
+            $request->session()->put('id_user_order', $newUserOrder->id);
+
+            return redirect()->route('oplata');
+        } else {
+            Session::flash('error', 'Необходимо выбрать Курс или Марафон!');
+            return redirect()->back();
+        }
+        
     }
 
     public function show_trainings()
