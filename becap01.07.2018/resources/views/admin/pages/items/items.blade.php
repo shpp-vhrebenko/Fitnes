@@ -37,7 +37,7 @@
                     <select class="form-control" id="courseId" name="filter[course_id]">       
                         @if(isset($courses) && count($courses) > 0)
                             @foreach($courses as $course)                                        
-                                <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                <option value="{{ $course->id }}">{!! $course->name !!}</option>
                             @endforeach
                         @endif        
                     </select>            

@@ -81,6 +81,9 @@ background:linear-gradient(to right, #ff5b77 0%, #613d7c 100%) !important;
   line-height:150%;
   text-align:left;
 ">
+  <br/> <br/>
+                            <p>{{$curMessage}}</p>
+   <br/> <br/>
                  
               
                             <table cellspacing="0" cellpadding="6" style="width: 100%; border-radius:5px; overflow:hidden;border-top:1px solid #aaa" >                              
@@ -88,12 +91,12 @@ background:linear-gradient(to right, #ff5b77 0%, #613d7c 100%) !important;
                                 <tr>
                                   <td style="text-align:left; vertical-align:middle; word-wrap:break-word;">Логин :<br>
                                     <small></small></td>
-                                  <td style="text-align:left; vertical-align:middle; "><span class="amount">[iv_member_user_name]</span></td>
+                                  <td style="text-align:left; vertical-align:middle; "><span class="amount">{{$user_name}}</span></td>
                                 </tr>
                               </tbody>
                               <tr>
                                 <td bgcolor="#efefef" style="text-align:left; " scope="row">Пароль:</td>
-                                <td bgcolor="#efefef" style="text-align:left; vertical-align:middle; "><span class="amount">[iv_member_password]</span></td>
+                                <td bgcolor="#efefef" style="text-align:left; vertical-align:middle; "><span class="amount">{{$user_password}}</span></td>
                               </tr>
                               
                             </table>

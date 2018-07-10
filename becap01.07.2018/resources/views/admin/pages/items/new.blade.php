@@ -93,7 +93,7 @@
                                     <option value="0">-- Не выбрано --</option>   
                                     @if(isset($courses) && count($courses) > 0)
                                         @foreach($courses as $course)                                        
-                                            <option value="{{ $course->id }}" @if(isset($item->course_id) && ($item->course_id == $course->id)) selected @endif>{{ $course->name }}</option>
+                                            <option value="{{ $course->id }}" @if(isset($item->course_id) && ($item->course_id == $course->id)) selected @endif>{!! $course->name !!}</option>
                                         @endforeach
                                     @endif        
                                 </select>

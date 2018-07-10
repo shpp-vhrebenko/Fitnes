@@ -12,7 +12,18 @@ class Category extends Model
         'name',
         'slug',
         'description',
+        'is_active',
     ];
+
+    public static $CategoryStatuses = [ 
+        'Не активна',
+        'Активна'
+    ];
+
+    public function getCategoryStatus($status_id)
+    {
+        return self::$CategoryStatuses[$status_id];
+    } 
   
 
     public function items()

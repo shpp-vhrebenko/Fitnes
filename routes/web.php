@@ -58,6 +58,7 @@ Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveC
     Route::post('/results/user', 'MyAccountController@get_results')->name('get_results');
     Route::get('/results/new', 'MyAccountController@add_result')->name('add_result');    
     Route::post('/results/new', 'MyAccountController@result_store')->name('result_store');
+    Route::delete('/results/delete', 'MyAccountController@result_delete')->name('result_delete');
 
     // Route courses
     Route::get('/courses','MyAccountController@show_courses')->name('courses_list');   

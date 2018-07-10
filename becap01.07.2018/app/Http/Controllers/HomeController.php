@@ -83,6 +83,7 @@ class HomeController extends Controller
         return view('auth.register', compact(['course']));
     }
 
+    // validate email user ajax request from frontend
     public function validate_email_user(Request $request)
     {
         if($curEmail = $request->get('email')) {
@@ -98,7 +99,9 @@ class HomeController extends Controller
     }
 
     public function user_store(Request $request, $slug) {
-        $course = Courses::where('slug', $slug)->first();         
+
+        $course = Courses::where('slug', $slug)->first();  
+
         $newSoulUser = UserSoul::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),            
@@ -106,200 +109,97 @@ class HomeController extends Controller
             'course_id' => $course->id,           
         ]);
 
-        $request->session()->put('id_soul_user', $newSoulUser->id);
+        $newUserOrder = Order::create([
+            'user_id' => $newSoulUser->id,
+            'course_id' => $course->id,
+            'status_id' => 2, // В ожидании оплаты    
+            'user_status' => 0, // Пользователь не зарегистрирован
+            'total' => $course->price,                
+        ]); 
+
+        $request->session()->put('id_user_order', $newUserOrder->id);
 
         return redirect()->route('oplata');
     }
 
     public function oplata(Request $request) {
-    $id_soul_user = $request->session()->get('id_soul_user');
-    $user = UserSoul::find($id_soul_user); 
-    $course = Courses::find($user->course_id);
-    $price = number_format((float)$course->price, 2, '.', '');   
-    $date = Carbon::now()->addHour();    
-        //Секретный ключ интернет-магазина
-    $key = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
- 
-    $fields = array();
- 
-      // Добавление полей формы в ассоциативный массив
-    $fields["WMI_MERCHANT_ID"]    = "117327853980";
-    $fields["WMI_PAYMENT_AMOUNT"] = $price;
-    $fields["WMI_CURRENCY_ID"]    = "643";  
-    $fields["WMI_DESCRIPTION"]    = "Оплата Курса ".strip_tags($course->name);
-    $fields["WMI_SUCCESS_URL"]    = route('success_oplata');
-    $fields["WMI_FAIL_URL"]       = route('error_oplata');
-    $fields["WMI_EXPIRED_DATE"] = $date;
-    
-    //Если требуется задать только определенные способы оплаты, раскоментируйте данную строку и перечислите требуемые способы оплаты.
-    //$fields["WMI_PTENABLED"]      = array("UnistreamRUB", "SberbankRUB", "RussianPostRUB");
- 
-    //Сортировка значений внутри полей
-    foreach($fields as $name => $val)
-    {
-        if(is_array($val))
-        {
-          usort($val, "strcasecmp");
-          $fields[$name] = $val;
-        }
-    }
- 
-    // Формирование сообщения, путем объединения значений формы,
-    // отсортированных по именам ключей в порядке возрастания.
-    uksort($fields, "strcasecmp");
-    $fieldValues = "";
- 
-    foreach($fields as $value)
-    {
-      if(is_array($value))
-          foreach($value as $v)
-          {
-              //Конвертация из текущей кодировки (UTF-8)
-              //необходима только если кодировка магазина отлична от Windows-1251
-              $v = iconv("utf-8", "windows-1251", $v);
-              $fieldValues .= $v;
-          }
-      else
+      $id_user_order = $request->session()->get('id_user_order');
+      $currentOrder = Order::find($id_user_order);       
+       
+      $course = Courses::find($currentOrder->course_id);
+      $price = number_format((float)$course->price, 2, '.', '');   
+      $date = Carbon::now()->addHour();    
+          //Секретный ключ интернет-магазина
+      $key = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
+   
+      $fields = array();
+   
+        // Добавление полей формы в ассоциативный массив
+      $fields["WMI_MERCHANT_ID"]    = "117327853980";
+      $fields["WMI_PAYMENT_AMOUNT"] = $price;
+      $fields["WMI_CURRENCY_ID"]    = "643";  
+      $fields["WMI_DESCRIPTION"]    = "Оплата Курса ".strip_tags($course->name);
+      $fields["WMI_SUCCESS_URL"]    = route('success_oplata');
+      $fields["WMI_FAIL_URL"]       = route('error_oplata');
+      $fields["WMI_EXPIRED_DATE"] = $date;
+      $fields["WMI_PAYMENT_NO"] = $id_user_order;
+      
+      //Если требуется задать только определенные способы оплаты, раскоментируйте данную строку и перечислите требуемые способы оплаты.
+      //$fields["WMI_PTENABLED"]      = array("UnistreamRUB", "SberbankRUB", "RussianPostRUB");
+   
+      //Сортировка значений внутри полей
+      foreach($fields as $name => $val)
       {
-          //Конвертация из текущей кодировки (UTF-8)
-          //необходима только если кодировка магазина отлична от Windows-1251
-          $value = iconv("utf-8", "windows-1251", $value);
-          $fieldValues .= $value;
+          if(is_array($val))
+          {
+            usort($val, "strcasecmp");
+            $fields[$name] = $val;
+          }
       }
-    }
- 
-    // Формирование значения параметра WMI_SIGNATURE, путем
-    // вычисления отпечатка, сформированного выше сообщения,
-    // по алгоритму MD5 и представление его в Base64
- 
-    $signature = base64_encode(pack("H*", md5($fieldValues . $key)));
- 
-    //Добавление параметра WMI_SIGNATURE в словарь параметров формы
- 
-    $fields["WMI_SIGNATURE"] = $signature;
-
-
-        return view('front/pages/oplata/oplata', compact(['signature', 'price', 'course', 'date']));
-    }
-
-    public function oplata_course(Request $request) { 
-        $check_course = $request->get('check_course');      
-        if($check_course && ($check_course === "on" )) {
-            $id_soul_user = $request->session()->get('id_soul_user');
-            $user_soul = UserSoul::find($id_soul_user);
-            $new_user = array();
-            $new_user['status_id'] = 0;                            
-            $new_user['remember_token'] = $request->get('_token');       
-            $newUserPass = str_random(8);
-            $new_user['password'] = bcrypt($newUserPass);   
-            $new_user['role_id'] = 3; 
-            $new_user['name'] = $user_soul->name;
-            $new_user['phone'] = $user_soul->phone;
-            $new_user['email'] = $user_soul->email; 
-            $new_user['course_id']  = $user_soul->course_id;
-            $currentCourse = Courses::where(['id' => $user_soul->course_id])->first();
-            if(isset($currentCourse)) {
-                if($currentCourse->type == 'cours') {
-                    $new_user['data_start_course']  = Carbon::now();   
-                } elseif ($currentCourse->type == 'marathon') {
-                    $new_user['data_start_course']  = $currentCourse->date_end_selection;                     
-                } 
-            }                         
-            $user = User::create($new_user);  
-            $user_soul->delete();      
-            $user->roles()->attach([
-                $new_user['role_id']
-            ]);   
-
-            Order::create([
-                'user_id' => $user->id,
-                'status_id' => 1,            
-                'total' => $currentCourse->price                
-            ]);   
-
-            $settings = Settings::first(); 
-
-            Mail::send('emails.user',array('user_name' =>$new_user['email'], 'user_password'=>$newUserPass), function($message)
+   
+      // Формирование сообщения, путем объединения значений формы,
+      // отсортированных по именам ключей в порядке возрастания.
+      uksort($fields, "strcasecmp");
+      $fieldValues = "";
+   
+      foreach($fields as $value)
+      {
+        if(is_array($value))
+            foreach($value as $v)
             {
-                $message->from($settings->email, 'gizerskaya - Фитнесс Тренер');
-                $message->to($new_user['email']);
-
-            });
-
-           /* mail($new_user['email'],
-                "gizerskaya - Фитнесс Тренер",
-                "Спасибо, что нас выбрали. \nВаши данные для входа в Ваш Личный Кабинет:\nЛогин: " . $new_user['email'] . "\nПароль: " . $newUserPass . "",
-                "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());*/
-
-            Mail::send('emails.admin',array('user_name' =>$new_user['email'], 'user_email'=>$new_user['email'], 'user_tel' => $new_user['phone']), function($message)
-            {
-                $message->from('gizerskaya - Фитнесс Тренер', 'gizerskaya - Фитнесс Тренер');
-                $message->to($settings->email);
-
-            });    
-
-            /*mail($settings->email,
-                "gizerskaya - Фитнесс Тренер",
-                "У Вас появился новичок : " . $new_user['email'],
-                "From:"."gizerskaya - Фитнесс Тренер"."\r\n"."X-Mailer: PHP/" . phpversion());*/
-
-            $request->session()->flush();
-            return redirect()->route('success_oplata');
-        } else {
-            return redirect()->route('error_oplata');
+                //Конвертация из текущей кодировки (UTF-8)
+                //необходима только если кодировка магазина отлична от Windows-1251
+                $v = iconv("utf-8", "windows-1251", $v);
+                $fieldValues .= $v;
+            }
+        else
+        {
+            //Конвертация из текущей кодировки (UTF-8)
+            //необходима только если кодировка магазина отлична от Windows-1251
+            $value = iconv("utf-8", "windows-1251", $value);
+            $fieldValues .= $value;
         }
+      }
+   
+      // Формирование значения параметра WMI_SIGNATURE, путем
+      // вычисления отпечатка, сформированного выше сообщения,
+      // по алгоритму MD5 и представление его в Base64
+   
+      $signature = base64_encode(pack("H*", md5($fieldValues . $key)));
+   
+      //Добавление параметра WMI_SIGNATURE в словарь параметров формы
+   
+      $fields["WMI_SIGNATURE"] = $signature;
+
+
+        return view('front/pages/oplata/oplata', compact(['fields', 'price', 'course', 'date']));
     }
+
 
 
 
     public function success_oplata(Request $request)
-    {
-      Log::info('Оплачено!!!');
-      $id_soul_user = $request->session()->get('id_soul_user');
-      $user_soul = UserSoul::find($id_soul_user);
-      $new_user = array();
-      $new_user['status_id'] = 0;                            
-      $new_user['remember_token'] = $request->get('_token');       
-      $newUserPass = str_random(8);
-      $new_user['password'] = bcrypt($newUserPass);   
-      $new_user['role_id'] = 3; 
-      $new_user['name'] = $user_soul->name;
-      $new_user['phone'] = $user_soul->phone;
-      $new_user['email'] = $user_soul->email; 
-      $new_user['course_id']  = $user_soul->course_id;
-      $currentCourse = Courses::where(['id' => $user_soul->course_id])->first();
-      if(isset($currentCourse)) {
-          if($currentCourse->type == 'cours') {
-              $new_user['data_start_course']  = Carbon::now();   
-          } elseif ($currentCourse->type == 'marathon') {
-              $new_user['data_start_course']  = $currentCourse->date_end_selection;                     
-          } 
-      }                         
-      $user = User::create($new_user);  
-      $user_soul->delete();      
-      $user->roles()->attach([
-          $new_user['role_id']
-      ]);   
-
-      Order::create([
-          'user_id' => $user->id,
-          'status_id' => 1,            
-          'total' => $currentCourse->price                
-      ]);   
-
-      $settings = Settings::first(); 
-      mail($new_user['email'],
-          "gizerskaya - Фитнесс Тренер",
-          "Спасибо, что нас выбрали. \nВаши данные для входа в Ваш Личный Кабинет:\nЛогин: " . $new_user['email'] . "\nПароль: " . $newUserPass . "",
-          "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());
-
-      mail($settings->email,
-          "gizerskaya - Фитнесс Тренер",
-          "У Вас появился новичок : " . $new_user['email'],
-          "From:"."gizerskaya - Фитнесс Тренер"."\r\n"."X-Mailer: PHP/" . phpversion());
-
-      $request->session()->flush();
-      
+    { 
       return view('front/pages/oplata/succes');
     }  
 
@@ -309,85 +209,150 @@ class HomeController extends Controller
     }
 
     public function oplata_result() 
-    {
-      Log::info('Результат оплаты');
-      
-       // Секретный ключ интернет-магазина (настраивается в кабинете)
- 
-  $skey = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
- 
-  // Функция, которая возвращает результат в Единую кассу
- 
-  function print_answer($result, $description)
-  {
-    print "WMI_RESULT=" . strtoupper($result) . "&";
-    print "WMI_DESCRIPTION=" .$description;
-    exit();
-  }
- 
-  // Проверка наличия необходимых параметров в POST-запросе
- 
-  if (!isset($_POST["WMI_SIGNATURE"]))
-    /*print_answer("Retry", "Отсутствует параметр WMI_SIGNATURE");*/
-    Log::info('Отсутствует параметр WMI_SIGNATURE');
- 
-  if (!isset($_POST["WMI_PAYMENT_NO"]))
-   /* print_answer("Retry", "Отсутствует параметр WMI_PAYMENT_NO");*/
-  Log::info('Отсутствует параметр WMI_PAYMENT_NO');
- 
-  if (!isset($_POST["WMI_ORDER_STATE"]))
-    /*print_answer("Retry", "Отсутствует параметр WMI_ORDER_STATE");*/
-  Log::info('Отсутствует параметр WMI_ORDER_STATE');
+    {   
 
- 
-  // Извлечение всех параметров POST-запроса, кроме WMI_SIGNATURE
- 
-  foreach($_POST as $name => $value)
-  {
-    if ($name !== "WMI_SIGNATURE") $params[$name] = $value;
-  }
- 
-  // Сортировка массива по именам ключей в порядке возрастания
-  // и формирование сообщения, путем объединения значений формы
- 
-  uksort($params, "strcasecmp"); $values = "";
- 
-  foreach($params as $name => $value)
-  {
- 
-    $values .= $value;
-  }
- 
-  // Формирование подписи для сравнения ее с параметром WMI_SIGNATURE
- 
-  $signature = base64_encode(pack("H*", md5($values . $skey)));
- 
-  //Сравнение полученной подписи с подписью W1
- 
-  if ($signature == $_POST["WMI_SIGNATURE"])
-  {
-    if (strtoupper($_POST["WMI_ORDER_STATE"]) == "ACCEPTED")
-    {
-      // TODO: Пометить заказ, как «Оплаченный» в системе учета магазина
- 
-    /*  print_answer("Ok", "Заказ #" . $_POST["WMI_PAYMENT_NO"] . " оплачен!");*/
-      Log::info('Заказ оплачен');
+        // Секретный ключ интернет-магазина (настраивается в кабинете) 
+        $skey = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
 
+        // Проверка наличия необходимых параметров в POST-запросе 
+        if (!isset($_POST["WMI_SIGNATURE"])) {        
+            Log::error('Отсутствует параметр WMI_SIGNATURE');
+        }   
+
+        if (!isset($_POST["WMI_ORDER_STATE"])) {
+            Log::error('Отсутствует параметр WMI_ORDER_STATE');
+        }
+
+        // Извлечение всех параметров POST-запроса, кроме WMI_SIGNATURE 
+        foreach($_POST as $name => $value)
+        {
+            if ($name !== "WMI_SIGNATURE") $params[$name] = $value;
+        }
+
+        // Сортировка массива по именам ключей в порядке возрастания
+        // и формирование сообщения, путем объединения значений формы
+     
+        uksort($params, "strcasecmp"); $values = "";
+     
+        foreach($params as $name => $value)
+        { 
+            $values .= $value;
+        }
+
+        // Формирование подписи для сравнения ее с параметром WMI_SIGNATURE
+     
+        $signature = base64_encode(pack("H*", md5($values . $skey)));
+     
+        //Сравнение полученной подписи с подписью W1 
+
+        if ($signature == $_POST["WMI_SIGNATURE"])
+        {
+            if (strtoupper($_POST["WMI_ORDER_STATE"]) == "ACCEPTED")
+            {
+                if(isset($_POST["WMI_PAYMENT_NO"]))
+                {
+                    $id_user_order = $_POST["WMI_PAYMENT_NO"];
+                    Log::info('Заказ № '. $_POST["WMI_PAYMENT_NO"] .' оплачен');
+                    $currentOrder = Order::find($id_user_order);      
+                    if(isset($currentOrder->user_status) && $currentOrder->user_status)
+                    { 
+                        self::succesOplataRegisteredUser($currentOrder->user_id, $currentOrder->course_id, $currentOrder); 
+                        Log::info('Заказ № '. $_POST["WMI_PAYMENT_NO"] .' оплачен');
+                        exit(); 
+                    } else if (isset($currentOrder->user_status) && !$currentOrder->user_status) {                         
+
+                        self::succesOplataNotRegisteredUser($currentOrder->user_id, $currentOrder->course_id, $currentOrder);
+                        Log::info('Заказ № '. $_POST["WMI_PAYMENT_NO"] .' оплачен');
+                        exit();   
+                    }                
+                    
+                } else {
+                Log::error('Отсутствует параметр WMI_PAYMENT_NO');
+                }            
+            } else {
+                Log::error("Неверное состояние ". $_POST["WMI_ORDER_STATE"]);
+            }
+        } else {
+            // Подпись не совпадает, возможно вы поменяли настройки интернет-магазина
+            Log::error("Неверная подпись " . $_POST["WMI_SIGNATURE"]);
+        }
+        
     }
-    else
+
+    protected static function  succesOplataNotRegisteredUser($user_id, $course_id, $currentOrder)
     {
-      // Случилось что-то странное, пришло неизвестное состояние заказа
- 
-     /* print_answer("Retry", "Неверное состояние ". $_POST["WMI_ORDER_STATE"]);*/
-       Log::info("Неверное состояние ". $_POST["WMI_ORDER_STATE"]);
+        $settings = Settings::first();
+        $user_soul = UserSoul::find($user_id);
+        $new_user = array();
+        $new_user['status_id'] = 0;    // Выключен. Еще не вводил результати.         
+        $newUserPass = str_random(8);
+        $new_user['password'] = bcrypt($newUserPass);   
+        $new_user['role_id'] = 3; 
+        $new_user['name'] = $user_soul->name;
+        $new_user['phone'] = $user_soul->phone;
+        $new_user['email'] = $user_soul->email; 
+        $new_user['course_id']  = $course_id;
+        $currentCourse = Courses::find($course_id);
+        if(isset($currentCourse)) {
+            if($currentCourse->type == 'cours') {
+              $new_user['data_start_course']  = Carbon::now();   
+            } elseif ($currentCourse->type == 'marathon') {
+              $new_user['data_start_course']  = $currentCourse->date_end_selection;           
+            } 
+        }
+        $user = User::create($new_user);  
+        $currentOrder->update([
+            'status_id' => 1,
+            'user_status' => 1,
+            'user_id' => $user->id,
+        ]);    
+        $user_soul->delete();      
+        $user->roles()->attach([
+            $new_user['role_id']
+        ]);  
+
+        $params = array();
+        $params['user_email'] = $new_user['email'];
+        $params['admin_email'] = $settings->email; 
+
+        Mail::send('emails.user',array('user_name' =>$new_user['email'], 'user_password'=>$newUserPass), function($message) use ($params)
+        {
+            $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
+            $message->to($params['user_email'])->subject('gizerskaya - Фитнесс Тренер');
+        });
+
+         /* mail($new_user['email'],
+          "gizerskaya - Фитнесс Тренер",
+          "Спасибо, что нас выбрали. \nВаши данные для входа в Ваш Личный Кабинет:\nЛогин: " . $new_user['email'] . "\nПароль: " . $newUserPass . "",
+          "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());*/
+
+        Mail::send('emails.admin',array('user_name' =>$new_user['name'], 'user_email'=>$new_user['email'], 'user_tel' => $new_user['phone']), function($message) use ($params)
+        {
+            $message->from('site@gizerskaya.com', 'gizerskaya - Фитнесс Тренер');
+            $message->to($params['admin_email'])->subject('gizerskaya - Фитнесс Тренер');
+
+        }); 
+
+        /* mail($settings->email,
+          "gizerskaya - Фитнесс Тренер",
+          "У Вас появился новичок : " . $new_user['email'],
+          "From:"."gizerskaya - Фитнесс Тренер"."\r\n"."X-Mailer: PHP/" . phpversion());*/
     }
-  }
-  else
-  {
-    // Подпись не совпадает, возможно вы поменяли настройки интернет-магазина
- 
- /*   print_answer("Retry", "Неверная подпись " . $_POST["WMI_SIGNATURE"]);*/
-    Log::info("Неверная подпись " . $_POST["WMI_SIGNATURE"]);
-  }
+
+    protected static function  succesOplataRegisteredUser($user_id, $course_id, $currentOrder)
+    {
+        $settings = Settings::first();
+        $currentOrder->update(['status_id' => 1]);
+        $currentUser = User::find($user_id);
+        $currentUser->update(['course_id' => $course_id]);   
+        $currentCourse = Courses::find($course_id);
+        if(isset($currentCourse)) {
+            if($currentCourse->type == 'cours') {
+                $currentDate = Carbon::now();
+                $currentUser->update(['data_start_course' => $currentDate]);              
+            } elseif ($currentCourse->type == 'marathon') {
+                $currentUser->update(['data_start_course' => $currentCourse->date_end_selection]);        
+            } 
+        }
     }
-}
+}    

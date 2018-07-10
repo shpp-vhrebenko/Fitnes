@@ -32,7 +32,7 @@
 					</a>
 					<div class="item__title">
 						<p>Курс тренировок</p>				
-						<a href="{{route('show_training', ['slug' => $item->slug])}}" target="_blank">День {{$item->day}} | Неделя {{ceil($item->day/7)}}</a>
+						<a href="{{route('show_training', ['slug' => $item->slug])}}">День {{$item->day}} | Неделя {{ceil($item->day/7)}}</a>
 					</div>
 				</div>
 				@endif

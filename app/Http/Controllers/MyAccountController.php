@@ -17,6 +17,7 @@ use Auth;
 use Lang;
 use Mail;
 
+
 use Carbon\Carbon;
 
 use App\Category;
@@ -28,6 +29,7 @@ use App\Courses;
 use App\Order;
 
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
 
 class MyAccountController extends Controller
 {
@@ -234,8 +236,9 @@ class MyAccountController extends Controller
     public function show_results(Request $request)
     {   
         $currentUser = Auth::user();
-        $results = $currentUser->results;       
-        return view('my_acount/pages/results/results', compact(['results']));
+        $results = $currentUser->results;  
+        $id_last_result = $currentUser->id_last_result;     
+        return view('my_acount/pages/results/results', compact(['results', 'id_last_result']));
     }   
 
     public function get_results(Request $request)
@@ -257,11 +260,7 @@ class MyAccountController extends Controller
     }
 
     public function result_store(StoreResultRequest $request)
-    {       
-
-        if(!Auth::check()) {
-            return redirect('/login');
-        }
+    {      
 
         $result = $request->get('result');  
 
@@ -297,7 +296,8 @@ class MyAccountController extends Controller
         $this->results->create($result);        
 
         Session::flash('success', 'Отчет успешно создан!');
-        return redirect()->back();    
+        /*return redirect()->back(); */   
+        return redirect()->route('show_trainings'); 
     }
 
     public function result_edit()
@@ -308,6 +308,36 @@ class MyAccountController extends Controller
     public function result_update() 
     {
 
+    }
+
+     public function result_delete(Request $request) 
+    {
+        $result_id = $request->get('result_id');
+        if(isset($result_id)) {
+            $currentUser = Auth::user();
+            $id_last_result = $currentUser->id_last_result;
+            if($id_last_result == 0) {
+                $currentResult = $this->results->find($result_id);                
+                if( $currentResult->image != 'no-image.png')
+                {
+                    File::delete( public_path('uploads/results/'. $currentResult->image ));                   
+                }                 
+                $currentResult->delete();
+                $currentUser->update(['id_last_result' => $result_id]);
+                return redirect()->route('show_results'); 
+            } else if ($id_last_result > 0 && $id_last_result < $result_id) {
+                $currentResult = $this->results->find($result_id);                
+                if( $currentResult->image != 'no-image.png')
+                {
+                    File::delete( public_path('uploads/results/'. $currentResult->image ));                   
+                }  
+                $currentResult->delete();
+                $currentUser->update(['id_last_result' => $result_id]);
+                return redirect()->route('show_results'); 
+            }
+                    
+        }
+        return redirect()->route('show_results');        
     }
 
     protected static function  getCurrentCourseDayNumber($data_start_course)

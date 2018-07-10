@@ -15,8 +15,7 @@ class User extends Authenticatable
 
     public static $userStatuses = [        
         'Выключен',
-        'Активен',
-        'Заблокирован'
+        'Активен',        
     ];
 
     public static function getUserStatus()
@@ -38,6 +37,7 @@ class User extends Authenticatable
         'is_subscribe',
         'course_id',
         'data_start_course',
+        'id_last_result',
     ];
 
     /**

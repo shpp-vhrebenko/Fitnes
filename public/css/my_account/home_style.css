@@ -300,6 +300,24 @@
     cursor: pointer;
 }
 
+.btn-delete-result {
+    display: block;    
+    padding: 0.5rem;    
+    border-radius: 0.2rem;
+    box-shadow: none;
+    color: #fff !important;
+    background-color: #B54F6B;
+    font-family: "HelveticaLight";
+    font-size: .8rem;
+    text-align: center;
+    text-decoration: none;  
+    text-transform: uppercase;  
+}
+
+.btn-delete-result:hover {
+    text-decoration: none;
+}
+
 .result-message {
     display: flex;
     flex-direction: column;

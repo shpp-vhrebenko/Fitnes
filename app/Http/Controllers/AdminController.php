@@ -247,7 +247,7 @@ class AdminController extends Controller
             return abort(404);
         }   
         $currentCourse = $this->courses->find($client->course_id);
-        if($currentCourse->type == 'cours') {            
+        if(isset($currentCourse) && $currentCourse->type == 'cours') {            
             $current_day_course = self::getCurrentCourseDayNumber($client->data_start_course);
         } else {
             $current_day_course = NULL;
@@ -282,8 +282,14 @@ class AdminController extends Controller
         $item = $request->get('item');
         $currentCourse = Courses::find($item['course_id']);
         $currentCourseType = $currentCourse->type;
-        if(isset($current_day_course) && $currentCourseType == 'cours') {            
-            $client_day_course = self::getCurrentCourseDayNumber($client->data_start_course);
+        if($currentCourseType == 'cours') { 
+            if(isset($client->data_start_course)) {
+                $client_day_course = self::getCurrentCourseDayNumber($client->data_start_course);
+            } else {
+                $client_day_course = 0;
+                $client->update(['data_start_course' => Carbon::now()]);
+            }          
+            
             if($current_day_course == 0) {
                 $client->update(['data_start_course' => Carbon::now()]);
             } else if($current_day_course > $client_day_course) {

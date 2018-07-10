@@ -1158,6 +1158,10 @@ a.price-item__button {
     background: linear-gradient(to right, #a74f67 0%,#49375d 100%);
 }
 
+.oplata.oplata-confirm {
+	background: linear-gradient(to right, #2a2f59 0%, #da5b6e 100%);
+}
+
 .oplata__container,
 .oplata__container .row {
 	height: 100%;
@@ -1175,6 +1179,15 @@ a.price-item__button {
     line-height: 1;
     margin-bottom: 30px;
     text-transform: uppercase;
+}
+
+.oplata-confirm .oplata__subheader {
+	font-size: 30px;
+	margin-bottom: .5rem;
+}
+
+.oplata .course-price {
+	font-family: "HelveticaLight"!important;
 }
 
 .oplata__subheader {
@@ -1239,4 +1252,13 @@ a.price-item__button {
 .oplata__button:hover {
 	border: 1px solid #fff;
 }
+
+.pay {
+	color: #fff;
+    font-family: "HelveticaLight";
+    font-size: 26px;
+    text-align: center;
+    padding: 1rem;    
+}
+
 /* END MESSAGES PAGES */

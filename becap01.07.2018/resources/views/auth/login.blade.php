@@ -26,9 +26,9 @@
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} form-login__input" name="email" value="{{ old('email') }}" required autofocus placeholder="Логин">
 
                                     @if ($errors->has('email'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
+                                        <div class="alert alert-danger alert-danger_custom">
+                                            {{ $errors->first('email') }}
+                                        </div>
                                     @endif
                                 </div>
                             </div>
@@ -38,9 +38,9 @@
                                     <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} form-login__input" name="password" required placeholder="Пароль">
 
                                     @if ($errors->has('password'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
+                                        <div class="alert alert-danger alert-danger_custom">
+                                            {{ $errors->first('password') }}
+                                        </div>
                                     @endif
                                 </div>
                             </div>

@@ -9,7 +9,11 @@ use App\User;
 class Order extends Model
 {
     protected $fillable = [
-        'user_id', 'status_id', 'total'
+        'user_id',
+        'course_id',
+        'status_id',
+        'user_status',
+        'total'
     ];
 
     protected $orderStatuses = [
@@ -38,4 +42,9 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }   
+
+    public function course()
+    {
+        return $this->belongsTo(Courses::class, 'course_id', 'id');
+    }  
 }
