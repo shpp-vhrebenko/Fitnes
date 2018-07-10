@@ -127,6 +127,22 @@
     font-size: 1rem;
     font-family: "HelveticaLight";
     letter-spacing: 3px;
+    margin-bottom: 40px;
+}
+
+.category-header__notification {
+    background-color: #b92034;
+    border: none ;
+    color: #fff;    
+    font-family: HelveticaLight;
+    letter-spacing: 3px;
+    border-radius: initial;
+    font-size: 1rem;
+    padding: 1rem;
+}
+
+.category-header__notification p {
+    margin-bottom: 0;
 }
 
 .category-content .item {

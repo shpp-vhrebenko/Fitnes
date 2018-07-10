@@ -72,7 +72,26 @@
                                     @endif
                                 </select>
                             </div>
-                        </div>
+                        </div>                                                
+                        <div class="form-group row" >
+                            <label for="course_select" class="col-sm-12 col-form-label">Курс<sup class="required">*</sup></label>
+                            <div class="col-sm-12">                            
+                                <select class="form-control" id="course_select" name="item[course_id]">  
+                                    <option value="0">-- Не выбрано --</option>   
+                                    @if(isset($courses) && count($courses) > 0)
+                                        @foreach($courses as $course)                                        
+                                            <option value="{{ $course->id }}" @if(isset($client->course_id) && ($client->course_id == $course->id)) selected @endif data-type-course="{{$course->type}}">{!! $course->name !!}</option>
+                                        @endforeach
+                                    @endif        
+                                </select>
+                            </div>                 
+                        </div>                                                
+                        <div class="form-group row" id="course_day">
+                            <label for="dsс" class="col-sm-12 col-form-label">Текущий день курса</label>
+                            <div class="col-sm-12">
+                                <input type="number" min="0" class="form-control" id="dsc" name="current_day_course"  value="{{ isset($current_day_course)  ? $current_day_course : old('current_day_course') }}">
+                            </div>
+                        </div>                                                                  
                         <div class="form-group row">
                             <label for="is_subscribe" class="col-sm-2 col-form-label">Подписка на рассылку</label>
                             <div class="col-sm-10">
@@ -82,7 +101,7 @@
                                     <option value="0" @if(isset($client->is_subscribe) && $client->is_subscribe < 1) selected @endif>Нет</option>
                                 </select>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -95,8 +114,23 @@
 @endsection
 
 @section('footer-scripts')
+    @parent
     <script>
-      $(document).ready(function () {
+      $(document).ready(function () {        
+        var currentTypeCourse = $('#course_select').find(':selected').data('typeCourse');
+        if(currentTypeCourse == 'cours') {
+            $('#course_day').show();
+        } else {
+           $('#course_day').hide(); 
+        }        
+        $('#course_select').change(function(){
+            currentTypeCourse = $(this).find(':selected').data('typeCourse');
+            if(currentTypeCourse == 'cours') {
+                $('#course_day').show();
+            } else {
+               $('#course_day').hide(); 
+            }
+        });
         $('.cancel').on("click", function () {
           return confirm('Вы действительно хотите отменить?');
         });

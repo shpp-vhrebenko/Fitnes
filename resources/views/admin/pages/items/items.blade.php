@@ -118,6 +118,7 @@
 @endsection
 
 @section('footer-scripts')
+    @parent
     <script>
       $(document).ready(function () {
         $('.delete').on("submit", function () {

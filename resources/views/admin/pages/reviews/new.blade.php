@@ -102,6 +102,7 @@ $locales = ['ru', 'ua', 'en'];
 @endsection
 
 @section('footer-scripts')
+    @parent
     <script>
       $(document).ready(function () {
         $('.cancel').on("click", function () {

@@ -70,7 +70,7 @@
                                 <div class="form-group col-sm-4">
                                     <label for="dsm" class="col-sm-12 col-form-label">Дата Начала отбора</label>
                                     <div class="col-sm-12">
-                                        <input type="text" data-toggle="datepicker" class="form-control" id="qty" name="item[date_start_selection]"  value="{{ isset($marathon) ? $marathon->date_start_selection : old('item.date_start_selection') }}">
+                                        <input type="text" data-toggle="datepicker" class="form-control" id="dsm" name="item[date_start_selection]"  value="{{ isset($marathon) ? $marathon->date_start_selection : old('item.date_start_selection') }}">
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
@@ -98,6 +98,21 @@
                                     <div class="col-sm-12">
                                         <input type="number" class="form-control" id="price" name="item[price]" value="{{ isset($marathon) ? $marathon->price : old('item.price') }}"> 
                                     </div>                                      
+                                </div>
+                            </div> 
+                            <h4>Уведомление об окончании Марафона</h4>
+                            <div class="row">                            
+                                <div class="form-group col-sm-4">
+                                    <label for="notification_day_number" class="col-sm-12 col-form-label">Количество дней до конца Курса<sup class="required">*</sup></label>
+                                    <div class="col-sm-12">
+                                        <input type="number" min="0" class="form-control" id="notification_day_number" name="item[notification_day_number]" value="{{ isset($marathon) ? $marathon->notification_day_number : old('item.notification_day_number') }}" > 
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <label for="notification" class="col-sm-12 col-form-label">Текст уведомления<sup class="required">*</sup></label>
+                                    <div class="col-sm-12">
+                                        <textarea class="form-control summernote" name="item[notification]" rows="3" id="notification" >{{ isset($marathon) ? $marathon->notification : old('item.notification') }}</textarea>
+                                    </div>
                                 </div>
                             </div>                            
                         </div>

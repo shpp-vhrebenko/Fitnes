@@ -245,15 +245,31 @@ class AdminController extends Controller
         $client = $this->users->find($id);
         if (!isset($client)) {
             return abort(404);
-        }        
+        }   
+        $currentCourse = $this->courses->find($client->course_id);
+        if($currentCourse->type == 'cours') {            
+            $current_day_course = self::getCurrentCourseDayNumber($client->data_start_course);
+        } else {
+            $current_day_course = NULL;
+        }           
         $roles = Role::all();
         $statuses = User::$userStatuses;
+        $courses = $this->courses->findWithParams(['is_active' => true])->get();    
         return view('admin/pages/clients/new')->with([
             'title' => 'Редактирование клиента: ' . $client->name,
             'client' => $client,
             'roles' => $roles,
-            'statuses' => $statuses
+            'statuses' => $statuses,
+            'courses' => $courses,
+            'current_day_course' => $current_day_course,
         ]);
+    }
+
+    protected static function  getCurrentCourseDayNumber($data_start_course)
+    {
+        $currentDate = Carbon::now();       
+        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $data_start_course);
+        return $dataStartCourse->diffInDays($currentDate, false); 
     }
 
     public function client_update($id, EditClientRequest $request)
@@ -262,7 +278,27 @@ class AdminController extends Controller
         if (!isset($client)) {
             return abort(404);
         }
-        $client->update($request->get('item'));
+        $current_day_course = $request->get('current_day_course');
+        $item = $request->get('item');
+        $currentCourse = Courses::find($item['course_id']);
+        $currentCourseType = $currentCourse->type;
+        if(isset($current_day_course) && $currentCourseType == 'cours') {            
+            $client_day_course = self::getCurrentCourseDayNumber($client->data_start_course);
+            if($current_day_course == 0) {
+                $client->update(['data_start_course' => Carbon::now()]);
+            } else if($current_day_course > $client_day_course) {
+                $diffDays = $current_day_course - $client_day_course;
+                $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $client->data_start_course);
+                $currentDataStartCourse = $dataStartCourse->subDays($diffDays);
+                $client->update(['data_start_course' => $currentDataStartCourse]);
+            } else if ($current_day_course < $client_day_course) {
+                $diffDays = $client_day_course - $current_day_course;
+                $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $client->data_start_course);
+                $currentDataStartCourse = $dataStartCourse->addDays($diffDays);
+                $client->update(['data_start_course' => $currentDataStartCourse]);
+            }
+        }
+        $client->update($item);
         if (!$client->hasRole($request->get('item')['role_id'])) {
             $client->updateRole($request->get('item')['role_id']);
         }
@@ -274,17 +310,31 @@ class AdminController extends Controller
     {              
         $roles = Role::all();
         $statuses = User::$userStatuses;
+        $courses = $this->courses->findWithParams(['is_active' => true])->get();
         return view('admin/pages/clients/new')->with([
             'title' => 'Coздание клиента',            
             'roles' => $roles,
-            'statuses' => $statuses
+            'statuses' => $statuses,
+            'courses' => $courses,
         ]);
     }
 
      public function client_store(StoreClientRequest $request)
     {
         $settings = Settings::first(); 
-        $item = $request->get('item');        
+        $item = $request->get('item'); 
+        $current_day_course = $request->get('current_day_course');        
+        $currentCourse = Courses::find($item['course_id']);
+        $currentCourseType = $currentCourse->type;  
+        if(isset($current_day_course) && $currentCourseType == 'cours') {
+            if($current_day_course == 0) {
+                $item['data_start_course'] = Carbon::now(); 
+            } else if ($current_day_course > 0) {
+                $DataStartCourse = Carbon::now()->subDays($current_day_course);
+                $item['data_start_course'] = $DataStartCourse; 
+            }             
+        } 
+
         $item['remember_token'] = $request->get('_token');       
         $newUserPass = str_random(8);
         $item['password'] = bcrypt($newUserPass);             

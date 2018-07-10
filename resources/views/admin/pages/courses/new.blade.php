@@ -36,7 +36,7 @@
                             <div class="form-group row">
                                 <label for="name" class="col-sm-2 col-form-label">Название курса<sup class="required">*</sup></label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" name="item[name]" value="{{ isset($cours) ? $cours->name : old('item.name') }}">
+                                    <input type="text" class="form-control" id="name" name="item[name]" value="{{ isset($cours) ? $cours->name : old('item.name') }}" >
                                     <p>Максимальное количество символов названия Курса <span class="badge badge-secondary">150</span></p>
                                 </div>
                             </div>
@@ -62,9 +62,9 @@
                                 <div class="form-group col-sm-4">
                                     <label for="period" class="col-sm-12 col-form-label">Продолжительность курса(дней)<sup class="required">*</sup></label>
                                     <div class="col-sm-12">
-                                        <input type="number" class="form-control" id="period" name="item[period]" value="{{ isset($cours) ? $cours->period : old('item.period') }}">                                    
+                                        <input type="number" class="form-control" id="period" name="item[period]" value="{{ isset($cours) ? $cours->period : old('item.period') }}" >                                    
                                     </div>
-                                </div>
+                                </div>                                
                                 <div class="form-group col-sm-4">
                                     <label for="status_id" class="col-sm-12 col-form-label">Cтатус Курса<sup class="required">*</sup></label>
                                     <div class="col-sm-12">
@@ -80,10 +80,25 @@
                                 <div class="form-group col-sm-4">
                                     <label for="price" class="col-sm-12 col-form-label">Цена курса<sup class="required">*</sup></label>
                                     <div class="col-sm-12">
-                                        <input type="number" class="form-control" id="price" name="item[price]" value="{{ isset($cours) ? $cours->price : old('item.price') }}">                                    
+                                        <input type="number" class="form-control" id="price" name="item[price]" value="{{ isset($cours) ? $cours->price : old('item.price') }}">                                   
                                     </div>                                      
                                 </div>
-                            </div>                            
+                            </div> 
+                            <h4>Уведомление об окончании Курса</h4>
+                            <div class="row">                            
+                                <div class="form-group col-sm-4">
+                                    <label for="notification_day_number" class="col-sm-12 col-form-label">Количество дней до конца Курса<sup class="required">*</sup></label>
+                                    <div class="col-sm-12">
+                                        <input type="number" min="0" class="form-control" id="notification_day_number" name="item[notification_day_number]" value="{{ isset($cours) ? $cours->notification_day_number : old('item.notification_day_number') }}" > 
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <label for="notification" class="col-sm-12 col-form-label">Текст уведомления<sup class="required">*</sup></label>
+                                    <div class="col-sm-12">
+                                        <textarea class="form-control summernote" name="item[notification]" rows="3" id="notification" >{{ isset($cours) ? $cours->notification : old('item.notification') }}</textarea>
+                                    </div>
+                                </div>
+                            </div>                           
                         </div>
                     </div> 
                 </div>                                

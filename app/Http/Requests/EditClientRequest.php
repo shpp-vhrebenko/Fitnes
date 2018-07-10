@@ -30,7 +30,8 @@ class EditClientRequest extends FormRequest
             'item.email' => 'required|string|email|max:150',
             'item.phone' => 'required|numeric|min:10',            
             'item.status_id' => 'required',
-            'item.is_subscribe' => 'required',      
+            'item.is_subscribe' => 'required', 
+            'item.data_start_course' => 'date|date_format:Y-m-d H:i:s'       
         ];
     }
 
@@ -41,6 +42,8 @@ class EditClientRequest extends FormRequest
             'item.phone.required' => 'Необходимо ввести Номер Телефона клиента',
             'item.status_id.required' => 'Необходимо указать Статус Клиента',
             'item.is_subscribe.required' => 'Необходимо указать Подписку на рассылку',
+            'item.data_start_course.date' => 'Необходимо указать дату начала Курса в формате даты',
+            'item.data_start_course.date_format' => 'Необходимо указать дату начала Курса в формате Год-месяц-день   часы : минуты : секунды', 
         ];
     }
 }

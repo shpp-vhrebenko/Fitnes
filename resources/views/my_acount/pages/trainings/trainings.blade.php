@@ -15,6 +15,13 @@
 		<header class="row category-header">
 			<h4 class="category-header__title col-sm-12">{{$title}}</h4>
 			<div class="category-header__description col-sm-12">{{$description}}</div>
+			@if(isset($notification))			
+			<div class="col-sm-12">
+				<div class="category-header__notification">
+					{!! $notification !!}
+				</div>                
+            </div>						
+			@endif
 		</header>
 		<div class="row category-content">
 			@foreach($trainingItems as $item)

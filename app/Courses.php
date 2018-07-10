@@ -23,6 +23,8 @@ class Courses extends Model
         'slug',      
         'whats_app_link',
         'faq', 
+        'notification_day_number',
+        'notification',
     ];
 
     protected $casts = [

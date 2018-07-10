@@ -116,14 +116,14 @@ class MyAccountController extends Controller
     }
 
     public function show_trainings()
-    {        
+    { 
+        $notification = null;       
         $currentUser = Auth::user(); 
         $course_id = $currentUser->course_id;     
-        $course = $this->courses->find($course_id);        
+        $course = $this->courses->find($course_id);         
+        $currentDayCourse = self::getCurrentCourseDayNumber($currentUser->data_start_course);
         $training_schedule = $course->training_schedule;
-        $currentDate = Carbon::now();       
-        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->data_start_course);
-        $diffDays = $dataStartCourse->diffInDays($currentDate, false);    
+        
         
 
         if($course->type == 'marathon') {            
@@ -163,15 +163,19 @@ class MyAccountController extends Controller
             }   
         }
              
-        if($diffDays <= $course->period) {
-            if($diffDays == 0) {
-                $diffDays = 1;
+        if($currentDayCourse <= $course->period) {
+            $diffPeriodCourse_currentDayCourse = $course->period - $currentDayCourse;            
+            if($diffPeriodCourse_currentDayCourse == $course->notification_day_number) {
+                $notification = $course->notification;
+            }
+            if($currentDayCourse == 0) {
+                $currentDayCourse = 1;
             }
             $category = Category::where('id', 1)->firstOrFail(); 
             $items = $category->items()->where('course_id',$course_id)->get();
 
             $trainingItems = [];
-            for ($i=0; $i < $diffDays; $i++) {
+            for ($i=0; $i < $currentDayCourse; $i++) {
                 $curDay = $i + 1;
                 $curTraining = $training_schedule['day_'.$curDay];
                 $curItem = null;
@@ -185,7 +189,8 @@ class MyAccountController extends Controller
             }        
             $title = 'Тренировки';
             $description = 'Выберите интересующий вас день тренировки';
-            return view('my_acount/pages/trainings/trainings', compact(['trainingItems', 'title', 'description']));
+
+            return view('my_acount/pages/trainings/trainings', compact(['trainingItems', 'title', 'description', 'notification']));
         } else {
             $currentUser->update(['course_id' => 0]);
             return redirect()->route('courses_list');  
@@ -303,5 +308,12 @@ class MyAccountController extends Controller
     public function result_update() 
     {
 
+    }
+
+    protected static function  getCurrentCourseDayNumber($data_start_course)
+    {
+        $currentDate = Carbon::now();       
+        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $data_start_course);
+        return $dataStartCourse->diffInDays($currentDate, false); 
     }
 }
