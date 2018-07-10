@@ -51,7 +51,12 @@ class MyAccountController extends Controller
         $this->users = $usersRepository;
         $this->courses = $coursesRepository;            
         $categories = $this->categories->all();              
-        $settings = Settings::first();      
+        $settings = Settings::first(); 
+        $currentUser = Auth::user();
+        if(isset($currentUser)) {
+            dd($currentUser);
+        }
+             
         view()->share(compact([ 'settings', 'categories']));        
     }
 
@@ -63,6 +68,16 @@ class MyAccountController extends Controller
     public function index()
     {         
         return redirect()->route('show_trainings');       
+    }
+
+    public function show_faq()
+    {
+        $currentUser = Auth::user(); 
+        $course_id = $currentUser->course_id;     
+        $course = $this->courses->find($course_id);        
+        $faq = $course->faq;
+        $title = "FAQ";
+        return view('my_acount/pages/faq/faq', compact(['title', 'faq']));
     }
 
   

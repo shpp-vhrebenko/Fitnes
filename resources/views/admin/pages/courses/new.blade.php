@@ -34,16 +34,28 @@
                     <div class="row">                      
                         <div class="col-12">
                             <div class="form-group row">
-                                <label for="title" class="col-sm-2 col-form-label">Название курса<sup class="required">*</sup></label>
+                                <label for="name" class="col-sm-2 col-form-label">Название курса<sup class="required">*</sup></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="name" name="item[name]" value="{{ isset($cours) ? $cours->name : old('item.name') }}">
                                     <p>Максимальное количество символов названия Курса <span class="badge badge-secondary">150</span></p>
                                 </div>
-                            </div>                            
+                            </div>
+                            <div class="form-group row">
+                                <label for="whats_app_link" class="col-sm-2 col-form-label">Cылка на WhatsApp Чат<sup class="required">*</sup></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="whats_app_link" name="item[whats_app_link]" value="{{ isset($cours) ? $cours->whats_app_link : old('item.whats_app_link') }}">     
+                                </div>
+                            </div>                             
                             <div class="form-group row">
                                 <label for="description_cours" class="col-sm-2 col-form-label">Содержание Курса<sup class="required">*</sup></label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="item[description]" rows="3" id="description_cours">{{ isset($cours) ? $cours->description : old('item.description') }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="faq_cours" class="col-sm-2 col-form-label">FAQ Курса<sup class="required">*</sup></label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control summernote" name="item[faq]" rows="3" id="faq_cours">{{ isset($cours) ? $cours->faq : old('item.faq') }}</textarea>
                                 </div>
                             </div>
                             <div class="row">

@@ -33,7 +33,9 @@ class StoreMarathonsRequest extends FormRequest
             'item.date_end_selection' => 'required|date|date_format:Y-m-d|after:item.date_start_selection',
             'item.date_start_selection' => 'required|date|date_format:Y-m-d|before:item.date_end_selection',     
             'item.price' => 'required|numeric', 
-            'item.icon' => 'image|mimes:png,svg',      
+            'item.icon' => 'image|mimes:png,svg', 
+            'item.whats_app_link' => 'required',
+            'item.faq' => 'required',        
         ];
     }
 
@@ -54,6 +56,8 @@ class StoreMarathonsRequest extends FormRequest
             'item.price.required' => 'Необходимо ввести цену Марафона',
             'item.icon.image' => 'Иконка курса должна быть в формате изображения',
             'item.icon.mimes' => 'Иконка курса должна быть в формате png, svg',
+            'item.whats_app_link.required' => 'Необходимо ввести сылку на WhatsApp Чат',
+            'item.faq' => 'Необходимо ввести FAQ',
         ];
     }
 }

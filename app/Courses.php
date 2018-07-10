@@ -20,7 +20,9 @@ class Courses extends Model
         'icon', 
         'is_active',
         'training_schedule',
-        'slug',       
+        'slug',      
+        'whats_app_link',
+        'faq', 
     ];
 
     protected $casts = [

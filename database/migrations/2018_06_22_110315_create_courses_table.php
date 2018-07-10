@@ -25,6 +25,8 @@ class CreateCoursesTable extends Migration
             $table->integer('period');
             $table->string('slug')->nullable(); 
             $table->boolean('is_active')->default(true);
+            $table->string('whats_app_link')->nullable();
+            $table->text('faq');
             $table->timestamps();
         });
     }

@@ -41,11 +41,23 @@
                                     <input type="text" class="form-control" id="name" name="item[name]" value="{{ isset($marathon) ? $marathon->name : old('item.name') }}">
                                     <p>Максимальное количество символов названия Марафона <span class="badge badge-secondary">150</span></p>
                                 </div>
+                            </div> 
+                            <div class="form-group row">
+                                <label for="whats_app_link" class="col-sm-2 col-form-label">Cылка на WhatsApp Чат<sup class="required">*</sup></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="whats_app_link" name="item[whats_app_link]" value="{{ isset($marathon) ? $marathon->whats_app_link : old('item.whats_app_link') }}">     
+                                </div>
                             </div>                            
                             <div class="form-group row">
                                 <label for="description_cours" class="col-sm-2 col-form-label">Содержание Марафона<sup class="required">*</sup></label>
                                 <div class="col-sm-10">                                    
                                     <textarea class="form-control" name="item[description]" rows="3" id="description_cours">{{ isset($marathon) ? $marathon->description : old('item.description') }}</textarea>    
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="faq_cours" class="col-sm-2 col-form-label">FAQ Марафона<sup class="required">*</sup></label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control summernote" name="item[faq]" rows="3" id="faq_cours">{{ isset($marathon) ? $marathon->faq : old('item.faq') }}</textarea>
                                 </div>
                             </div>
                             <div class="row">

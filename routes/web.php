@@ -62,6 +62,9 @@ Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveC
     // Route courses
     Route::get('/courses','MyAccountController@show_courses')->name('courses_list');   
     Route::post('/courses','MyAccountController@by_course')->name('by_course'); 
+
+    // Route
+    Route::get('/faq', 'MyAccountController@show_faq')->name('show_faq');
     
 });
 
