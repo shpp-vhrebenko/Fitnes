@@ -451,8 +451,8 @@ class AdminController extends Controller
         }
     }
 
-    public function client_sendMessage(Request $request) {
-        $message = $request->get('messageUser');
+    public function client_sendMessage(Request $request) {        
+        $message = "";
         $userId = $request->get('user_id');
         $settings = Settings::first();                      
         $user = $this->users->find($userId); 
@@ -472,7 +472,7 @@ class AdminController extends Controller
         {
             $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
 
-            $message->to($params['user_email']);
+            $message->to($params['user_email'])->subject('gizerskaya - Фитнесс Тренер');
 
         });
 
@@ -481,11 +481,13 @@ class AdminController extends Controller
         mail($user->email,
             "gizerskaya - Фитнесс Тренер",
             $currentMessage,
-            "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());*/
+            "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());*/       
 
-        Session::flash('success', 'Клиенту "'.$user->name.'" успешно отправленно сообщение и задан новый пароль!'); 
-
-        return redirect()->back();
+        $response = array(
+            'status' => 'success',
+            'result' => 'Сообщение успешно отправлено!'
+        );
+        return response()->json($response); 
     }
 
     // END CLIENTS    

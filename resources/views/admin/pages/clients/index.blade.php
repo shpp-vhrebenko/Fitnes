@@ -73,8 +73,8 @@
                                         @endif
                                     </form>
                                 </li>
-                                <li>
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#SendMessageModal" data-id-user="{{$client->id}}"><i class="fa fa-envelope" data-toggle="tooltip" data-placement="top" title="Сбросить пароль и отправить сообщение" style="color: #fff"></i></button>
+                                <li>                                    
+                                    <button type="button" class="btn btn-info send-message-user"  data-id-user="{{$client->id}}"><i class="fa fa-envelope" data-toggle="tooltip" data-placement="top" title="Сбросить пароль и отправить сообщение" style="color: #fff"></i></button>
                                 </li>
                             </ul>
                         </td>
@@ -102,14 +102,26 @@
               return confirm('Вы действительно хотите удалить пользователя и его заказы?');
             });
 
-            $('#SendMessageModal').on('show.bs.modal', function (event) {
-              var button = $(event.relatedTarget);
-              var recipient = button.data('idUser');
-              console.log(recipient);
-              var modal = $(this);
-              var $inputUserId = modal.find('#user_id');
-              $inputUserId.attr('value',recipient);          
-            })
+            $('.send-message-user').on('click', function (e) {
+                var recipient_id = $(this).data('idUser');              
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route('send_message_client') }}',
+                    data: {
+                        user_id:  recipient_id,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function( msg ) {
+                        var $modal = $('#SendMessageModal');
+                        var resultMessageField = $modal.find('.result-message');             
+                        resultMessageField.text(msg.result);
+                        $('#SendMessageModal').modal('show');                        
+                    },
+                    error: function (xhr, b, c) {
+                        console.log("xhr=" + xhr + " b=" + b + " c=" + c);
+                    }
+                });
+            });       
         });
         
     </script>
@@ -118,28 +130,19 @@
 
 @section('footer-modal')
 <!-- Modal -->
-<div class="modal fade" id="SendMessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <form class="modal-content" action="{{ route('send_message_client') }}" method="POST"> 
+<div class="modal" tabindex="-1" role="dialog" id="SendMessageModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Отправить сообщение клиенту</h5>
+        <h5 class="modal-title"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-         <input type="hidden" name="user_id" id="user_id">
-         <div class="form-group ">
-            <label for="messageUser">Текст сообщения</label>
-            <textarea class="form-control" id="messageUser" rows="4" name="messageUser"></textarea>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-danger" type="reset">Очистить</button>
-        <button type="submit" class="btn btn-success">Отправить</button>
-      </div>
-    </form>
+        <p class="result-message"></p>
+      </div>      
+    </div>
   </div>
 </div>
 @endsection
