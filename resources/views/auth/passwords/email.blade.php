@@ -26,17 +26,7 @@
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-8">
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} form-login__input" name="email" value="{{ old('email') }}" required placeholder="ВВЕДИТЕ ВАШ EMAIL">
-                                     @if (session('status'))
-                                        <div class="alert alert-success alert-success_custom">
-                                            {{ session('status') }}
-                                        </div>
-                                    @endif
-
-                                    @if ($errors->has('email'))
-                                        <div class="alert alert-danger alert-danger_custom">
-                                            {{ $errors->first('email') }}
-                                        </div>
-                                    @endif
+                                    
                                 </div>
                             </div>
 
@@ -52,6 +42,17 @@
                             </div>
                         </form>
                     </div>
+                    @if (session('status'))
+                        <div class="alert alert-success alert-success_custom">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->has('email'))
+                        <div class="alert alert-danger alert-danger_custom">
+                            {{ $errors->first('email') }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

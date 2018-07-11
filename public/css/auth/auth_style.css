@@ -230,10 +230,11 @@ label.error {
     margin-top: 0px;
     border-color: initial;
     border: none;
+    text-align: center;
 }
 
 .alert.alert-success.alert-success_custom {
-    background-color: #11b939;
+    background-color: #468848;
     border: none ;
     color: #fff;    
     font-family: HelveticaLight;
@@ -241,6 +242,7 @@ label.error {
     font-size: 1rem;
     border: none;
     border-color: initial;
+    text-align: center;
 }
 
 

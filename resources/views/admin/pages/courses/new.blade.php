@@ -147,6 +147,7 @@
           height: 200,
           focus: true,
           placeholder: "^ Для ввода Содержания Курса нужно активировать эту кнопку!!!",
+          disableResizeEditor: true
         });         
     });
     </script>

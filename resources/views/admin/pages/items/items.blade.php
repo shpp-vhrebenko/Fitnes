@@ -70,8 +70,8 @@
                         <th scope="row">{{ $item->id }}</th>
                         <td>
                             @if(isset($item->image))
-                                <a href="/uploads/items/{{ $item->image }}" class="item-preview" style="background-image: url('/uploads/items/{{ $item->image }}');">
-                                </a>    
+                                <div class="item-preview" style="background-image: url('/uploads/items/{{ $item->image }}');">
+                                </div>    
                             @endif
                         </td> 
                         <td>

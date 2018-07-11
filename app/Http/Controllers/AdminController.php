@@ -65,10 +65,21 @@ class AdminController extends Controller
 
     public function index()
     {
+        $orders = $this->orders->all();
+        $total_income = 0;
+        foreach ($orders as $order) {
+            if($order->status_id == 1) {
+                $total_income = $total_income + $order->total;
+            }
+        }   
+
         $stats = [            
             'users' => $this->users->count(),
             'orders' => $this->orders->count(),
-        ];       
+            'total' => $total_income,
+        ];  
+
+
 
         $latest_orders = $this->orders->latest(5)->get();       
 

@@ -29,6 +29,7 @@
         ['insert', ['link', 'picture', 'video']],
         ['misc', ['accordion', 'codeview']],
       ],
+      disableResizeEditor: true
     });
     $('[data-toggle="datepicker"]').datepicker({      
       monthsShort: [ "Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],

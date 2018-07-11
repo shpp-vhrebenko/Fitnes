@@ -31,6 +31,16 @@
                     </div>
                 </div>
             </div>
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-header">
+                        Заработанно
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">{{ $stats['total'] }} руб.</h6>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>    
     <section class="camotek-admin-index-modules">
@@ -67,7 +77,7 @@
                                     <td>@if(isset($order->course))<a href="{{ route('show_cours', $order->course->id) }}">{!! $order->course->name !!}</a>@endif</td>
                                     <td>{{ $order->getOrderStatus($order->status_id) }}</td>
                                     <td>{{ $order->created_at->format('d-m-Y H:i:s') }}</td>
-                                    <td>{{ $order->total }} рубл.</td>                      
+                                    <td>{{ $order->total }} руб.</td>                      
                                 </tr>
                             @endforeach
                             </tbody>
