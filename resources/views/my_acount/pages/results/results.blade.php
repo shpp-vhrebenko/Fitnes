@@ -59,8 +59,7 @@
                 		@if($loop->last && $result->id > $id_last_result)                		
         				<div class="result-item__option">                			
 					  		<a class="btn-delete-result" href="{{ route('result_delete') }}"
-						       onclick="event.preventDefault();
-						                     document.getElementById('result-form-delete').submit();">	Удалить последний результат							
+						       onclick="confSubmit(event)">	Удалить последний результат
 							</a>			    
 						    <form id="result-form-delete" action="{{ route('result_delete') }}" method="POST" style="display: none;">
 						    	<input type="hidden" name="_method" value="delete">
@@ -84,6 +83,14 @@
     <script src="{{asset('js/lib/Chart.min.js')}}"></script>
     <script  src="{{asset('js/my_account.js') }}"></script>
 	<script>
+		function confSubmit(event) {
+			event.preventDefault();
+			$form = $('#result-form-delete');			
+			if (confirm("Вы действительно хотите удалить последний результат?")) {
+				$form.submit();				
+			}		
+		}
+
 		Chart.defaults.global.defaultFontColor = '#f3ccf8';
 		var labelsArr = [];
 		var dataVes = [];

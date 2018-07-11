@@ -59,13 +59,20 @@
                 @foreach($orders as $order)
                     <tr>
                         <th scope="row">{{ $order->id }}</th>
-                        <td>@if(isset($order->client)) 
-                            {{$order->client->email}}
-                            @endif
-                        </td>
+                        @if($order->user_status)
+                            <td>@if(isset($order->client)) 
+                                {{$order->client->email}}
+                                @endif
+                            </td>
+                        @else                            
+                            <td>@if(isset($order->client_not_register)) 
+                                {{$order->client_not_register->email}}
+                                @endif
+                            </td>
+                        @endif                        
                         <td>@if(isset($order->course)) {!! $order->course->name !!}@endif</td>
                         <td>{{ $order->getOrderStatus($order->status_id) }}</td>
-                        <td>{{ $order->created_at->format('d-m-Y') }}</td>
+                        <td>{{ $order->created_at->format('d-m-Y H:i:s') }}</td>
                         <td>{{ $order->total }} рубл.</td>
                         <td>
                             <ul class="camotek-form-links">

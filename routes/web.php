@@ -87,6 +87,7 @@ Route::group(['prefix'=>'admin','middleware' => 'isAdmin'], function() {
     // Route clients
     Route::get('/clients', 'AdminController@clients')->name('clients');
     Route::get('/client/{id}', 'AdminController@client')->name('show_client');
+    Route::get('/client/not_register/{id}', 'AdminController@client_not_register')->name('show_client_not_register');
     Route::get('/client/{id}/edit', 'AdminController@client_edit')->name('edit_client');
     Route::post('/client/{id}/edit', 'AdminController@client_update')->name('update_client');
     Route::delete('/client/{id}/destroy', 'AdminController@client_destroy')->name('destroy_client');

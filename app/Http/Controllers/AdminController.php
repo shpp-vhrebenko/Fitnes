@@ -21,6 +21,7 @@ use App\Repositories\CoursesRepositoryInterface;
 use App\Repositories\OrdersRepositoryInterface;
 
 use App\User;
+use App\UserSoul;
 use App\Settings;
 use App\Social;
 use App\Role;
@@ -183,10 +184,11 @@ class AdminController extends Controller
         $order = $this->orders->find($id);              
         if (!isset($order)) {
             return abort('404');
-        }
-        $course = $order->client->course;  
+        }        
+        $course = $this->courses->find($order->course_id);     
         $this->setTitle('Просмотр заказа');
         return view('admin/pages/orders/show')->with(['order' => $order, 'course' => $course]);
+        
     }
 
     public function edit_order($id)
@@ -237,7 +239,17 @@ class AdminController extends Controller
         if (!isset($client)) {
             return abort(404);
         }        
-        return view('admin/pages/clients/show')->with(['title' => 'Профиль клиента: ' . $client->name, 'client' => $client]);
+        return view('admin/pages/clients/show')->with(['title' => 'Профиль клиента: ' . $client->name, 'client' => $client, 'client_status' => 1]);
+    }
+
+    public function client_not_register($id)
+    {
+        $client = UserSoul::find($id);
+        if (!isset($client)) {
+            return abort(404);
+        }  
+        return view('admin/pages/clients/show')->with(['title' => 'Профиль не зарегистрированого клиента: ' . $client->name, 'client' => $client, 'client_status' => 0 ]);
+
     }
 
     public function client_edit($id)
