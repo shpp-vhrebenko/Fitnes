@@ -51,10 +51,16 @@ span.rur {
 	text-align: center;
 	line-height: 1;
 	margin-bottom: 30px;
+	text-transform: uppercase;
 }
 
 .login-card__body .form-group {
 	margin-bottom: 28px;
+}
+
+.form-login__input::placeholder {
+	color: #fff;
+   text-transform: uppercase;
 }
 
 .form-login__input {

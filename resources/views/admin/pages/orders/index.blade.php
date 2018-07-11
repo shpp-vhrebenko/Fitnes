@@ -73,7 +73,7 @@
                         <td>@if(isset($order->course)) {!! $order->course->name !!}@endif</td>
                         <td>{{ $order->getOrderStatus($order->status_id) }}</td>
                         <td>{{ $order->created_at->format('d-m-Y H:i:s') }}</td>
-                        <td>{{ $order->total }} рубл.</td>
+                        <td>{{ $order->total }} руб.</td>
                         <td>
                             <ul class="camotek-form-links">
                                 <li><a href="{{ route('show_order', $order->id) }}" class="btn btn-light">Просмотр</a></li>

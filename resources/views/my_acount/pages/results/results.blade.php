@@ -120,13 +120,14 @@
             success: function (data) {
             	if(data.results != undefined) {
             		results = data.results;
+
             		for (key in results) {
             			var item = results[key];
             			dataVes.push(item.weight);
             			dataRost.push(item.height);
             			dataGrud.push(item.grud);
             			dataBedra.push(item.bedra);								
-						dataTaliya.push(item.taliya);
+						dataTaliya.push(item.taliya);						
 						labelsArr.push(item.created_at);
             		}
             		nameLabel = "Веc";

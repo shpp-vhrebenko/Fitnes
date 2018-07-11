@@ -13,7 +13,7 @@
 @section('content')
 <section class="auth">
     <div class="container auth__container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center">
             <div class="col-md-10">
                 <div class="login-card">
                     <div class="login-card__header">Сброс пароля</div>
@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="form-group row justify-content-center">
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <input id="password-confirm" type="password" class="form-control form-login__input" name="password_confirmation" required placeholder="Подтвердите Пароль">
                                 </div>
                             </div>

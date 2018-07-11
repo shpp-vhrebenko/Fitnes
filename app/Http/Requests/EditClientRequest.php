@@ -28,7 +28,7 @@ class EditClientRequest extends FormRequest
         return [
             'item.name' => 'required',
             'item.email' => 'required|string|email|max:150',
-            'item.phone' => 'required|numeric|min:10',            
+            'item.phone' => 'required',            
             'item.status_id' => 'required',
             'item.course_id' => 'required',                 
         ];

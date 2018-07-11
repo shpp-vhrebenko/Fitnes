@@ -19,7 +19,7 @@
 		<div class="row category-content">
 			@foreach($items as $item)
 				<div class="col-md-4 col-sm-12 item">
-					<a class="item__image" href="{{route('show_item', ['slug' => $category->slug, 'id' => $item->id])}}" style="background-image: url('/uploads/items/{{$item->image}}')">						
+					<a class="item__image" href="{{route('show_item', ['category_slug' => $category->slug, 'item_slug' => $item->slug])}}" style="background-image: url('/uploads/items/{{$item->image}}')">						
 					</a>
 					<div class="item__title">					
 						<a href="{{route('show_item', ['category_slug' => $category->slug, 'item_slug' => $item->slug])}}">{{ str_limit($item->title, $limit = 60, $end = '...') }}</a>

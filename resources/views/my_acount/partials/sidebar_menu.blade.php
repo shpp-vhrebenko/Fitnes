@@ -10,7 +10,7 @@
 	            		Главная
 	            	</a>
 	         	</li>
-	            <li class="@if(Request::url() == route('show_results')) active @endif">
+	            <li class="@if(Request::url() == route('show_results')) active @elseif(Request::url() == route('add_result')) active @endif">
 		            <a class="usermenu__link" href="{{ route('show_results') }}">
 		            	Результаты
 		            </a>

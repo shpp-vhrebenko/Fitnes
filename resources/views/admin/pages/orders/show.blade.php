@@ -29,7 +29,7 @@
                 @endif                               
                 <td>{{ $order->getOrderStatus($order->status_id) }}</td>
                 <td>{{ $order->created_at->format('d-m-Y') }}</td>
-                <td>{{ $order->total }} грн.</td>                
+                <td>{{ $order->total }} руб.</td>                
             </tr>
             </tbody>
         </table>
@@ -85,7 +85,7 @@
                 <tr>
                     <th scope="row">{{ $course->id }}</th>
                     <td><a href="@if($course->type == 'cours'){{route('show_cours', $course->id)}}@else{{ route('show_marathon', $course->id) }}@endif">{!! $course->name !!}</a></td>                   
-                    <td>{{ $course->price }} рубл.</td>                    
+                    <td>{{ $course->price }} руб.</td>                    
                 </tr>
                 
                 </tbody>

@@ -13,7 +13,7 @@
 @section('content')	
 	<div class="container-fluid">
 		<header class="row item-header">
-			<h4 class="item-header__title col-sm-12">{{$title}}</h4>		
+			<h4 class="item-header__title col-sm-12">{{$page_title}}</h4>		
 		</header>
 		<div class="row item-content">
 			{!! $faq !!}

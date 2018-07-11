@@ -28,7 +28,7 @@ class StoreClientRequest extends FormRequest
         return [
             'item.name' => 'required',
             'item.email' => 'required|string|email|max:150|unique:users,email',
-            'item.phone' => 'required|numeric|min:10',            
+            'item.phone' => 'required',            
             'item.status_id' => 'required',           
             'item.course_id' => 'required',                      
         ];
