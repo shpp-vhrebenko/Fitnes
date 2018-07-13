@@ -29,7 +29,11 @@ class StoreCoursRequest extends FormRequest
             'item.description' => 'required',
             'item.price' => 'required|numeric',            
             'item.period' => 'required|numeric',
-            'item.icon' => 'image|mimes:png,svg',      
+            'item.icon' => 'image|mimes:png,svg',  
+            'item.whats_app_link' => 'required',
+            'item.faq' => 'required',  
+            'item.notification_day_number' => 'required',
+            'item.notification' => 'required', 
         ];
     }
 
@@ -42,6 +46,10 @@ class StoreCoursRequest extends FormRequest
             'item.period.required' => 'Необходимо ввести Продолжительность Курса',
             'item.icon.image' => 'Иконка курса должна быть в формате изображения',
             'item.icon.mimes' => 'Иконка курса должна быть в формате png, svg',
+            'item.whats_app_link.required' => 'Необходимо ввести сылку на WhatsApp Чат',
+            'item.faq' => 'Необходимо ввести FAQ',
+            'item.notification_day_number.required' => 'Необходимо ввести количество дней до конца Курса',
+            'item.notification.required' => 'Необходимо ввести Текст уведомления',
         ];
     }
 }

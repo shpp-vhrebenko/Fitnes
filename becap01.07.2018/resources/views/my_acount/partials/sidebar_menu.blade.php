@@ -10,7 +10,7 @@
 	            		Главная
 	            	</a>
 	         	</li>
-	            <li class="@if(Request::url() == route('show_results')) active @endif">
+	            <li class="@if(Request::url() == route('show_results')) active @elseif(Request::url() == route('add_result')) active @endif">
 		            <a class="usermenu__link" href="{{ route('show_results') }}">
 		            	Результаты
 		            </a>
@@ -28,21 +28,28 @@
 		                @endif    
 	                @endforeach
 	            @endif							
-			    <li class=" ">
-			  		<a class="usermenu__link" href="https://gizerskaya.com/my-account/?&amp;profile=statii" .="">						
+			    <li class="@if(Request::url() == route('show_faq')) active @endif">
+			  		<a class="usermenu__link" href="{{ route('show_faq') }}">					
 						FAQ
 					</a>
 			    </li>
+			    @if(Session::has('whats_app_link'))			    
 			    <li class=" ">
-			  		<a class="usermenu__link" href="https://gizerskaya.com/my-account/?&amp;profile=statii" .="">						
+			  		<a class="usermenu__link" href="{{Session::get('whats_app_link')}}" target="_blank">						
 						Чат
 					</a>
 			    </li>
+			    @endif
 			    <li class=" ">
-			  		<a class="usermenu__link" href="https://gizerskaya.com/my-account/?&amp;profile=statii" .="">						
+			  		<a class="usermenu__link" href="{{ route('logout') }}"
+				       onclick="event.preventDefault();
+				                     document.getElementById('logout-form').submit();">
 						Выйти
 					</a>
 			    </li>
+			    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+			        @csrf
+			    </form>
 	    	</ul>
 		</div>	
 	</div>

@@ -2,6 +2,10 @@
     padding: 5px 50px;
 }
 
+textarea {  
+    resize: none; 
+} 
+
 .required{
     color: #ff0007 !important;
     font-weight: bold;

@@ -22,11 +22,19 @@
                         </thead>
                         <tbody>
                         <tr>
+                            @if($client_status)
                             <td>{{ $client->id }}</td>
                             <td>{{ $client->name }}</td>
                             <td>{{ $client->email }}</td>
                             <td>{{ $client->phone }}</td>                            
                             <td>{{ $client->getClientStatus($client->status_id) }}</td>
+                            @else
+                            <td>{{ $client->id }}</td>
+                            <td>{{ $client->name }}</td>
+                            <td>{{ $client->email }}</td>
+                            <td>{{ $client->phone }}</td>                            
+                            <td>Клиент {{ $client->name }} не выполнил оплату. Поэтому на данный момент он не зарегистрирован.</td>
+                            @endif
                         </tr>
                         </tbody>
                     </table>

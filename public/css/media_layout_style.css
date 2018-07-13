@@ -8,5 +8,10 @@
 		display: none;
 	}
 }
+@media (max-width: 767px){
+	.sidebar-menu__list li {
+		margin-top:0px;
+	}
+}
 
 /* END NAVBAR MENU */

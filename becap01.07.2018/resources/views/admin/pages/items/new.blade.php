@@ -87,9 +87,9 @@
                     </div> 
                     <div id="item_course" class="row">                          
                         <div class="form-group col-sm-6" >
-                            <label for="week" class="col-sm-12 col-form-label">Курс<sup class="required">*</sup></label>
+                            <label for="course" class="col-sm-12 col-form-label">Курс<sup class="required">*</sup></label>
                             <div class="col-sm-12">                            
-                                <select class="form-control" id="week" name="item[course_id]">  
+                                <select class="form-control" id="course" name="item[course_id]">  
                                     <option value="0">-- Не выбрано --</option>   
                                     @if(isset($courses) && count($courses) > 0)
                                         @foreach($courses as $course)                                        

@@ -65,7 +65,7 @@
                             <div class="form-group row justify-content-center">                       
                                 <div class="checkbox">
                                     <label class="form-login__label form-login__label-terms row align-items-center">
-                                        <input class="form-login__input-remember" type="checkbox" name="check_terms" {{ old('check_terms') ? 'checked' : '' }}> Я подтверждаю <a style="color:#fff; text-decoration:underline;" target="_blank" href="/doc/offer5.pdf" required> Пользовательское соглашение</a>
+                                        <input class="form-login__input-remember" type="checkbox" name="check_terms" {{ old('check_terms') ? 'checked' : '' }} required> Я подтверждаю <a style="color:#fff; text-decoration:underline;" target="_blank" href="/doc/offer5.pdf" > Пользовательское соглашение</a>
                                     </label>
                                 </div>                                
                             </div>

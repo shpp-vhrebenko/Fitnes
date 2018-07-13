@@ -19,7 +19,7 @@ class Controller extends BaseController
 
     public function setTitle($title)
     {
-        view()->share('title', $title);
+        view()->share('title', strip_tags($title));
     }
 
     public function setTitleFront($meta_title, $title)

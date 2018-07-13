@@ -8,6 +8,7 @@ use App\Http\Requests\EditClientRequest;
 use App\Http\Requests\ItemRequest;
 use App\Http\Requests\ItemUpdateRequest;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use App\Http\Requests\StoreCoursRequest;
 use App\Http\Requests\CourseUpdateRequest;
 use App\Http\Requests\StoreMarathonsRequest;
@@ -249,8 +250,9 @@ class AdminController extends Controller
         $client = $this->users->find($id);
         if (!isset($client)) {
             return abort(404);
-        }        
-        return view('admin/pages/clients/show')->with(['title' => 'Профиль клиента: ' . $client->name, 'client' => $client, 'client_status' => 1]);
+        }  
+        $course = $this->courses->find($client->course_id);      
+        return view('admin/pages/clients/show')->with(['title' => 'Профиль клиента: ' . $client->name, 'client' => $client, 'client_status' => 1, 'course' => $course]);
     }
 
     public function client_not_register($id)
@@ -258,8 +260,9 @@ class AdminController extends Controller
         $client = UserSoul::find($id);
         if (!isset($client)) {
             return abort(404);
-        }  
-        return view('admin/pages/clients/show')->with(['title' => 'Профиль не зарегистрированого клиента: ' . $client->name, 'client' => $client, 'client_status' => 0 ]);
+        } 
+        $course = NULL;   
+        return view('admin/pages/clients/show')->with(['title' => 'Профиль не зарегистрированого клиента: ' . $client->name, 'client' => $client, 'client_status' => 0 , 'course' => $course]);
 
     }
 
@@ -521,6 +524,7 @@ class AdminController extends Controller
     public function categories_store(StoreCategoryRequest $request)
     {
         $item_request = $request->get('item');
+        $item_request['slug'] = str_slug($item_request['name']);
         $category = $this->categories->create($item_request);       
         Session::flash('success', 'Категория успешно создана!');
         return redirect()->back();
@@ -538,17 +542,31 @@ class AdminController extends Controller
         return view('admin/pages/items/categories-new', compact(['title', 'category', 'statuses']));
     }
 
-    public function update_category($id, StoreCategoryRequest $request)
+    public function update_category(CategoryUpdateRequest $request, $id)
     {
         $category = $this->categories->find($id);
         if (!isset($category))
         {
             return abort('404');
         }
-        $category->update($request->get('item')); 
-
-        Session::flash('success', 'Категория успешно изменена!');
-        return redirect()->back();
+        $newCategory = $request->get('item');
+        $searchCategory = $this->categories->findWithParams(['name' => $newCategory['name']])->first();      
+       
+        if(isset($searchCategory)) {
+            if($searchCategory->id == $id) {
+                $category->update($newCategory);                
+                Session::flash('success', 'Категория успешно изменена!');
+                return redirect()->back();
+            } else {
+                Session::flash('danger', 'Категория с таким Названием уже есть!');
+                return redirect()->back();
+            }
+        } else {
+            $newCategory['slug'] = str_slug($newCategory['name']);
+            $category->update($newCategory);            
+            Session::flash('success', 'Категория успешно изменена!');
+            return redirect()->back();
+        }
     }
 
     public function destroy_category($id)

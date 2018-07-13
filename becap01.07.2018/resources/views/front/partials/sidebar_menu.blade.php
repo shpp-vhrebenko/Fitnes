@@ -8,6 +8,6 @@
 	  	<li><a href='#results' class="anchor-link">Результаты</a></li>
 	  	<li><a href='#faq' class="anchor-link">Вопросы</a></li>
 		<li><a href='#contacts' class="anchor-link">Контакты</a></li>	  	
-		<li><a href='/doc/ПОЛИТИКА_КОНФИДЕНЦИАЛЬНОСТИ_ИП_Гизерская.pdf' target='_blank'>Политика конфиденциальности</a></li>
+		<li><a href='/doc/policy.pdf' target='_blank'>Политика конфиденциальности</a></li>
 	</ul>
 <div>

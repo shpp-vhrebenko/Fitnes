@@ -29,7 +29,10 @@ class CourseUpdateRequest extends FormRequest
             'item.description' => 'required',
             'item.price' => 'required|numeric',            
             'item.period' => 'required|numeric',
-            'item.icon' => 'image|mimes:png,svg',      
+            'item.icon' => 'image|mimes:png,svg', 
+            'item.notification_day_number' => 'required',
+            'item.notification' => 'required', 
+            'item.faq' => 'required',     
         ];
     }
 
@@ -41,6 +44,9 @@ class CourseUpdateRequest extends FormRequest
             'item.period.required' => 'Необходимо ввести Продолжительность Курса',
             'item.icon.image' => 'Иконка курса должна быть в формате изображения',
             'item.icon.mimes' => 'Иконка курса должна быть в формате png, svg',
+            'item.notification_day_number.required' => 'Необходимо ввести количество дней до конца Курса',
+            'item.notification.required' => 'Необходимо ввести Текст уведомления',
+            'item.faq.required' => 'Необходимо ввести FAQ',  
         ];
     }
 }

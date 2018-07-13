@@ -212,6 +212,12 @@
 }
 
 @media only screen and (max-width: 768px) {
+
+
+.result-item {
+	display:block;
+}
+
     
     .about__description {
     	height: 100%;
@@ -311,7 +317,7 @@
     }
 
     .play-btn {
-    	bottom: 230px;
+    	bottom: 176px;
     }
 } 
 
@@ -488,9 +494,18 @@
     } 
 
     .testamonials__title h3 {
-    	font-size: 70px;
+    	font-size: 55px;
     	margin-bottom: .5rem;
     }
+    .results__header {
+	    font-size: 43px;
+	}
+	.price__header {
+		padding: 50px 0px 20px 0px;
+	}
+	.price {
+		padding:0px 0px;
+	}
 
     .testamonials__indicators {    	
 	    position: relative;	   

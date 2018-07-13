@@ -28,9 +28,9 @@ class EditClientRequest extends FormRequest
         return [
             'item.name' => 'required',
             'item.email' => 'required|string|email|max:150',
-            'item.phone' => 'required|numeric|min:10',            
+            'item.phone' => 'required',            
             'item.status_id' => 'required',
-            'item.is_subscribe' => 'required',      
+            'item.course_id' => 'required',                 
         ];
     }
 
@@ -39,8 +39,8 @@ class EditClientRequest extends FormRequest
             'item.name.required' => 'Необходимо ввести ФИО Клиента',
             'item.email.required' => 'Необходимо ввести Email Клиента',            
             'item.phone.required' => 'Необходимо ввести Номер Телефона клиента',
-            'item.status_id.required' => 'Необходимо указать Статус Клиента',
-            'item.is_subscribe.required' => 'Необходимо указать Подписку на рассылку',
+            'item.status_id.required' => 'Необходимо указать Статус Клиента',  
+            'item.course_id.required' => 'Необходимо выбрать Курс',              
         ];
     }
 }

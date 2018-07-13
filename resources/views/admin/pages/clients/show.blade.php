@@ -18,6 +18,7 @@
                             <th scope="col">Почта</th>
                             <th scope="col">Телефон</th>                            
                             <th scope="col">Статус</th>
+                            <th scope="col">Курс</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -28,12 +29,14 @@
                             <td>{{ $client->email }}</td>
                             <td>{{ $client->phone }}</td>                            
                             <td>{{ $client->getClientStatus($client->status_id) }}</td>
+                            <td><a href="@if($course->type == 'cours'){{route('show_cours', $course->id)}}@else{{ route('show_marathon', $course->id) }}@endif">{!! $course->name !!}</a></td>
                             @else
                             <td>{{ $client->id }}</td>
                             <td>{{ $client->name }}</td>
                             <td>{{ $client->email }}</td>
                             <td>{{ $client->phone }}</td>                            
-                            <td>Клиент {{ $client->name }} не выполнил оплату. Поэтому на данный момент он не зарегистрирован.</td>
+                            <td>Клиент {{ $client->name }} <span class="badge badge-info">не зарегистрирован</span></td>
+                            <td>Курс не оплачен</td>
                             @endif
                         </tr>
                         </tbody>

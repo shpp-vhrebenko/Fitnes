@@ -56,6 +56,19 @@
                 			<p><strong>Обхват бедер: </strong>{{$result->bedra}}</p>
                 			<p><strong>Обхват талии: </strong>{{$result->taliya}}</p>
                 		</div>
+                		@if($loop->last && $result->id > $id_last_result)                		
+        				<div class="result-item__option">                			
+					  		<a class="btn-delete-result" href="{{ route('result_delete') }}"
+						       onclick="confSubmit(event)">	Удалить последний результат
+							</a>			    
+						    <form id="result-form-delete" action="{{ route('result_delete') }}" method="POST" style="display: none;">
+						    	<input type="hidden" name="_method" value="delete">
+						        @csrf
+						        <input type="hidden" name="result_id" value="{{$result->id}}">
+						    </form>
+                		</div>
+     					@endif
+                		
                 	</div>
                 	@endforeach
                 </div>
@@ -70,6 +83,14 @@
     <script src="{{asset('js/lib/Chart.min.js')}}"></script>
     <script  src="{{asset('js/my_account.js') }}"></script>
 	<script>
+		function confSubmit(event) {
+			event.preventDefault();
+			$form = $('#result-form-delete');			
+			if (confirm("Вы действительно хотите удалить последний результат?")) {
+				$form.submit();				
+			}		
+		}
+
 		Chart.defaults.global.defaultFontColor = '#f3ccf8';
 		var labelsArr = [];
 		var dataVes = [];
@@ -99,13 +120,14 @@
             success: function (data) {
             	if(data.results != undefined) {
             		results = data.results;
+
             		for (key in results) {
             			var item = results[key];
             			dataVes.push(item.weight);
             			dataRost.push(item.height);
             			dataGrud.push(item.grud);
             			dataBedra.push(item.bedra);								
-						dataTaliya.push(item.taliya);
+						dataTaliya.push(item.taliya);						
 						labelsArr.push(item.created_at);
             		}
             		nameLabel = "Веc";

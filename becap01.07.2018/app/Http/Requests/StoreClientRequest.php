@@ -28,9 +28,9 @@ class StoreClientRequest extends FormRequest
         return [
             'item.name' => 'required',
             'item.email' => 'required|string|email|max:150|unique:users,email',
-            'item.phone' => 'required|numeric|min:10',            
-            'item.status_id' => 'required',
-            'item.is_subscribe' => 'required',      
+            'item.phone' => 'required',            
+            'item.status_id' => 'required',           
+            'item.course_id' => 'required',                      
         ];
     }
 
@@ -40,8 +40,8 @@ class StoreClientRequest extends FormRequest
             'item.email.required' => 'Необходимо ввести Email Клиента',
             'item.email.unique' => 'Клиент с таким Email уже зарегистрирован',
             'item.phone.required' => 'Необходимо ввести Номер Телефона клиента',
-            'item.status_id.required' => 'Необходимо указать Статус Клиента',
-            'item.is_subscribe.required' => 'Необходимо указать Подписку на рассылку',
+            'item.status_id.required' => 'Необходимо указать Статус Клиента',           
+            'item.course_id.required' => 'Необходимо выбрать Курс',                   
         ];
     }
 }

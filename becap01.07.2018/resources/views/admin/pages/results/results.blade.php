@@ -53,6 +53,7 @@
 @endsection
 
 @section('footer-scripts')
+    @parent
     <script>
       $(document).ready(function () {       
         $(document).on('click', '[data-toggle="lightbox"]', function(event) {

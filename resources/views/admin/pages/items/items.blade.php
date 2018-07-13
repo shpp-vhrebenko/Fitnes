@@ -12,7 +12,6 @@
         @endif
       @endforeach
     </div> 
-
     <div class="jumbotron jumbotron-fluid">
         <form class="form" action="{{ route('items_filter') }}" method="get">
             <div class="form-row">

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use App\User;
+use App\UserSoul;
 
 class Order extends Model
 {
@@ -23,8 +24,8 @@ class Order extends Model
     ];
 
     protected $userStatuses = [
-        'Зарегистрирован',
         'Не зарегистрирован',
+        'Зарегистрирован',        
     ];
 
     public static function getAllOrderStatuses()
@@ -38,10 +39,20 @@ class Order extends Model
         return $this->orderStatuses[$id];
     }
 
+    public function getClientStatus($id)
+    {
+        return $this->userStatuses[$id];
+    }
+
     public function client()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }   
+
+    public function client_not_register()
+    {
+        return $this->belongsTo(UserSoul::class, 'user_id', 'id');
+    }
 
     public function course()
     {

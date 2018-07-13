@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Role;
@@ -15,8 +17,7 @@ class User extends Authenticatable
 
     public static $userStatuses = [        
         'Выключен',
-        'Активен',
-        'Заблокирован'
+        'Активен',        
     ];
 
     public static function getUserStatus()
@@ -38,6 +39,7 @@ class User extends Authenticatable
         'is_subscribe',
         'course_id',
         'data_start_course',
+        'id_last_result',
     ];
 
     /**
@@ -80,5 +82,29 @@ class User extends Authenticatable
         return $this;
     }
 
+     /**
+     * Sends the password reset notification.
+     *
+     * @param  string $token
+     *
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new CustomPassword($token));
+    }
 
+
+}
+
+
+class CustomPassword extends ResetPassword
+{
+    public function toMail($notifiable)
+    {
+        return (new MailMessage)
+            ->line('Вы получили это письмо, потому что мы получили запрос на изменение пароля для Вашей учетной записи.')
+            ->action('Сброс пароля', url(config('app.url') . route('password.reset', $this->token, false)))
+            ->line('Если вы не запрашивали сброс пароля, не требуется никаких дополнительных действий.');
+    }
 }

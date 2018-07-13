@@ -58,10 +58,14 @@ Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveC
     Route::post('/results/user', 'MyAccountController@get_results')->name('get_results');
     Route::get('/results/new', 'MyAccountController@add_result')->name('add_result');    
     Route::post('/results/new', 'MyAccountController@result_store')->name('result_store');
+    Route::delete('/results/delete', 'MyAccountController@result_delete')->name('result_delete');
 
     // Route courses
     Route::get('/courses','MyAccountController@show_courses')->name('courses_list');   
     Route::post('/courses','MyAccountController@by_course')->name('by_course'); 
+
+    // Route
+    Route::get('/faq', 'MyAccountController@show_faq')->name('show_faq');
     
 });
 
@@ -83,6 +87,7 @@ Route::group(['prefix'=>'admin','middleware' => 'isAdmin'], function() {
     // Route clients
     Route::get('/clients', 'AdminController@clients')->name('clients');
     Route::get('/client/{id}', 'AdminController@client')->name('show_client');
+    Route::get('/client/not_register/{id}', 'AdminController@client_not_register')->name('show_client_not_register');
     Route::get('/client/{id}/edit', 'AdminController@client_edit')->name('edit_client');
     Route::post('/client/{id}/edit', 'AdminController@client_update')->name('update_client');
     Route::delete('/client/{id}/destroy', 'AdminController@client_destroy')->name('destroy_client');

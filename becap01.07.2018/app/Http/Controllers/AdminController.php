@@ -21,6 +21,7 @@ use App\Repositories\CoursesRepositoryInterface;
 use App\Repositories\OrdersRepositoryInterface;
 
 use App\User;
+use App\UserSoul;
 use App\Settings;
 use App\Social;
 use App\Role;
@@ -64,10 +65,21 @@ class AdminController extends Controller
 
     public function index()
     {
+        $orders = $this->orders->all();
+        $total_income = 0;
+        foreach ($orders as $order) {
+            if($order->status_id == 1) {
+                $total_income = $total_income + $order->total;
+            }
+        }   
+
         $stats = [            
             'users' => $this->users->count(),
             'orders' => $this->orders->count(),
-        ];       
+            'total' => $total_income,
+        ];  
+
+
 
         $latest_orders = $this->orders->latest(5)->get();       
 
@@ -183,10 +195,11 @@ class AdminController extends Controller
         $order = $this->orders->find($id);              
         if (!isset($order)) {
             return abort('404');
-        }
-        $course = $order->client->course;  
+        }        
+        $course = $this->courses->find($order->course_id);     
         $this->setTitle('Просмотр заказа');
         return view('admin/pages/orders/show')->with(['order' => $order, 'course' => $course]);
+        
     }
 
     public function edit_order($id)
@@ -237,7 +250,17 @@ class AdminController extends Controller
         if (!isset($client)) {
             return abort(404);
         }        
-        return view('admin/pages/clients/show')->with(['title' => 'Профиль клиента: ' . $client->name, 'client' => $client]);
+        return view('admin/pages/clients/show')->with(['title' => 'Профиль клиента: ' . $client->name, 'client' => $client, 'client_status' => 1]);
+    }
+
+    public function client_not_register($id)
+    {
+        $client = UserSoul::find($id);
+        if (!isset($client)) {
+            return abort(404);
+        }  
+        return view('admin/pages/clients/show')->with(['title' => 'Профиль не зарегистрированого клиента: ' . $client->name, 'client' => $client, 'client_status' => 0 ]);
+
     }
 
     public function client_edit($id)
@@ -245,15 +268,31 @@ class AdminController extends Controller
         $client = $this->users->find($id);
         if (!isset($client)) {
             return abort(404);
-        }        
+        }   
+        $currentCourse = $this->courses->find($client->course_id);
+        if(isset($currentCourse) && $currentCourse->type == 'cours') {            
+            $current_day_course = self::getCurrentCourseDayNumber($client->data_start_course);
+        } else {
+            $current_day_course = NULL;
+        }           
         $roles = Role::all();
         $statuses = User::$userStatuses;
+        $courses = $this->courses->findWithParams(['is_active' => true])->get();    
         return view('admin/pages/clients/new')->with([
             'title' => 'Редактирование клиента: ' . $client->name,
             'client' => $client,
             'roles' => $roles,
-            'statuses' => $statuses
+            'statuses' => $statuses,
+            'courses' => $courses,
+            'current_day_course' => $current_day_course,
         ]);
+    }
+
+    protected static function  getCurrentCourseDayNumber($data_start_course)
+    {
+        $currentDate = Carbon::now();       
+        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $data_start_course);
+        return $dataStartCourse->diffInDays($currentDate, false); 
     }
 
     public function client_update($id, EditClientRequest $request)
@@ -262,7 +301,33 @@ class AdminController extends Controller
         if (!isset($client)) {
             return abort(404);
         }
-        $client->update($request->get('item'));
+        $current_day_course = $request->get('current_day_course');
+        $item = $request->get('item');
+        $currentCourse = Courses::find($item['course_id']);
+        $currentCourseType = $currentCourse->type;
+        if($currentCourseType == 'cours') { 
+            if(isset($client->data_start_course)) {
+                $client_day_course = self::getCurrentCourseDayNumber($client->data_start_course);
+            } else {
+                $client_day_course = 0;
+                $client->update(['data_start_course' => Carbon::now()]);
+            }          
+            
+            if($current_day_course == 0) {
+                $client->update(['data_start_course' => Carbon::now()]);
+            } else if($current_day_course > $client_day_course) {
+                $diffDays = $current_day_course - $client_day_course;
+                $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $client->data_start_course);
+                $currentDataStartCourse = $dataStartCourse->subDays($diffDays);
+                $client->update(['data_start_course' => $currentDataStartCourse]);
+            } else if ($current_day_course < $client_day_course) {
+                $diffDays = $client_day_course - $current_day_course;
+                $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $client->data_start_course);
+                $currentDataStartCourse = $dataStartCourse->addDays($diffDays);
+                $client->update(['data_start_course' => $currentDataStartCourse]);
+            }
+        }
+        $client->update($item);
         if (!$client->hasRole($request->get('item')['role_id'])) {
             $client->updateRole($request->get('item')['role_id']);
         }
@@ -274,17 +339,31 @@ class AdminController extends Controller
     {              
         $roles = Role::all();
         $statuses = User::$userStatuses;
+        $courses = $this->courses->findWithParams(['is_active' => true])->get();
         return view('admin/pages/clients/new')->with([
             'title' => 'Coздание клиента',            
             'roles' => $roles,
-            'statuses' => $statuses
+            'statuses' => $statuses,
+            'courses' => $courses,
         ]);
     }
 
      public function client_store(StoreClientRequest $request)
     {
         $settings = Settings::first(); 
-        $item = $request->get('item');        
+        $item = $request->get('item'); 
+        $current_day_course = $request->get('current_day_course');        
+        $currentCourse = Courses::find($item['course_id']);
+        $currentCourseType = $currentCourse->type;  
+        if(isset($current_day_course) && $currentCourseType == 'cours') {
+            if($current_day_course == 0) {
+                $item['data_start_course'] = Carbon::now(); 
+            } else if ($current_day_course > 0) {
+                $DataStartCourse = Carbon::now()->subDays($current_day_course);
+                $item['data_start_course'] = $DataStartCourse; 
+            }             
+        } 
+
         $item['remember_token'] = $request->get('_token');       
         $newUserPass = str_random(8);
         $item['password'] = bcrypt($newUserPass);             
@@ -383,8 +462,8 @@ class AdminController extends Controller
         }
     }
 
-    public function client_sendMessage(Request $request) {
-        $message = $request->get('messageUser');
+    public function client_sendMessage(Request $request) {        
+        $message = "";
         $userId = $request->get('user_id');
         $settings = Settings::first();                      
         $user = $this->users->find($userId); 
@@ -404,7 +483,7 @@ class AdminController extends Controller
         {
             $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
 
-            $message->to($params['user_email']);
+            $message->to($params['user_email'])->subject('gizerskaya - Фитнесс Тренер');
 
         });
 
@@ -413,11 +492,13 @@ class AdminController extends Controller
         mail($user->email,
             "gizerskaya - Фитнесс Тренер",
             $currentMessage,
-            "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());*/
+            "From:".$settings->email."\r\n"."X-Mailer: PHP/" . phpversion());*/       
 
-        Session::flash('success', 'Клиенту "'.$user->name.'" успешно отправленно сообщение и задан новый пароль!'); 
-
-        return redirect()->back();
+        $response = array(
+            'status' => 'success',
+            'result' => 'Сообщение успешно отправлено!'
+        );
+        return response()->json($response); 
     }
 
     // END CLIENTS    

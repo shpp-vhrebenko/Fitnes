@@ -10,7 +10,7 @@
 .auth {
 	width: 100%;
 	height: 100vh;
-	min-height: 900px;
+	min-height:auto;
 	background: linear-gradient(to right, #a74f67 0%,#49375d 100%);
 }
 
@@ -51,10 +51,16 @@ span.rur {
 	text-align: center;
 	line-height: 1;
 	margin-bottom: 30px;
+	text-transform: uppercase;
 }
 
 .login-card__body .form-group {
 	margin-bottom: 28px;
+}
+
+.form-login__input::placeholder {
+	color: #fff;
+   text-transform: uppercase;
 }
 
 .form-login__input {
@@ -100,6 +106,10 @@ a.form-login__button:hover {
 	cursor: pointer;
 	text-decoration: none;
 }
+.form-login__button:focus,
+a.form-login__button:focus {
+	outline:none;
+}	
 
 .btn-center {
 	margin: 0 auto;
@@ -146,6 +156,10 @@ a.form-login__button:hover {
 
 .form-description {
 	text-align: center;
+	padding-top: 50px;
+}
+.form-login__label.form-login__label-terms a {
+	margin-left:10px;
 }
 
 .form-description h3{
@@ -164,16 +178,22 @@ a.form-login__button:hover {
 }
 
 .arrow {
-	display: inline-block;
-	position: relative;	
-	width: 86px;
-    height: 2px;
-    background: #fff;
-	line-height: 2px;
-	margin-top: 30px;
-	margin-right: 1rem;
+    display: inline-block;
+    position: relative;
+    /* width: 86px; */
+    /* height: 2px; */
+    /* background: #fff; */
+    /* line-height: 2px; */
+    display: inline-block;
+    background-image: url(img/strelki.png);
+    width: 100px;
+    height: 16px;
+    background-repeat: no-repeat;
+    margin-top: 21px;
+    /* margin-top: 30px; */
+    /* margin-right: 1rem; */
 }
-.arrow:before,
+/*.arrow:before,
 .arrow:after {
 	content: "";
 	display: block;
@@ -182,14 +202,14 @@ a.form-login__button:hover {
 	height: 0;
 	border: 12px solid transparent; 
 	border-right: 0;
-}
+}*/
 
-.arrow:after {
+/*.arrow:after {
     top: -5px;
     right: -10px;
     border-left-color: #fff;
     border-width: 6px 0 6px 26px;
-}
+}*/
 
 label.error {
 	width: 100%;
@@ -224,10 +244,11 @@ label.error {
     margin-top: 0px;
     border-color: initial;
     border: none;
+    text-align: center;
 }
 
 .alert.alert-success.alert-success_custom {
-    background-color: #11b939;
+    background-color: #468848;
     border: none ;
     color: #fff;    
     font-family: HelveticaLight;
@@ -235,6 +256,7 @@ label.error {
     font-size: 1rem;
     border: none;
     border-color: initial;
+    text-align: center;
 }
 
 
@@ -309,3 +331,46 @@ label.error {
 	cursor: pointer;	
 }
 /* END MODAL CONTACTS */
+@media (max-width: 1024px){ 
+.auth {
+		min-height: auto;
+		overflow: hidden;
+	}
+.login-card__header {
+		font-size: 75px ;
+}
+.login-card {
+    padding-top: 20px;
+}
+}
+@media (max-width: 920px){
+.login-card__header {
+		font-size: 70px ;
+}
+.login-card {
+    padding-top: 40px;
+}
+}
+@media (max-width: 767px){
+	.login-card__header {
+		font-size: 60px ;
+	}
+.auth {
+		min-height: auto;
+		overflow: hidden;
+	}
+.login-card {
+	padding-top: 30px;
+}
+body {
+	overflow: hidden;
+}
+.form-login__button, a.form-login__button {
+    padding: 1rem 1rem;
+}
+}
+@media (max-width: 500px) {
+.login-card {
+    padding-top: 70px;
+}
+}
