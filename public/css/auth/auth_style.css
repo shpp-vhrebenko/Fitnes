@@ -115,6 +115,11 @@ a.form-login__button:focus {
 	margin: 0 auto;
 }
 
+.form-login__input.form-control.is-invalid:focus {
+	border: none;
+	box-shadow: none;
+}
+
 .form-login__label {	
 	color: #fff;
 	font-family: HelveticaLight;
