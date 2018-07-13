@@ -181,7 +181,10 @@ class MyAccountController extends Controller
             $this->setTitle($course->name . ' - Тренировки');  
             return view('my_acount/pages/trainings/trainings', compact(['trainingItems', 'page_title', 'description', 'notification']));
         } else {
-            $currentUser->update(['course_id' => 0]);
+            $currentUser->update([
+                'course_id' => 0,
+                'data_start_course' => NULL
+                ]);           
             return redirect()->route('courses_list');  
         }       
 
