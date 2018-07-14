@@ -23,13 +23,13 @@
                             @csrf
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} form-login__input" name="email" value="{{ old('email') }}" required autofocus placeholder="Логин">                                    
+                                    <input id="email" type="email" class="form-control form-login__input" name="email" value="{{ old('email') }}" required autofocus placeholder="Логин">                                    
                                 </div>
                             </div>
 
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} form-login__input" name="password" required placeholder="Пароль">                                   
+                                    <input id="password" type="password" class="form-control  form-login__input" name="password" required placeholder="Пароль">                                   
                                 </div>
                             </div>
 

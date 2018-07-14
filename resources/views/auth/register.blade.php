@@ -108,6 +108,7 @@
                                     return $('#register-form :input[name="email"]').val();
                                 },
                                 _token: $('meta[name="csrf-token"]').attr('content'),
+                                status_email: 'issetEmail',
                             },
                          
                         }

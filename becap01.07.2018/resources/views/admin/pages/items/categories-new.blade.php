@@ -2,11 +2,13 @@
 
 @section('content')
     <h1>{{ $title }} <a href="{{ route('categories') }}" class="fa fa-arrow-left btn-back" data-toggle="tooltip" data-placement="top" title="Вернутся назад"></a></h1>
-    @if (Session::has('success'))
-        <div class="alert alert-success" role="alert">
-            {{ Session::get('success') }}
-        </div>
-    @endif
+    <div class="flash-message">
+      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if(Session::has($msg))
+        <p class="alert alert-{{ $msg }}">{{ Session::get($msg) }}</p>
+        @endif
+      @endforeach
+    </div> 
     @if($errors)
         @foreach ($errors->all() as $error)
             <div class="alert alert-danger" role="alert">
@@ -41,27 +43,22 @@
                                                 name="item[name]"
                                                 value="{{ isset($category) ? $category->name : old('item.name') }}"
                                                 {{ (isset($category) && ($category->id == 1)) ? 'disabled' : '' }}>
-                                </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="slug" class="col-sm-2 col-form-label">ЧПУ<sup class="required">*</sup></label>
-                                    <div class="col-sm-10">
-                                        <input type="text" 
-                                                class="form-control"
-                                                id="slug" 
-                                                name="item[slug]" 
-                                                value="{{ isset($category) ? $category->slug : old('item.slug') }}"
-                                                {{ (isset($category) && ($category->id == 1)) ? 'disabled' : '' }}>
                                     </div>
-                                </div>
+                                </div>                               
                                 <div class="form-group row">
                                     <label for="status_id" class="col-sm-2 col-form-label">Cтатус Категории<sup class="required">*</sup></label>
                                     <div class="col-sm-10">
                                         <select class="form-control" id="status_id" name="item[is_active]">
                                             @if(isset($statuses))
-                                                @foreach($statuses as $key => $status)
-                                                    <option value="{{ $key }}" @if(isset($category) && $category->is_active == $key) selected @endif>{{ $status }}</option>
-                                                @endforeach
+                                                @if(Route::is('categories_new'))
+                                                    @foreach($statuses as $key => $status)
+                                                        <option value="{{ $key }}" @if($key == 1) selected @endif>{{ $status }}</option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach($statuses as $key => $status)
+                                                        <option value="{{ $key }}" @if(isset($category) && $category->is_active == $key) selected @endif>{{ $status }}</option>
+                                                    @endforeach
+                                                @endif    
                                             @endif
                                         </select>
                                     </div>

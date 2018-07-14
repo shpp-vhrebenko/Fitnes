@@ -28,7 +28,7 @@
                     </td>
                 @endif                               
                 <td>{{ $order->getOrderStatus($order->status_id) }}</td>
-                <td>{{ $order->created_at->format('d-m-Y') }}</td>
+                <td>{{ $order->created_at->format('d-m-Y H:i:s') }}</td>
                 <td>{{ $order->total }} руб.</td>                
             </tr>
             </tbody>

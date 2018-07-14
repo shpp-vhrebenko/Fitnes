@@ -18,7 +18,7 @@ class Order extends Model
     ];
 
     protected $orderStatuses = [
-        'Не оплочено',
+        'Не оплачено',
         'Оплачено',
         'Ожидает оплаты',
     ];

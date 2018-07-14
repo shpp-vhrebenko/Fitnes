@@ -299,6 +299,7 @@
                   <span aria-hidden="true">X</span>
             </button>
             <div class="modal-body">
+                <h5 class="block-contacts__header">Написать письмо</h5>
                 <form action="#" class="form-contacts">
                     <div class="form-group">
                         <label for="name">имя</label>

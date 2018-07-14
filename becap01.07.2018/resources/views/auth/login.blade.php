@@ -23,25 +23,13 @@
                             @csrf
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} form-login__input" name="email" value="{{ old('email') }}" required autofocus placeholder="Логин">
-
-                                    @if ($errors->has('email'))
-                                        <div class="alert alert-danger alert-danger_custom">
-                                            {{ $errors->first('email') }}
-                                        </div>
-                                    @endif
+                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} form-login__input" name="email" value="{{ old('email') }}" required autofocus placeholder="Логин">                                    
                                 </div>
                             </div>
 
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} form-login__input" name="password" required placeholder="Пароль">
-
-                                    @if ($errors->has('password'))
-                                        <div class="alert alert-danger alert-danger_custom">
-                                            {{ $errors->first('password') }}
-                                        </div>
-                                    @endif
+                                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} form-login__input" name="password" required placeholder="Пароль">                                   
                                 </div>
                             </div>
 
@@ -51,12 +39,24 @@
                                 </button>                               
                             </div>
 
-                            <div class="form-group row justify-content-center">                       
+                            <div class="form-group row justify-content-center">                
                                 <div class="checkbox">
                                     <label class="form-login__label row align-items-center">
                                         <input class="form-login__input-remember" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> ЗАПОМНИТЬ ПАРОЛЬ
                                     </label>
                                 </div>                                
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                @if (count($errors) > 0)                                    
+                                    @foreach($errors->all() as $error)
+                                    <div class="alert alert-danger alert-danger_custom" role="alert">
+                                        {{$error}}
+                                    </div>
+                                    @endforeach                                  
+                                @endif 
+                                </div>                               
                             </div>
 
                             <div class="form-group row justify-content-center">

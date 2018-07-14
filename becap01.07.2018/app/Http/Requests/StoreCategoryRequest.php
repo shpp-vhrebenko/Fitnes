@@ -24,8 +24,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'item.name' => 'required',
-            'item.slug' => 'required',
+            'item.name' => 'required|max:190|unique:categories,name',            
             'item.description' => 'required',
             'item.is_active' => 'required',
         ];
@@ -33,8 +32,8 @@ class StoreCategoryRequest extends FormRequest
 
     public function messages() {
         return [
-            'item.name.required' => 'Необходимо ввести Название Категории',
-            'item.slug.required' => 'Необходимо ввести ЧПУ Категории',
+            'item.name.required' => 'Необходимо ввести Название Категории', 
+            'item.name.unique' => 'Категория с таким названием уже есть',           
             'item.description.required' => 'Необходимо ввести Описание Категории',
             'item.is_active.required' => 'Необходимо указать статус Категории',           
         ];

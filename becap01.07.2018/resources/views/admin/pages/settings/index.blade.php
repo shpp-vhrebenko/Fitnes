@@ -19,27 +19,29 @@
             <div class="card-header">Все настройки</div>
             <div class="card-body">
                 <div class="form-group row" >
-                    {!! Form::label('logo', 'Логотип', array('class'=>'col-sm-2 control-label') ) !!}
                     <div class="col-sm-6">
-                        {!! Form::file('logo', array('class' => 'filestyle', 'data-value'=> $settings->logo, 'data-buttonText' => 'Выбрать файл', 'data-buttonName' => 'btn-primary', 'data-icon' => 'false', 'name' => 'logo' ) ) !!}                        
-                    </div>                  
-                    <div class="col-sm-4" style="margin: 8px 0">
-                        <div class="bg-image">
-                            <img src="/uploads/logo/{{$settings->logo}}">
+                        {!! Form::label('logo', 'Логотип', array('class'=>'col-sm-12 control-label') ) !!}
+                        <div class="col-sm-12" style="margin: 8px 0">
+                            <div class="bg-image">
+                                <img src="/uploads/logo/{{$settings->logo}}">
+                            </div>                        
+                            <p>Рекомендуемые размеры логотипа <span class="badge badge-secondary">186 x 30</span></p>
+                        </div>                                                 
+                        <div class="col-sm-12">
+                            {!! Form::file('logo', array('class' => 'filestyle', 'data-value'=> $settings->logo, 'data-buttonText' => 'Выбрать файл', 'data-buttonName' => 'btn-primary', 'data-icon' => 'false', 'name' => 'logo' ) ) !!}                        
                         </div>                        
-                        <p>Рекомендуемые размеры логотипа <span class="badge badge-secondary">186 x 30</span></p>
-                    </div>          
-                </div>
-                <div class="form-group row" >
-                    {!! Form::label('favicon', 'Favicon', array('class'=>'col-sm-2 control-label') ) !!}
+                    </div>
                     <div class="col-sm-6">
-                        {!! Form::file('favicon', array('class' => 'filestyle', 'data-value'=> $settings->favicon, 'data-buttonText' => 'Выбрать файл', 'data-buttonName' => 'btn-primary', 'data-icon' => 'false', 'name' => 'favicon' ) ) !!}                        
-                    </div>                  
-                    <div class="col-sm-4" style="margin: 8px 0;">
-                        <img src="/uploads/favicon/{{$settings->favicon}}" style="transform: scale(2); margin-left: 16px;">
-                        <p>Рекомендуемые размеры favicon <span class="badge badge-secondary">16 x 16</span></p>
-                    </div>          
-                </div>
+                        {!! Form::label('favicon', 'Favicon', array('class'=>'col-sm-12 control-label') ) !!}                                         
+                        <div class="col-sm-12" style="margin: 8px 0;">
+                            <img src="/uploads/favicon/{{$settings->favicon}}" style="transform: scale(2); margin-left: 16px;">
+                            <p>Рекомендуемые размеры favicon <span class="badge badge-secondary">16 x 16</span></p>
+                        </div> 
+                        <div class="col-sm-12">
+                            {!! Form::file('favicon', array('class' => 'filestyle', 'data-value'=> $settings->favicon, 'data-buttonText' => 'Выбрать файл', 'data-buttonName' => 'btn-primary', 'data-icon' => 'false', 'name' => 'favicon' ) ) !!}                        
+                        </div> 
+                    </div>                             
+                </div>              
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Мета-тег Title <sup class="required">*</sup></label>
                     <div class="col-sm-10">
@@ -58,19 +60,7 @@
                         <textarea class="form-control" id="exampleFormControlTextarea1" name="settings[keywords]" rows="3">{!! old('', $settings->keywords) !!}</textarea>
                     </div>
                 </div>               
-                <div class="dropdown-divider"></div><br/>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Название магазина<sup class="required">*</sup></label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="settings[title_site]" value="{{ old('', $settings->title_site) }}" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Владелец магазина<sup class="required">*</sup></label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="settings[owner]" value="{{ old('', $settings->owner) }}" />
-                    </div>
-                </div>                                    
+                <div class="dropdown-divider"></div><br/>                               
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">E-Mail<sup class="required">*</sup></label>
                     <div class="col-sm-10">

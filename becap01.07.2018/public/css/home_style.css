@@ -1093,6 +1093,17 @@ a.price-item__button {
     border-radius: 0;
 }
 
+.block-contacts__header {
+	width: 100%;
+	color: #fff;
+	font-family: HelveticaBold;
+    font-size: 30px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 .block-contacts__close {
 	position: absolute;
 	top: 0rem;
@@ -1250,6 +1261,14 @@ font-weight: 100;
 	outline: none;
 }
 
+.oplata__link {
+	color: #fff;
+}
+
+.oplata__link:hover {
+	color: #fff;
+}
+
 .pay {
 	color: #fff;
     font-family: "HelveticaLight";
@@ -1258,12 +1277,12 @@ font-weight: 100;
     padding: 1rem;    
 }
 @media (min-width: 768px) {
-.col-md-6 {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 60%;
-    flex: 0 0 60%;
-    max-width: 60%;
-}
+	.col-md-6 {
+	    -webkit-box-flex: 0;
+	    -ms-flex: 0 0 60%;
+	    flex: 0 0 60%;
+	    max-width: 60%;
+	}
 }
 
 /* END MESSAGES PAGES */

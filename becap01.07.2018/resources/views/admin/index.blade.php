@@ -59,7 +59,8 @@
                                 <th scope="col">Курс</th>
                                 <th scope="col">Статус</th>
                                 <th scope="col">Дата заказа</th>
-                                <th scope="col">Всего</th>                                
+                                <th scope="col">Всего</th>
+                                <th scope="col">Просмотр</th>                    
                             </tr>
                             </thead>
                             <tbody>
@@ -70,14 +71,14 @@
                                         <td>@if(isset($order->client))<a href="{{ route('show_client', $order->client->id) }}">{{ $order->client->name }}</a>@endif</td>
                                     @else
                                         <td>
-                                            @if(isset($order->client_not_register))<a href="{{ route('show_client_not_register', $order->client_not_register->id) }}">{{ $order->client_not_register->name }}</a>@endif
-                                            <p><span class="badge badge-info">не зарегистрирован</span></p>
+                                            @if(isset($order->client_not_register))<a href="{{ route('show_client_not_register', $order->client_not_register->id) }}">{{ $order->client_not_register->name }}</a>@endif                                            
                                         </td>
                                     @endif                                    
                                     <td>@if(isset($order->course))<a href="{{ route('show_cours', $order->course->id) }}">{!! $order->course->name !!}</a>@endif</td>
                                     <td>{{ $order->getOrderStatus($order->status_id) }}</td>
                                     <td>{{ $order->created_at->format('d-m-Y H:i:s') }}</td>
-                                    <td>{{ $order->total }} руб.</td>                      
+                                    <td>{{ $order->total }} руб.</td>
+                                    <td><a href="{{ route('show_order', $order->id) }}" class="btn btn-light">Просмотр</a></td>                      
                                 </tr>
                             @endforeach
                             </tbody>

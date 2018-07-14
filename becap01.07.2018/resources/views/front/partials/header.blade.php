@@ -5,9 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <meta name="csrf-token" content="{{ csrf_token() }}">    
-	@if (  isset( $settings->keywords ) )<meta name="keywords" content="{!! $settings->keywords !!}">@endif
-	@if (  isset( $settings->description )  )<meta name="description" content="{!! $settings->description !!}">@endif
-	@if (  isset( $settings->title ) )<title>{!! $settings->title !!}</title>@endif	
+	@if (  isset( $settings->keywords ) )
+<meta name="keywords" content="{!! $settings->keywords !!}">
+	@endif
+@if (  isset( $settings->description )  )
+<meta name="description" content="{!! $settings->description !!}">
+	@endif
+@if (  isset( $settings->title ) )
+<title>{!! $settings->title !!}</title>
+	@endif	
 
 	@if (  isset( $settings->favicon ) )
 	<link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon/{{ $settings->favicon }}">

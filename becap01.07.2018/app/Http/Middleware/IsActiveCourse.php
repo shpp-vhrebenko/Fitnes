@@ -19,18 +19,23 @@ class IsActiveCourse
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
-       
+    {       
         if (Auth::user()) {
-            $curentUser = User::find(Auth::id());                      
-            if($curentUser->course_id || Route::currentRouteName() == 'courses_list') {
-                $course = Courses::find($curentUser->course_id);
-                $whats_app_link = $course->whats_app_link;
-                $request->session()->put('whats_app_link', $whats_app_link);
+            $curentUser = User::find(Auth::id());
+            if($curentUser->course_id == 0 && Route::currentRouteName() == 'courses_list') {
                 return $next($request);
-            } else {                
+            } else if ($curentUser->course_id == 0) {                
                 return redirect()->route('courses_list');                       
-            }            
+            } else if($curentUser->course_id != 0 && Route::currentRouteName() == 'courses_list'){
+                return redirect()->route('show_trainings');                
+            } else if ($curentUser->course_id != 0){
+                $course = Courses::find($curentUser->course_id);
+                if(isset($course)) {
+                    $whats_app_link = $course->whats_app_link;
+                    $request->session()->put('whats_app_link', $whats_app_link); 
+                }
+                return $next($request);
+            }          
         }
 
         return redirect('/');

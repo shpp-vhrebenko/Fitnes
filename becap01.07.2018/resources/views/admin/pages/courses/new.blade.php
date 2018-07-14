@@ -70,9 +70,15 @@
                                     <div class="col-sm-12">
                                         <select class="form-control" id="status_id" name="item[is_active]">
                                             @if(isset($statuses))
-                                                @foreach($statuses as $key => $status)
-                                                    <option value="{{ $key }}" @if(isset($cours) && $cours->is_active == $key) selected @endif>{{ $status }}</option>
-                                                @endforeach
+                                                @if(Route::is('new_cours'))
+                                                    @foreach($statuses as $key => $status)
+                                                        <option value="{{ $key }}" @if($key == 1) selected @endif>{{ $status }}</option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach($statuses as $key => $status)
+                                                        <option value="{{ $key }}" @if(isset($cours) && $cours->is_active == $key) selected @endif>{{ $status }}</option>
+                                                    @endforeach
+                                                @endif    
                                             @endif
                                         </select>
                                     </div>

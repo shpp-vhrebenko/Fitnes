@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <h4 class="oplata__header">Спасибо</h4>
                 <h5 class="oplata__subheader">Ваш заказ принят</h5>
-                <p class="oplata_description">На Вашу почту отправлено письмо с логином и паролем для входа в аккаунт. Пожалуйста проверте почту и авторизуйтесь в личном кабинете. На сайте <b>http://gizerskaya.com</b></p>
+                <p class="oplata_description">На Вашу почту отправлено письмо с логином и паролем для входа в аккаунт. Пожалуйста проверте почту и авторизуйтесь в личном кабинете. На сайте <a class="oplata__link" href="{{route('index')}}">http://gizerskaya.com</b></p>
                 <hr>
                 <div class="row justify-content-center">
                     <div class="arrow"></div>

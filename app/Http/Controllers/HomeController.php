@@ -63,6 +63,35 @@ class HomeController extends Controller
 
     }
 
+    public function password_reset(Request $request) {        
+        $message = "";
+        $userEmail = $request->get('email');
+        $settings = Settings::first();                      
+        $user = $users = User::where('email', $userEmail)->firstOrFail();  
+
+        $newUserPass = str_random(8);
+        $hashNewPass = bcrypt($newUserPass); 
+        $user->update(['password' => $hashNewPass]); 
+
+        $currentMessage = "Ваш пароль обновлен. ";     
+        $currentMessage = $currentMessage . "\n" . $message;
+
+        $params = array();
+        $params['user_email'] = $user->email;
+        $params['admin_email'] = $settings->email;  
+
+        Mail::send('emails.reset_password',array('user_name' =>$user->email, 'user_password'=>$newUserPass, 'curMessage' => $currentMessage), function($message) use($params)
+        {
+            $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
+
+            $message->to($params['user_email'])->subject('gizerskaya - Фитнесс Тренер');
+
+        });
+
+        Session::flash('success', 'Мы отправили вам по электронной почте новые данные для входа в Личный кабинет!');
+        return redirect()->back();
+    }
+
     public function test_message()
     {
         $user_name = 'vova';
@@ -86,16 +115,26 @@ class HomeController extends Controller
     // validate email user ajax request from frontend
     public function validate_email_user(Request $request)
     {
-        if($curEmail = $request->get('email')) {
-            $users = User::where('email', $curEmail)->get();            
-            if($users->count() > 0) {
-                return response()->json(false);
-            } else {
-                return response()->json(true);
-            }
+        $curEmail = $request->get('email');
+        $statusEmail = $request->get('status_email');
+        $users = User::where('email', $curEmail)->get();       
+         
+        if($statusEmail == 'issetEmail'){
+          if($users->count() > 0) {
+              return response()->json(false);
+          } else {
+              return response()->json(true);
+          }
+        } else if($statusEmail == 'noIssetEmail' ) {
+          if($users->count() > 0) {
+              return response()->json(true);
+          } else {
+              return response()->json(false);
+          }
         } else {
-             return response()->json(false);
-        }       
+          return response()->json(false);
+        }     
+          
     }
 
     public function user_store(Request $request, $slug) {
