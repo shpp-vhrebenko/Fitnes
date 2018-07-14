@@ -95,10 +95,11 @@
                         <div class="form-group col-sm-6" >
                             <label for="course" class="col-sm-12 col-form-label">Курс<sup class="required">*</sup></label>
                             <div class="col-sm-12">                            
-                                <select class="form-control selectpicker" multiple" id="course" name="item[course_id]">                                       
+                                <select class="form-control" id="course" name="item[course_id]">  
+                                    <option value="0">-- Не выбрано --</option>   
                                     @if(isset($courses) && count($courses) > 0)
                                         @foreach($courses as $course)                                        
-                                            <option>{!! $course->name !!}</option>
+                                            <option value="{{ $course->id }}" @if(isset($item->course_id) && ($item->course_id == $course->id)) selected @endif>{!! $course->name !!}</option>
                                         @endforeach
                                     @endif        
                                 </select>
