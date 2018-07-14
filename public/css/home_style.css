@@ -1158,8 +1158,7 @@ a.price-item__button {
 }
 
 .form-contacts__button:hover {
-	cursor: pointer;
-	border: 1px solid #919094;
+	cursor: pointer;	
 }
 /* END MODAL CONTACTS */
 

@@ -172,6 +172,7 @@ class MyAccountController extends Controller
                     if($value['id'] == $curTraining['item_id']) {
                         $curItem = $items[$key];
                         $curItem['day'] = $curDay;
+                        $curItem['course_slug'] = $course->slug;
                     }
                 }
                array_push( $trainingItems,$curItem);
@@ -210,10 +211,10 @@ class MyAccountController extends Controller
         }
     }
 
-    public function show_training($item_slug)
+    public function show_training($course_slug,$item_slug)
     {
-        $item = $this->items->findWithParams(['slug' => $item_slug])->firstOrFail();
-        $course = $this->courses->find($item->course_id);
+        $course = $this->courses->findWithParams(['slug' => $course_slug])->firstOrFail();      
+        $item = Item::where(['slug' => $item_slug])->where(['course_id' => $course->id])->firstOrFail();    
         $training_schedule = $course->training_schedule; 
         $numberDay = null;
         foreach ($training_schedule as $key => $value) {
@@ -239,7 +240,8 @@ class MyAccountController extends Controller
 
     public function show_item($category_slug, $item_slug)
     { 
-        $item = $this->items->findWithParams(['slug' => $item_slug])->firstOrFail();   
+        $category = Category::where(['slug' => $category_slug])->firstOrFail();
+        $item = Item::where(['category_id' => $category->id])->where(['slug' => $item_slug])->firstOrFail();   
         $this->setTitle($item->title);     
         return view('my_acount/pages/items/item', compact([ 'item']));
     }

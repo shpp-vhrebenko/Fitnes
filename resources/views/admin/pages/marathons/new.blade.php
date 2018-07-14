@@ -68,13 +68,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="dsm" class="col-sm-12 col-form-label">Дата Начала отбора</label>
+                                    <label for="dsm" class="col-sm-12 col-form-label">Дата Начала отбора<sup class="required">*</sup></label>
                                     <div class="col-sm-12">
                                         <input type="text" data-toggle="datepicker" class="form-control" id="dsm" name="item[date_start_selection]"  value="{{ isset($marathon) ? $marathon->date_start_selection : old('item.date_start_selection') }}">
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-4">
-                                    <label for="dsm" class="col-sm-12 col-form-label">Дата Окончания отбора</label>
+                                    <label for="dsm" class="col-sm-12 col-form-label">Дата Окончания отбора<sup class="required">*</sup></label>
                                     <div class="col-sm-12">
                                         <input type="text" data-toggle="datepicker" class="form-control" id="qty" name="item[date_end_selection]" value="{{ isset($marathon) ? $marathon->date_end_selection : old('item.date_end_selection') }}">
                                     </div>

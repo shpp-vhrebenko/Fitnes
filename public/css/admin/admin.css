@@ -116,6 +116,12 @@ select.form-control{
     background-size: cover;
 }
 
+@media only screen and (min-width: 1900px) {
+    .trainings__item {
+        height: 40vh;
+    }   
+}
+
 .btn-add-training,
 .btn-edit-training {
     position: absolute;
@@ -155,6 +161,12 @@ select.form-control{
     font-weight: bold;
     text-align: center;
     color: #fff;
+}
+
+@media only screen and (min-width: 1900px) {   
+    .trainings-status {
+        padding: 3rem;
+    }
 }
 
 .trainings__item-holiday {

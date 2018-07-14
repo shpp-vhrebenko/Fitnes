@@ -21,11 +21,17 @@
 				@if (isset($item))
 				<div class="col-md-4 col-sm-12 item">
 					
-					<a class="item__image" href="{{route('show_training', ['slug' => $item->slug])}}" style="background-image: url('/uploads/items/{{$item->image}}')" >			
+					<a class="item__image" href="{{route('show_training', ['course_slug' => $item->course_slug,'slug' => $item->slug])}}" style="background-image: url('/uploads/items/{{$item->image}}')" >			
 					</a>
 					<div class="item__title">
 						<p>Курс тренировок</p>				
-						<a href="{{route('show_training', ['slug' => $item->slug])}}">День {{$item->day}} | Неделя {{ceil($item->day/7)}}</a>
+						<a href="{{route('show_training', ['course_slug' => $item->course_slug, 'slug' => $item->slug])}}">
+							@if(isset($item->title)) 
+							{!!$item->title!!}
+							@else 
+							День {{$item->day}} | Неделя {{ceil($item->day/7)}}
+							@endif
+						</a>
 					</div>
 				</div>
 				@endif

@@ -18,8 +18,7 @@ class Settings extends Model
         'keywords',        
         'title_site',
         'owner',       
-        'email',
-        'phone',
+        'email',       
         'favicon',
         'logo'        
     ];

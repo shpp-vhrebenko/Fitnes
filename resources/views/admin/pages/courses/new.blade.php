@@ -140,7 +140,7 @@
 @endsection
 
 @section('footer-scripts')
-    @parent
+    @parent    
     <script>
     $(document).ready(function () {
         $('.cancel').on("click", function () {

@@ -95,11 +95,10 @@
                         <div class="form-group col-sm-6" >
                             <label for="course" class="col-sm-12 col-form-label">Курс<sup class="required">*</sup></label>
                             <div class="col-sm-12">                            
-                                <select class="form-control" id="course" name="item[course_id]">  
-                                    <option value="0">-- Не выбрано --</option>   
+                                <select class="form-control selectpicker" multiple" id="course" name="item[course_id]">                                       
                                     @if(isset($courses) && count($courses) > 0)
                                         @foreach($courses as $course)                                        
-                                            <option value="{{ $course->id }}" @if(isset($item->course_id) && ($item->course_id == $course->id)) selected @endif>{!! $course->name !!}</option>
+                                            <option>{!! $course->name !!}</option>
                                         @endforeach
                                     @endif        
                                 </select>
@@ -150,7 +149,7 @@
 @endsection
 
 @section('footer-scripts')
-    @parent
+    @parent    
     <script>
     $(document).ready(function () {
         $('.cancel').on("click", function () {

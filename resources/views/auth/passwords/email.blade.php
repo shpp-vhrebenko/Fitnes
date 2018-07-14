@@ -94,4 +94,9 @@
             });
         })
     </script>
+    <script  src="{{asset('js/auth.js') }}"></script>
+@endsection
+
+@section('footer-modal')
+    @parent 
 @endsection

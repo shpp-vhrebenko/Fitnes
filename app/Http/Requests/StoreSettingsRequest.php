@@ -27,8 +27,7 @@ class StoreSettingsRequest extends FormRequest
             'settings.logo' => 'image',
             'settings.favicon' => 'image',
             'settings.title' => 'required',                        
-            'settings.email' => 'required', 
-            'settings.phone' => 'required', 
+            'settings.email' => 'required',            
             'social.instagram' => 'required', 
         ];
     }
@@ -40,8 +39,7 @@ class StoreSettingsRequest extends FormRequest
              'settings.logo.required' => 'Необходимо загрузить логотип сайта',
             'settings.favicon.required' => 'Необходимо загрузить favicon icon',
             'settings.title.required' => 'Необходимо ввести Мета-тег Title',            
-            'settings.email.required' => 'Необходимо ввести Email',
-            'settings.phone.required' => 'Необходимо ввести Номер телефона',    
+            'settings.email.required' => 'Необходимо ввести Email',             
             'social.instagram.required' => 'Необходимо ввести Ссылку на instagram',        
         ];
     }
