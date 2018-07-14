@@ -45,6 +45,10 @@ Route::group([], function() {
 Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveCourse'] ], function() {
 
 	Route::get('/', 'MyAccountController@index')->name('my-account');
+
+    //Route notification
+    Route::post('/notification', 'MyAccountController@check_user_notification')->name('check_user_notification');
+
     // Route trainings
     Route::get('/trainings', 'MyAccountController@show_trainings')->name('show_trainings');
     Route::get('/training/{id}', 'MyAccountController@show_training')->name('show_training');
