@@ -66,13 +66,7 @@
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="settings[email]" value="{{ old('', $settings->email) }}"/>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Телефон<sup class="required">*</sup></label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="settings[phone]" value="{{ old('', $settings->phone) }}"/>
-                    </div>
-                </div>        
+                </div>                      
                 <div class="dropdown-divider"></div><br/>
                 @foreach($social as $key => $item)
                     <div class="form-group row">

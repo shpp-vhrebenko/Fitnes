@@ -15,16 +15,16 @@
 		            	Результаты
 		            </a>
 	            </li>
-	            <li class="@if(Request::url() == route('show_trainings')) active @endif">
+	            <li class="@if(Request::is('my-account/trainings', 'my-account/training/*')) active @endif">
 		            <a class="usermenu__link" href="{{ route('show_trainings') }}">Тренировки</a>
 	            </li>	
 	            @if(isset($categories) && count($categories) > 0)
 	                @foreach($categories as $category) 
 		                @if($category->id != 1 && $category->is_active != 0)
-		                <li class="@if(Request::url() == route('show_category_items', $category->slug)) active @endif">
+		                <li class="@if(Request::is('my-account/category/'.$category->slug, 'my-account/category/'.$category->slug.'/*')) active @endif">
 		                    <a class="usermenu__link" href="{{route('show_category_items', $category->slug)}}" .="">		{{$category->name}}
 							</a>                       
-		                </li>
+		                </li>		                
 		                @endif    
 	                @endforeach
 	            @endif							

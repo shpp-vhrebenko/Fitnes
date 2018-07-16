@@ -593,7 +593,8 @@ class AdminController extends Controller
     {
             $title = 'Список записей';
             $items = Item::where('category_id','!=', 1)->orderBy('id', 'asc')->paginate(10);
-            $items->load('category');
+            $items->load('category');			
+			
             $categories = $this->categories->all(); 
             $courses = $this->courses->findWithParams(['is_active' => true])->get(); 
             return view('admin/pages/items/items', compact(['title', 'items', 'categories', 'courses']));
@@ -675,16 +676,24 @@ class AdminController extends Controller
     {
 
         $item = $request->get('item'); 
-        $item['slug'] = str_slug($item['title']);
-        if( $image = $request->file('item.image') )
-        {            
-            $item['image'] = Item::saveImage( $image );                 
-        }        
+        $searchItem = Item::where(['category_id' => $item['category_id']])->where(['title' => $item['title']])->exists(); 
+            
 
-        $this->items->create($item);       
+        if($searchItem) {
+            Session::flash('danger', 'Запись с таким Названием в выбранной Категории уже есть!');
+            return redirect()->back();
+        } else {
+            $item['slug'] = str_slug($item['title']);
+            if( $image = $request->file('item.image') )
+            {            
+                $item['image'] = Item::saveImage( $image );                 
+            }        
 
-        Session::flash('success', 'Запись успешно создана!');
-        return redirect()->back();
+            $this->items->create($item);       
+
+            Session::flash('success', 'Запись успешно создана!');
+            return redirect()->back();
+        }
     }
 
     public function item_edit($id)
@@ -711,10 +720,11 @@ class AdminController extends Controller
             return abort('404');
         }
         $newItem = $request->get('item');
-        $searchItem = $this->items->findWithParams(['title' => $newItem['title']])->first();
+        $searchItem = Item::where(['category_id' => $newItem['category_id']])->where(['title' => $newItem['title']])->first(); 
+        
        
         if(isset($searchItem)) {
-            if($searchItem->id == $id) {
+            if($searchItem->id == $id) {                
                 $item->update($newItem);
                 if( $image = $request->file('item.image') )
                 {
@@ -725,7 +735,7 @@ class AdminController extends Controller
                 Session::flash('success', 'Запись успешно изменена!');
                 return redirect()->back();
             } else {
-                Session::flash('danger', 'Запись с таким Названием уже есть!');
+                Session::flash('danger', 'Запись с таким Названием в выбранной Категории уже есть!');
                 return redirect()->back();
             }
         } else {
@@ -980,42 +990,51 @@ class AdminController extends Controller
     }
 
     public function training_store(ItemRequest $request)
-    {
-              
+    {        
+
         $item = $request->get('item'); 
-        $numberDay = $request->get('numberDay'); 
-        $item['slug'] = str_slug($item['title']);
-        $item['number_day'] = $numberDay; 
+        $searchItem = Item::where(['course_id' => $item['course_id']])->where(['title' => $item['title']])->exists();      
+
+        if($searchItem) {
+            Session::flash('danger', 'Тренировка с таким Названием в текущем Курсе уже есть!');
+            return redirect()->back();
+        } else {
+            $numberDay = $request->get('numberDay'); 
+            $item['slug'] = str_slug($item['title']);
+            $item['number_day'] = $numberDay; 
+            
+            $course = $this->courses->find($item['course_id']);
+            $training_schedule = $course->training_schedule;
+
+            
+            $training_image = 'no-image.png';
+            if( $image = $request->file('item.image') )
+            {            
+                $item['image'] = Item::saveImage( $image );
+                $training_image = $item['image'];                 
+            }  
+
+            // default value for item property is_active
+            $item['is_active'] = true; 
+
+           
+
+            $newItem = $this->items->create($item);  
+
+            $training_schedule['day_'.$numberDay] = [
+                'item_id' => $newItem->id,
+                'is_holiday' => $item['is_holiday'],  
+                'image' => $training_image,   
+                'title' => $item['title']       
+            ];
+
+            $course->update(['training_schedule' => $training_schedule]); 
+
+            Session::flash('success', 'Тренировка успешно создана!');
+            return redirect()->route('course_trainings', ['id_course' => $item['course_id']]);
+        }
         
-        $course = $this->courses->find($item['course_id']);
-        $training_schedule = $course->training_schedule;
-
-        
-        $training_image = 'no-image.png';
-        if( $image = $request->file('item.image') )
-        {            
-            $item['image'] = Item::saveImage( $image );
-            $training_image = $item['image'];                 
-        }  
-
-        // default value for item property is_active
-        $item['is_active'] = true; 
-
-       
-
-        $newItem = $this->items->create($item);  
-
-        $training_schedule['day_'.$numberDay] = [
-            'item_id' => $newItem->id,
-            'is_holiday' => $item['is_holiday'],  
-            'image' => $training_image,   
-            'title' => $item['title']       
-        ];
-
-        $course->update(['training_schedule' => $training_schedule]); 
-
-        Session::flash('success', 'Тренировка успешно создана!');
-        return redirect()->route('course_trainings', ['id_course' => $item['course_id']]);       
+               
     }
 
     
@@ -1037,15 +1056,16 @@ class AdminController extends Controller
     }
 
     public function training_update(ItemUpdateRequest $request, $id) {
-        $item = $this->items->find($id);
-        $numberDay = $request->get('numberDay');
+        $item = $this->items->find($id);      
         if (!isset($item))
         {
             return abort('404');
-        }
+        }        
 
+        $numberDay = $request->get('numberDay');
         $newItem = $request->get('item');
-        $searchItem = $this->items->findWithParams(['title' => $newItem['title']])->first();
+
+        $searchItem = Item::where(['course_id' => $newItem['course_id']])->where(['title' => $newItem['title']])->first();      
 
         $course = $this->courses->find($item->course_id);
         $training_schedule = $course->training_schedule;
@@ -1074,7 +1094,7 @@ class AdminController extends Controller
                /* return redirect()->route('course_trainings', ['id_course' => $item->course_id]); */
                 return redirect()->back();
             } else {
-                Session::flash('danger', 'Тренировка с таким Названием уже есть!');
+                Session::flash('danger', 'Тренировка с таким Названием в текущем Курсе уже есть!');
                 return redirect()->back();
             }
         } else {         

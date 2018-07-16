@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/libs/font-awesome.min.css') }}">  
     <link rel="stylesheet" href="{{ asset('css/libs/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('css/libs/bootstrap.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/admin.css') }}"/>			
+	<link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}"/>			
 	@show
 
 	@section('header-scripts')

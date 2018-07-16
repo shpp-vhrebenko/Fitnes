@@ -121,8 +121,7 @@ class MyAccountController extends Controller
     }
 
     public function show_trainings()
-    {         
-        $notification = null;       
+    {             
         $currentUser = Auth::user(); 
         $course_id = $currentUser->course_id;     
         $course = $this->courses->find($course_id);         
@@ -132,6 +131,7 @@ class MyAccountController extends Controller
         $data_start_course = $currentUser->data_start_course;
         $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $data_start_course);        
 
+        // How many days left before the start of the marathon
         if($course->type == 'marathon') {  
             $diffMinutesStartCourse = $currentDate->diffInMinutes($dataStartCourse, false);
 
@@ -152,11 +152,11 @@ class MyAccountController extends Controller
             }   
         }
              
+        // Format training shedule for current course. If the marathon or course has already begun
         if($currentDayCourse <= $course->period) {
-            $diffPeriodCourse_currentDayCourse = $course->period - $currentDayCourse;            
-            if($diffPeriodCourse_currentDayCourse == $course->notification_day_number) {
-                $notification = $course->notification;
-            }
+            $notification = array();
+            $notification['message'] = self::isShowNotification($currentUser, $course, $currentDayCourse);            
+           
             if($currentDayCourse == 0) {
                 $currentDayCourse = 1;
             }
@@ -172,6 +172,7 @@ class MyAccountController extends Controller
                     if($value['id'] == $curTraining['item_id']) {
                         $curItem = $items[$key];
                         $curItem['day'] = $curDay;
+                        $curItem['course_slug'] = $course->slug;
                     }
                 }
                array_push( $trainingItems,$curItem);
@@ -183,17 +184,37 @@ class MyAccountController extends Controller
         } else {
             $currentUser->update([
                 'course_id' => 0,
-                'data_start_course' => NULL
+                'data_start_course' => NULL,
+                'check_notification' => 0,
                 ]);           
             return redirect()->route('courses_list');  
         }       
 
     }
 
-    public function show_training($item_slug)
+    public function check_user_notification(Request $request) {                 
+        $currentUser = Auth::user();
+        $results = $currentUser->update(['check_notification' => true]);
+        $response = array(
+            'status' => 'success'            
+        );
+        return response()->json($response);         
+    }
+
+    protected static function  isShowNotification($currentUser, $course, $currentDayCourse)
     {
-        $item = $this->items->findWithParams(['slug' => $item_slug])->firstOrFail();
-        $course = $this->courses->find($item->course_id);
+        $diffPeriodCourse_currentDayCourse = $course->period - $currentDayCourse;            
+        if($diffPeriodCourse_currentDayCourse <= $course->notification_day_number && !$currentUser->check_notification) {
+            return $course->notification;
+        } else {
+            return false;
+        }
+    }
+
+    public function show_training($course_slug,$item_slug)
+    {
+        $course = $this->courses->findWithParams(['slug' => $course_slug])->firstOrFail();      
+        $item = Item::where(['slug' => $item_slug])->where(['course_id' => $course->id])->firstOrFail();    
         $training_schedule = $course->training_schedule; 
         $numberDay = null;
         foreach ($training_schedule as $key => $value) {
@@ -219,7 +240,8 @@ class MyAccountController extends Controller
 
     public function show_item($category_slug, $item_slug)
     { 
-        $item = $this->items->findWithParams(['slug' => $item_slug])->firstOrFail();   
+        $category = Category::where(['slug' => $category_slug])->firstOrFail();
+        $item = Item::where(['category_id' => $category->id])->where(['slug' => $item_slug])->firstOrFail();   
         $this->setTitle($item->title);     
         return view('my_acount/pages/items/item', compact([ 'item']));
     }
@@ -339,4 +361,7 @@ class MyAccountController extends Controller
         $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $data_start_course);
         return $dataStartCourse->diffInDays($currentDate, false); 
     }
+
+
+    
 }

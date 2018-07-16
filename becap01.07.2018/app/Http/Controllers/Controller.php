@@ -14,7 +14,8 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function __construct(){    	
-        
+        $settings = Settings::first();     
+        view()->share(compact([ 'settings'])); 
     }
 
     public function setTitle($title)

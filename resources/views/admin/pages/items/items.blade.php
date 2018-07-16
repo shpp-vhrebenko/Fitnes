@@ -31,16 +31,6 @@
                         @endif
                     </select>                    
                 </div>
-                <div class="col-3">
-                    <label for="courseId">Название курса или марафона</label>
-                    <select class="form-control" id="courseId" name="filter[course_id]">       
-                        @if(isset($courses) && count($courses) > 0)
-                            @foreach($courses as $course)                                        
-                                <option value="{{ $course->id }}">{!! $course->name !!}</option>
-                            @endforeach
-                        @endif        
-                    </select>            
-                </div>   
                        
             </div>                       
             <button type="submit" class="btn btn-primary mt-3 mb-2">Применить фильтр</button>

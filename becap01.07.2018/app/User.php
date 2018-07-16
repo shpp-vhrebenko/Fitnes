@@ -40,6 +40,7 @@ class User extends Authenticatable
         'course_id',
         'data_start_course',
         'id_last_result',
+        'check_notification'
     ];
 
     /**

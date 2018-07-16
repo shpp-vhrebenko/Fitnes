@@ -28,14 +28,14 @@ class StoreMarathonsRequest extends FormRequest
        
         return [
             'item.name' => 'required|unique:courses,name',
-            'item.description' => 'required',                       
+            /*'item.description' => 'required',   */                    
             'item.period' => 'required|numeric',
             'item.date_end_selection' => 'required|date|date_format:Y-m-d|after:item.date_start_selection',
             'item.date_start_selection' => 'required|date|date_format:Y-m-d|before:item.date_end_selection',     
             'item.price' => 'required|numeric', 
             'item.icon' => 'image|mimes:png,svg', 
-            'item.whats_app_link' => 'required',
-            'item.faq' => 'required',  
+            /*'item.whats_app_link' => 'required',
+            'item.faq' => 'required',  */
             'item.notification_day_number' => 'required',
             'item.notification' => 'required',       
         ];
@@ -45,7 +45,7 @@ class StoreMarathonsRequest extends FormRequest
         return [
             'item.name.required' => 'Необходимо ввести Название Марафона',
             'item.name.unique' => 'Марафон с таким названием уже есть',
-            'item.description.required' => 'Необходимо ввести Содержание Марафона',            
+           /* 'item.description.required' => 'Необходимо ввести Содержание Марафона',    */        
             'item.period.required' => 'Необходимо ввести Продолжительность Марафона',
             'item.date_start_selection.required' => 'Необходимо ввести дату Начала отбора',
             'item.date_start_selection.date' => 'Необходимо ввести дату Начала отбора в формате даты',
@@ -58,8 +58,8 @@ class StoreMarathonsRequest extends FormRequest
             'item.price.required' => 'Необходимо ввести цену Марафона',
             'item.icon.image' => 'Иконка курса должна быть в формате изображения',
             'item.icon.mimes' => 'Иконка курса должна быть в формате png, svg',
-            'item.whats_app_link.required' => 'Необходимо ввести сылку на WhatsApp Чат',
-            'item.faq' => 'Необходимо ввести FAQ',
+           /* 'item.whats_app_link.required' => 'Необходимо ввести сылку на WhatsApp Чат',
+            'item.faq' => 'Необходимо ввести FAQ',*/
             'item.notification_day_number.required' => 'Необходимо ввести количество дней до конца Курса',
             'item.notification.required' => 'Необходимо ввести Текст уведомления',
         ];

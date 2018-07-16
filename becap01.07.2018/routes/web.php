@@ -29,6 +29,8 @@ Route::get('/_debugbar/open', [
 
 Auth::routes();
 
+Route::post('/password/reset', 'HomeController@password_reset')->name('password.email');
+
 Route::group([], function() {
 	Route::get('/', 'HomeController@index')->name('index');
     Route::get('/register/{slug}', 'HomeController@register_user')->name('register_user');
@@ -38,16 +40,19 @@ Route::group([], function() {
     Route::any('/oplata/result', 'HomeController@oplata_result')->name('oplata_result');
     Route::get('/oplata/success', 'HomeController@success_oplata')->name('success_oplata');
     Route::get('/oplata/error', 'HomeController@error_oplata')->name('error_oplata');
-
     Route::get('/test_message', 'HomeController@test_message')->name('test_message');
 });
 
 Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveCourse'] ], function() {
 
-	Route::get('/', 'MyAccountController@index')->name('my-account');
+	Route::get('/', 'MyAccountController@index')->name('my-account');    
+
+    //Route notification
+    Route::post('/notification', 'MyAccountController@check_user_notification')->name('check_user_notification');
+
     // Route trainings
     Route::get('/trainings', 'MyAccountController@show_trainings')->name('show_trainings');
-    Route::get('/training/{id}', 'MyAccountController@show_training')->name('show_training');
+    Route::get('/training/{course_slug}/{slug}', 'MyAccountController@show_training')->name('show_training');
 
     // Route categories
     Route::get('/category/{slug}', 'MyAccountController@show_category_items')->name('show_category_items');

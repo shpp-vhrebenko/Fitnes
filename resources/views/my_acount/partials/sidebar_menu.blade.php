@@ -27,26 +27,28 @@
 		                </li>		                
 		                @endif    
 	                @endforeach
-	            @endif							
+	            @endif	
+	            @if(Session::has('faq'))							
 			    <li class="@if(Request::url() == route('show_faq')) active @endif">
-			  		<a class="usermenu__link" href="{{ route('show_faq') }}">					
+			  		<a class="usermenu__link" href="{{ route('show_faq') }}">				
 						FAQ
 					</a>
 			    </li>
+			    @endif
 			    @if(Session::has('whats_app_link'))			    
 			    <li class=" ">
 			  		<a class="usermenu__link" href="{{Session::get('whats_app_link')}}" target="_blank">						
 						Чат
 					</a>
 			    </li>
-			    @endif
+			    @endif			    
 			    <li class=" ">
 			  		<a class="usermenu__link" href="{{ route('logout') }}"
 				       onclick="event.preventDefault();
 				                     document.getElementById('logout-form').submit();">
 						Выйти
 					</a>
-			    </li>
+			    </li>			    
 			    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 			        @csrf
 			    </form>

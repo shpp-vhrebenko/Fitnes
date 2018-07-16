@@ -86,7 +86,9 @@
                     <p class="price-item__subtitle">ВСЕГО ЗА {{$marathon->price}} {{ Lang::choice('messages.price', $marathon->price) }} ВЫ ПОЛУЧИТЕ:</p>
                     <div class="price-item__icon" style="background-image: url('./uploads/icons/{{$marathon->icon}}');">                        
                     </div>
+                    @if(isset($marathon->description))
                     {!! $marathon->description !!} 
+                    @endif
                     <div class="price-item__val">
                         <p>{{$marathon->price}}</p>
                         <p>{{ Lang::choice('messages.price', $marathon->price) }}</p>
@@ -104,7 +106,9 @@
                     <div class="price-item__icon" style="background-image:url('./uploads/icons/{{$course->icon}}')">
                         
                     </div>
-                    {!! $course->description !!}                    
+                    @if(isset($course->description))
+                    {!! $course->description !!} 
+                    @endif                   
                     <div class="price-item__val">
                         <p>{{$course->price}}</p>
                         <p>{{ Lang::choice('messages.price', $course->price) }}</p>

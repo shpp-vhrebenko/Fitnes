@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 
 use App\Category;
+use App\Courses;
 
 use Image;
 
@@ -21,7 +22,7 @@ class Item extends Model
                 'is_holiday',
                 'number_day',
                 'slug'
-            ];
+            ];    
 
     public static $ItemStatuses = [ 
         'Не активна',
@@ -48,6 +49,16 @@ class Item extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function courses()
+    {
+        return $this->belongsToMany(Courses::class, 'course_item', 'item_id', 'course_id');
+    }
+
+    public function coursesId($course_id){
+        
+        return $this->belongsToMany(Courses::class, 'course_item', 'item_id', 'course_id')->wherePivot('course_id', $course_id);
+    }
+
     public static function saveImage( $image ){
         $filename  = time() . '.' . $image->getClientOriginalExtension();
         $img = Image::make($image->getRealPath());        
@@ -58,4 +69,5 @@ class Item extends Model
 
         return $filename;
     }
+  
 }

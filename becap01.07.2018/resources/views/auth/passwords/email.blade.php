@@ -19,20 +19,17 @@
                     <div class="login-card__header">ЗАБЫЛИ ПАРОЛЬ?</div>
 
                     <div class="login-card__body">
-                       
-
-                        <form method="POST" action="{{ route('password.email') }}" class="form-login">
+                        <form method="POST" id="reset-password-form" action="{{ route('password.email') }}" class="form-login">
                             @csrf
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-8">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} form-login__input" name="email" value="{{ old('email') }}" required placeholder="ВВЕДИТЕ ВАШ EMAIL">
-                                    
+                                    <input id="email" type="email" class="form-control form-login__input" name="email" value="{{ old('email') }}" required placeholder="ВВЕДИТЕ ВАШ EMAIL">                             
                                 </div>
                             </div>
 
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-8">
-                                    <a class="form-login__button pull-left" href="{{ URL::previous() }}">
+                                    <a class="form-login__button pull-left" href="{{ route('login') }}">
                                         Назад
                                     </a>
                                     <button type="submit" class="form-login__button pull-right">
@@ -42,20 +39,64 @@
                             </div>
                         </form>
                     </div>
-                    @if (session('status'))
-                        <div class="alert alert-success alert-success_custom">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    @if ($errors->has('email'))
-                        <div class="alert alert-danger alert-danger_custom">
-                            {{ $errors->first('email') }}
-                        </div>
-                    @endif
+                    <div class="alerts" id="alerts">
+                        @if (session('success'))
+                            <div class="alert alert-success alert-success_custom">
+                                {{ session('success') }}
+                            </div>
+                        @endif                        
+                    </div>                    
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endsection
+
+@section('footer-scripts')    
+    @parent  
+    <script  src="{{asset('js/lib/jquery.validate.min.js') }}"></script> 
+    <script>
+        $(document).ready(function() {   
+            $("#reset-password-form").validate({
+                rules: {                    
+                    email:  {                         
+                        required: true,
+                        email: true,
+                        remote : {
+                            url: '{{ route('validate_email_user') }}',
+                            type: 'post',
+                            data: {
+                                email: function()
+                                {
+                                    return $('#reset-password-form :input[name="email"]').val();
+                                },
+                                _token: $('meta[name="csrf-token"]').attr('content'),
+                                status_email: 'noIssetEmail',
+                            },
+                         
+                        }
+                    }
+                },
+                messages:{                   
+                    email:{                        
+                        required: "Поле не заполнено",
+                        email: "Необходимо указать Email",
+                        remote: 'Мы не можем найти пользователя с этим адресом электронной почты.'    
+                    }       
+                },
+                errorPlacement: function(error, element) { 
+                    if (element.attr("name") == "email") {
+                        $("#alerts").empty();
+                        error.appendTo($("#alerts")); 
+                    }                      
+                }   
+            });
+        })
+    </script>
+    <script  src="{{asset('js/auth.js') }}"></script>
+@endsection
+
+@section('footer-modal')
+    @parent 
 @endsection

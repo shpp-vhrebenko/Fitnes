@@ -29,7 +29,8 @@ class ItemUpdateRequest extends FormRequest
             'item.text' => 'required',
             'item.image' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'item.category_id' => 'required|not_in:0',
-            'item.course_id' => 'required|not_in:0',
+            /*'item.course_id' => 'required|not_in:0',*/
+            'courses_array' => 'required',
             /*'item.is_active' => 'required', */           
         ];
     }
@@ -44,8 +45,9 @@ class ItemUpdateRequest extends FormRequest
             'item.image.mimes' => 'Изображение записи должно быть в формате jpeg,png,jpg,gif,svg',
             'item.category_id.required' => 'Необходимо выбрать Категорию Записи',
             'item.category_id.not_in' => 'Необходимо выбрать Категорию Записи',
-            'item.course_id.required' => 'Необходимо выбрать Курс',
-            'item.course_id.not_in' => 'Необходимо выбрать Курс',
+            'courses_array.required' => 'Необходимо выбрать Курс',
+            /*'item.course_id.required' => 'Необходимо выбрать Курс',
+            'item.course_id.not_in' => 'Необходимо выбрать Курс',*/
             /*'item.is_active.required' => 'Необходимо указать Статус Записи',  */          
         ];
     }

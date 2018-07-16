@@ -13,7 +13,13 @@
 @section('content')	
 	<div class="container-fluid">
 		<header class="row item-header">
-			<h4 class="item-header__title col-sm-12">День {{$numberDay}} | Неделя {{ceil($numberDay/7)}}</h4>		
+			<h4 class="item-header__title col-sm-12">
+			@if(isset($item->title)) 
+				{!!$item->title!!}
+			@else 
+			День {{$item->day}} | Неделя {{ceil($item->day/7)}}
+			@endif
+			</h4>		
 		</header>
 		<div class="row item-content ">
 			<div class="col-12 flex-direction-column">

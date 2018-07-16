@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <h4 class="oplata__header">ОЙ</h4>
                 <h5 class="oplata__subheader">Вы не оплатили курс</h5>
-                <p class="oplata_description">Во время оплаты что-то пошло не так проверьте свои реквизиты и попробуйте купить наш курс еще раз, на сайте  <b>http://gizerskaya.com</b></p>
+                <p class="oplata_description">Во время оплаты что-то пошло не так проверьте свои реквизиты и попробуйте купить наш курс еще раз, на сайте  <a class="oplata__link" href="{{route('index')}}">http://gizerskaya.com</a></p>
                 <hr>
                 <div class="row justify-content-center">
                     <div class="arrow"></div>
