@@ -53,11 +53,7 @@ class MyAccountController extends Controller
         $this->users = $usersRepository;
         $this->courses = $coursesRepository;            
         $categories = $this->categories->all();              
-        $settings = Settings::first(); 
-        $currentUser = Auth::user();
-        if(isset($currentUser)) {
-            dd($currentUser);
-        }
+        $settings = Settings::first();           
              
         view()->share(compact([ 'settings', 'categories']));        
     }
@@ -231,7 +227,14 @@ class MyAccountController extends Controller
         $currentUser = Auth::user(); 
         $course_id = $currentUser->course_id;
         $category = Category::where('slug', $category_slug)->firstOrFail();       
-        $items = $category->items()->where('course_id',$course_id)->get();
+        $categoryItems = $category->items;
+        $items = array();
+        foreach ($categoryItems as $item) {
+            $curItem = $item->courses()->wherePivot('course_id', $course_id)->get();
+            if($curItem->count() != 0) {
+                array_push($items, $item);
+            }
+        }        
         $this->setTitle('Личный кабинет - '. $category->name);
         $page_title = $category->name;
         $description = $category->description;

@@ -11,6 +11,7 @@
 <link href="{{ asset('css/datepicker.min.css') }}" rel="stylesheet">
 <script src="{{ asset('js/datepicker.min.js') }}"></script>
 
+
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 <script src="{{ asset('js/lib/summernote_acordion.js') }}"></script>
 <style>

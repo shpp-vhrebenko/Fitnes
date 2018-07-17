@@ -7,6 +7,8 @@ use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\EditClientRequest;
 use App\Http\Requests\ItemRequest;
 use App\Http\Requests\ItemUpdateRequest;
+use App\Http\Requests\TrainingRequest;
+use App\Http\Requests\TrainingUpdateRequest;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\CategoryUpdateRequest;
 use App\Http\Requests\StoreCoursRequest;
@@ -593,8 +595,7 @@ class AdminController extends Controller
     {
             $title = 'Список записей';
             $items = Item::where('category_id','!=', 1)->orderBy('id', 'asc')->paginate(10);
-            $items->load('category');			
-			
+            $items->load('category');
             $categories = $this->categories->all(); 
             $courses = $this->courses->findWithParams(['is_active' => true])->get(); 
             return view('admin/pages/items/items', compact(['title', 'items', 'categories', 'courses']));
@@ -626,10 +627,7 @@ class AdminController extends Controller
                     }
                     elseif ($key == 'category_id') {
                         $items->where('category_id', $filter);
-                    }
-                    elseif ($key == 'course_id') {
-                        $items->where('course_id',$filter);
-                    }                    
+                    }                                    
                     else {
                         $items->where($key, $filter);
                     }
@@ -674,9 +672,9 @@ class AdminController extends Controller
 
     public function items_store(ItemRequest $request)
     {
-
         $item = $request->get('item'); 
-        $searchItem = Item::where(['category_id' => $item['category_id']])->where(['title' => $item['title']])->exists(); 
+        $courses_array = $request->get('courses_array');
+        $searchItem = Item::where(['category_id' => $item['category_id']])->where(['title' => $item['title']])->exists();         
             
 
         if($searchItem) {
@@ -689,8 +687,9 @@ class AdminController extends Controller
                 $item['image'] = Item::saveImage( $image );                 
             }        
 
-            $this->items->create($item);       
-
+            $currentItem = $this->items->create($item);            
+            $currentItem->courses()->attach($courses_array);
+            
             Session::flash('success', 'Запись успешно создана!');
             return redirect()->back();
         }
@@ -707,8 +706,12 @@ class AdminController extends Controller
         $categories = $this->categories->all(); 
         $statuses = Item::$ItemStatuses;
         $courses = $this->courses->findWithParams(['is_active' => true])->get();        
-
-        return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'item', 'courses']));
+        $itemCourses = $item->courses;        
+        $checkedCourses = array();
+        foreach ($itemCourses as $key => $value) {
+            $checkedCourses[$key] = $value->id;
+        }       
+        return view('admin/pages/items/new', compact(['title', 'categories', 'statuses', 'item', 'courses', 'checkedCourses']));
     }
 
     public function item_update(ItemUpdateRequest $request, $id)
@@ -720,12 +723,13 @@ class AdminController extends Controller
             return abort('404');
         }
         $newItem = $request->get('item');
-        $searchItem = Item::where(['category_id' => $newItem['category_id']])->where(['title' => $newItem['title']])->first(); 
-        
+        $courses_array = $request->get('courses_array');
+        $searchItem = Item::where(['category_id' => $newItem['category_id']])->where(['title' => $newItem['title']])->first();        
        
         if(isset($searchItem)) {
             if($searchItem->id == $id) {                
                 $item->update($newItem);
+                $item->courses()->sync($courses_array);
                 if( $image = $request->file('item.image') )
                 {
                     File::delete( public_path('uploads/items/'. $item->image ));
@@ -741,6 +745,7 @@ class AdminController extends Controller
         } else {
             $newItem['slug'] = str_slug($newItem['title']);
             $item->update($newItem);
+            $item->courses()->sync($courses_array);
             if( $image = $request->file('item.image') )
             {
                 File::delete( public_path('uploads/items/'. $item->image ));
@@ -989,12 +994,13 @@ class AdminController extends Controller
         return view('admin/pages/courses/new_trainings', compact(['title', 'item', 'statuses', 'numberDay', 'statusesDays']));
     }
 
-    public function training_store(ItemRequest $request)
+    public function training_store(TrainingRequest $request)
     {        
 
         $item = $request->get('item'); 
+        
         $searchItem = Item::where(['course_id' => $item['course_id']])->where(['title' => $item['title']])->exists();      
-
+        
         if($searchItem) {
             Session::flash('danger', 'Тренировка с таким Названием в текущем Курсе уже есть!');
             return redirect()->back();
@@ -1004,6 +1010,7 @@ class AdminController extends Controller
             $item['number_day'] = $numberDay; 
             
             $course = $this->courses->find($item['course_id']);
+
             $training_schedule = $course->training_schedule;
 
             
@@ -1055,7 +1062,7 @@ class AdminController extends Controller
         return view('admin/pages/courses/new_trainings', compact(['title', 'statuses', 'item', 'statusesDays', 'numberDay']));
     }
 
-    public function training_update(ItemUpdateRequest $request, $id) {
+    public function training_update(TrainingUpdateRequest $request, $id) {
         $item = $this->items->find($id);      
         if (!isset($item))
         {

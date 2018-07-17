@@ -45,6 +45,11 @@ class Courses extends Model
     	return $this->hasMany(Item::class, 'course_id');
     }
 
+
+    public function courseItems() {
+        return $this->belongsToMany(Item::class);
+    }
+
     public static function saveIcon( $image ){
         $filename  = time() . '.' . $image->getClientOriginalExtension();
         $img = Image::make($image->getRealPath());        

@@ -32,7 +32,17 @@ class IsActiveCourse
                 $course = Courses::find($curentUser->course_id);
                 if(isset($course)) {
                     $whats_app_link = $course->whats_app_link;
-                    $request->session()->put('whats_app_link', $whats_app_link); 
+                    $faq = strip_tags($course->faq);                    
+                    if(isset($whats_app_link)) {
+                       $request->session()->put('whats_app_link', $whats_app_link);  
+                    } else {
+                        $request->session()->forget('whats_app_link');
+                    }
+                    if(isset($faq) && !empty($faq)) {
+                       $request->session()->put('faq', true);  
+                    } else {
+                        $request->session()->forget('faq');
+                    }               
                 }
                 return $next($request);
             }          

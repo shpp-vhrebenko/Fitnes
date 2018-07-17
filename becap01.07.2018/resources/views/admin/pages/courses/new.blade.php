@@ -41,19 +41,19 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="whats_app_link" class="col-sm-2 col-form-label">Cылка на WhatsApp Чат<sup class="required">*</sup></label>
+                                <label for="whats_app_link" class="col-sm-2 col-form-label">Cылка на WhatsApp Чат</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="whats_app_link" name="item[whats_app_link]" value="{{ isset($cours) ? $cours->whats_app_link : old('item.whats_app_link') }}">     
                                 </div>
                             </div>                             
                             <div class="form-group row">
-                                <label for="description_cours" class="col-sm-2 col-form-label">Содержание Курса<sup class="required">*</sup></label>
+                                <label for="description_cours" class="col-sm-2 col-form-label">Содержание Курса</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="item[description]" rows="3" id="description_cours">{{ isset($cours) ? $cours->description : old('item.description') }}</textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="faq_cours" class="col-sm-2 col-form-label">FAQ Курса<sup class="required">*</sup></label>
+                                <label for="faq_cours" class="col-sm-2 col-form-label">FAQ Курса</label>
                                 <div class="col-sm-10">
                                     <textarea class="form-control summernote" name="item[faq]" rows="3" id="faq_cours">{{ isset($cours) ? $cours->faq : old('item.faq') }}</textarea>
                                 </div>
@@ -140,7 +140,7 @@
 @endsection
 
 @section('footer-scripts')
-    @parent
+    @parent    
     <script>
     $(document).ready(function () {
         $('.cancel').on("click", function () {

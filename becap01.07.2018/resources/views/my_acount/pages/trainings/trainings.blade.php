@@ -47,6 +47,10 @@
     <script>
     	jQuery(document).ready(function($) {
     		@if($notification)
+    			$('#modalNotification').modal({
+				    backdrop: 'static',
+				    keyboard: false  // to prevent closing with Esc button (if you want this too)
+				})
     			$('#modalNotification').modal('show');
     			$("#button-modalNotification-close").on("click", function(){
 				    $.ajax({

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Request;
 
-class ItemUpdateRequest extends FormRequest
+class TrainingUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,8 +29,7 @@ class ItemUpdateRequest extends FormRequest
             'item.text' => 'required',
             'item.image' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'item.category_id' => 'required|not_in:0',
-            /*'item.course_id' => 'required|not_in:0',*/
-            'courses_array' => 'required',
+            'item.course_id' => 'required|not_in:0',            
             /*'item.is_active' => 'required', */           
         ];
     }
@@ -44,10 +43,9 @@ class ItemUpdateRequest extends FormRequest
             'item.image.image' => 'Изображение записи должно быть в формате изображения',
             'item.image.mimes' => 'Изображение записи должно быть в формате jpeg,png,jpg,gif,svg',
             'item.category_id.required' => 'Необходимо выбрать Категорию Записи',
-            'item.category_id.not_in' => 'Необходимо выбрать Категорию Записи',
-            'courses_array.required' => 'Необходимо выбрать Курс',
-            /*'item.course_id.required' => 'Необходимо выбрать Курс',
-            'item.course_id.not_in' => 'Необходимо выбрать Курс',*/
+            'item.category_id.not_in' => 'Необходимо выбрать Категорию Записи',            
+            'item.course_id.required' => 'Необходимо выбрать Курс',
+            'item.course_id.not_in' => 'Необходимо выбрать Курс',
             /*'item.is_active.required' => 'Необходимо указать Статус Записи',  */          
         ];
     }

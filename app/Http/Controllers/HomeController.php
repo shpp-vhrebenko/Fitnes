@@ -44,22 +44,30 @@ class HomeController extends Controller
         $monthes = array("Нулября","Января","Февраля","Марта","Апреля","Мая","Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря");
         $instagram = Social::firstOrFail();             
         $settings = Settings::first();  
-        $course = Courses::where('is_active', true)->where('type', 'cours')->first();    
-        $marathon = Courses::where('is_active', true)->where('type', 'marathon')->first(); 
-        $marathon_message = '';        
+        $courses = Courses::where('is_active', true)->where('type', 'cours')->get();    
+        $active_marathons = Courses::where('is_active', true)->where('type', 'marathon')->get();
+        $marathons = array();            
          
-        if(isset($marathon)) {
+        if(isset($active_marathons)) {
+          foreach ($active_marathons as $marathon) {
             $currentDate = Carbon::now();  
-            $dataStarttMarathon = Carbon::createFromFormat('Y-m-d', $marathon->date_end_selection);
-            $diffDays = $currentDate->diffInDays($dataStarttMarathon, false);            
-            if($diffDays > 0) {
-                $dt = Carbon::parse($marathon->date_end_selection);
-                $marathon_message = 'Cтарт марафона ' . $dt->day ." ".$monthes[$dt->month];
-            }            
+            $dataStartMarathon = Carbon::createFromFormat('Y-m-d', $marathon->date_end_selection);
+            $diffDays = $currentDate->diffInDays($dataStartMarathon, false); 
+            $dataEndMarathon = $dataStartMarathon->addDay($marathon->period);
+            $diffDaysEdnMarathon = $currentDate->diffInDays($dataEndMarathon, false);
+            if($diffDaysEdnMarathon >= 0) {
+              if($diffDays > 0) {
+                $dt = Carbon::parse($marathon->date_end_selection);              
+                $marathon->message = 'Cтарт марафона ' . $dt->day ." ".$monthes[$dt->month];
+              } 
+              array_push($marathons, $marathon);
+            }         
+          }                       
         }  
         
+
         
-        return view('front.home', compact(['settings', 'instagram', 'course', 'marathon' ,'marathon_message']));
+        return view('front.home', compact(['settings', 'instagram', 'courses', 'marathons' ,'marathon_message']));
 
     }
 

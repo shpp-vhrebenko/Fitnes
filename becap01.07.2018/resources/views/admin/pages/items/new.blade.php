@@ -95,14 +95,12 @@
                         <div class="form-group col-sm-6" >
                             <label for="course" class="col-sm-12 col-form-label">Курс<sup class="required">*</sup></label>
                             <div class="col-sm-12">                            
-                                <select class="form-control" id="course" name="item[course_id]">  
-                                    <option value="0">-- Не выбрано --</option>   
-                                    @if(isset($courses) && count($courses) > 0)
-                                        @foreach($courses as $course)                                        
-                                            <option value="{{ $course->id }}" @if(isset($item->course_id) && ($item->course_id == $course->id)) selected @endif>{!! $course->name !!}</option>
-                                        @endforeach
-                                    @endif        
-                                </select>
+                                @foreach($courses as $course)
+                                    <label class="form-checkbox form-normal form-green form-text">
+                                        {!! Form::checkbox('courses_array[]', $course->id, (isset($checkedCourses) && in_array($course->id, $checkedCourses)) ? true : false) !!}
+                                        {{ strip_tags($course->name) }}
+                                    </label>
+                                @endforeach
                             </div>                 
                         </div>                         
                     </div>                                 
@@ -150,7 +148,7 @@
 @endsection
 
 @section('footer-scripts')
-    @parent
+    @parent    
     <script>
     $(document).ready(function () {
         $('.cancel').on("click", function () {

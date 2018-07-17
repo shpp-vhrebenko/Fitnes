@@ -62,11 +62,14 @@
                                 <p>Абонемент: {!! strip_tags($course->name) !!}</p>
                                 <p>Цена: {{ $course->price }} RUB</p>
                             </div> 
-                            <div class="form-group row justify-content-center">                       
+                            <div class="form-group row justify-content-center">           
                                 <div class="checkbox">
                                     <label class="form-login__label form-login__label-terms row align-items-center">
                                         <input class="form-login__input-remember" type="checkbox" name="check_terms" {{ old('check_terms') ? 'checked' : '' }} required> Я подтверждаю <a style="color:#fff; text-decoration:underline;" target="_blank" href="/doc/offer5.pdf" > Пользовательское соглашение</a>
-                                    </label>
+                                    </label>                                    
+                                </div>
+                                <div id="checkbox-errors" class="col-md-8">
+                                        
                                 </div>                                
                             </div>
                             <div class="row justify-content-center">
@@ -132,7 +135,7 @@
                         remote: 'Пользователь с таким Email уже зарегистрирован'    
                     },   
                     check_terms: {
-                        required: "Необхлдимо ознакомится и подтвердить Пользовательское соглашение"
+                        required: "Необходимо ознакомится и подтвердить Пользовательское соглашение"
                     }        
                 },
                 errorPlacement: function(error, element) {
@@ -141,7 +144,9 @@
                     if (element.attr("name") == "phone") error.insertAfter($("input[name=phone]"));   
 
                     if (element.attr("name") == "email") error.insertAfter($("input[name=email]")); 
-                    if (element.attr("name") == "check_terms") error.insertAfter($(".form-login__label-terms"));     
+                    if (element.attr("name") == "check_terms") {
+                        $('#checkbox-errors').append(error);
+                    }      
                 }   
             });
         })

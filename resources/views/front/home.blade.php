@@ -80,44 +80,54 @@
                 <p class="price__sub-title">Направление курса</p>
             </div>       
             <div class="price__box row">
-                @if(isset($marathon))
-                <div class="col-sm-12 col-md-12 col-lg-6 price-item" id="price_marafon">
-                    <h3 class="price-item__title">{!! $marathon->name !!}</h3>
-                    <p class="price-item__subtitle">ВСЕГО ЗА {{$marathon->price}} {{ Lang::choice('messages.price', $marathon->price) }} ВЫ ПОЛУЧИТЕ:</p>
-                    <div class="price-item__icon" style="background-image: url('./uploads/icons/{{$marathon->icon}}');">                        
-                    </div>
-                    @if(isset($marathon->description))
-                    {!! $marathon->description !!} 
-                    @endif
-                    <div class="price-item__val">
-                        <p>{{$marathon->price}}</p>
-                        <p>{{ Lang::choice('messages.price', $marathon->price) }}</p>
-                    </div>
-                    <a class="price-item__button" href="{{route('register_user', $marathon->slug)}}">
-                        купить курс
-                    </a>                    
-                    <p class="price-item__message">{{$marathon_message}}</p>
-                </div>
+                @if(isset($marathons))
+                    @foreach ($marathons as $marathon)
+                        @if(isset($marathon))
+                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 price-item" id="price_marafon">
+                            <h3 class="price-item__title">{!! $marathon->name !!}</h3>
+                            <p class="price-item__subtitle">ВСЕГО ЗА {{$marathon->price}} {{ Lang::choice('messages.price', $marathon->price) }} ВЫ ПОЛУЧИТЕ:</p>
+                            <div class="price-item__icon" style="background-image: url('./uploads/icons/{{$marathon->icon}}');">                        
+                            </div>
+                            @if(isset($marathon->description))
+                            {!! $marathon->description !!} 
+                            @endif
+                            <div class="price-item__val">
+                                <p>{{$marathon->price}}</p>
+                                <p>{{ Lang::choice('messages.price', $marathon->price) }}</p>
+                            </div>
+                            <a class="price-item__button" href="{{route('register_user', $marathon->slug)}}">
+                                купить курс
+                            </a>                    
+                            <p class="price-item__message">
+                                @if(isset($marathon->message))
+                                {{$marathon->message}}
+                                @endif
+                            </p>
+                        </div>
+                        @endif
+                    @endforeach
                 @endif
-                @if(isset($course))
-                <div class="col-sm-12 col-md-12 col-lg-6 price-item" id="price_curs">
-                    <h3 class="price-item__title">{!! $course->name !!}</h3>
-                    <p class="price-item__subtitle">ВСЕГО ЗА {{$course->price}} {{ Lang::choice('messages.price', $course->price) }} РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
-                    <div class="price-item__icon" style="background-image:url('./uploads/icons/{{$course->icon}}')">
-                        
+                @if(isset($courses))
+                    @foreach ($courses as $course)
+                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 price-item" id="price_curs">
+                        <h3 class="price-item__title">{!! $course->name !!}</h3>
+                        <p class="price-item__subtitle">ВСЕГО ЗА {{$course->price}} {{ Lang::choice('messages.price', $course->price) }} РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
+                        <div class="price-item__icon" style="background-image:url('./uploads/icons/{{$course->icon}}')">
+                            
+                        </div>
+                        @if(isset($course->description))
+                        {!! $course->description !!} 
+                        @endif                   
+                        <div class="price-item__val">
+                            <p>{{$course->price}}</p>
+                            <p>{{ Lang::choice('messages.price', $course->price) }}</p>
+                        </div>
+                        <a class="price-item__button" href="{{route('register_user', $course->slug)}}">
+                            купить курс
+                        </a>
+                        <p class="price-item__message"></p>
                     </div>
-                    @if(isset($course->description))
-                    {!! $course->description !!} 
-                    @endif                   
-                    <div class="price-item__val">
-                        <p>{{$course->price}}</p>
-                        <p>{{ Lang::choice('messages.price', $course->price) }}</p>
-                    </div>
-                    <a class="price-item__button" href="{{route('register_user', $course->slug)}}">
-                        купить курс
-                    </a>
-                    <p class="price-item__message"></p>
-                </div>
+                    @endforeach
                 @endif
             </div> 
         </div>

@@ -1,5 +1,9 @@
 @extends('admin/layout/admin')
 
+@section('header-scripts')
+   @parent    
+@endsection
+
 @section('content')
     <h1>{{ $title }}</h1>
     @if (Session::has('success'))
