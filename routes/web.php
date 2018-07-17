@@ -40,6 +40,10 @@ Route::group([], function() {
     Route::any('/oplata/result', 'HomeController@oplata_result')->name('oplata_result');
     Route::get('/oplata/success', 'HomeController@success_oplata')->name('success_oplata');
     Route::get('/oplata/error', 'HomeController@error_oplata')->name('error_oplata');
+
+    Route::get('/oplata/paypal', 'PaymentController@index')->name('paypal');
+    Route::post('/oplata/paypal', 'PaymentController@payWithpaypal')->name('pay_to_paypal');
+    Route::get('/oplata/paypal/status', 'PaymentController@getPaymentStatus')->name('paypal_status');
     Route::get('/test_message', 'HomeController@test_message')->name('test_message');
 });
 

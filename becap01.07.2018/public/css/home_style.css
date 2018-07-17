@@ -277,8 +277,9 @@
 }
 
 .price-item {	
-	padding: 45px 85px;
+	padding: 45px 45px;
 	background-color: #1f2343;
+	margin-bottom: 2rem;
 }
 
 .price-item__title {

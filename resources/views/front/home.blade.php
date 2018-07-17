@@ -263,7 +263,7 @@
                         </p>
                     </div>
                     <p class="contacts__second-text"><b>НАПИШИТЕ МНЕ И Я СВЯЖУСЬ С ВАМИ</b></p>
-                    <a class="contacts__mail-link" href="mailto:gizerskaya.fitness@mail.ru">gizerskaya.fitness@mail.ru</a>           
+                    <a class="contacts__mail-link" href="mailto:{{$settings->email}}">{{$settings->email}}</a>           
                     <p class="contacts__third-text"><b>СВЯЗАТЬСЯ СО МНОЙ</b></p>
                     <button id="contacts-button-w" class="contacts__button" data-toggle="modal" data-target="#modalContacts">НАПИСАТЬ ПИСЬМО</button>
                 </div>

@@ -384,7 +384,7 @@
 /* Large devices (laptops/desktops, 992px and up) .col-lg*/
 @media only screen and (min-width: 992px) {
 	.price {
-		height: 100vh;
+		height: auto;
 		min-height: 1000px;
 	}
 	
