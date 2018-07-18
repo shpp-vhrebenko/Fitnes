@@ -22,38 +22,57 @@
 @section('footer-scripts')	
 	<script  src="{{asset('js/lib/popper.min.js') }}"></script>
 	<script  src="{{asset('js/lib/bootstrap.min.js') }}"></script>
+    @if(Session::has('message_success'))
+    <script>
+        jQuery(document).ready(function($) {
+            $('#modalUserMessage').modal('show')
+        });
+    </script>
+    @endif 
 @show
 
 @section('footer-modal')
 @include('auth/partials/sidebar_menu')
-<div class="modal fade" id="modalContacts" tabindex="-1" role="dialog" aria-labelledby="modalContactsTitle" aria-hidden="true">
+    <div class="modal fade" id="modalContacts" tabindex="-1" role="dialog" aria-labelledby="modalContactsTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-block-contacts" role="document">
         <div class="modal-content block-contacts">
             <button type="button" class="close block-contacts__close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">X</span>
             </button>
             <div class="modal-body">
-            	<h5 class="block-contacts__header">Написать письмо</h5>
-                <form action="#" class="form-contacts">
+                <h5 class="block-contacts__header">Написать письмо</h5>
+                <form action="{{route('user_message')}}" class="form-contacts" method="post">
+                    {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="user-name">имя</label>
-                        <input type="text" class="form-control" id="user-name"  placeholder="" required="true">             
+                        <label for="name">имя</label>
+                        <input type="text" name="name" class="form-control" id="name"  placeholder="" required="true">             
                     </div>
                     <div class="form-group">
-                        <label for="user-email">Email</label>
-                        <input type="email" class="form-control" id="user-email" placeholder="" required="true">                        
+                        <label for="email">Email</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="" required="true">                        
                     </div>
                     <div class="form-group form-contacts__text">
-                        <label for="user-textMessage">текст сообщения</label>
-                        <textarea class="form-control" id="user-textMessage" rows="4"></textarea>
+                        <label for="textMessage">текст сообщения</label>
+                        <textarea name="message" class="form-control" id="textMessage" rows="4"></textarea>
                     </div>
                     <button class="form-contacts__button" id="submitFormContacts">отправить</button>
                 </form>
-            </div>
-          
+            </div>          
         </div>
       </div>
-    </div>  
+    </div>
+    <div class="modal fade" id="modalUserMessage" tabindex="-1" role="dialog" aria-labelledby="modalContactsTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-block-contacts" role="document">
+        <div class="modal-content block-contacts">
+            <button type="button" class="close block-contacts__close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">X</span>
+            </button>
+            <div class="modal-body">
+                <h5 class="block-contacts__header">Сообщение успешно отправлено!</h5>      
+            </div>          
+        </div>
+      </div>
+    </div>      
 @show
 
 </body>
