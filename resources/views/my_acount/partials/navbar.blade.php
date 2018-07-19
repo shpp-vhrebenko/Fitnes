@@ -3,10 +3,12 @@
     <img src="/uploads/logo/{{$settings->logo}}" class="attachment-medium size-medium" alt="" />
   </a>
   @if(Auth::check())
+  @if(Auth::user()->status_id)
   <div id="open-sidebar" class="navbar__open-sidebar">
     <i class="fa fa-bars"></i>
     МЕНЮ
   </div>  
+  @endif
   <div id='fixed-menu' class="fixed-menu">
     @if(Auth::user()->hasRole(1) == true))
     <a href="{{ route('admin') }}" class="fixed-menu__link">   

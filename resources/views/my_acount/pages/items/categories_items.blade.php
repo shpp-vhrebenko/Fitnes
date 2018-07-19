@@ -15,6 +15,9 @@
 		<header class="row category-header">
 			<h4 class="category-header__title col-sm-12">{{$category->name}}</h4>
 			<div class="category-header__description col-sm-12">{!! $category->description !!}</div>
+			@if($category->slug == 'food' && isset($course))
+			<a href="{{ route('food_regulations', $course->slug ) }}" class="category-header__link col-sm-12">Подробнее</a>
+			@endif
 		</header>
 		<div class="row category-content">
 			@foreach($items as $item)

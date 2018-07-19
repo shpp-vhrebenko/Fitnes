@@ -55,6 +55,8 @@ Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveC
     //Route notification
     Route::post('/notification', 'MyAccountController@check_user_notification')->name('check_user_notification');
 
+    //Route food regulations
+    Route::get('/food/regulations/{course_slug}', 'MyAccountController@food_regulations')->name('food_regulations');
     // Route trainings
     Route::get('/trainings', 'MyAccountController@show_trainings')->name('show_trainings');
     Route::get('/training/{course_slug}/{slug}', 'MyAccountController@show_training')->name('show_training');

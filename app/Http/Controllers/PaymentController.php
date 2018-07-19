@@ -17,6 +17,7 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use PayPal\Api\PaymentExecution;
 
 class PaymentController extends Controller
 {
@@ -36,23 +37,25 @@ class PaymentController extends Controller
 	}
 
 	public function payWithpaypal(Request $request)
-    {
+    {    	
 		$payer = new Payer();
 		        $payer->setPaymentMethod('paypal');
 		$item_1 = new Item();
 		$item_1->setName('Item 1') /** item name **/
 		            ->setCurrency('RUB')
+		            ->setSku("12")
 		            ->setQuantity(1)
 		            ->setPrice($request->get('amount')); /** unit price **/
 		$item_list = new ItemList();
 		        $item_list->setItems(array($item_1));
 		$amount = new Amount();
-		        $amount->setCurrency('USD')
+		        $amount->setCurrency('RUB')
 		            ->setTotal($request->get('amount'));
 		$transaction = new Transaction();
 		        $transaction->setAmount($amount)
 		            ->setItemList($item_list)
-		            ->setDescription('Your transaction description');
+		            ->setDescription('Your transaction description')
+		            ->setCustom('2');
 		$redirect_urls = new RedirectUrls();
 		        $redirect_urls->setReturnUrl(URL::route('paypal_status')) /** Specify return URL **/
 		            ->setCancelUrl(URL::route('paypal_status'));
@@ -62,17 +65,18 @@ class PaymentController extends Controller
 		            ->setRedirectUrls($redirect_urls)
 		            ->setTransactions(array($transaction));
 		        /** dd($payment->create($this->_api_context));exit; **/
-		        try {
-		$payment->create($this->_api_context);
-		} catch (\PayPal\Exception\PPConnectionException $ex) {
-		if (\Config::get('app.debug')) {
-		\Session::put('error', 'Connection timeout');
-		                return Redirect::route('paywithpaypal');
-		} else {
-		\Session::put('error', 'Some error occur, sorry for inconvenient');
-		                return Redirect::route('paywithpaypal');
-		}
-		}
+		try {			
+			$payment->create($this->_api_context);
+		}  catch (\PayPal\Exception\PPConnectionException $ex) {
+
+            if (\Config::get('app.debug')) {
+                \Session::put('error', 'Connection timeout');
+                return Redirect::route('paywithpaypal');
+            } else {
+                \Session::put('error', 'Some error occur, sorry for inconvenient');
+                return Redirect::route('paywithpaypal');
+            }
+        }    
 		foreach ($payment->getLinks() as $link) {
 		if ($link->getRel() == 'approval_url') {
 		$redirect_url = $link->getHref();
@@ -89,8 +93,9 @@ class PaymentController extends Controller
 		        return Redirect::route('paywithpaypal');
 	}
 
-	public function getPaymentStatus()
+	public function getPaymentStatus(Request $request)
     {
+    	
 		        /** Get the payment ID before session clear **/
 		        $payment_id = Session::get('paypal_payment_id');
 		/** clear the session payment ID **/
@@ -99,7 +104,13 @@ class PaymentController extends Controller
 		\Session::put('error', 'Payment failed');
 		            return Redirect::route('paypal');
 		}
+		$paymentCurrentId  = Input::get('paymentId');
+		$payerCurrentId    = Input::get('PayerID');
+
 		$payment = Payment::get($payment_id, $this->_api_context);
+		$obj        = json_decode($payment);
+		$custom     = $obj->transactions[0]->custom;
+		dd($custom);
 		        $execution = new PaymentExecution();
 		        $execution->setPayerId(Input::get('PayerID'));
 		/**Execute the payment **/

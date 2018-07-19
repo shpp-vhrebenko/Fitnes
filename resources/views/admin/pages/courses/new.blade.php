@@ -58,6 +58,12 @@
                                     <textarea class="form-control summernote" name="item[faq]" rows="3" id="faq_cours">{{ isset($cours) ? $cours->faq : old('item.faq') }}</textarea>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="food_regulations" class="col-sm-2 col-form-label">Основные правила питания</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control summernote" name="item[food_regulations]" rows="3" id="food_regulations">{{ isset($cours) ? $cours->food_regulations : old('item.food_regulations') }}</textarea>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="form-group col-sm-4">
                                     <label for="period" class="col-sm-12 col-form-label">Продолжительность курса(дней)<sup class="required">*</sup></label>

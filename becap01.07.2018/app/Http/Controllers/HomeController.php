@@ -100,18 +100,27 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    public function test_message()
+    public function user_message(Request $request)
     {
-        $user_name = 'vova';
-        $newUserPass = 3243432;
-        $currentMessage = "Ваш пароль обновлен. ";
-         Mail::send('emails.reset_password',array('user_name' =>$user_name, 'user_password'=> $newUserPass, 'curMessage' => $currentMessage), function($message)
+        $message = $request->get('message');
+        $user_name = $request->get('name');
+        $user_email = $request->get('email');
+        $settings = Settings::first();           
+        $currentMessage = $message;
+
+        $params = array();
+        $params['user_email'] = $user_email;
+        $params['admin_email'] = $settings->email; 
+        $params['user_name'] = $user_name;
+
+        Mail::send('emails.user_message',array('user_name' =>$user_name, 'user_email'=>$user_email, 'curMessage' => $currentMessage), function($message) use($params)
         {
-            $message->from('test@gmail.com', 'vova');
+            $message->from($params['user_email'], $params['user_name']);
 
-            $message->to('vhrebenko@gmail.com');
-
+            $message->to($params['admin_email'])->subject('gizerskaya - Фитнесс Тренер');
         });
+        Session::flash('message_success', 'Сообщение успешно отправлено!');
+        return redirect()->back();
     }
    
     public function register_user($slug)
@@ -177,12 +186,17 @@ class HomeController extends Controller
       $price = number_format((float)$course->price, 2, '.', '');   
       $date = Carbon::now()->addHour();    
           //Секретный ключ интернет-магазина
-      $key = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
-   
+      //test key
+      //$key = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
+
+      $key = "4a4a436534717c647c6e5961654849385b41427276626e784b7467";
+      
       $fields = array();
    
         // Добавление полей формы в ассоциативный массив
-      $fields["WMI_MERCHANT_ID"]    = "117327853980";
+      // test wmi_merchant_id
+      //$fields["WMI_MERCHANT_ID"]    = "117327853980";
+      $fields["WMI_MERCHANT_ID"]    = "101655594440";
       $fields["WMI_PAYMENT_AMOUNT"] = $price;
       $fields["WMI_CURRENCY_ID"]    = "643";  
       $fields["WMI_DESCRIPTION"]    = "Оплата Курса ".strip_tags($course->name);
@@ -246,7 +260,7 @@ class HomeController extends Controller
 
 
     public function success_oplata(Request $request)
-    { 
+    {      
       return view('front/pages/oplata/succes');
     }  
 
@@ -259,7 +273,9 @@ class HomeController extends Controller
     {   
 
         // Секретный ключ интернет-магазина (настраивается в кабинете) 
-        $skey = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
+        //test key
+        //$skey = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
+        $skey = "4a4a436534717c647c6e5961654849385b41427276626e784b7467";
 
         // Проверка наличия необходимых параметров в POST-запросе 
         if (!isset($_POST["WMI_SIGNATURE"])) {        

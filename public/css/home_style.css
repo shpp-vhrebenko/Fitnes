@@ -167,7 +167,7 @@
 .about__populated {
 	height: 100vh;
 	background-attachment: scroll;
-	background-image: url(https://gizerskaya.com/wp-content/uploads/2018/04/photo_2018-03-23_02-20-38.jpg);
+	background-image: url(../img/photo_2018-03-23_02-20-38.jpg);
     background-position: top left;
     background-repeat: no-repeat;    
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s
@@ -176,7 +176,7 @@
 .about__populated .about__background-overlay {
 	background-attachment: scroll;
 	transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
-	background-image: url(http://gizerskaya.com/wp-content/uploads/2018/03/girl.png);
+	background-image: url(../img/girl.png);
     background-position: top right;
     background-repeat: no-repeat;
     background-size: contain;
@@ -319,7 +319,7 @@
 }
 
 .price-item ul li {	
-	list-style-image: url(https://gizerskaya.com/wp-content/uploads/2018/05/icon-pay-list.png);
+	list-style-image: url(../img/icon-pay-list.png);
     margin-bottom: 30px;
     color: #cbcbcb;
     letter-spacing: 1px;
@@ -944,7 +944,7 @@ a.price-item__button {
     width: 100%;
     top: 0;
     left: 0;    
-	background-image: url(http://gizerskaya.com/wp-content/uploads/2018/03/5555.png);
+	background-image: url(../img/5555.png);
 	background-repeat: no-repeat;
     background-size: contain;
     opacity: 1;

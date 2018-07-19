@@ -1,18 +1,18 @@
 
 @section('footer-scripts')
-<script src="{{asset('js/lib/popper.min.js') }}"></script>
-<script  src="{{asset('js/lib/bootstrap.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 @show
 
 @section('footer-assets')
   <!-- include summernote css/js -->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 
-<link href="{{ asset('css/datepicker.min.css') }}" rel="stylesheet">
-<script src="{{ asset('js/datepicker.min.js') }}"></script>
+<link href="{{ asset('css/libs/datepicker.min.css') }}" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
 
 
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 <script src="{{ asset('js/lib/summernote_acordion.js') }}"></script>
 <style>
   .dropdown:hover>.dropdown-menu {

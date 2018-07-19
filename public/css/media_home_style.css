@@ -281,7 +281,7 @@
 	.about__populated {
 		position: relative;
 		height: 300px;
-		background-image: url(https://gizerskaya.com/wp-content/uploads/2018/03/bg_750_706.jpg) !important;
+		background-image: url(../img/bg_750_706.jpg) !important;
 	    background-position: center 20% !important;
 	    background-size: cover;
 	    background-repeat: no-repeat;

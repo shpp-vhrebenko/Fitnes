@@ -37,10 +37,15 @@ Route::group([], function() {
     Route::post('/register/store/{slug}', 'HomeController@user_store')->name('store_user');
     Route::post('/register/users', 'HomeController@validate_email_user')->name('validate_email_user');  
     Route::get('/oplata', 'HomeController@oplata')->name('oplata');   
-    Route::any('/oplata/result', 'HomeController@oplata_result')->name('oplata_result');
+    Route::post('/oplata/result', 'HomeController@oplata_result')->name('oplata_result');
     Route::get('/oplata/success', 'HomeController@success_oplata')->name('success_oplata');
     Route::get('/oplata/error', 'HomeController@error_oplata')->name('error_oplata');
-    Route::get('/test_message', 'HomeController@test_message')->name('test_message');
+
+    Route::get('/oplata/paypal', 'PaymentController@index')->name('paypal');
+    Route::post('/oplata/paypal', 'PaymentController@payWithpaypal')->name('pay_to_paypal');
+    Route::get('/oplata/paypal/status', 'PaymentController@getPaymentStatus')->name('paypal_status');
+
+    Route::post('/user/message', 'HomeController@user_message')->name('user_message');
 });
 
 Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveCourse'] ], function() {

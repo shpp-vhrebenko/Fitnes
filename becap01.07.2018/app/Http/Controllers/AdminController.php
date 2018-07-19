@@ -400,7 +400,7 @@ class AdminController extends Controller
 
     public function client_destroy($id)
     {
-        $client = $this->users->find($id);
+        $client = $this->users->find($id);        
         if (!isset($client)) {
             return abort(404);
         }        
@@ -769,6 +769,7 @@ class AdminController extends Controller
         {
             File::delete( public_path('uploads/items/'. $item->image ));                   
         }  
+        $item->courses()->detach();
         $item->delete();
         Session::flash('success', 'Запись успешно удалена!');
         return redirect()->route('admin_items');

@@ -77,59 +77,67 @@
         <div class="container price__container">
             <div class='price__header'>
                 <p class="price__title"><b>Выберите</b></p>
-                <p class="price__sub-title">Направление курса</p>
+                <p class="price__sub-title">Направление курса {{bcmod( '2',  '3')}}</p>
             </div>       
-            <div class="price__box row">
+            
                 @if(isset($marathons))
-                    @foreach ($marathons as $marathon)
-                        @if(isset($marathon))
-                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 price-item" id="price_marafon">
-                            <h3 class="price-item__title">{!! $marathon->name !!}</h3>
-                            <p class="price-item__subtitle">ВСЕГО ЗА {{$marathon->price}} {{ Lang::choice('messages.price', $marathon->price) }} ВЫ ПОЛУЧИТЕ:</p>
-                            <div class="price-item__icon" style="background-image: url('./uploads/icons/{{$marathon->icon}}');">                        
-                            </div>
-                            @if(isset($marathon->description))
-                            {!! $marathon->description !!} 
-                            @endif
-                            <div class="price-item__val">
-                                <p>{{$marathon->price}}</p>
-                                <p>{{ Lang::choice('messages.price', $marathon->price) }}</p>
-                            </div>
-                            <a class="price-item__button" href="{{route('register_user', $marathon->slug)}}">
-                                купить курс
-                            </a>                    
-                            <p class="price-item__message">
-                                @if(isset($marathon->message))
-                                {{$marathon->message}}
+                    @foreach(array_chunk($marathons, 3) as $chunk)
+                        <div class="price__box row justify-content-center">
+                            @foreach($chunk as $marathon)
+                                @if(isset($marathon))
+                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 price-item" id="price_marafon">
+                                    <h3 class="price-item__title">{!! $marathon['name'] !!}</h3>
+                                    <p class="price-item__subtitle">ВСЕГО ЗА {{$marathon['price']}} {{ Lang::choice('messages.price', $marathon['price']) }} ВЫ ПОЛУЧИТЕ:</p>
+                                    <div class="price-item__icon" style="background-image: url('./uploads/icons/{{$marathon['icon']}}');">                        
+                                    </div>
+                                    @if(isset($marathon['description']))
+                                    {!! $marathon['description'] !!} 
+                                    @endif
+                                    <div class="price-item__val">
+                                        <p>{{$marathon['price']}}</p>
+                                        <p>{{ Lang::choice('messages.price', $marathon['price']) }}</p>
+                                    </div>
+                                    <a class="price-item__button" href="{{route('register_user', $marathon['slug'])}}">
+                                        купить курс
+                                    </a>                    
+                                    <p class="price-item__message">
+                                        @if(isset($marathon['message']))
+                                        {{$marathon['message']}}
+                                        @endif
+                                    </p>
+                                </div>
                                 @endif
-                            </p>
+                            @endforeach
                         </div>
-                        @endif
-                    @endforeach
+                    @endforeach                   
                 @endif
                 @if(isset($courses))
-                    @foreach ($courses as $course)
-                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 price-item" id="price_curs">
-                        <h3 class="price-item__title">{!! $course->name !!}</h3>
-                        <p class="price-item__subtitle">ВСЕГО ЗА {{$course->price}} {{ Lang::choice('messages.price', $course->price) }} РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
-                        <div class="price-item__icon" style="background-image:url('./uploads/icons/{{$course->icon}}')">
-                            
+                    @foreach(array_chunk($courses->toArray(), 3) as $chunk)
+                        <div class="price__box row justify-content-center">
+                            @foreach($chunk as $course)
+                                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 price-item" id="price_curs">
+                                <h3 class="price-item__title">{!! $course['name'] !!}</h3>
+                                <p class="price-item__subtitle">ВСЕГО ЗА {{$course['price']}} {{ Lang::choice('messages.price', $course['price']) }} РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
+                                <div class="price-item__icon" style="background-image:url('./uploads/icons/{{$course['icon']}}')">
+                                    
+                                </div>
+                                @if(isset($course['description']))
+                                {!! $course['description'] !!} 
+                                @endif                   
+                                <div class="price-item__val">
+                                    <p>{{$course['price']}}</p>
+                                    <p>{{ Lang::choice('messages.price', $course['price']) }}</p>
+                                </div>
+                                <a class="price-item__button" href="{{route('register_user', $course['slug'])}}">
+                                    купить курс
+                                </a>
+                                <p class="price-item__message"></p>
+                            </div>
+                            @endforeach
                         </div>
-                        @if(isset($course->description))
-                        {!! $course->description !!} 
-                        @endif                   
-                        <div class="price-item__val">
-                            <p>{{$course->price}}</p>
-                            <p>{{ Lang::choice('messages.price', $course->price) }}</p>
-                        </div>
-                        <a class="price-item__button" href="{{route('register_user', $course->slug)}}">
-                            купить курс
-                        </a>
-                        <p class="price-item__message"></p>
-                    </div>
-                    @endforeach
+                    @endforeach                    
                 @endif
-            </div> 
+            
         </div>
                 
     </section>
@@ -305,7 +313,7 @@
                 <div class="modal-body">
                     <div class="block-otziv__info">
                         <div class="foto-otziv">
-                            <img src="http://gizerskaya.com/wp-content/uploads/2018/03/girl12.png">
+                            <img src="">
                         </div>
                         <div class="name">Вика</div>
                         <span class="age">21 год</span>

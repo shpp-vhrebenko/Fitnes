@@ -25,7 +25,7 @@
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-8">
                                     <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} form-login__input" name="name" value="{{ old('name') }}" required autofocus placeholder="ИМЯ">
-
+                                    <div class="errors"></div>
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -37,7 +37,7 @@
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-8">
                                     <input id="phone" type="tel" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }} form-login__input" minlength="10" name="phone" value="{{ old('phone') }}" pattern="^[\+?0-9]+$" title="+ХХХХХХХХХХХ или ХХХХХХХХХХХ" required placeholder="ТЕЛЕФОН ДЛЯ WHATSAPP">
-
+                                    <div class="errors"></div>
                                     @if ($errors->has('phone'))
                                         <span class="invalid-feedback">
                                             <strong>{{ $errors->first('phone') }}</strong>
@@ -49,7 +49,7 @@
                             <div class="form-group row justify-content-center">                
                                 <div class="col-md-8">
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }} form-login__input" name="email" value="{{ old('email') }}" required placeholder="EMAIL">
-
+                                    <div class="errors"></div>
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -139,14 +139,26 @@
                     }        
                 },
                 errorPlacement: function(error, element) {
-                    if (element.attr("name") == "name") error.insertAfter($("input[name=name]"));
+                    if (element.attr("name") == "name") {
+                        $("input[name=name]").next().empty();
+                        $("input[name=name]").next().append(error);                     
+                    } 
                     
-                    if (element.attr("name") == "phone") error.insertAfter($("input[name=phone]"));   
+                    if (element.attr("name") == "phone") {
+                        $("input[name=phone]").next().empty();
+                        $("input[name=phone]").next().append(error);
+                    }   
 
-                    if (element.attr("name") == "email") error.insertAfter($("input[name=email]")); 
+                    if (element.attr("name") == "email") {
+                        $("input[name=email]").next().empty();
+                        $("input[name=email]").next().append(error);
+                    }  
+
                     if (element.attr("name") == "check_terms") {
+                        $('#checkbox-errors').empty();
                         $('#checkbox-errors').append(error);
-                    }      
+                    } 
+                       
                 }   
             });
         })

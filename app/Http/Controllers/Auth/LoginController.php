@@ -36,7 +36,8 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $settings = Settings::first();     
+        $settings = Settings::first();
+        $this->setTitle('Вход');     
         view()->share(compact([ 'settings']));
     }
 }

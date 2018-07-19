@@ -21,7 +21,7 @@
 	@section('header-styles')	
 	<link rel="stylesheet" href="{{ asset('css/libs/font-awesome.min.css') }}">  
     <link rel="stylesheet" href="{{ asset('css/libs/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/libs/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/libs/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/libs/slick-theme.css') }}">  	
 	<link rel="stylesheet" href="{{ asset('css/layout_style.css') }}">
@@ -29,7 +29,10 @@
 	@show
 
 	@section('header-scripts')
-	<script  src="{{asset('js/lib/jquery-3.3.1.min.js') }}"></script>	
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 	@show
 	
 </head>	

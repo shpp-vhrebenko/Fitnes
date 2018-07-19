@@ -130,6 +130,19 @@
     /*margin-bottom: 40px;*/
 }
 
+.category-header__link {
+    color: #fff;
+    font-size: 1rem;
+    font-family: "HelveticaLight";
+    letter-spacing: 3px;
+    text-decoration: underline;
+}
+
+.category-header__link:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
 .category-header__notification {
     background-color: #b92034;
     border: none ;
@@ -190,8 +203,7 @@
 
 .item-content {
     /*min-height: 600px;*/
-    padding: 105px 15px 105px 15px;
-    padding-bottom: 70px;
+    padding: 40px 15px 40px 15px;    
     font-size: 1rem;
     line-height: 20px;
     border: 1px solid #8e647a;
@@ -202,8 +214,9 @@
 }
 
 .item-content p {
-    font-size: .9rem;
+    font-size: 1.2rem;
     margin-bottom: .5rem;
+    line-height:26px;
 }
 /* END ITEMS */
 
@@ -606,6 +619,7 @@
         margin-bottom: 0px;
         line-height: 30px;
 }
+
 .category-content {
     padding-top: 10px;
 }

@@ -226,6 +226,7 @@ class MyAccountController extends Controller
     {     
         $currentUser = Auth::user(); 
         $course_id = $currentUser->course_id;
+        $course = Courses::find($course_id);       
         $category = Category::where('slug', $category_slug)->firstOrFail();       
         $categoryItems = $category->items;
         $items = array();
@@ -238,7 +239,7 @@ class MyAccountController extends Controller
         $this->setTitle('Личный кабинет - '. $category->name);
         $page_title = $category->name;
         $description = $category->description;
-        return view('my_acount/pages/items/categories_items', compact(['category', 'items', 'page_title', 'description']));
+        return view('my_acount/pages/items/categories_items', compact(['category', 'items', 'page_title', 'description', 'course']));
     }
 
     public function show_item($category_slug, $item_slug)
@@ -365,6 +366,11 @@ class MyAccountController extends Controller
         return $dataStartCourse->diffInDays($currentDate, false); 
     }
 
-
-    
+    public function food_regulations(Request $request, $course_slug)
+    {
+        $currentCourse = $this->courses->findWithParams(['slug'=>$course_slug])->first();
+        $food_regulations = $currentCourse->food_regulations;
+        $this->setTitle($currentCourse->name . ' - Основные правила питания'); 
+        return view('my_acount/pages/food_regulations/food_regulations', compact([ 'food_regulations']));
+    }    
 }

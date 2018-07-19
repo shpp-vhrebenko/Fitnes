@@ -486,7 +486,7 @@ class AdminController extends Controller
 
         Mail::send('emails.reset_password',array('user_name' =>$user->email, 'user_password'=>$newUserPass, 'curMessage' => $currentMessage), function($message) use($params)
         {
-            $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
+            $message->from($params['admin_email']);
 
             $message->to($params['user_email'])->subject('gizerskaya - Фитнесс Тренер');
 
@@ -1000,8 +1000,7 @@ class AdminController extends Controller
 
         $item = $request->get('item'); 
         
-        $searchItem = Item::where(['course_id' => $item['course_id']])->where(['title' => $item['title']])->exists();      
-        
+        $searchItem = Item::where(['course_id' => $item['course_id']])->where(['title' => $item['title']])->exists();       
         if($searchItem) {
             Session::flash('danger', 'Тренировка с таким Названием в текущем Курсе уже есть!');
             return redirect()->back();
@@ -1073,8 +1072,7 @@ class AdminController extends Controller
         $numberDay = $request->get('numberDay');
         $newItem = $request->get('item');
 
-        $searchItem = Item::where(['course_id' => $newItem['course_id']])->where(['title' => $newItem['title']])->first();      
-
+        $searchItem = Item::where(['course_id' => $newItem['course_id']])->where(['title' => $newItem['title']])->first();
         $course = $this->courses->find($item->course_id);
         $training_schedule = $course->training_schedule;
 

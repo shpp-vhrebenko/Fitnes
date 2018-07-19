@@ -67,7 +67,11 @@ strong {
 	display:inline-block;
 	color:white;
 	margin-top:5px;
-	font-size:13px;
+	font-size:13px;	
+}
+
+.fixed-menu__right span:hover {
+	cursor: pointer;
 }
 
 .fixed-menu__button {

@@ -90,7 +90,7 @@ class HomeController extends Controller
 
         Mail::send('emails.reset_password',array('user_name' =>$user->email, 'user_password'=>$newUserPass, 'curMessage' => $currentMessage), function($message) use($params)
         {
-            $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
+            $message->from($params['admin_email']);
 
             $message->to($params['user_email'])->subject('gizerskaya - Фитнесс Тренер');
 
@@ -126,6 +126,7 @@ class HomeController extends Controller
     public function register_user($slug)
     {      
         $course = Courses::where('slug', $slug)->firstOrFail();  
+        $this->setTitle('Оформление заказа');    
         return view('auth.register', compact(['course']));
     }
 
@@ -187,16 +188,16 @@ class HomeController extends Controller
       $date = Carbon::now()->addHour();    
           //Секретный ключ интернет-магазина
       //test key
-      $key = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
+      //$key = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
 
-      //$key = "4a4a436534717c647c6e5961654849385b41427276626e784b7467";
+      $key = "4a4a436534717c647c6e5961654849385b41427276626e784b7467";
       
       $fields = array();
    
         // Добавление полей формы в ассоциативный массив
       // test wmi_merchant_id
-      $fields["WMI_MERCHANT_ID"]    = "117327853980";
-      //$fields["WMI_MERCHANT_ID"]    = "101655594440";
+      //$fields["WMI_MERCHANT_ID"]    = "117327853980";
+      $fields["WMI_MERCHANT_ID"]    = "101655594440";
       $fields["WMI_PAYMENT_AMOUNT"] = $price;
       $fields["WMI_CURRENCY_ID"]    = "643";  
       $fields["WMI_DESCRIPTION"]    = "Оплата Курса ".strip_tags($course->name);
@@ -273,7 +274,9 @@ class HomeController extends Controller
     {   
 
         // Секретный ключ интернет-магазина (настраивается в кабинете) 
-        $skey = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
+        //test key
+        //$skey = "506462706f727c57375f36775652724449475a4d316b6a6b5e6c5d";
+        $skey = "4a4a436534717c647c6e5961654849385b41427276626e784b7467";
 
         // Проверка наличия необходимых параметров в POST-запросе 
         if (!isset($_POST["WMI_SIGNATURE"])) {        
@@ -336,6 +339,7 @@ class HomeController extends Controller
         } else {
             // Подпись не совпадает, возможно вы поменяли настройки интернет-магазина
             Log::error("Неверная подпись " . $_POST["WMI_SIGNATURE"]);
+            Log::error(print_r($_POST, true));
         }
         
     }
@@ -378,7 +382,7 @@ class HomeController extends Controller
 
         Mail::send('emails.user',array('user_name' =>$new_user['email'], 'user_password'=>$newUserPass), function($message) use ($params)
         {
-            $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
+            $message->from($params['admin_email']);
             $message->to($params['user_email'])->subject('gizerskaya - Фитнесс Тренер');
         });
 
@@ -389,7 +393,7 @@ class HomeController extends Controller
 
         Mail::send('emails.admin',array('user_name' =>$new_user['name'], 'user_email'=>$new_user['email'], 'user_tel' => $new_user['phone']), function($message) use ($params)
         {
-            $message->from('site@gizerskaya.com', 'gizerskaya - Фитнесс Тренер');
+            $message->from('site@gizerskaya.com');
             $message->to($params['admin_email'])->subject('gizerskaya - Фитнесс Тренер');
 
         }); 

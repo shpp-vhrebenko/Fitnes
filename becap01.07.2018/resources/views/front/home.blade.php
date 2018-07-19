@@ -263,7 +263,11 @@
                         </p>
                     </div>
                     <p class="contacts__second-text"><b>НАПИШИТЕ МНЕ И Я СВЯЖУСЬ С ВАМИ</b></p>
-                    <a class="contacts__mail-link" href="mailto:{{$settings->email}}">{{$settings->email}}</a>           
+                    @if($settings->email == 'gizerskaya.fitness@mail.ru')
+                    <a class="contacts__mail-link" href="mailto:{{$settings->email}}">{{$settings->email}}</a> 
+                    @else
+                    <a class="contacts__mail-link" href="mailto:gizerskaya.fitness@mail.ru">gizerskaya.fitness@mail.ru</a> 
+                    @endif          
                     <p class="contacts__third-text"><b>СВЯЗАТЬСЯ СО МНОЙ</b></p>
                     <button id="contacts-button-w" class="contacts__button" data-toggle="modal" data-target="#modalContacts">НАПИСАТЬ ПИСЬМО</button>
                 </div>
@@ -280,7 +284,14 @@
 @section('footer-scripts')    
     @parent    
     <script  src="{{asset('js/lib/slick.min.js') }}"></script>   
-    <script  src="{{asset('js/main.js') }}"></script> 
+    <script  src="{{asset('js/main.js') }}"></script>
+    @if(Session::has('message_success'))
+    <script>
+        jQuery(document).ready(function($) {
+            $('#modalUserMessage').modal('show')
+        });
+    </script>
+    @endif 
 @endsection
 
 @section('footer-modal')
@@ -314,18 +325,19 @@
             </button>
             <div class="modal-body">
                 <h5 class="block-contacts__header">Написать письмо</h5>
-                <form action="#" class="form-contacts">
+                <form action="{{route('user_message')}}" class="form-contacts" method="post">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <label for="name">имя</label>
-                        <input type="text" class="form-control" id="name"  placeholder="" required="true">             
+                        <input type="text" name="name" class="form-control" id="name"  placeholder="" required="true">             
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="" required="true">                        
+                        <input type="email" name="email" class="form-control" id="email" placeholder="" required="true">                        
                     </div>
                     <div class="form-group form-contacts__text">
                         <label for="textMessage">текст сообщения</label>
-                        <textarea class="form-control" id="textMessage" rows="4"></textarea>
+                        <textarea name="message" class="form-control" id="textMessage" rows="4"></textarea>
                     </div>
                     <button class="form-contacts__button" id="submitFormContacts">отправить</button>
                 </form>
@@ -333,5 +345,17 @@
           
         </div>
       </div>
-    </div>  
+    </div>    
+    <div class="modal fade" id="modalUserMessage" tabindex="-1" role="dialog" aria-labelledby="modalContactsTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-block-contacts" role="document">
+        <div class="modal-content block-contacts">
+            <button type="button" class="close block-contacts__close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">X</span>
+            </button>
+            <div class="modal-body">
+                <h5 class="block-contacts__header">Сообщение успешно отправлено!</h5>      
+            </div>          
+        </div>
+      </div>
+    </div>     
 @endsection

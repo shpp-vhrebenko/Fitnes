@@ -27,6 +27,9 @@ class CreateCoursesTable extends Migration
             $table->boolean('is_active')->default(true);
             $table->string('whats_app_link')->nullable();
             $table->text('faq');
+            $table->integer('notification_day_number')->unsigned()->default(2);
+            $table->text('notification');
+            $table->text('food_regulations')->nullable();
             $table->timestamps();
         });
     }
