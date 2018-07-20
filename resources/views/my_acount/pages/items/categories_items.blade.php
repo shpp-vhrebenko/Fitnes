@@ -25,7 +25,7 @@
 					<a class="item__image" href="{{route('show_item', ['category_slug' => $category->slug, 'item_slug' => $item->slug])}}" style="background-image: url('/uploads/items/{{$item->image}}')">						
 					</a>
 					<div class="item__title">					
-						<a href="{{route('show_item', ['category_slug' => $category->slug, 'item_slug' => $item->slug])}}">{{ str_limit($item->title, $limit = 60, $end = '...') }}</a>
+						<a href="{{route('show_item', ['category_slug' => $category->slug, 'item_slug' => $item->slug])}}">{{ str_limit($item->title, $limit = 20, $end = '...') }}</a>
 					</div>
 				</div>
 			@endforeach

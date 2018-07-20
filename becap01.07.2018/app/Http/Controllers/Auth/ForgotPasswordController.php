@@ -30,7 +30,8 @@ class ForgotPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $settings = Settings::first();     
+        $settings = Settings::first();   
+        $this->setTitle('Сброс пароля пользователя');  
         view()->share(compact([ 'settings']));
     }
 }

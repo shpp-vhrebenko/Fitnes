@@ -44,11 +44,11 @@ class HomeController extends Controller
         $monthes = array("Нулября","Января","Февраля","Марта","Апреля","Мая","Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря");
         $instagram = Social::firstOrFail();             
         $settings = Settings::first();  
-        $courses = Courses::where('is_active', true)->where('type', 'cours')->get();    
+        $active_courses = Courses::where('is_active', true)->where('type', 'cours')->get();          
         $active_marathons = Courses::where('is_active', true)->where('type', 'marathon')->get();
-        $marathons = array();            
+        $courses = array();            
          
-        if(isset($active_marathons)) {
+        if(isset($active_marathons) && ($active_marathons->count() > 0)) {
           foreach ($active_marathons as $marathon) {
             $currentDate = Carbon::now();  
             $dataStartMarathon = Carbon::createFromFormat('Y-m-d', $marathon->date_end_selection);
@@ -60,10 +60,15 @@ class HomeController extends Controller
                 $dt = Carbon::parse($marathon->date_end_selection);              
                 $marathon->message = 'Cтарт марафона ' . $dt->day ." ".$monthes[$dt->month];
               } 
-              array_push($marathons, $marathon);
+              array_push($courses, $marathon);
             }         
           }                       
         }  
+        if(isset($active_courses) && ($active_courses->count() > 0)) {
+          foreach ($active_courses as $course) {
+            array_push($courses, $course);
+          }
+        }
         
 
         

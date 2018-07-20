@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Role;
 use Result;
 use App\Courses;
+use App\Item;
 
 class User extends Authenticatable
 {
@@ -40,7 +41,9 @@ class User extends Authenticatable
         'course_id',
         'data_start_course',
         'id_last_result',
-        'check_notification'
+        'check_notification',
+        'last_id_motivation',
+        'last_time_motivation',
     ];
 
     /**
@@ -66,6 +69,12 @@ class User extends Authenticatable
     public function results() {
         return $this->hasMany('App\Result');
     }   
+
+    public function items() {
+        return $this->belongsToMany(Item::class, 'item_user', 'user_id', 'item_id')
+        ->withPivot('is_done')
+        ->withTimestamps();
+    }
 
      public function course()
     {

@@ -59,21 +59,21 @@ $( document ).ready(function() {
 
   
 	var arrImgsReview = [
-		"http://gizerskaya.com/wp-content/uploads/2018/03/girl15.png",
-	    "http://gizerskaya.com/wp-content/uploads/2018/03/girl14.png",
-	    "http://gizerskaya.com/wp-content/uploads/2018/03/girl13.png",
-	    "http://gizerskaya.com/wp-content/uploads/2018/03/girl12.png",
-        "http://gizerskaya.com/wp-content/uploads/2018/03/girl11.png",
-	    "http://gizerskaya.com/wp-content/uploads/2018/03/girl10.png",
-	    "http://gizerskaya.com/wp-content/uploads/2018/03/girl9.png",
-	    "http://gizerskaya.com/wp-content/uploads/2018/03/girl8.png",
-	    "http://gizerskaya.com/wp-content/uploads/2018/03/girl7.png",
-	    "http://gizerskaya.com/wp-content/uploads/2018/03/girl6.png",
-	    "http://gizerskaya.com/wp-content/uploads/2018/03/girl5.png",
-        "http://gizerskaya.com/wp-content/uploads/2018/03/girl4.png",
-        "http://gizerskaya.com/wp-content/uploads/2018/03/girl3-1.png",
-        "http://gizerskaya.com/wp-content/uploads/2018/03/girl2-1.png",
-        "http://gizerskaya.com/wp-content/uploads/2018/03/girl1-1.png"
+		"https://gizerskaya.com/img/girl15.png",
+	    "https://gizerskaya.com/img/girl14.png",
+	    "https://gizerskaya.com/img/girl13.png",
+	    "https://gizerskaya.com/img/girl12.png",
+        "https://gizerskaya.com/img/girl11.png",
+	    "https://gizerskaya.com/img/girl10.png",
+	    "https://gizerskaya.com/img/girl9.png",
+	    "https://gizerskaya.com/img/girl8.png",
+	    "https://gizerskaya.com/img/girl7.png",
+	    "https://gizerskaya.com/img/girl6.png",
+	    "https://gizerskaya.com/img/girl5.png",
+        "https://gizerskaya.com/img/girl4.png",
+        "https://gizerskaya.com/img/girl3-1.png",
+        "https://gizerskaya.com/img/girl2-1.png",
+        "https://gizerskaya.com/img/girl1-1.png"
 	];
   
 	var namearr = ["Ксения","Алена","Маша","Вика","Сабина","Ала","Настя","Саша","Валерия","Катя","Люда","Анжела","Оксана","Лена","Яна"];

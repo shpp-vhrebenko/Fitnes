@@ -11,12 +11,13 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Контент
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="{{ route('categories') }}">Категории</a>
-                      <a class="dropdown-item" href="{{ route('admin_items') }}">Записи</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="{{ route('show_courses') }}">Курсы</a>
-                      <a class="dropdown-item" href="{{ route('show_marathons') }}">Марафоны</a>                       
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">               
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('categories') }}">Категории</a>
+                        <a class="dropdown-item" href="{{ route('admin_items') }}">Записи</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('show_courses') }}">Курсы</a>
+                        <a class="dropdown-item" href="{{ route('show_marathons') }}">Марафоны</a>                       
                     </div>
                 </li> 
                 <li class="nav-item"><a class="nav-link" href="{{ route('orders') }}">Заказы</a></li>              

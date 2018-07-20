@@ -7,6 +7,7 @@ use App\Item;
 use App\Result;
 use App\Courses;
 use App\Order;
+use App\Motivations;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -32,7 +33,10 @@ class RepositoryServiceProvider extends ServiceProvider
         }); 
         $this->app->bind(OrdersRepositoryInterface::class, function($app) {
             return new OrdersModel(new Order());
-        });       
+        });
+        $this->app->bind(MotivationsRepositoryInterface::class, function($app) {
+            return new MotivationsModel(new Motivations());
+        });          
     }
 
 }

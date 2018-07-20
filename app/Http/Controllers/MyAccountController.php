@@ -27,6 +27,7 @@ use App\Result;
 use App\User;
 use App\Courses;
 use App\Order;
+use App\Motivations;
 
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
@@ -209,7 +210,8 @@ class MyAccountController extends Controller
 
     public function show_training($course_slug,$item_slug)
     {
-        $course = $this->courses->findWithParams(['slug' => $course_slug])->firstOrFail();      
+        $course = $this->courses->findWithParams(['slug' => $course_slug])->firstOrFail();
+        $currentUser = Auth::user();       
         $item = Item::where(['slug' => $item_slug])->where(['course_id' => $course->id])->firstOrFail();    
         $training_schedule = $course->training_schedule; 
         $numberDay = null;
@@ -218,8 +220,57 @@ class MyAccountController extends Controller
                 $numberDay = str_replace('day_','',$key); 
             }
         }
+        $current_training = $item->users()->wherePivot('user_id', $currentUser->id)->first();
+        if(isset($current_training)) {
+            $traininig_status = $current_training->pivot->is_done;
+        } else {
+            $traininig_status = NULL;
+        }       
         $this->setTitle($course->name . ' - Тренировка День ' . $numberDay .' | Неделя ' .ceil($numberDay/7)); 
-        return view('my_acount/pages/trainings/trainings_item', compact(['item', 'numberDay']));
+        return view('my_acount/pages/trainings/trainings_item', compact(['item', 'numberDay', 'traininig_status']));
+    }
+
+    public function set_training_status(Request $request)
+    {
+        $currentUser = Auth::user();  
+        $training_id = $request->get('training_id');
+        
+        $current_training = $currentUser->items()->wherePivot('item_id',$training_id)->first();
+        if(isset($current_training)) {
+            $training_status = $current_training->pivot->is_done;
+            if(isset($training_status) && $training_status == 1) {
+                $currentUser->items()->sync([
+                    $training_id => ['is_done' => 0]
+                ]);               
+                $response = array(
+                    'status' => 'success',                
+                    'is_done' => false,                     
+                );
+            } elseif (isset($training_status) && $training_status == 0) {
+                $currentUser->items()->sync([
+                    $training_id => ['is_done' => 1]
+                ], false);  
+                $response = array(
+                    'status' => 'success',                
+                    'is_done' => true,                     
+                );
+            } else {
+                $currentUser->items()->attach($training_id, ['is_done' => 1]); 
+                $response = array(
+                    'status' => 'success',                
+                    'is_done' => true,                     
+                );
+            }  
+        } else {
+            $currentUser->items()->attach($training_id, ['is_done' => 1]); 
+            $response = array(
+                'status' => 'success',                
+                'is_done' => true,                     
+            );
+        }
+                     
+              
+        return response()->json($response);          
     }
 
     public function show_category_items($category_slug)
@@ -232,7 +283,7 @@ class MyAccountController extends Controller
         $items = array();
         foreach ($categoryItems as $item) {
             $curItem = $item->courses()->wherePivot('course_id', $course_id)->get();
-            if($curItem->count() != 0) {
+            if($curItem->count() != 0 && $item->is_active) {
                 array_push($items, $item);
             }
         }        
@@ -373,4 +424,101 @@ class MyAccountController extends Controller
         $this->setTitle($currentCourse->name . ' - Основные правила питания'); 
         return view('my_acount/pages/food_regulations/food_regulations', compact([ 'food_regulations']));
     }    
+
+    public function motivations(Request $request)
+    {        
+        $motivations = Motivations::getMotivations();
+        $settings_motivation = Motivations::getMotivationsSettings();
+        $period_motivation = $settings_motivation['period_motivation'];
+        $interval = $settings_motivation['interval'];
+        $currentUser = Auth::user();        
+        $currentDate = Carbon::now();
+        if(isset($currentUser->last_time_motivation)) {
+            $last_time_motivation = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->last_time_motivation); 
+        } else {
+            $last_time_motivation = $currentDate->subMinutes($period_motivation);
+            $currentUser->update([                
+                'last_time_motivation' => $last_time_motivation,
+            ]);
+        }  
+
+        $last_id = $currentUser->last_id_motivation;
+        $diffMinutes = $last_time_motivation->diffInMinutes($currentDate, false);
+      
+        if($diffMinutes >= $period_motivation) {
+            if(($last_id + 1) >= count($motivations)) {
+                $last_id = 0;
+            } else {
+                $last_id++;
+            }
+            $currentUser->update([
+                'last_id_motivation' => $last_id,
+                'last_time_motivation' => $currentDate
+            ]);
+            $response = array(
+                'status' => 'success',
+                'motivations' => $motivations,
+                'period_motivation' => $period_motivation,
+                'last_id' => $last_id,
+                'interval' => $interval, 
+                'show_motivation' => true,                     
+            );
+        } else {
+            $response = array(
+                'status' => 'success',
+                'motivations' => $motivations,
+                'period_motivation' => $period_motivation,
+                'last_id' => $last_id,
+                'interval' => $interval, 
+                'show_motivation' => false,                     
+            );
+        }        
+        return response()->json($response);  
+    }
+
+    public function is_show_motivation(Request $request)
+    {
+        $motivations = Motivations::getMotivations();
+        $settings_motivation = Motivations::getMotivationsSettings();
+        $period_motivation = $settings_motivation['period_motivation'];
+        $currentUser = Auth::user();
+        $currentDate = Carbon::now();
+        if(isset($currentUser->last_time_motivation)) {
+            $last_time_motivation = Carbon::createFromFormat('Y-m-d H:i:s', $currentUser->last_time_motivation); 
+        } else {
+            $last_time_motivation = $currentDate->subMinutes($period_motivation);
+            $currentUser->update([                
+                'last_time_motivation' => $last_time_motivation,
+            ]);
+        }
+        
+        $last_id = $currentUser->last_id_motivation;         
+        $diffMinutes = $last_time_motivation->diffInMinutes($currentDate, false);
+      
+        if($diffMinutes >= $period_motivation) {
+            if(($last_id + 1) >= count($motivations)) {
+                $last_id = 0;
+            } else {
+                $last_id++;
+            }
+            $currentUser->update([
+                'last_id_motivation' => $last_id,
+                'last_time_motivation' => $currentDate
+            ]);
+            $response = array(
+                'status' => 'success',
+                'show_motivation' => true,                
+                'last_id' => $last_id                                   
+            );
+        } else {
+            $response = array(
+                'status' => 'success',
+                'show_motivation' => false,                
+                'last_id' => $last_id                                   
+            );
+        }
+        return response()->json($response); 
+    }
+
+
 }

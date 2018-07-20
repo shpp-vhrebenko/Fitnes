@@ -38,14 +38,14 @@
                         </form>                       
                     </div>                    
                 </div>
-                <div class="row justify-content-center">
-                    <div class="login-card__body">
-                        <form method="post" action="{{route('pay_to_paypal')}}" class="form-succes-oplata" id="paypay-form">
-                            {{ csrf_field() }}
-                            <input name="amount" type="text" value="{{$price}}" type="hidden"/>
-                        </form>                       
-                    </div>                    
-                </div>  
+                <!-- <div class="row justify-content-center">
+                     <div class="login-card__body">
+                         <form method="post" action="{{route('pay_to_paypal')}}" class="form-succes-oplata" id="paypay-form">
+                             {{ csrf_field() }}
+                             <input name="amount" type="text" value="{{$price}}" type="hidden"/>
+                         </form>                       
+                     </div>                    
+                 </div>  --> 
             </div>
         </div>
     </div>

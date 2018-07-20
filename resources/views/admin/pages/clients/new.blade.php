@@ -56,7 +56,7 @@
                             <div class="col-sm-10">
                                 <select class="form-control" id="role_id" name="item[role_id]">  
                                     @foreach($roles as $role)
-                                        <option value="{{ $role->id }}" @if(isset($client->roles) && $client->hasRole($role->id)) selected @endif>{{ $role->name }}</option>
+                                        <option value="{{ $role->id }}" @if(isset($client->roles) && $client->hasRole($role->id)) selected @elseif(!isset($client->roles) && $role->id = 3) selected @endif>{{ $role->name }}</option>
                                     @endforeach                                    
                                 </select>
                             </div>
@@ -67,7 +67,7 @@
                                 <select class="form-control" id="status_id" name="item[status_id]">
                                     @if(isset($statuses))
                                         @foreach($statuses as $key => $status)
-                                            <option value="{{ $key }}" @if(isset($client) && $client->status_id == $key) selected @endif>{{ $status }}</option>
+                                            <option value="{{ $key }}" @if(isset($client) && $client->status_id == $key) selected @elseif(!isset($client) && $key == 1) selected @endif>{{ $status }}</option>
                                         @endforeach
                                     @endif
                                 </select>

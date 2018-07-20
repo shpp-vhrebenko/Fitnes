@@ -79,59 +79,124 @@
                 <p class="price__title"><b>Выберите</b></p>
                 <p class="price__sub-title">Направление курса</p>
             </div>       
-            <div class="price__box row">
-                @if(isset($marathons))
-                    @foreach ($marathons as $marathon)
-                        @if(isset($marathon))
-                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 price-item" id="price_marafon">
-                            <h3 class="price-item__title">{!! $marathon->name !!}</h3>
-                            <p class="price-item__subtitle">ВСЕГО ЗА {{$marathon->price}} {{ Lang::choice('messages.price', $marathon->price) }} ВЫ ПОЛУЧИТЕ:</p>
-                            <div class="price-item__icon" style="background-image: url('./uploads/icons/{{$marathon->icon}}');">                        
+        @if(isset($courses) && (count($courses) > 0))
+            @if(count($courses) == 1)
+                @foreach($courses as $course)
+                    <div class="price__box row justify-content-center">
+                        @if(isset($course))
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 price-item" id="price_marafon">
+                                <h3 class="price-item__title">{!! $course['name'] !!}</h3>
+                                <p class="price-item__subtitle">ВСЕГО ЗА {{$course['price']}} {{ Lang::choice('messages.price', $course['price']) }} ВЫ ПОЛУЧИТЕ:</p>
+                                <div class="price-item__icon" style="background-image: url('./uploads/icons/{{$course['icon']}}');">                        
+                                </div>
+                                @if(isset($course['description']))
+                                {!! $course['description'] !!} 
+                                @endif
+                                <div class="price-item__val">
+                                    <p>{{$course['price']}}</p>
+                                    <p>{{ Lang::choice('messages.price', $course['price']) }}</p>
+                                </div>
+                                <a class="price-item__button" href="{{route('register_user', $course['slug'])}}">
+                                    купить курс
+                                </a>                    
+                                <p class="price-item__message">
+                                    @if(isset($course['message']))
+                                    {{$course['message']}}
+                                    @endif
+                                </p>
                             </div>
-                            @if(isset($marathon->description))
-                            {!! $marathon->description !!} 
+                        @endif                                
+                    </div>
+                @endforeach  
+            @elseif(count($courses) == 2)
+                <div class="price__box row justify-content-center">
+                @foreach($courses as $course)                
+                    @if(isset($course))
+                        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 price-item" id="price_marafon">
+                            <h3 class="price-item__title">{!! $course['name'] !!}</h3>
+                            <p class="price-item__subtitle">ВСЕГО ЗА {{$course['price']}} {{ Lang::choice('messages.price', $course['price']) }} ВЫ ПОЛУЧИТЕ:</p>
+                            <div class="price-item__icon" style="background-image: url('./uploads/icons/{{$course['icon']}}');">                        
+                            </div>
+                            @if(isset($course['description']))
+                            {!! $course['description'] !!} 
                             @endif
                             <div class="price-item__val">
-                                <p>{{$marathon->price}}</p>
-                                <p>{{ Lang::choice('messages.price', $marathon->price) }}</p>
+                                <p>{{$course['price']}}</p>
+                                <p>{{ Lang::choice('messages.price', $course['price']) }}</p>
                             </div>
-                            <a class="price-item__button" href="{{route('register_user', $marathon->slug)}}">
+                            <a class="price-item__button" href="{{route('register_user', $course['slug'])}}">
                                 купить курс
                             </a>                    
                             <p class="price-item__message">
-                                @if(isset($marathon->message))
-                                {{$marathon->message}}
+                                @if(isset($course['message']))
+                                {{$course['message']}}
                                 @endif
                             </p>
                         </div>
-                        @endif
-                    @endforeach
-                @endif
-                @if(isset($courses))
-                    @foreach ($courses as $course)
-                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 price-item" id="price_curs">
-                        <h3 class="price-item__title">{!! $course->name !!}</h3>
-                        <p class="price-item__subtitle">ВСЕГО ЗА {{$course->price}} {{ Lang::choice('messages.price', $course->price) }} РУБЛЕЙ ВЫ ПОЛУЧИТЕ:</p>
-                        <div class="price-item__icon" style="background-image:url('./uploads/icons/{{$course->icon}}')">
-                            
+                    @endif             
+                @endforeach 
+                </div>
+            @elseif(count($courses) == 3)
+                <div class="price__box row justify-content-center">
+                @foreach($courses as $course)                
+                    @if(isset($course))
+                        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 price-item" id="price_marafon">
+                            <h3 class="price-item__title">{!! $course['name'] !!}</h3>
+                            <p class="price-item__subtitle">ВСЕГО ЗА {{$course['price']}} {{ Lang::choice('messages.price', $course['price']) }} ВЫ ПОЛУЧИТЕ:</p>
+                            <div class="price-item__icon" style="background-image: url('./uploads/icons/{{$course['icon']}}');">                        
+                            </div>
+                            @if(isset($course['description']))
+                            {!! $course['description'] !!} 
+                            @endif
+                            <div class="price-item__val">
+                                <p>{{$course['price']}}</p>
+                                <p>{{ Lang::choice('messages.price', $course['price']) }}</p>
+                            </div>
+                            <a class="price-item__button" href="{{route('register_user', $course['slug'])}}">
+                                купить курс
+                            </a>                    
+                            <p class="price-item__message">
+                                @if(isset($course['message']))
+                                {{$course['message']}}
+                                @endif
+                            </p>
                         </div>
-                        @if(isset($course->description))
-                        {!! $course->description !!} 
-                        @endif                   
-                        <div class="price-item__val">
-                            <p>{{$course->price}}</p>
-                            <p>{{ Lang::choice('messages.price', $course->price) }}</p>
-                        </div>
-                        <a class="price-item__button" href="{{route('register_user', $course->slug)}}">
-                            купить курс
-                        </a>
-                        <p class="price-item__message"></p>
+                    @endif             
+                @endforeach 
+                </div
+            @elseif(count($courses) > 3)
+                @foreach(array_chunk($courses, 4) as $chunk)
+                    <div class="price__box row justify-content-center">
+                        @foreach($chunk as $course)
+                            @if(isset($course))
+                            <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 price-item" id="price_marafon">
+                                <h3 class="price-item__title">{!! $course['name'] !!}</h3>
+                                <p class="price-item__subtitle">ВСЕГО ЗА {{$course['price']}} {{ Lang::choice('messages.price', $course['price']) }} ВЫ ПОЛУЧИТЕ:</p>
+                                <div class="price-item__icon" style="background-image: url('./uploads/icons/{{$course['icon']}}');">                        
+                                </div>
+                                @if(isset($course['description']))
+                                {!! $course['description'] !!} 
+                                @endif
+                                <div class="price-item__val">
+                                    <p>{{$course['price']}}</p>
+                                    <p>{{ Lang::choice('messages.price', $course['price']) }}</p>
+                                </div>
+                                <a class="price-item__button" href="{{route('register_user', $course['slug'])}}">
+                                    купить курс
+                                </a>                    
+                                <p class="price-item__message">
+                                    @if(isset($course['message']))
+                                    {{$course['message']}}
+                                    @endif
+                                </p>
+                            </div>
+                            @endif
+                        @endforeach
                     </div>
-                    @endforeach
-                @endif
-            </div> 
-        </div>
-                
+                @endforeach 
+            @endif
+        @endif        
+        </div>                
     </section>
     <section class="testamonials" id="review">
         <div class="container-fluid testamonials__container">
@@ -305,7 +370,7 @@
                 <div class="modal-body">
                     <div class="block-otziv__info">
                         <div class="foto-otziv">
-                            <img src="http://gizerskaya.com/wp-content/uploads/2018/03/girl12.png">
+                            <img src="">
                         </div>
                         <div class="name">Вика</div>
                         <span class="age">21 год</span>

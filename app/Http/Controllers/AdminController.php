@@ -15,6 +15,7 @@ use App\Http\Requests\StoreCoursRequest;
 use App\Http\Requests\CourseUpdateRequest;
 use App\Http\Requests\StoreMarathonsRequest;
 use App\Http\Requests\MarathonsUpdateRequest;
+use App\Http\Requests\MotivatorRequest;
 
 use App\Repositories\UsersRepositoryInterface;
 use App\Repositories\CategoriesRepositoryInterface;
@@ -22,6 +23,7 @@ use App\Repositories\ItemsRepositoryInterface;
 use App\Repositories\ResultsRepositoryInterface;
 use App\Repositories\CoursesRepositoryInterface;
 use App\Repositories\OrdersRepositoryInterface;
+use App\Repositories\MotivationsRepositoryInterface;
 
 use App\User;
 use App\UserSoul;
@@ -33,6 +35,7 @@ use App\Item;
 use App\Result;
 use App\Courses;
 use App\Order;
+use App\Motivations;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -55,7 +58,8 @@ class AdminController extends Controller
         CategoriesRepositoryInterface           $categoriesRepository,
         ResultsRepositoryInterface              $resultsRepository,     
         CoursesRepositoryInterface              $coursesRepository,
-        OrdersRepositoryInterface               $ordersRepository
+        OrdersRepositoryInterface               $ordersRepository,
+        MotivationsRepositoryInterface               $motivationsRepository
 
     )
     {        
@@ -63,7 +67,8 @@ class AdminController extends Controller
         $this->users = $usersRepository;        
         $this->categories = $categoriesRepository;
         $this->courses = $coursesRepository;  
-        $this->orders = $ordersRepository;         
+        $this->orders = $ordersRepository;
+        $this->motivations = $motivationsRepository;         
     }
 
     public function index()
@@ -87,6 +92,61 @@ class AdminController extends Controller
         $latest_orders = $this->orders->latest(5)->get();       
 
         return view('admin/index', compact(['stats', 'latest_orders']));
+    }
+
+    // MOTIVATIONS
+
+    public function motivations(Request $request)
+    {
+        $title = 'Записи мотиватора';
+        $motivations = $this->motivations->order('id', 'desc')->paginate(10);      
+        return view('admin/pages/motivations/index', compact(['title', 'motivations']));
+    }
+
+    public function motivations_new()
+    {
+        $title = 'Создание записи мотиватора';        
+        return view('admin/pages/motivations/new', compact(['title']));
+    }
+
+    public function motivations_store(MotivatorRequest $request)
+    {
+        $item = $request->get('item'); 
+        $this->motivations->create($item);
+        Session::flash('success', 'Запись мотиватора успешно создана!');
+        return redirect()->back();
+    }
+
+    public function motivations_edit($id)
+    {
+        $item = $this->motivations->find($id);              
+        if (!isset($item)) {
+            return abort('404');
+        }            
+        $title = 'Просмотр записи мотиватора';
+        return view('admin/pages/motivations/new', compact(['title','item']));
+    }
+
+    public function motivations_update(MotivatorRequest $request, $id) 
+    {
+        $motivator = $this->motivations->find($id);
+        if (!isset($motivator)) {
+            return abort('404');
+        }
+        $motivator->update($request->get('item'));
+        Session::flash('success', 'Запись мотиватора успешно изменена!');
+        return redirect()->back();
+    }
+
+    public function motivations_destroy($id)
+    {
+        $motivator = $this->motivations->find($id);        
+        if (!isset($motivator)) {
+            return abort(404);
+        }    
+        $motivator->delete();
+        Session::flash('success', 'Запись мотиватора успешно удалена!');
+        return redirect()->route('motivations');
     }
 
     // SETTINGS
@@ -406,6 +466,7 @@ class AdminController extends Controller
         }        
         $client->roles()->detach($client['role_id']);        
         $client->results()->delete();
+        $client->items()->detach();
         $client->delete();
         Session::flash('success', 'Клиент успешно удален!');
         return redirect()->route('clients');
@@ -956,7 +1017,8 @@ class AdminController extends Controller
                     {
                         File::delete( public_path('uploads/items/'. $item->image ));           
                     }  
-                    $item->delete();
+                    $item->users()->detach();
+                    $item->delete();                    
                 }
                 $dayNumber = $countTrainings - $i;                 
             }
@@ -1196,7 +1258,7 @@ class AdminController extends Controller
 
         $id_new_course = $this->courses->create($item);       
 
-        Session::flash('success', 'Марафон успешно создана!');
+        Session::flash('success', 'Марафон успешно создан!');
         return redirect()->route('course_trainings', ['id_course' => $id_new_course]);
     }
 

@@ -8,7 +8,6 @@ $( document ).ready(function() {
 			$("#profile-sidebar").stop( true, true ).animate({left: "-265px"} , 1000);
 			flag = true;
 		} 	    
-	});      
-	   
+	});  	  
 
 });

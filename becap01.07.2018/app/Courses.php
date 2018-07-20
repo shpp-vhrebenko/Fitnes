@@ -25,6 +25,7 @@ class Courses extends Model
         'faq', 
         'notification_day_number',
         'notification',
+        'food_regulations',
     ];
 
     protected $casts = [

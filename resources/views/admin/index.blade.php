@@ -68,13 +68,13 @@
                                 <tr>
                                     <th scope="row">{{ $order->id }}</th>
                                     @if($order->user_status)
-                                        <td>@if(isset($order->client))<a href="{{ route('show_client', $order->client->id) }}">{{ $order->client->name }}</a>@endif</td>
+                                        <td>@if(isset($order->client)){{ $order->client->name }}@endif</td>
                                     @else
                                         <td>
-                                            @if(isset($order->client_not_register))<a href="{{ route('show_client_not_register', $order->client_not_register->id) }}">{{ $order->client_not_register->name }}</a>@endif                                            
+                                            @if(isset($order->client_not_register)){{ $order->client_not_register->name }}@endif                                            
                                         </td>
                                     @endif                                    
-                                    <td>@if(isset($order->course))<a href="{{ route('show_cours', $order->course->id) }}">{!! $order->course->name !!}</a>@endif</td>
+                                    <td>@if(isset($order->course)){!! $order->course->name !!}@endif</td>
                                     <td>{{ $order->getOrderStatus($order->status_id) }}</td>
                                     <td>{{ $order->created_at->format('d-m-Y H:i:s') }}</td>
                                     <td>{{ $order->total }} руб.</td>

@@ -39,7 +39,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $settings = Settings::first();     
+        $settings = Settings::first(); 
+        $this->setTitle('Оформление заказа');     
         view()->share(compact([ 'settings']));
     }
 

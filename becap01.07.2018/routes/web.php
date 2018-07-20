@@ -11,7 +11,7 @@
 |
 */
 
-/*Route::get('/_debugbar/assets/stylesheets', [
+Route::get('/_debugbar/assets/stylesheets', [
     'as' => 'debugbar-css',
     'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
 ]);
@@ -24,7 +24,7 @@ Route::get('/_debugbar/assets/javascript', [
 Route::get('/_debugbar/open', [
     'as' => 'debugbar-open',
     'uses' => '\Barryvdh\Debugbar\Controllers\OpenController@handler'
-]);*/
+]);
 
 
 Auth::routes();
@@ -52,9 +52,15 @@ Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveC
 
 	Route::get('/', 'MyAccountController@index')->name('my-account');    
 
+    //Route motivations
+    Route::post('/motivations', 'MyAccountController@motivations')->name('get_motivations');
+    Route::post('/motivations/is_show_motivation', 'MyAccountController@is_show_motivation')->name('is_show_motivation');
+
     //Route notification
     Route::post('/notification', 'MyAccountController@check_user_notification')->name('check_user_notification');
 
+    //Route food regulations
+    Route::get('/food/regulations/{course_slug}', 'MyAccountController@food_regulations')->name('food_regulations');
     // Route trainings
     Route::get('/trainings', 'MyAccountController@show_trainings')->name('show_trainings');
     Route::get('/training/{course_slug}/{slug}', 'MyAccountController@show_training')->name('show_training');
@@ -85,6 +91,14 @@ Route::group(['prefix'=>'admin','middleware' => 'isAdmin'], function() {
 	// Route settings
 	Route::get('/settings', 'AdminController@settings')->name('settings');
     Route::post('/settings', 'AdminController@settings_update')->name('settings_update');
+
+    // Route motivations
+    Route::get('/motivations', 'AdminController@motivations')->name('motivations');
+    Route::get('/motivations/new', 'AdminController@motivations_new')->name('motivations_new');
+    Route::post('/motivations/new', 'AdminController@motivations_store')->name('motivations_store');
+    Route::get('/motivations/{id}/edit', 'AdminController@motivations_edit')->name('motivations_edit');
+    Route::put('/motivations/{id}/edit', 'AdminController@motivations_update')->name('motivations_update');
+    Route::delete('/motivations/{id}/delete', 'AdminController@motivations_destroy')->name('motivations_destroy');
 
     // Route orders
     Route::get('/orders', 'AdminController@orders')->name('orders');

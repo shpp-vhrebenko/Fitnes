@@ -22,19 +22,30 @@
                     <p class="pay__type">
                         Wallet One Единая касса
                     </p>
+                    <p>
+                        PayPal
+                    </p>
                     <p class="pay__description">Wallet One Единая касса — платежный агрегатор</p>
                 </div> 
                 <hr>             
                 <div class="row justify-content-center">
                     <div class="login-card__body">
-                        <form method="post" action="https://wl.walletone.com/checkout/checkout/Index" class="form-succes-oplata">
+                        <form method="post" action="https://wl.walletone.com/checkout/checkout/Index" class="form-succes-oplata" id="walletone-form">
                           @foreach ( $fields as $key => $value )
                             <input name="{{$key}}"    value="{{$value}}" type="hidden"/>  
                           @endforeach                          
                           <input type="submit" value="Подтвердить заказ" class="btn oplata__button btn-center "/>
                         </form>                       
                     </div>                    
-                </div> 
+                </div>
+                <!-- <div class="row justify-content-center">
+                     <div class="login-card__body">
+                         <form method="post" action="{{route('pay_to_paypal')}}" class="form-succes-oplata" id="paypay-form">
+                             {{ csrf_field() }}
+                             <input name="amount" type="text" value="{{$price}}" type="hidden"/>
+                         </form>                       
+                     </div>                    
+                 </div>  --> 
             </div>
         </div>
     </div>

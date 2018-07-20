@@ -44,11 +44,11 @@ class HomeController extends Controller
         $monthes = array("Нулября","Января","Февраля","Марта","Апреля","Мая","Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря");
         $instagram = Social::firstOrFail();             
         $settings = Settings::first();  
-        $courses = Courses::where('is_active', true)->where('type', 'cours')->get();    
+        $active_courses = Courses::where('is_active', true)->where('type', 'cours')->get();          
         $active_marathons = Courses::where('is_active', true)->where('type', 'marathon')->get();
-        $marathons = array();            
+        $courses = array();            
          
-        if(isset($active_marathons)) {
+        if(isset($active_marathons) && ($active_marathons->count() > 0)) {
           foreach ($active_marathons as $marathon) {
             $currentDate = Carbon::now();  
             $dataStartMarathon = Carbon::createFromFormat('Y-m-d', $marathon->date_end_selection);
@@ -60,10 +60,15 @@ class HomeController extends Controller
                 $dt = Carbon::parse($marathon->date_end_selection);              
                 $marathon->message = 'Cтарт марафона ' . $dt->day ." ".$monthes[$dt->month];
               } 
-              array_push($marathons, $marathon);
+              array_push($courses, $marathon);
             }         
           }                       
         }  
+        if(isset($active_courses) && ($active_courses->count() > 0)) {
+          foreach ($active_courses as $course) {
+            array_push($courses, $course);
+          }
+        }
         
 
         
@@ -90,7 +95,7 @@ class HomeController extends Controller
 
         Mail::send('emails.reset_password',array('user_name' =>$user->email, 'user_password'=>$newUserPass, 'curMessage' => $currentMessage), function($message) use($params)
         {
-            $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
+            $message->from($params['admin_email']);
 
             $message->to($params['user_email'])->subject('gizerskaya - Фитнесс Тренер');
 
@@ -126,6 +131,7 @@ class HomeController extends Controller
     public function register_user($slug)
     {      
         $course = Courses::where('slug', $slug)->firstOrFail();  
+        $this->setTitle('Оформление заказа');    
         return view('auth.register', compact(['course']));
     }
 
@@ -338,6 +344,7 @@ class HomeController extends Controller
         } else {
             // Подпись не совпадает, возможно вы поменяли настройки интернет-магазина
             Log::error("Неверная подпись " . $_POST["WMI_SIGNATURE"]);
+            Log::error(print_r($_POST, true));
         }
         
     }
@@ -380,7 +387,7 @@ class HomeController extends Controller
 
         Mail::send('emails.user',array('user_name' =>$new_user['email'], 'user_password'=>$newUserPass), function($message) use ($params)
         {
-            $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
+            $message->from($params['admin_email']);
             $message->to($params['user_email'])->subject('gizerskaya - Фитнесс Тренер');
         });
 
@@ -391,7 +398,7 @@ class HomeController extends Controller
 
         Mail::send('emails.admin',array('user_name' =>$new_user['name'], 'user_email'=>$new_user['email'], 'user_tel' => $new_user['phone']), function($message) use ($params)
         {
-            $message->from('site@gizerskaya.com', 'gizerskaya - Фитнесс Тренер');
+            $message->from('site@gizerskaya.com');
             $message->to($params['admin_email'])->subject('gizerskaya - Фитнесс Тренер');
 
         }); 

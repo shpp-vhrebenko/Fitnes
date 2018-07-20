@@ -90,9 +90,11 @@
                     </tr>
                 @endforeach
                 </tbody>
-            </table>
-            {{ $orders->links() }}
+            </table>                       
         </div>
+        <div class="row justify-content-center">
+            {{ $orders->links() }}
+        </div> 
     @else
         <div class="alert alert-danger" role="alert">
             Нет заказов!
