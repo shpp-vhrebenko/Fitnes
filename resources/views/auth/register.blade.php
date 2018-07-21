@@ -20,6 +20,11 @@
                         <h3>ВАШИ ДАННЫЕ</h3>
                     </div>
                     <div class="login-card__body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8" id="form-errors">
+                                
+                            </div>
+                        </div>    
                         <form method="POST" action="{{ route('store_user', $course->slug) }}" class="form-login" id="register-form">
                             @csrf
                             <div class="form-group row justify-content-center">
@@ -89,7 +94,7 @@
     @parent  
     <script  src="{{asset('js/lib/jquery.validate.min.js') }}"></script> 
     <script>
-        $(document).ready(function() {   
+        $(document).ready(function() {             
             $("#register-form").validate({
                 rules: {
                     name: {
@@ -123,14 +128,14 @@
                 },
                 messages:{
                     name:{
-                        required: "Поле не заполнено",
+                        required: "Заполнены не все поля",
                         minlength: "в поле должно быть минимум 2 символа",
                     },            
                     phone:{
-                        required: "Поле не заполнено"
+                        required: "Заполнены не все поля"
                     },
                     email:{                        
-                        required: "Поле не заполнено",
+                        required: "Заполнены не все поля",
                         email: "Необходимо указать Email",
                         remote: 'Пользователь с таким Email уже зарегистрирован'    
                     },   
@@ -139,27 +144,28 @@
                     }        
                 },
                 errorPlacement: function(error, element) {
-                    if (element.attr("name") == "name") {
-                        $("input[name=name]").next().empty();
-                        $("input[name=name]").next().append(error);                     
+                  
+
+                    if (element.attr("name") == "name") {                        
+                        $("#form-errors").empty();  
+                        $("#form-errors").append(error);                                     
                     } 
                     
-                    if (element.attr("name") == "phone") {
-                        $("input[name=phone]").next().empty();
-                        $("input[name=phone]").next().append(error);
+                    if (element.attr("name") == "phone") {                        
+                        $("#form-errors").empty();  
+                        $("#form-errors").append(error);                       
                     }   
 
-                    if (element.attr("name") == "email") {
-                        $("input[name=email]").next().empty();
-                        $("input[name=email]").next().append(error);
+                    if (element.attr("name") == "email") {                       
+                        $("#form-errors").empty();  
+                        $("#form-errors").append(error);                
                     }  
 
                     if (element.attr("name") == "check_terms") {
                         $('#checkbox-errors').empty();
                         $('#checkbox-errors').append(error);
-                    } 
-                       
-                }   
+                    }                                   
+                }
             });
         })
     </script>
