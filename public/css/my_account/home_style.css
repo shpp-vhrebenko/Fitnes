@@ -218,6 +218,14 @@
     margin-bottom: .5rem;
     line-height:26px;
 }
+
+.training-done {
+    position: absolute;
+    color: green;
+    top: 1rem;
+    left: 2rem;
+    font-size: 3rem;
+}
 /* END ITEMS */
 
 /* RESULTS */

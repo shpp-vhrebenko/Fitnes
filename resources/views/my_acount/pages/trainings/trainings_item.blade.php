@@ -23,16 +23,16 @@
 		</header>
 		<div class="row item-content ">
 			<div class="col-12 flex-direction-column">
-				{!! $item->text !!}
-			
-				
-				<button type="button" class="training__button pull-left" id="doneTraining" data-training-indification="{{$item->id}}">
-					@if(isset($traininig_status) && $traininig_status)
-					Тренировка завершина
-					@else
-					Завершить тренировку
-					@endif
-				</button>
+				{!! $item->text !!}			
+			<p id="training-done">	
+			@if(isset($traininig_status) && $traininig_status)
+			Тренировка завершина
+			@else
+			</p>
+			<button type="button" class="training__button pull-left" id="doneTraining" data-training-indification="{{$item->id}}">
+			Завершить тренировку
+			</button>
+			@endif			
 				
 			</div>			
 		</div>  
@@ -59,10 +59,9 @@
 				    },
 				    success: function (data) {  
 				    	if(data.is_done != undefined && data.is_done == 1) {
-				    		$this.html('Тренировка завершина');
-				    	} else {
-				    		$this.html('Завершить тренировку');
-				    	} 	
+				    		$this.hide();
+				    		$('#training-done').text('Тренировка завершина');
+				    	}
 				    	
 				    },
 				    error: function (xhr, b, c) {

@@ -1163,6 +1163,45 @@ a.price-item__button {
 }
 /* END MODAL CONTACTS */
 
+/*MODAL CONCURS*/
+.block-concurs {	
+	background-color: #1f2343;
+    padding:50px 100px;
+    color: #fff;
+    font-family: HelveticaNeue;
+    border-radius: 0;
+}
+
+.block-concurs__header {
+	width: 100%;
+	color: #fff;
+	font-family: HelveticaBold;
+    font-size: 30px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.block-concurs__description {
+	text-align: center;
+}
+
+.block-concurs__close {
+	position: absolute;
+	top: 0rem;
+	right: 0rem;
+	padding: 10px 15px!important;
+	color: #fff !important;	
+	font-size: 30px;
+	opacity: 1;
+}
+
+.block-concurs__close:focus {
+	outline: none;
+}
+/* END MODAL CONCURS */
+
 /* MESSAGES PAGES */
 .oplata {
 	width: 100%;

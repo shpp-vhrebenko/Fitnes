@@ -129,18 +129,18 @@ class MyAccountController extends Controller
         $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $data_start_course);        
 
         // How many days left before the start of the marathon
-        if($course->type == 'marathon') {  
-            $diffMinutesStartCourse = $currentDate->diffInMinutes($dataStartCourse, false);
-
-            if($diffMinutesStartCourse > 0 && $diffMinutesStartCourse > 1140) {
-                $diffDaysStartMarathon = $currentDate->diffInDays($dataStartCourse, false); 
+        if($course->type == 'marathon') {
+            $dataStartMarathon = Carbon::createFromFormat('Y-m-d', $course->date_end_selection); 
+            $diffMinutesStartMarathon = $currentDate->diffInMinutes($dataStartMarathon, false);
+            if($diffMinutesStartMarathon > 0 && $diffMinutesStartMarathon > 1140) {
+                $diffDaysStartMarathon = $currentDate->diffInDays($dataStartMarathon, false); 
                 $page_title = $course->name;
                 $daysCount = Lang::choice('messages.days', $diffDaysStartMarathon);
                 $message = 'До начала марафона сталось '. $diffDaysStartMarathon." ".$daysCount;
                 $this->setTitle($course->name . ' - Тренировки'); 
-                return view('my_acount/pages/courses/marathon_message')->with(array('page_title' => $title, 'message' => $message, 'course' => $course));
-            }  elseif ($diffMinutesStartCourse > 0 && $diffMinutesStartCourse < 1140) {
-                $diffHoursStartMarathon = $currentDate->diffInHours($dataStartCourse, false);
+                return view('my_acount/pages/courses/marathon_message')->with(array('page_title' => $page_title, 'message' => $message, 'course' => $course));
+            }  elseif ($diffMinutesStartMarathon > 0 && $diffMinutesStartMarathon < 1140) {
+                $diffHoursStartMarathon = $currentDate->diffInHours($dataStartMarathon, false);
                 $page_title = $course->name;
                 $hoursCount = Lang::choice('messages.hours', $diffHoursStartMarathon);
                 $message = 'До начала марафона осталось '. $diffHoursStartMarathon." ".$hoursCount ;

@@ -429,13 +429,13 @@
     </div> 
     <div class="modal fade" id="modalConcurs" tabindex="-1" role="dialog" aria-labelledby="modalConcursTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-block-contacts" role="document">
-        <div class="modal-content block-contacts">
-            <button type="button" class="close block-contacts__close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-content block-concurs">
+            <button type="button" class="close block-concurs__close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">X</span>
             </button>
             <div class="modal-body">
-                <h5 class="block-contacts__header">Внимание! Конкурс!</h5>
-                <p>Приобретай марафон «Стройное тело за 30 дней» или «Стройное тело за 30 дней VIP» до конца июля и получи шанс выиграть 50 000, 20 000 или 10 000 рублей! Для этого нужно просто активировать свой курс до конца этого месяца, пройти его полностью и показать свой результат! 1 сентября мы подведём итоге и выберем победителей! Остальные подробности вы узнаете в личном кабинете!</p>
+                <h5 class="block-concurs__header">Внимание! Конкурс!</h5>
+                <p class="block-concurs__description">Приобретай марафон «Стройное тело за 30 дней» или «Стройное тело за 30 дней VIP» до конца июля и получи шанс выиграть 50 000, 20 000 или 10 000 рублей! Для этого нужно просто активировать свой курс до конца этого месяца, пройти его полностью и показать свой результат! 1 сентября мы подведём итоге и выберем победителей! Остальные подробности вы узнаете в личном кабинете!</p>
             </div>          
         </div>
       </div>

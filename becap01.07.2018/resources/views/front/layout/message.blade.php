@@ -3,4 +3,6 @@
 	<main role="main">
 	@yield('content')
 	</main>
+	
+@yield('footer-scripts')
 

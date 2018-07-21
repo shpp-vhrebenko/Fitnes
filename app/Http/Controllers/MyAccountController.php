@@ -170,6 +170,11 @@ class MyAccountController extends Controller
                         $curItem = $items[$key];
                         $curItem['day'] = $curDay;
                         $curItem['course_slug'] = $course->slug;
+                        $trainigUser = $curItem->users()->wherePivot('user_id', $currentUser->id)->first();
+                        if(isset($trainigUser)) {
+                            $curItem['training_status'] = $trainigUser->pivot->is_done;                            
+                        }
+
                     }
                 }
                array_push( $trainingItems,$curItem);

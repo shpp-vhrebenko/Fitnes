@@ -19,6 +19,18 @@
                     <div class="login-card__header">ЛИЧНЫЙ КАБИНЕТ</div>
 
                     <div class="login-card__body">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                            @if (count($errors) > 0)                                    
+                                @foreach($errors->all() as $error)
+                                <div class="alert alert-danger alert-danger_custom" role="alert">
+                                    {{$error}}
+                                </div>
+                                @endforeach                                  
+                            @endif 
+                            </div>                               
+                        </div>
+
                         <form method="POST" action="{{ route('login') }}" class="form-login">
                             @csrf
                             <div class="form-group row justify-content-center">
@@ -45,19 +57,7 @@
                                         <input class="form-login__input-remember" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> ЗАПОМНИТЬ ПАРОЛЬ
                                     </label>
                                 </div>                                
-                            </div>
-
-                            <div class="row justify-content-center">
-                                <div class="col-md-6">
-                                @if (count($errors) > 0)                                    
-                                    @foreach($errors->all() as $error)
-                                    <div class="alert alert-danger alert-danger_custom" role="alert">
-                                        {{$error}}
-                                    </div>
-                                    @endforeach                                  
-                                @endif 
-                                </div>                               
-                            </div>
+                            </div>                           
 
                             <div class="form-group row justify-content-center">
                                 <a class="btn btn-link form-login__button-link" href="{{ route('password.request') }}">

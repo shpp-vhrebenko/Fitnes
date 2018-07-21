@@ -14,7 +14,8 @@ class Order extends Model
         'course_id',
         'status_id',
         'user_status',
-        'total'
+        'total',
+        'type_pay',
     ];
 
     protected $orderStatuses = [
@@ -27,6 +28,16 @@ class Order extends Model
         'Не зарегистрирован',
         'Зарегистрирован',        
     ];
+
+    protected $orderTypePay = [
+        'Wallet One',
+        'PayPal',
+    ];
+
+    public function getTypePay($id)
+    {
+        return $this->orderTypePay[$id];
+    }
 
     public static function getAllOrderStatuses()
     {
