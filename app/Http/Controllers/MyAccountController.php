@@ -131,7 +131,7 @@ class MyAccountController extends Controller
         // How many days left before the start of the marathon
         if($course->type == 'marathon') {
             $dataStartMarathon = Carbon::createFromFormat('Y-m-d', $course->date_end_selection); 
-            $diffMinutesStartMarathon = $currentDate->diffInMinutes($dataStartMarathon, false);
+            $diffMinutesStartMarathon = $currentDate->diffInMinutes($dataStartMarathon, false);   
             if($diffMinutesStartMarathon > 0 && $diffMinutesStartMarathon > 1140) {
                 $diffDaysStartMarathon = $currentDate->diffInDays($dataStartMarathon, false); 
                 $page_title = $course->name;

@@ -1,4 +1,5 @@
-$( document ).ready(function() {
+$( document ).ready(function() {	
+
 	// animation sidebar navigation
     $("#button_open_sidebar-menu").click(function(){     	 
 		$("#sidebar-menu").stop(true , true).animate({right:"0"},500);				      
