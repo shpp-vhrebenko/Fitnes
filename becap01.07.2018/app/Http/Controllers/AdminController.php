@@ -429,9 +429,16 @@ class AdminController extends Controller
             }             
         } 
 
-        $item['remember_token'] = $request->get('_token');       
-        $newUserPass = str_random(8);
-        $item['password'] = bcrypt($newUserPass);             
+        $item['remember_token'] = $request->get('_token');    
+        if(isset($item['password']) && !empty($item['password'])) {            
+            $newUserPass = $item['password'];
+            $item['password'] = bcrypt($newUserPass);
+        } else {            
+            $newUserPass = str_random(8);
+            $item['password'] = bcrypt($newUserPass); 
+        }
+
+
         $user = $this->users->create($item);        
         $user->roles()->attach([
             $item['role_id']
@@ -466,6 +473,7 @@ class AdminController extends Controller
         }        
         $client->roles()->detach($client['role_id']);        
         $client->results()->delete();
+        $client->items()->detach();
         $client->delete();
         Session::flash('success', 'Клиент успешно удален!');
         return redirect()->route('clients');
@@ -1016,7 +1024,8 @@ class AdminController extends Controller
                     {
                         File::delete( public_path('uploads/items/'. $item->image ));           
                     }  
-                    $item->delete();
+                    $item->users()->detach();
+                    $item->delete();                    
                 }
                 $dayNumber = $countTrainings - $i;                 
             }

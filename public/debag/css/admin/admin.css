@@ -1,0 +1,192 @@
+.camotek-admin-header .navbar{
+    padding: 5px 50px;
+}
+
+textarea {  
+    resize: none; 
+} 
+
+.required{
+    color: #ff0007 !important;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.camotek-admin-content{
+    padding: 50px;
+}
+
+.camotek-admin-index-modules{
+    margin-top: 25px;
+}
+
+.camotek-admin-table{
+    margin-bottom: 0;
+}
+
+.camotek-admin-table thead th{
+    background: #efefef;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.camotek-admin-table th, .camotek-admin-table td{
+    vertical-align: middle;
+}
+
+.camotek-admin-table .fixed-width-250{
+    width: 250px !important;
+}
+
+.camotek-form-links{
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.camotek-form-links li{
+    list-style-type: none;
+    display: inline-table;
+}
+
+.note-popover{
+    display: none;
+}
+
+.jumbotron{
+    padding: 15px 25px 8px 25px !important;
+}
+
+.jumbotron .row, .jumbotron .row input{
+    width: 100%;
+}
+
+select.form-control{
+    
+}
+
+.note-editor.note-frame .note-editing-area .note-editable{
+    padding: 40px 30px 10px 30px !important;
+}
+
+.dropdown-menu{
+    top: 30px !important;
+}
+
+.bg-image {
+    background-color: grey;
+    padding: 1rem;
+    width: auto;
+}
+
+.item-preview {
+    display: block;
+    width: 150px;
+    height: 150px; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 10px;
+}
+
+.imagemodal .modal-body {
+    padding-top: 0;    
+}
+
+.imagemodal .modal-content {
+    width: auto;
+}
+
+.btn-close {
+    text-align: right;
+    line-height: .8;   
+}
+
+.card {
+    margin-bottom: 1rem;
+}
+
+.trainings {
+
+}
+
+.trainings__item {   
+    position: relative;
+    height: 200px;
+    background-position: center center;
+    background-size: cover;
+}
+
+@media only screen and (min-width: 1900px) {
+    .trainings__item {
+        height: 40vh;
+    }   
+}
+
+.btn-add-training,
+.btn-edit-training {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.trainings__header {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.trainings__header h4 {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    padding: .5rem 0 0 .5rem;
+    margin-bottom: .5rem;    
+}
+
+.trainings__header p {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    padding-left: .5rem;   
+}
+
+.trainings-status {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+@media only screen and (min-width: 1900px) {   
+    .trainings-status {
+        padding: 3rem;
+    }
+}
+
+.trainings__item-holiday {
+    background-color: rgba(215, 44, 44, 0.3);
+}
+
+.trainings__item-work {
+    background-color: rgba(0, 148, 101, 0.3);
+}
+
+.trainings__item-empty {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-back {
+    margin-left: 1rem;
+    font-size: 2rem;
+}
+
+.btn-back:hover {
+    cursor: pointer;
+    text-decoration: none;
+}

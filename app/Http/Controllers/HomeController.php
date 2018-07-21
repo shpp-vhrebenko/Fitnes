@@ -186,8 +186,7 @@ class HomeController extends Controller
 
     public function oplata(Request $request) {
       $id_user_order = $request->session()->get('id_user_order');
-      $currentOrder = Order::find($id_user_order);       
-       
+      $currentOrder = Order::find($id_user_order);     
       $course = Courses::find($currentOrder->course_id);
       $price = number_format((float)$course->price, 2, '.', '');   
       $date = Carbon::now()->addHour();    
@@ -267,12 +266,23 @@ class HomeController extends Controller
 
     public function success_oplata(Request $request)
     {      
-      return view('front/pages/oplata/succes');
+      $referer = request()->headers->get('referer');      
+      if(isset($referer)) {
+        return view('front/pages/oplata/succes');
+      } else {
+        return abort('404');
+      }
+      
     }  
 
     public function error_oplata(Request $request)
     {       
-      return view('front/pages/oplata/error');
+      $referer = request()->headers->get('referer');
+      if(isset($referer)) {
+        return view('front/pages/oplata/error');
+      } else {
+        return abort('404');
+      }      
     }
 
     public function oplata_result() 

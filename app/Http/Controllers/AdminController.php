@@ -362,6 +362,7 @@ class AdminController extends Controller
 
     public function client_update($id, EditClientRequest $request)
     {
+        $settings = Settings::first(); 
         $client = $this->users->find($id);
         if (!isset($client)) {
             return abort(404);
@@ -392,7 +393,28 @@ class AdminController extends Controller
                 $client->update(['data_start_course' => $currentDataStartCourse]);
             }
         }
+
+        
+        if(isset($item['password']) && !empty($item['password'])) {            
+            $newUserPass = $item['password'];
+            $item['password'] = bcrypt($newUserPass);
+        } else {
+            unset($item['password']);
+        }
+
         $client->update($item);
+
+        if(isset($item['password'])) {
+            $params = array();
+            $params['user_email'] = $item['email'];
+            $params['admin_email'] = $settings->email; 
+            Mail::send('emails.user',array('user_name' =>$item['email'], 'user_password'=>$newUserPass), function($message) use ($params)
+            {
+                $message->from($params['admin_email'], 'gizerskaya - Фитнесс Тренер');
+                $message->to($params['user_email'] );
+
+            });
+        }
         if (!$client->hasRole($request->get('item')['role_id'])) {
             $client->updateRole($request->get('item')['role_id']);
         }
@@ -429,9 +451,16 @@ class AdminController extends Controller
             }             
         } 
 
-        $item['remember_token'] = $request->get('_token');       
-        $newUserPass = str_random(8);
-        $item['password'] = bcrypt($newUserPass);             
+        $item['remember_token'] = $request->get('_token');    
+        if(isset($item['password']) && !empty($item['password'])) {            
+            $newUserPass = $item['password'];
+            $item['password'] = bcrypt($newUserPass);
+        } else {            
+            $newUserPass = str_random(8);
+            $item['password'] = bcrypt($newUserPass); 
+        }
+
+
         $user = $this->users->create($item);        
         $user->roles()->attach([
             $item['role_id']

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\App;
 
 use App\Category;
 use App\Courses;
+use App\User;
 
 use Image;
 
@@ -47,6 +48,13 @@ class Item extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'item_user', 'item_id', 'user_id')
+        ->withPivot('is_done')
+        ->withTimestamps();
     }
 
     public function courses()

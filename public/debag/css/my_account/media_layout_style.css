@@ -1,0 +1,22 @@
+/* NAVBAR MENU */
+@media only screen and (max-width: 576px) {
+	.fixed-menu__title {
+		display: none;
+	}		
+
+	.footer {
+		display: none;
+	}
+}
+
+@media only screen and (min-width: 1400px) {
+	.navbar__open-sidebar {
+		display: none;
+	}
+
+	.profile-sidebar {
+		left: 0px !important;
+	}
+}
+
+/* END NAVBAR MENU */

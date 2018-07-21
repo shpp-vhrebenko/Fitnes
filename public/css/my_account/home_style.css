@@ -483,7 +483,13 @@
 }
 .row.item-content > div {
     width:100%;
-    background: #2c3059;
+   /* background: #2c3059;*/
+}
+.panel-heading h5 {
+	color:#fff!important;
+}
+.col-12.flex-direction-column h5 {
+	color:#fff!important;
 }
 
 .panel-title a:before {
@@ -595,6 +601,7 @@
     width:100%;
 }
 }
+
 @media (max-width: 500px){
     .note-video-clip {
     width:100%;
@@ -633,4 +640,7 @@
 .item-content{
     margin: 0px auto 30px auto;
 }
+}
+img {
+	max-width:100%;
 }

@@ -59,6 +59,7 @@
                                 <th scope="col">Курс</th>
                                 <th scope="col">Статус</th>
                                 <th scope="col">Дата заказа</th>
+                                <th scope="col">Тип оплаты</th>
                                 <th scope="col">Всего</th>
                                 <th scope="col">Просмотр</th>                    
                             </tr>
@@ -77,6 +78,7 @@
                                     <td>@if(isset($order->course)){!! $order->course->name !!}@endif</td>
                                     <td>{{ $order->getOrderStatus($order->status_id) }}</td>
                                     <td>{{ $order->created_at->format('d-m-Y H:i:s') }}</td>
+                                    <td>{{ $order->getTypePay($order->type_pay) }}</td>
                                     <td>{{ $order->total }} руб.</td>
                                     <td><a href="{{ route('show_order', $order->id) }}" class="btn btn-light">Просмотр</a></td>                      
                                 </tr>

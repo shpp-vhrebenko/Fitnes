@@ -24,6 +24,8 @@ class IsActiveCourse
             $curentUser = User::find(Auth::id());
             if($curentUser->course_id == 0 && Route::currentRouteName() == 'courses_list') {
                 return $next($request);
+            } else if($curentUser->course_id == 0 && Route::currentRouteName() == 'by_course') {
+                return $next($request);
             } else if ($curentUser->course_id == 0) {                
                 return redirect()->route('courses_list');                       
             } else if($curentUser->course_id != 0 && Route::currentRouteName() == 'courses_list'){

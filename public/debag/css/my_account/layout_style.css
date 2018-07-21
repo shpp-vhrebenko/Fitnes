@@ -1,0 +1,131 @@
+body {    
+	line-height: 1.2;
+	font-size: 16px;
+}
+
+@font-face {
+ font-family:"HelveticaMedium";
+ src: url("../fonts/HelveticaNeueCyr-Medium.ttf");
+}
+
+@font-face {
+ font-family:"HelveticaCondensedBold";
+ src: url("../fonts/Helvetica-Neue-Condensed-Bold.ttf");
+}
+
+@font-face {
+ font-family:"HelveticaLight";
+ src: url("../fonts/HelveticaNeueCyr-Light.ttf");
+}
+
+@font-face {
+ font-family:"HelveticaUltraLight";
+ src: url("../fonts/HelveticaNeueCyr-UltraLight.ttf");
+}
+
+@font-face {
+ font-family:"HelveticaBold";
+ src: url("../fonts/HelveticaNeueCyr-Bold.ttf");
+}
+
+@font-face {
+ font-family:"MyriadProRegular";
+ src: url("../fonts/MyriadProRegular.ttf");
+}
+
+@font-face {
+ font-family:"HelveticaNeue";
+ src: url("../fonts/MyriadProRegular.ttf");
+}
+
+strong {
+    font-family: HelveticaBold;
+}
+
+.animated {
+    -webkit-animation-duration: 1.25s;
+    animation-duration: 1.25s;
+}
+
+.animated.animated-slow {
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
+}
+
+main {	
+	background: linear-gradient(to right, #2a2f59 0%, #da5b6e 100%) !important;
+}
+
+/* NAVBAR MENU */
+.navbar {
+	height: 62px;
+	background-color: #312d50;
+    box-shadow: 2px 0px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-brand img {
+	width: 190px;
+    height: 30px;    
+}
+
+.navbar__open-sidebar{
+	color: #fff;
+	font-family: HelveticaMedium;
+	font-size: 1rem;
+	margin-left: 2rem;
+}
+
+.navbar__open-sidebar:hover {
+	cursor: pointer;
+}
+
+.fixed-menu {
+	display: flex;
+	height: 62px;
+	flex-direction: row;
+	align-items: center;
+	position: fixed;
+	z-index: 999;	
+    right: 21px;
+}
+
+.fixed-menu__user-name {
+	font-family: "HelveticaLight";
+    color: #fff;
+    font-size: 1rem; 
+    margin-right: 1.5rem;      
+}
+
+.fixed-menu__link,
+.fixed-menu__link:hover {
+	text-decoration: none;
+	color: #fff;
+	margin-right: 2rem;
+	line-height: 2rem;
+	border: 1px solid #fff;
+	border-radius: 4px;
+	padding: 0 1rem;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+
+
+.fixe-menu__logout {
+	font-size: 1rem;
+	color: #fff;
+	transition: all .2s ease;
+}
+
+.fixe-menu__logout:hover {
+	color: #fff;
+	opacity: .7;
+	text-decoration: none;
+}
+/* END NAVBAR MENU */
+
+/* SIDEBAR-MENU */
+
+/* END SIDEBAR-MENU */
+

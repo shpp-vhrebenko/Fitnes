@@ -22,7 +22,7 @@ class IsActive
        
         if (Auth::user()) {
             $curentUser = User::find(Auth::id());                      
-            if($curentUser->status_id == 1 || Route::currentRouteName() == 'result_store') {
+            if($curentUser->status_id == 1 || Route::currentRouteName() == 'result_store' || Route::currentRouteName() == 'get_motivations' || Route::currentRouteName() == 'is_show_motivation') {
                 return $next($request);
             } else {
                 if(Route::currentRouteName() != 'add_result') {

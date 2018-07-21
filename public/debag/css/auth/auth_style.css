@@ -1,0 +1,388 @@
+.fixed-menu {
+	height: 22px;
+}
+
+.auth {
+	width: 100%;
+	height: 100vh;
+	min-height: 900px;
+	background: linear-gradient(to right, #a74f67 0%,#49375d 100%);
+}
+
+.auth__container {
+	height: 100%;
+}
+
+.auth__container .row {
+	height: 100%;
+}
+
+.register-card__header{	
+	text-align: center;
+	color: #fff;    
+    font-family: HelveticaBold;	
+	line-height: 1;
+	margin-bottom: 30px;
+}
+
+.register-card__header h3 {
+	font-size: 60px;
+}
+
+.register-card__header p {
+	font-size: 30px;
+}
+
+span.rur {
+    font-family: rub-arial-regular;
+    text-transform: uppercase;
+}
+
+.login-card__header {
+	height: auto;
+	color: #fff;
+    font-size: 90px;
+    font-family: HelveticaBold;
+	text-align: center;
+	line-height: 1;
+	margin-bottom: 30px;
+	text-transform: uppercase;
+}
+
+.login-card__body .form-group {
+	margin-bottom: 28px;
+}
+
+.form-login__input::placeholder {
+	color: #fff;
+   text-transform: uppercase;
+}
+
+.form-login__input {
+	height: 40px;
+	line-height: 40px;
+    padding: 6px 12px;
+	background-color: transparent;
+    border: none;   
+    border-bottom: 1px solid #bfa2b1;
+    border-radius: 0;
+    color: #fff;
+    font-size: 21px;
+    letter-spacing: 4px;
+    font-family: HelveticaUltraLight;
+    text-align: center;
+}
+
+.form-login__input:focus {
+	color: #fff;
+    background-color: transparent;
+    border-color: transparent;
+    border: none;   
+    border-bottom: 1px solid #bfa2b1;
+    outline: 0;
+    box-shadow: none;
+}
+
+.form-login__button,
+a.form-login__button {
+	padding: 1rem 2rem;
+	background-color: transparent;
+    border: 1px solid transparent;
+    color: #fff !important;
+    font-size: 21px;
+    letter-spacing: 1px;
+    font-family: HelveticaBold;
+    text-transform: uppercase;
+    transition: all .2s ease;
+}
+
+.form-login__button:hover,
+a.form-login__button:hover {	
+	cursor: pointer;
+	text-decoration: none;
+}
+.form-login__button:focus,
+a.form-login__button:focus {
+	outline:none;
+}	
+
+.btn-center {
+	margin: 0 auto;
+}
+
+.form-login__input.form-control.is-invalid:focus {
+	border: none;
+	box-shadow: none;
+}
+
+.form-login__label {	
+	color: #fff;
+	font-family: HelveticaLight;
+	font-size: 13px;
+	line-height: 1;
+	cursor: pointer;	
+}
+
+.form-login__label-terms {
+	font-size: 20px;
+
+}
+
+.form-login__input-remember {
+	margin-right: .5rem;
+	height: 15px;
+	width: 15px;
+}
+
+
+
+.form-login__button-link {
+	color: #fff;
+	font-family: HelveticaLight;
+	font-size: 13px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.form-login__button-link:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.form-login input::placeholder {
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.form-description {
+	text-align: center;
+	padding-top: 50px;
+}
+.form-login__label.form-login__label-terms a {
+	margin-left:10px;
+}
+
+.form-description h3{
+	color: #fff;
+    font-size: 60px;
+    font-family: HelveticaBold;	
+	line-height: 1;
+	margin-bottom: 30px;
+	text-transform: uppercase;
+}
+
+.form-description p {
+	color: #fff;
+	font-size: 20px;
+	font-family: "HelveticaLight";
+}
+
+.arrow {
+    display: inline-block;
+    position: relative;
+    /* width: 86px; */
+    /* height: 2px; */
+    /* background: #fff; */
+    /* line-height: 2px; */
+    display: inline-block;
+    background-image: url(img/strelki.png);
+    width: 100px;
+    height: 16px;
+    background-repeat: no-repeat;
+    margin-top: 21px;
+    /* margin-top: 30px; */
+    /* margin-right: 1rem; */
+}
+/*.arrow:before,
+.arrow:after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	border: 12px solid transparent; 
+	border-right: 0;
+}*/
+
+/*.arrow:after {
+    top: -5px;
+    right: -10px;
+    border-left-color: #fff;
+    border-width: 6px 0 6px 26px;
+}*/
+
+label.error {
+	width: 100%;
+	text-align: center;
+	background-color: #b92034;    
+    color: #fff ;
+    text-transform: uppercase ;
+    font-family: HelveticaLight;
+    padding: 15px;
+}
+
+.form-login__label-terms {
+	height: auto !important;
+}
+
+.form-succes-oplata {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.alert.alert-danger.alert-danger_custom {
+	width: 100%;
+    text-align: center;
+    background-color: #b92034;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: HelveticaLight;
+    padding: 15px;
+    font-size: 16px;
+    margin-top: 0px;
+    border-color: initial;
+    border: none;
+    text-align: center;
+}
+
+.alert.alert-success.alert-success_custom {
+    background-color: #468848;
+    border: none ;
+    color: #fff;    
+    font-family: HelveticaLight;
+    border-radius: initial;
+    font-size: 1rem;
+    border: none;
+    border-color: initial;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+
+/* MODAL CONTACTS */
+.modal-block-contacts {
+	min-width: 60%;
+}
+
+.block-contacts {	
+	background-color: rgb(34, 33, 40);
+    padding:30px 70px;
+    color: #fff;
+    font-family: HelveticaNeue;
+    border-radius: 0;
+}
+
+.block-contacts__header {
+	width: 100%;
+	color: #fff;
+	font-family: HelveticaBold;
+    font-size: 30px;
+    margin-top: 20px;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.block-contacts__close {
+	position: absolute;
+	top: 0rem;
+	right: 0rem;
+	padding: 16px !important;
+	color: #fff !important;	
+	font-size: 30px;
+	opacity: 1;
+}
+
+.block-contacts__close:focus {
+	outline: none;
+}
+
+.form-contacts label{
+	font-family: HelveticaUltraLight ;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.form-contacts .form-control {
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #919094;	
+    color: #fff;      
+    font-family: HelveticaMedium ;
+}
+
+.form-contacts .form-control:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.form-contacts textarea {
+	resize: none;
+}
+
+.form-contacts__button {
+	display: block;
+	padding: 1rem 1.5rem;
+	margin: 0 auto;
+	background: none;
+	border: 1px solid transparent;
+	color: #fff;
+	font-family: HelveticaBold;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.form-contacts__button:hover {
+	cursor: pointer;	
+}
+/* END MODAL CONTACTS */
+@media (max-width: 1024px){ 
+.auth {
+		min-height: auto;
+		overflow: hidden;
+	}
+.login-card__header {
+		font-size: 75px ;
+}
+.login-card {
+    padding-top: 20px;
+}
+}
+@media (max-width: 920px){
+.login-card__header {
+		font-size: 70px ;
+}
+.login-card {
+    padding-top: 40px;
+}
+}
+@media (max-width: 767px){
+	.login-card__header {
+		font-size: 60px ;
+	}
+.auth {
+		min-height: auto;
+		overflow: hidden;
+	}
+.login-card {
+	padding-top: 30px;
+}
+body {
+	overflow: hidden;
+}
+.form-login__button, a.form-login__button {
+    padding: 1rem 1rem;
+}
+}
+@media (max-width: 500px) {
+.login-card {
+    padding-top: 70px;
+}
+}

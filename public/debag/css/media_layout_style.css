@@ -1,0 +1,17 @@
+/* NAVBAR MENU */
+@media only screen and (max-width: 576px) {
+	.fixed-menu__title {
+		display: none;
+	}		
+
+	.footer {
+		display: none;
+	}
+}
+@media (max-width: 767px){
+	.sidebar-menu__list li {
+		margin-top:0px;
+	}
+}
+
+/* END NAVBAR MENU */

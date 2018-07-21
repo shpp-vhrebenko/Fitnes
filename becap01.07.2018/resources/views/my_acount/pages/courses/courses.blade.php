@@ -46,8 +46,7 @@
 @endsection
 
 
-@section('footer-scripts')    
-    @parent     
+@section('footer-scripts')      
     <script  src="{{asset('js/my_account.js') }}"></script>
 @endsection
 

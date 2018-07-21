@@ -103,7 +103,7 @@ class MyAccountController extends Controller
                 'user_id' => $currentUser->id,
                 'course_id' => $course->id,
                 'status_id' => 2, // В ожидании оплаты    
-                'user_status' => 1, // Пользователь не зарегистрирован
+                'user_status' => 1, // Пользователь зарегистрирован
                 'total' => $course->price,                
             ]); 
 
@@ -210,7 +210,8 @@ class MyAccountController extends Controller
 
     public function show_training($course_slug,$item_slug)
     {
-        $course = $this->courses->findWithParams(['slug' => $course_slug])->firstOrFail();      
+        $course = $this->courses->findWithParams(['slug' => $course_slug])->firstOrFail();
+        $currentUser = Auth::user();       
         $item = Item::where(['slug' => $item_slug])->where(['course_id' => $course->id])->firstOrFail();    
         $training_schedule = $course->training_schedule; 
         $numberDay = null;
@@ -219,8 +220,57 @@ class MyAccountController extends Controller
                 $numberDay = str_replace('day_','',$key); 
             }
         }
+        $current_training = $item->users()->wherePivot('user_id', $currentUser->id)->first();
+        if(isset($current_training)) {
+            $traininig_status = $current_training->pivot->is_done;
+        } else {
+            $traininig_status = NULL;
+        }       
         $this->setTitle($course->name . ' - Тренировка День ' . $numberDay .' | Неделя ' .ceil($numberDay/7)); 
-        return view('my_acount/pages/trainings/trainings_item', compact(['item', 'numberDay']));
+        return view('my_acount/pages/trainings/trainings_item', compact(['item', 'numberDay', 'traininig_status']));
+    }
+
+    public function set_training_status(Request $request)
+    {
+        $currentUser = Auth::user();  
+        $training_id = $request->get('training_id');
+        
+        $current_training = $currentUser->items()->wherePivot('item_id',$training_id)->first();
+        if(isset($current_training)) {
+            $training_status = $current_training->pivot->is_done;
+            if(isset($training_status) && $training_status == 1) {
+                $currentUser->items()->sync([
+                    $training_id => ['is_done' => 0]
+                ]);               
+                $response = array(
+                    'status' => 'success',                
+                    'is_done' => false,                     
+                );
+            } elseif (isset($training_status) && $training_status == 0) {
+                $currentUser->items()->sync([
+                    $training_id => ['is_done' => 1]
+                ], false);  
+                $response = array(
+                    'status' => 'success',                
+                    'is_done' => true,                     
+                );
+            } else {
+                $currentUser->items()->attach($training_id, ['is_done' => 1]); 
+                $response = array(
+                    'status' => 'success',                
+                    'is_done' => true,                     
+                );
+            }  
+        } else {
+            $currentUser->items()->attach($training_id, ['is_done' => 1]); 
+            $response = array(
+                'status' => 'success',                
+                'is_done' => true,                     
+            );
+        }
+                     
+              
+        return response()->json($response);          
     }
 
     public function show_category_items($category_slug)

@@ -3,7 +3,7 @@
     <img src="/uploads/logo/{{$settings->logo}}" class="attachment-medium size-medium" alt="" />
   </a>
   @if(Auth::check())
-  @if(Auth::user()->status_id)
+  @if(Auth::user()->status_id && Auth::user()->course_id != 0)
   <div id="open-sidebar" class="navbar__open-sidebar">
     <i class="fa fa-bars"></i>
     МЕНЮ

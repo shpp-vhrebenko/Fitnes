@@ -12,6 +12,7 @@
                 <th scope="col">Клиент</th>                
                 <th scope="col">Статус</th>
                 <th scope="col">Дата заказа</th>
+                <th scope="col">Тип оплаты</th>
                 <th scope="col">Название Курса</th>
                 <th scope="col">Всего</th>               
             </tr>
@@ -30,6 +31,7 @@
                 @endif                               
                 <td>{{ $order->getOrderStatus($order->status_id) }}</td>
                 <td>{{ $order->created_at->format('d-m-Y H:i:s') }}</td>
+                <td>{{ $order->getTypePay($order->type_pay) }}</td>
                 <td>@if(isset($course)) {!! $course->name !!} @endif</td>
                 <td>{{ $order->total }} руб.</td>              
             </tr>

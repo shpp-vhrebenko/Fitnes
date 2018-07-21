@@ -34,25 +34,31 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="base" role="tabpanel" aria-labelledby="base-tab">
                         <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">ФИО клиента</label>
+                            <label for="name" class="col-sm-2 col-form-label">ФИО клиента<sup class="required">*</sup></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="name" name="item[name]" @if(isset($client)) value="{{ $client->name }}" @endif>
+                                <input type="text" class="form-control" id="name" name="item[name]" value="{{ isset($client->name) ? $client->name : old('item.name') }}" >
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email" class="col-sm-2 col-form-label">Email</label>
+                            <label for="email" class="col-sm-2 col-form-label">Email<sup class="required">*</sup></label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" name="item[email]" @if(isset($client)) value="{{ $client->email }}" @endif maxlength="150">
+                                <input type="email" class="form-control" id="email" name="item[email]" value="{{ isset($client->email) ? $client->email : old('item.email') }}" maxlength="150">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="telephone" class="col-sm-2 col-form-label">Телефон</label>
+                            <label for="email" class="col-sm-2 col-form-label">Пароль</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="telephone" name="item[phone]" @if(isset($client)) value="{{ $client->phone }}" @endif>
+                                <input type="password" class="form-control" id="email" name="item[password]" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Пароль должен содержать по крайней мере одно число, одну большую и одну маленькую букву и не менее 8 или более символов">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="role_id" class="col-sm-2 col-form-label">Роль клиента</label>
+                            <label for="telephone" class="col-sm-2 col-form-label">Телефон<sup class="required">*</sup></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="telephone" name="item[phone]" value="{{ isset($client->phone) ? $client->phone : old('item.phone') }}" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="role_id" class="col-sm-2 col-form-label">Роль клиента<sup class="required">*</sup></label>
                             <div class="col-sm-10">
                                 <select class="form-control" id="role_id" name="item[role_id]">  
                                     @foreach($roles as $role)
@@ -62,7 +68,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="status_id" class="col-sm-2 col-form-label">Cтатус клиента</label>
+                            <label for="status_id" class="col-sm-2 col-form-label">Cтатус клиента<sup class="required">*</sup></label>
                             <div class="col-sm-10">
                                 <select class="form-control" id="status_id" name="item[status_id]">
                                     @if(isset($statuses))
@@ -87,7 +93,7 @@
                             </div>                 
                         </div>                                                
                         <div class="form-group row" id="course_day">
-                            <label for="dsс" class="col-sm-12 col-form-label">Текущий день курса</label>
+                            <label for="dsс" class="col-sm-12 col-form-label">Текущий день курса<sup class="required">*</sup></label>
                             <div class="col-sm-12">
                                 <input type="number" min="0" max="" class="form-control" id="dsc" name="current_day_course"  value="{{ isset($current_day_course)  ? $current_day_course : old('current_day_course') }}">
                             </div>
