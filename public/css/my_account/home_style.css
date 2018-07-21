@@ -218,14 +218,6 @@
     margin-bottom: .5rem;
     line-height:26px;
 }
-
-.training-done {
-    position: absolute;
-    color: green;
-    top: 1rem;
-    left: 2rem;
-    font-size: 3rem;
-}
 /* END ITEMS */
 
 /* RESULTS */
@@ -651,4 +643,18 @@
 }
 img {
 	max-width:100%;
+}
+.panel-heading h3 {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif!important;
+    font-size: 1.2rem!important;
+}
+
+.training-done {
+	display:inline-block;
+	background-color: #1f2343;
+	padding:10px 10px;
+	border-radius:4px;
+	font-family: HelveticaNeue;
+	margin-left:27px;
+	cursor:pointer;
 }
