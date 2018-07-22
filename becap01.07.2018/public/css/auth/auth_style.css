@@ -369,8 +369,11 @@ label.error {
 	}
 .auth {
 		min-height: auto;
-		overflow: hidden;
+		overflow: auto;
 	}
+.auth__container {
+    height: initial;
+}
 .login-card {
 	padding-top: 30px;
 }
@@ -384,5 +387,15 @@ body {
 @media (max-width: 500px) {
 .login-card {
     padding-top: 70px;
+}
+}
+@media (min-width:320px) and (max-width:340px) {
+.auth .form-login__label-terms {
+font-size:12px;	
+}
+}
+@media (min-width:341px) and (max-width:480px) {
+.auth .form-login__label-terms {
+font-size:15px;	
 }
 }

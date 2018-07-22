@@ -2,8 +2,8 @@
 
 @section('header-styles')     
     @parent
-    <link rel="stylesheet" href="{{ asset('css/home_style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/media_home_style.css') }}">         
+    <link rel="stylesheet" href="{{ asset('css/home_style.css') }}?v={{time()}}">
+    <link rel="stylesheet" href="{{ asset('css/media_home_style.css') }}?v={{time()}}">         
 @endsection
 
 @section('header-scripts')
@@ -243,31 +243,31 @@
                     <div id="sliderResults" class="slider-results">
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result1.jpg">                   
+                            <img class="results-item__img img-responsive" src="./img/results/result1.png">                   
                         </div> 
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result2.jpg">                   
+                            <img class="results-item__img img-responsive" src="./img/results/result2.png">                   
                         </div>   
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result3.jpg">                   
+                            <img class="results-item__img img-responsive" src="./img/results/result3.png">                   
                         </div>   
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result4.jpg">                   
+                            <img class="results-item__img img-responsive" src="./img/results/result4.png">                   
                         </div>
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result5.jpg">                   
+                            <img class="results-item__img img-responsive" src="./img/results/result5.png">                   
                         </div>
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result6.jpg">                   
+                            <img class="results-item__img img-responsive" src="./img/results/result6.png">                   
                         </div>
                         <div class="results-item">
                             <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result7.jpg">                   
+                            <img class="results-item__img img-responsive" src="./img/results/result1.png">                   
                         </div>                                                                                         
                     </div>
                 </div>                

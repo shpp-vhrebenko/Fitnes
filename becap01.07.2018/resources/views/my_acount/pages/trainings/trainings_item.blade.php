@@ -24,16 +24,17 @@
 		<div class="row item-content ">
 			<div class="col-12 flex-direction-column">
 				{!! $item->text !!}			
-			<p id="training-done">	
-			@if(isset($traininig_status) && $traininig_status)
-			Тренировка завершина
-			@else
-			</p>
-			<button type="button" class="training__button pull-left" id="doneTraining" data-training-indification="{{$item->id}}">
-			Завершить тренировку
-			</button>
-			@endif			
-				
+				<div id="training-action">
+					@if(isset($traininig_status) && $traininig_status)
+					<p class="training-done">
+					Тренировка завершина
+					</p>
+					@else
+					<button type="button" class="training__button pull-left" id="doneTraining" data-training-indification="{{$item->id}}">
+						Завершить тренировку
+					</button>
+					@endif	
+				</div>			
 			</div>			
 		</div>  
 	</div>	 
@@ -60,7 +61,8 @@
 				    success: function (data) {  
 				    	if(data.is_done != undefined && data.is_done == 1) {
 				    		$this.hide();
-				    		$('#training-done').text('Тренировка завершина');
+				    		var trainingDone = $('<p>').addClass('training-done').text('Тренировка завершина');
+				    		trainingDone.prependTo('#training-action');
 				    	}
 				    	
 				    },

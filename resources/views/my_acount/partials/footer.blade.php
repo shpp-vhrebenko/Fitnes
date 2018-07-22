@@ -22,7 +22,7 @@
 		    error: function (xhr, b, c) {
 		        console.log("xhr=" + xhr + " b=" + b + " c=" + c);
 		    }	    
-		});	 
+		}); 
 
 		function startMotivation(motivations, period_motivation, last_id, interval) {					
 			setInterval(function() {				
@@ -56,19 +56,14 @@
 </script>
 @show
 @section('footer-modal')
-<div class="modal" tabindex="-1" role="dialog" id="modalMotivations" class="modal-motivation">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">        
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p id="motivationsMessage"></p>
-      </div>      
-    </div>
-  </div>
+<div id="modalMotivations" class="edinorog modal modal-motivation" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="cloud-wrap">
+			<div id="motivationsMessage" class="cloud"></div>
+				<div class="arrow-cloud"></div>
+			<div class="edinorog-img"></div> 
+		</div>
+	</div>
 </div>
 @include('my_acount/partials/sidebar_menu')
 @show

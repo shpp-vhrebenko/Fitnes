@@ -64,6 +64,7 @@ Route::group(['prefix'=>'my-account','middleware'=>['auth','isActive','isActiveC
     // Route trainings
     Route::get('/trainings', 'MyAccountController@show_trainings')->name('show_trainings');
     Route::get('/training/{course_slug}/{slug}', 'MyAccountController@show_training')->name('show_training');
+    Route::post('/trainings/training_status', 'MyAccountController@set_training_status')->name('set_training_status');
 
     // Route categories
     Route::get('/category/{slug}', 'MyAccountController@show_category_items')->name('show_category_items');

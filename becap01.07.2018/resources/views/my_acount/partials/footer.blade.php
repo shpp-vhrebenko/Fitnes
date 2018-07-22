@@ -56,7 +56,7 @@
 </script>
 @show
 @section('footer-modal')
-<div class="modal" tabindex="-1" role="dialog" id="modalMotivations" class="modal-motivation">
+<!--<div class="modal" tabindex="-1" role="dialog" id="modalMotivations" class="modal-motivation">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">        
@@ -69,7 +69,20 @@
       </div>      
     </div>
   </div>
+</div>-->
+
+<div id="modalMotivations" class="edinorog modal modal-motivation" tabindex="-1" role="dialog">
+<div class="modal-dialog modal-dialog-centered" role="document">
+<div class="cloud-wrap">
+<div id="motivationsMessage" class="cloud"></div>
+<div class="arrow-cloud"></div>
+<div class="edinorog-img"></div> 
 </div>
+</div>
+
+
+</div>
+
 @include('my_acount/partials/sidebar_menu')
 @show
 

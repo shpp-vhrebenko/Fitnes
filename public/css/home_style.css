@@ -1325,3 +1325,14 @@ font-weight: 100;
 }
 
 /* END MESSAGES PAGES */
+@media (max-width:1200px) {
+.block-concurs {
+	padding: 50px 50px;
+}	
+}
+@media (max-width:767px) {
+.block-concurs {
+	padding: 50px 10px;
+}	
+}
+

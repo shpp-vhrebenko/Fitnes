@@ -244,14 +244,22 @@ $( document ).ready(function() {
 
 
 	//animation results
-	var arrImgResults = ["./img/result1.jpg", 
+	/*var arrImgResults = ["./img/result1.jpg", 
 							"./img/result7.jpg", 
 							"./img/result6.jpg", 
 							"./img/result5.jpg", 
 							"./img/result4.jpg",
 							"./img/result3.jpg",
 							"./img/result2.jpg"
-						]
+						]*/
+	var arrImgResults = ["./img/results/result1.png", 
+							"./img/results/result2.png", 
+							"./img/results/result3.png", 
+							"./img/results/result4.png", 
+							"./img/results/result5.png",
+							"./img/results/result6.png",
+							"./img/results/result1.png",						
+						];
 	var countTestam = arrImgResults.length - 1;		
 	var counterResultG = 1;	
 	var counterResultV = 1;		

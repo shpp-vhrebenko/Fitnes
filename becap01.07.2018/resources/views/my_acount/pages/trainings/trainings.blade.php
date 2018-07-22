@@ -23,8 +23,12 @@
 					
 					<a class="item__image" href="{{route('show_training', ['course_slug' => $item->course_slug,'slug' => $item->slug])}}" style="background-image: url('/uploads/items/{{$item->image}}')" >			
 					</a>
-					<div class="item__title">
-						<p>Курс тренировок</p>				
+					<div class="item__title">					
+					<p>Курс тренировок
+					@if(isset($item->training_status) && $item->training_status)
+					<i class="fa fa-check-square-o" aria-hidden="true"></i>
+					@endif	
+					</p>					
 						<a href="{{route('show_training', ['course_slug' => $item->course_slug, 'slug' => $item->slug])}}">
 							@if(isset($item->title)) 
 							{!!$item->title!!}

@@ -31,6 +31,141 @@
 }
 /* END BOOTSTRAP CUSTOM STYLE */
 
+/*EDINOROG*/
+.edinorog-img { 
+	background: url(../img/edinorog.png) no-repeat;
+    width: 500px;
+    height: 500px;
+    background-size: contain;
+    background-position: right;
+    position: absolute;
+    top: 25%;
+    left: 57%;
+    right: 0;
+    bottom: 0;
+}
+.edinorog {
+	position:fixed;
+    bottom: 0;
+    right: 0;
+	left: 25%;
+    top: 10%;
+	z-index:999999;
+}
+.cloud {
+	/*width: 500px;
+	background-color: #48385e;
+	border: 5px solid #fff;
+	border-radius: 100%;
+	padding: 20% 10%;
+	text-align: center;
+	color: #fff;
+	font-size: 18px;
+	letter-spacing: 1px;
+	line-height: 24px;
+	position: absolute;
+	top: 12%;
+	text-transform: uppercase;
+	right: 57%;
+	z-index: 10;
+	max-height: 310px;
+	height:310px;*/
+	line-height: 24px;
+    vertical-align: middle;
+    display: inline-block;
+	padding: 0px 20px;
+	
+}
+.arrow-cloud {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    right: 14%;
+    bottom: -9.7%;
+    background: url(../img/treugolka.png) no-repeat;
+    z-index: 11;
+    background-size: 100%;
+    transform: rotate(7deg);
+}
+.cloud-wrap {
+    line-height: 310px;
+    width: 500px;
+    background-color: #48385e;
+    border: 5px solid #fff;
+    border-radius: 100%;
+    /* padding: 20% 10%; */
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 1px;
+    /* line-height: 24px; */
+    position: absolute;
+    top: 6%;
+    text-transform: uppercase;
+    right: 67%;
+    z-index: 10;
+    /* max-height: 310px; */
+    height: 310px;
+}
+@media (max-width:1550px){
+	.edinorog {
+		left:0;
+	}
+.cloud-wrap {
+	right:20%;
+}
+}
+@media (max-width:767px) {
+.edinorog {
+	position:fixed;
+    bottom: 0;
+    right: 0;
+	left: 0;
+    top: 20%;
+	z-index:999999;
+}
+.cloud {
+font-size:12px;
+}
+.cloud-wrap {
+    line-height: 130px;
+    width: 300px;
+    height: 130px;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: 1.75rem auto;
+}
+.edinorog-img {
+	height: 300px;
+    background-size: contain;
+    background-position: center;
+    width: 200px;
+    margin: 0 auto;
+	top: 100%;
+    left: 0%;
+}
+.arrow-cloud {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 46%;
+    bottom: -20px;
+    background: url(../img/treugolka.png) no-repeat;
+    z-index: 11;
+    background-size: 100%;
+    transform: rotate(31deg);
+}
+}
+@media (max-width:420px) {
+
+}
+@media (max-width:360px) {
+
+}
+/*END EDINOROG*/
+
 .main {
 	height: auto;
     min-height: 100vh;  
@@ -483,7 +618,13 @@
 }
 .row.item-content > div {
     width:100%;
-    background: #2c3059;
+   /* background: #2c3059;*/
+}
+.panel-heading h5 {
+	color:#fff!important;
+}
+.col-12.flex-direction-column h5 {
+	color:#fff!important;
 }
 
 .panel-title a:before {
@@ -595,6 +736,7 @@
     width:100%;
 }
 }
+
 @media (max-width: 500px){
     .note-video-clip {
     width:100%;
@@ -633,4 +775,34 @@
 .item-content{
     margin: 0px auto 30px auto;
 }
+}
+img {
+	max-width:100%;
+}
+.panel-heading h3 {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif!important;
+    font-size: 1.2rem!important;
+}
+.training-done {
+	display:inline-block;
+	background-color: #1f2343;
+	padding:10px 10px;
+	border-radius:4px;
+	font-family: HelveticaNeue;
+	margin-left:0px;
+	margin-top:20px;
+} 
+#training-action button {
+	background-color: #1f2343;
+	padding:10px 10px;
+	border-radius:4px;
+	font-family: HelveticaNeue;
+	margin-left:0px;
+	margin-top:20px;
+	cursor:pointer;
+	color:#fff;
+	border:none;
+}
+.fa.fa-check-square-o {
+	color:#70d403;
 }

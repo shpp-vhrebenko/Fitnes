@@ -44,8 +44,8 @@ class Motivations extends Model
     ];
 
     private static $settings = [
-    	'period_motivation' => 10,
-    	'interval' => 300000,
+    	'period_motivation' => 10,    	
+        'interval' => 300000,
     ];
 
     public static function getMotivations()

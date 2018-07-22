@@ -360,7 +360,7 @@
             }, 2000);           
         });
     </script>
-    
+ 
 @endsection
 
 @section('footer-modal')
@@ -414,7 +414,8 @@
           
         </div>
       </div>
-    </div>    
+    </div>  
+
     <div class="modal fade" id="modalUserMessage" tabindex="-1" role="dialog" aria-labelledby="modalContactsTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-block-contacts" role="document">
         <div class="modal-content block-contacts">
@@ -439,5 +440,6 @@
             </div>          
         </div>
       </div>
-    </div>     
+    </div>
+
 @endsection
