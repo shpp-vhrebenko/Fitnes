@@ -121,12 +121,14 @@ class MyAccountController extends Controller
     {             
         $currentUser = Auth::user(); 
         $course_id = $currentUser->course_id;     
-        $course = $this->courses->find($course_id);         
-        $currentDayCourse = self::getCurrentCourseDayNumber($currentUser->data_start_course);
+        $course = $this->courses->find($course_id);  
+        if($course->type == 'marathon') {
+            $currentDayCourse = self::getCurrentMarathonDayNumber($course->date_end_selection);
+        } else {
+            $currentDayCourse = self::getCurrentCourseDayNumber($currentUser->data_start_course);
+        }      
         $training_schedule = $course->training_schedule;
-        $currentDate = Carbon::now(); 
-        $data_start_course = $currentUser->data_start_course;
-        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $data_start_course);        
+        $currentDate = Carbon::now();               
 
         // How many days left before the start of the marathon
         if($course->type == 'marathon') {
@@ -188,7 +190,8 @@ class MyAccountController extends Controller
                 'course_id' => 0,
                 'data_start_course' => NULL,
                 'check_notification' => 0,
-                ]);           
+                ]);  
+            $currentUser->items()->detach();             
             return redirect()->route('courses_list');  
         }       
 
@@ -422,6 +425,13 @@ class MyAccountController extends Controller
         return $dataStartCourse->diffInDays($currentDate, false); 
     }
 
+    protected static function  getCurrentMarathonDayNumber($data_start_course)
+    {
+        $currentDate = Carbon::now();       
+        $dataStartCourse = Carbon::createFromFormat('Y-m-d', $data_start_course);
+        return $dataStartCourse->diffInDays($currentDate, false); 
+    }
+
     public function food_regulations(Request $request, $course_slug)
     {
         $currentCourse = $this->courses->findWithParams(['slug'=>$course_slug])->first();
@@ -433,6 +443,7 @@ class MyAccountController extends Controller
     public function motivations(Request $request)
     {        
         $motivations = Motivations::getMotivations();
+        $motivations_images = Motivations::getMotivationsImages();
         $settings_motivation = Motivations::getMotivationsSettings();
         $period_motivation = $settings_motivation['period_motivation'];
         $interval = $settings_motivation['interval'];
@@ -463,6 +474,7 @@ class MyAccountController extends Controller
             $response = array(
                 'status' => 'success',
                 'motivations' => $motivations,
+                'motivations_images' => $motivations_images,
                 'period_motivation' => $period_motivation,
                 'last_id' => $last_id,
                 'interval' => $interval, 
@@ -472,6 +484,7 @@ class MyAccountController extends Controller
             $response = array(
                 'status' => 'success',
                 'motivations' => $motivations,
+                'motivations_images' => $motivations_images,
                 'period_motivation' => $period_motivation,
                 'last_id' => $last_id,
                 'interval' => $interval, 

@@ -10,9 +10,9 @@
       <!-- <i class="fa fa-user-circle-o user-icon" aria-hidden="true"></i>  -->           
       <span class="fixed-menu__title" >ЛИЧНЫЙ КАБИНЕТ</span>
     </a>
-    <div  class="fixed-menu__right pull-right">
+    <div  class="fixed-menu__right pull-right" id="button_open_sidebar-menu">
       <span>МЕНЮ</span>
-      <div class="fixed-menu__button" id="button_open_sidebar-menu">
+      <div class="fixed-menu__button" >
         <div class="inner-button"></div>
       </div>
     </div>

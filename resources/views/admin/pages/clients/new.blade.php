@@ -48,7 +48,8 @@
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label">Пароль</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="email" name="item[password]" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Пароль должен содержать по крайней мере одно число, одну большую и одну маленькую букву и не менее 8 или более символов">
+                                <input type="password" class="form-control" id="email" name="item[password]" pattern="[A-Za-z0-9]{6,}" title="Пароль должен содержать по крайней мере шесть символов (допускаются большые, маленькие английские буквы а также  цифры от 0 до 9">
+                               <!--  <input type="password" class="form-control" id="email" name="item[password]" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Пароль должен содержать по крайней мере одно число, одну большую и одну маленькую букву и не менее 8 или более символов"> -->
                             </div>
                         </div>
                         <div class="form-group row">

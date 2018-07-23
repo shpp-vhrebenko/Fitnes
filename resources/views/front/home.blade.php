@@ -241,34 +241,7 @@
                 </div>
                 <div class="col-md-12 col-lg-10 col-xl-9 results-slider__box">
                     <div id="sliderResults" class="slider-results">
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/results/result1.png">                   
-                        </div> 
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/results/result2.png">                   
-                        </div>   
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/results/result3.png">                   
-                        </div>   
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/results/result4.png">                   
-                        </div>
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/results/result5.png">                   
-                        </div>
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/results/result6.png">                   
-                        </div>
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/results/result1.png">                   
-                        </div>                                                                                         
+                                                                                                              
                     </div>
                 </div>                
                 
@@ -349,7 +322,7 @@
 @section('footer-scripts')    
     @parent    
     <script  src="{{asset('js/lib/slick.min.js') }}"></script>   
-    <script  src="{{asset('js/main.js') }}"></script>  
+    <script  src="{{asset('js/main.js') }}?v={{time()}}"></script>  
     <script>
         jQuery(document).ready(function($) {
             @if(Session::has('message_success'))
