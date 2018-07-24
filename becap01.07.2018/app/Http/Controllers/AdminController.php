@@ -449,7 +449,14 @@ class AdminController extends Controller
                 $DataStartCourse = Carbon::now()->subDays($current_day_course);
                 $item['data_start_course'] = $DataStartCourse; 
             }             
-        } 
+        } else {
+            if(isset($currentCourse->date_end_selection)) {
+                $item['data_start_course'] = Carbon::createFromFormat('Y-m-d', $currentCourse->date_end_selection);
+            } else {
+                $item['data_start_course'] = Carbon::now();
+            }
+            
+        }
 
         $item['remember_token'] = $request->get('_token');    
         if(isset($item['password']) && !empty($item['password'])) {            

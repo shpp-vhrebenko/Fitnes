@@ -11,20 +11,23 @@
 		    },
 		    success: function (data) {    	
 		    	motivations = data.motivations;
+		    	motivations_images = data.motivations_images;
 		    	period_motivation = data.period_motivation;
 		    	last_id = data.last_id;
 		    	interval = data.interval; 
-		    	if(data.show_motivation) {				    			
-					showMotivation(motivations[data.last_id]);
-				}	
-		    	startMotivation(motivations, period_motivation, last_id, interval);
+		    	if(data.show_motivation) {	
+		    		var indexImage = Math.floor(Math.random() * 10);
+					var image_src = motivations_images[indexImage];		    			
+					showMotivation(motivations[data.last_id], image_src);
+				}					
+		    	startMotivation(motivations, motivations_images, period_motivation, last_id, interval);
 		    },
 		    error: function (xhr, b, c) {
 		        console.log("xhr=" + xhr + " b=" + b + " c=" + c);
 		    }	    
-		});	 
+		}); 
 
-		function startMotivation(motivations, period_motivation, last_id, interval) {					
+		function startMotivation(motivations, motivations_images, period_motivation, last_id, interval) {			
 			setInterval(function() {				
 				$.ajax({
 				    url: '{{ route('is_show_motivation') }}',
@@ -33,8 +36,10 @@
 				      _token: $('meta[name="csrf-token"]').attr('content'),
 				    },
 				    success: function (data) {	    	
-				    	if(data.show_motivation) {				    			
-							showMotivation(motivations[data.last_id]);
+				    	if(data.show_motivation) {		
+				    		var indexImage = Math.floor(Math.random() * 10);
+							var image_src = motivations_images[indexImage];			
+							showMotivation(motivations[data.last_id], image_src);
 						}				      	
 				    },
 				    error: function (xhr, b, c) {
@@ -45,10 +50,12 @@
 			}, interval);
 		}
 
-		function showMotivation(message) {
+		function showMotivation(message, image_src) {				
 			$('#modalMotivations').modal('hide');
 			var motivationsMessage = $( "#motivationsMessage" );
+			var motivationsImage = $("#edinorog-img");
 			$('#modalMotivations').find(motivationsMessage).text(message);
+			motivationsImage.css('background-image', 'url(' + image_src + ')');
 			$('#modalMotivations').modal('show');
 		}
 		
@@ -56,33 +63,15 @@
 </script>
 @show
 @section('footer-modal')
-<!--<div class="modal" tabindex="-1" role="dialog" id="modalMotivations" class="modal-motivation">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">        
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p id="motivationsMessage"></p>
-      </div>      
-    </div>
-  </div>
-</div>-->
-
 <div id="modalMotivations" class="edinorog modal modal-motivation" tabindex="-1" role="dialog">
-<div class="modal-dialog modal-dialog-centered" role="document">
-<div class="cloud-wrap">
-<div id="motivationsMessage" class="cloud"></div>
-<div class="arrow-cloud"></div>
-<div class="edinorog-img"></div> 
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="cloud-wrap">
+			<div id="motivationsMessage" class="cloud"></div>
+				<div class="arrow-cloud"></div>
+			<div class="edinorog-img" id="edinorog-img"></div> 
+		</div>
+	</div>
 </div>
-</div>
-
-
-</div>
-
 @include('my_acount/partials/sidebar_menu')
 @show
 

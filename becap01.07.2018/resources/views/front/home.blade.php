@@ -2,8 +2,8 @@
 
 @section('header-styles')     
     @parent
-    <link rel="stylesheet" href="{{ asset('css/home_style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/media_home_style.css') }}">         
+    <link rel="stylesheet" href="{{ asset('css/home_style.css') }}?v={{time()}}">
+    <link rel="stylesheet" href="{{ asset('css/media_home_style.css') }}?v={{time()}}">         
 @endsection
 
 @section('header-scripts')
@@ -201,33 +201,22 @@
     <section class="testamonials" id="review">
         <div class="container-fluid testamonials__container">
             <div class="row">
-                <div class="col-md-12 col-lg-5 testamonials__title">
-                    <h3>ОТЗЫВЫ</h3>
-                    <p>234 ОТЗЫВА</p>
-                </div>
-                <div id="carouselTestamonials" class="testamonials__carousel carousel vert slide col-md-12 col-lg-7" data-ride="false">
-                    <div class="row">
-                        <div class="col-12 order-2 col-md-12 col-lg-1 order-lg-1 testamonials__indicators">
-                             <a class="carousel-control-prev" href="#carouselTestamonials" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                            </a>
-                            <ol class="carousel-indicators carousel-indicators-numbers" id="carouselTestamonialsIndicators">                                
-                            </ol>
-                            <a class="carousel-control-next" href="#carouselTestamonials" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                            </a>
-                        </div>
-                        <div class="col-12 order-1 col-md-12 col-lg-11 order-lg-2 testamonials__content">
-                            <div class="carousel-inner" id="carouselTestamonials-inner">                             
-                            </div>
-                        </div>
+                <div class="col-md-12 col-lg-2 col-xl-3 results-title__box">
+                    <div class="results__title">
+                        <p><span class="results__header"><b>ОТЗЫВЫ</b></span><br>
+                        <span>234 ОТЗЫВА</span><br>
+                        </p>
                     </div>                    
                 </div>
+                <div class="col-md-12 col-lg-10 col-xl-9 results-slider__box">
+                    <div id="sliderTestamonials" class="slider-results">
+                                                                                                              
+                    </div>
+                </div>                
+                
             </div>
-        </div>        
-    </section>
+        </div>   
+    </section>  
     <section class="results" id="results">
         <div class="container results-container">
             <div class="row">
@@ -241,34 +230,7 @@
                 </div>
                 <div class="col-md-12 col-lg-10 col-xl-9 results-slider__box">
                     <div id="sliderResults" class="slider-results">
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result1.jpg">                   
-                        </div> 
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result2.jpg">                   
-                        </div>   
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result3.jpg">                   
-                        </div>   
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result4.jpg">                   
-                        </div>
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result5.jpg">                   
-                        </div>
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result6.jpg">                   
-                        </div>
-                        <div class="results-item">
-                            <div class="content-overlay"></div>                                  
-                            <img class="results-item__img img-responsive" src="./img/result7.jpg">                   
-                        </div>                                                                                         
+                                                                                                              
                     </div>
                 </div>                
                 
@@ -349,7 +311,7 @@
 @section('footer-scripts')    
     @parent    
     <script  src="{{asset('js/lib/slick.min.js') }}"></script>   
-    <script  src="{{asset('js/main.js') }}"></script>  
+    <script  src="{{asset('js/main.js') }}?v={{time()}}"></script>  
     <script>
         jQuery(document).ready(function($) {
             @if(Session::has('message_success'))
@@ -360,7 +322,7 @@
             }, 2000);           
         });
     </script>
- 
+    
 @endsection
 
 @section('footer-modal')
@@ -414,8 +376,7 @@
           
         </div>
       </div>
-    </div>  
-
+    </div>    
     <div class="modal fade" id="modalUserMessage" tabindex="-1" role="dialog" aria-labelledby="modalContactsTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-block-contacts" role="document">
         <div class="modal-content block-contacts">
@@ -440,6 +401,5 @@
             </div>          
         </div>
       </div>
-    </div>
-
+    </div>     
 @endsection

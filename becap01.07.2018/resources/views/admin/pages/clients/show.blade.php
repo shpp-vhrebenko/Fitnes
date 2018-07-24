@@ -29,7 +29,7 @@
                             <td>{{ $client->email }}</td>
                             <td>{{ $client->phone }}</td>                            
                             <td>{{ $client->getClientStatus($client->status_id) }}</td>
-                            <td><a href="@if($course->type == 'cours'){{route('show_cours', $course->id)}}@else{{ route('show_marathon', $course->id) }}@endif">{!! $course->name !!}</a></td>
+                            <td>{!! $course->name !!}</td>
                             @else
                             <td>{{ $client->id }}</td>
                             <td>{{ $client->name }}</td>

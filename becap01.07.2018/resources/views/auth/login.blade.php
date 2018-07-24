@@ -35,7 +35,7 @@
                             @csrf
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control form-login__input" name="email" value="{{ old('email') }}" required autofocus placeholder="Логин">                                    
+                                    <input id="user_email" type="email" class="form-control form-login__input" name="email" value="{{ old('email') }}" required autofocus placeholder="Логин">                                    
                                 </div>
                             </div>
 

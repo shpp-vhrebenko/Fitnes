@@ -1,4 +1,5 @@
-$( document ).ready(function() {
+$( document ).ready(function() {	
+
 	// animation sidebar navigation
     $("#button_open_sidebar-menu").click(function(){     	 
 		$("#sidebar-menu").stop(true , true).animate({right:"0"},500);				      
@@ -23,22 +24,6 @@ $( document ).ready(function() {
 		e.preventDefault();
 	})
 
-
-	// initial plugin slick slider
-	$('#sliderResults').slick({   
-	    dots: true,
-	    customPaging : function(slider, i) {
-	    var thumb = $(slider.$slides[i]).data();
-	    return '<a>'+(i+1)+'</a>';
-	    },
-	    arrows: true,
-	    vertical: true,
-	    slidesToShow: 1,
-	    centerMode: true,     
-	}); 
-
-
-
 	// review --------------------------------------------------------
 	var textarr = [
 		"Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня первый день как марафон закончился, а я начала день по прежнему с овсянки" , 
@@ -59,21 +44,21 @@ $( document ).ready(function() {
 
   
 	var arrImgsReview = [
-		"https://gizerskaya.com/img/girl15.png",
-	    "https://gizerskaya.com/img/girl14.png",
-	    "https://gizerskaya.com/img/girl13.png",
-	    "https://gizerskaya.com/img/girl12.png",
-        "https://gizerskaya.com/img/girl11.png",
-	    "https://gizerskaya.com/img/girl10.png",
-	    "https://gizerskaya.com/img/girl9.png",
-	    "https://gizerskaya.com/img/girl8.png",
-	    "https://gizerskaya.com/img/girl7.png",
-	    "https://gizerskaya.com/img/girl6.png",
-	    "https://gizerskaya.com/img/girl5.png",
-        "https://gizerskaya.com/img/girl4.png",
-        "https://gizerskaya.com/img/girl3-1.png",
-        "https://gizerskaya.com/img/girl2-1.png",
-        "https://gizerskaya.com/img/girl1-1.png"
+		"https://gizerskaya.com/img/review/girl15.png",
+	    "https://gizerskaya.com/img/review/girl14.png",
+	    "https://gizerskaya.com/img/review/girl13.png",
+	    "https://gizerskaya.com/img/review/girl12.png",
+        "https://gizerskaya.com/img/review/girl11.png",
+	    "https://gizerskaya.com/img/review/girl10.png",
+	    "https://gizerskaya.com/img/review/girl9.png",
+	    "https://gizerskaya.com/img/review/girl8.png",
+	    "https://gizerskaya.com/img/review/girl7.png",
+	    "https://gizerskaya.com/img/review/girl6.png",
+	    "https://gizerskaya.com/img/review/girl5.png",
+        "https://gizerskaya.com/img/review/girl4.png",
+        "https://gizerskaya.com/img/review/girl3-1.png",
+        "https://gizerskaya.com/img/review/girl2-1.png",
+        "https://gizerskaya.com/img/review/girl1-1.png"
 	];
   
 	var namearr = ["Ксения","Алена","Маша","Вика","Сабина","Ала","Настя","Саша","Валерия","Катя","Люда","Анжела","Оксана","Лена","Яна"];
@@ -197,7 +182,7 @@ $( document ).ready(function() {
 		}	
 	}
 
-		// open modal review
+	// open modal review 
 		$('#carouselTestamonials-inner').on('click','.testamonials-item__open-modal',function(e){
 			var dataId = $(this).data('id');
 			var curImg = arrImgsReview[dataId];
@@ -242,15 +227,39 @@ $( document ).ready(function() {
 	// end faq ---------------------------------------------------------
 
 
-	//animation results
-	var arrImgResults = ["./img/result1.jpg", 
-							"./img/result7.jpg", 
-							"./img/result6.jpg", 
-							"./img/result5.jpg", 
-							"./img/result4.jpg",
-							"./img/result3.jpg",
-							"./img/result2.jpg"
-						]
+	//animation slider results -----------------------------------------	
+	var arrImgResults = ["./img/results/oldresults/result1.jpg", 
+							"./img/results/oldresults/result2.jpg", 
+							"./img/results/oldresults/result3.jpg", 
+							"./img/results/oldresults/result4.jpg", 
+							"./img/results/oldresults/result5.jpg",
+							"./img/results/oldresults/result6.jpg",
+							"./img/results/oldresults/result1.jpg",						
+						];
+
+	$sliderResults = $('#sliderResults');
+
+	for (var i = 0; i < arrImgResults.length; i++) {		
+		$resultsItem = $('<div>').addClass('results-item').append($('<div>').addClass('content-overlay'))
+											.append($('<img>').addClass('results-item__img img-responsive')
+																.attr('src', arrImgResults[i]));
+		$sliderResults.append($resultsItem);									
+	}	
+
+	// initial plugin slick slider
+	$('#sliderResults').slick({   
+	    dots: true,
+	    customPaging : function(slider, i) {
+	    var thumb = $(slider.$slides[i]).data();
+	    return '<a>'+(i+1)+'</a>';
+	    },
+	    arrows: true,
+	    vertical: true,
+	    slidesToShow: 1,
+	    centerMode: true,     
+	}); 
+
+
 	var countTestam = arrImgResults.length - 1;		
 	var counterResultG = 1;	
 	var counterResultV = 1;		
@@ -339,10 +348,133 @@ $( document ).ready(function() {
 		}	
 		
 	});
+	//end animation slider results -----------------------------------------------------------------
+
+	
+	
+	
+		//animation slider testamonial -----------------------------------------	
+	var arrImgResults = ["./img/results/result1.png", 
+							"./img/results/result2.png", 
+							"./img/results/result3.png", 
+							"./img/results/result4.png", 
+							"./img/results/result5.png",
+							"./img/results/result6.png",
+							"./img/results/result1.png",						
+						];
+
+	$sliderTestamonials = $('#sliderTestamonials');
+
+	for (var i = 0; i < arrImgResults.length; i++) {		
+		$resultsItem = $('<div>').addClass('results-item').append($('<div>').addClass('content-overlay').addClass('content-overlay-testamonial'))
+											.append($('<img>').addClass('results-item__img img-responsive')
+																.attr('src', arrImgResults[i]));
+		$sliderTestamonials.append($resultsItem);									
+	}	
+
+	// initial plugin slick slider
+	$('#sliderTestamonials').slick({   
+	    dots: true,
+	    customPaging : function(slider, i) {
+	    var thumb = $(slider.$slides[i]).data();
+	    return '<a>'+(i+1)+'</a>';
+	    },
+	    arrows: true,
+	    vertical: true,
+	    slidesToShow: 1,
+	    centerMode: true,     
+	}); 
 
 
-	//end animation results
+	var countTestam = arrImgResults.length - 1;		
+	var counterResultG = 1;	
+	var counterResultV = 1;		
 
+
+	var blockWidthResult = parseInt(jQuery('.slick-dots li').css('width'));	
+	var blockHeightResult = parseInt(jQuery('.slick-dots li').css('height'));
+	var blockMarginLeftResult = parseInt(jQuery('.slick-dots li').css('margin-right'));	
+	var blockMarginBottomResult = parseInt(jQuery('.slick-dots li').css('margin-bottom'));	
+	var countTestamWidthLength = (arrImgResults.length * blockWidthResult) + (countTestam * blockMarginLeftResult);
+	var countTestamHeightLength = (arrImgResults.length * blockWidthResult) + (countTestam * blockMarginBottomResult);
+
+	var howplusResultG = blockWidthResult + blockMarginLeftResult;
+	var howplusResultV = blockHeightResult + blockMarginBottomResult;	
+	
+	var currentScrollPositionResultG = 0;
+	var currentScrollPositionResultV = 0;
+	$('.slick-dots li').click(function(){  	
+		if($(window).width() >= '992') {
+			if(counterResultV < countTestam) {
+				currentScrollPositionResultV = howplusResultV * $(this).index();					
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
+				counterResultV = $(this).index() + 1;
+			}	
+		} else {
+			if(counterResultG < countTestam) {
+				currentScrollPositionResultG = howplusResultG * $(this).index();					
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
+				counterResultG = $(this).index() + 1;
+			}	
+		}					
+	});
+
+	$('.slick-next').click(function(e){	
+		if($(window).width() >= '992') {
+			if(counterResultV < countTestam) {
+				if(counterResultV > 0) {
+					currentScrollPositionResultV += howplusResultV;
+				}						
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
+				counterResultV++;
+			} else {
+				currentScrollPositionResultV = -currentScrollPositionResultV;			
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 800);
+				currentScrollPositionResultV = 0;
+				counterResultV = 0;
+			}
+		} else {
+			if(counterResultG < countTestam) {
+				if(counterResultG > 0) {
+					currentScrollPositionResultG += howplusResultG;
+				}						
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
+				counterResultG++;
+			} else {
+				currentScrollPositionResultG = -currentScrollPositionResultG;			
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 800);
+				currentScrollPositionResultG = 0;
+				counterResultG = 0;
+			}
+		}	
+				
+	});
+
+	$('.slick-prev').click(function(e){	
+		if($(window).width() >= '992') {
+			if(counterResultV > 0 && currentScrollPositionResultV > 0){
+				currentScrollPositionResultV -= howplusResultV;			
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
+				counterResultV--;
+			} else {
+				currentScrollPositionResultV = countTestamHeightLength;			
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 800);			
+				counterResultV = countTestam;
+			}
+		} else {
+			if(counterResultG > 0 && currentScrollPositionResultG > 0){
+				currentScrollPositionResultG -= howplusResultG;			
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
+				counterResultG--;
+			} else {
+				currentScrollPositionResultG = countTestamWidthLength;			
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 800);			
+				counterResultG = countTestam;
+			}
+		}	
+		
+	});
+	//end animation slider testamonial -----------------------------------------------------------------
 	
 
 });

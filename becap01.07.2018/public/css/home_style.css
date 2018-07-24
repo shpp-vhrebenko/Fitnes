@@ -675,10 +675,11 @@ a.price-item__button {
 }
 
 .results-item .content-overlay {
-  background: rgba(0,0,0,0.7);
+ background: rgba(0,0,0,0.7);
   position: absolute;
   height: 100%;
-  width: 100%;
+
+width: 100%;
   left: 0;
   top: 0;
   bottom: 0;
@@ -688,7 +689,10 @@ a.price-item__button {
   -moz-transition: all 0.4s ease-in-out 0s;
   transition: all 0.4s ease-in-out 0s;
 }
+.content-overlay-testamonial {
+	width: 100%;
 
+}
 .results-item.slick-current .content-overlay {
 	opacity: 0;
 }

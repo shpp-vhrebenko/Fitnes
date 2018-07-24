@@ -43,14 +43,32 @@ class Motivations extends Model
         'Помни одно - если ты не даешь своему телу самое лучшее, то попросту обкрадываешь сама себя.',
     ];
 
+    public static $motivations_imgs = [
+        "/img/motivations/edinorog_1.png",
+        "/img/motivations/edinorog_1.png",
+        "/img/motivations/edinorog_1.png",
+        "/img/motivations/edinorog_1.png",
+        "/img/motivations/edinorog_1.png",
+        "/img/motivations/edinorog_1.png",
+        "/img/motivations/edinorog_1.png",
+        "/img/motivations/edinorog_1.png",
+        "/img/motivations/edinorog_1.png",
+        "/img/motivations/edinorog_1.png",
+    ];
+
     private static $settings = [
-    	'period_motivation' => 10,    	
-        'interval' => 300000,
+    	'period_motivation' => 10, // set time minuts
+    	'interval' => 300000, // set time milesecunds
     ];
 
     public static function getMotivations()
     {
         return self::$motivations;
+    }
+
+    public static function getMotivationsImages()
+    {
+        return self::$motivations_imgs;
     }
 
     public static function getMotivationsSettings()
