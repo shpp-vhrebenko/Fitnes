@@ -24,7 +24,7 @@ $( document ).ready(function() {
 		e.preventDefault();
 	})
 
-	// review -------------------------------------------------------- ( dont active )
+	// review --------------------------------------------------------
 	var textarr = [
 		"Я тоже скину свой результат! Настя спасибо за марафон, я уже писала что к еде начала относиться как к средству существования, не более. Вот сегодня первый день как марафон закончился, а я начала день по прежнему с овсянки" , 
         "Девочки, марафон огонь, мне вообще сладкого не хочется, это первый раз за весь мой сознательный возраст (а мне вот скоро 28). И все тренировки переписала названия и буду делать дальше! Прям чувствую, как крепнет тело и уходят бока!" , 
@@ -66,7 +66,7 @@ $( document ).ready(function() {
 	var countReview = textarr.length;
 	var countItem = Math.round(countReview/3);
 	var indexItem = 0;  
-/*	for (var i = 0; i < countItem ; i++) {
+	for (var i = 0; i < countItem ; i++) {
 		var $carouselItem = $('<div>').addClass('carousel-item');
 		if(i == 0) {
 			$carouselItem.addClass('active');
@@ -180,7 +180,7 @@ $( document ).ready(function() {
 			}
 			
 		}	
-	}*/
+	}
 
 	// open modal review 
 		$('#carouselTestamonials-inner').on('click','.testamonials-item__open-modal',function(e){
@@ -228,13 +228,13 @@ $( document ).ready(function() {
 
 
 	//animation slider results -----------------------------------------	
-	var arrImgResults = ["./img/results/oldresults/result1.jpg", 
-							"./img/results/oldresults/result2.jpg", 
-							"./img/results/oldresults/result3.jpg", 
-							"./img/results/oldresults/result4.jpg", 
-							"./img/results/oldresults/result5.jpg",
-							"./img/results/oldresults/result6.jpg",
-							"./img/results/oldresults/result1.jpg",						
+	var arrImgResults = ["./img/results/result1.png", 
+							"./img/results/result2.png", 
+							"./img/results/result3.png", 
+							"./img/results/result4.png", 
+							"./img/results/result5.png",
+							"./img/results/result6.png",
+							"./img/results/result1.png",						
 						];
 
 	$sliderResults = $('#sliderResults');
@@ -265,10 +265,10 @@ $( document ).ready(function() {
 	var counterResultV = 1;		
 
 
-	var blockWidthResult = parseInt(jQuery('#sliderResults .slick-dots li').css('width'));	
-	var blockHeightResult = parseInt(jQuery('#sliderResults .slick-dots li').css('height'));
-	var blockMarginLeftResult = parseInt(jQuery('#sliderResults .slick-dots li').css('margin-right'));	
-	var blockMarginBottomResult = parseInt(jQuery('#sliderResults .slick-dots li').css('margin-bottom'));	
+	var blockWidthResult = parseInt(jQuery('.slick-dots li').css('width'));	
+	var blockHeightResult = parseInt(jQuery('.slick-dots li').css('height'));
+	var blockMarginLeftResult = parseInt(jQuery('.slick-dots li').css('margin-right'));	
+	var blockMarginBottomResult = parseInt(jQuery('.slick-dots li').css('margin-bottom'));	
 	var countTestamWidthLength = (arrImgResults.length * blockWidthResult) + (countTestam * blockMarginLeftResult);
 	var countTestamHeightLength = (arrImgResults.length * blockWidthResult) + (countTestam * blockMarginBottomResult);
 
@@ -277,33 +277,33 @@ $( document ).ready(function() {
 	
 	var currentScrollPositionResultG = 0;
 	var currentScrollPositionResultV = 0;
-	$('#sliderResults .slick-dots li').click(function(){  	
+	$('.slick-dots li').click(function(){  	
 		if($(window).width() >= '992') {
 			if(counterResultV < countTestam) {
 				currentScrollPositionResultV = howplusResultV * $(this).index();					
-				$("#sliderResults .slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
 				counterResultV = $(this).index() + 1;
 			}	
 		} else {
 			if(counterResultG < countTestam) {
 				currentScrollPositionResultG = howplusResultG * $(this).index();					
-				$("#sliderResults .slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
 				counterResultG = $(this).index() + 1;
 			}	
 		}					
 	});
 
-	$('#sliderResults .slick-next').click(function(e){	
+	$('.slick-next').click(function(e){	
 		if($(window).width() >= '992') {
 			if(counterResultV < countTestam) {
 				if(counterResultV > 0) {
 					currentScrollPositionResultV += howplusResultV;
 				}						
-				$("#sliderResults .slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
 				counterResultV++;
 			} else {
 				currentScrollPositionResultV = -currentScrollPositionResultV;			
-				$("#sliderResults .slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 800);
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 800);
 				currentScrollPositionResultV = 0;
 				counterResultV = 0;
 			}
@@ -312,11 +312,11 @@ $( document ).ready(function() {
 				if(counterResultG > 0) {
 					currentScrollPositionResultG += howplusResultG;
 				}						
-				$("#sliderResults .slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
 				counterResultG++;
 			} else {
 				currentScrollPositionResultG = -currentScrollPositionResultG;			
-				$("#sliderResults .slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 800);
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 800);
 				currentScrollPositionResultG = 0;
 				counterResultG = 0;
 			}
@@ -324,25 +324,25 @@ $( document ).ready(function() {
 				
 	});
 
-	$('#sliderResults .slick-prev').click(function(e){	
+	$('.slick-prev').click(function(e){	
 		if($(window).width() >= '992') {
 			if(counterResultV > 0 && currentScrollPositionResultV > 0){
 				currentScrollPositionResultV -= howplusResultV;			
-				$("#sliderResults .slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
 				counterResultV--;
 			} else {
 				currentScrollPositionResultV = countTestamHeightLength;			
-				$("#sliderResults .slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 800);			
+				$(".slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 800);			
 				counterResultV = countTestam;
 			}
 		} else {
 			if(counterResultG > 0 && currentScrollPositionResultG > 0){
 				currentScrollPositionResultG -= howplusResultG;			
-				$("#sliderResults .slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
 				counterResultG--;
 			} else {
 				currentScrollPositionResultG = countTestamWidthLength;			
-				$("#sliderResults .slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 800);			
+				$(".slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 800);			
 				counterResultG = countTestam;
 			}
 		}	
@@ -350,131 +350,6 @@ $( document ).ready(function() {
 	});
 	//end animation slider results -----------------------------------------------------------------
 
-	
-	
-	
-	//animation slider testamonial -----------------------------------------	
-	var arrImgResults = ["./img/results/result1.png", 
-							"./img/results/result2.png", 
-							"./img/results/result3.png", 
-							"./img/results/result4.png", 
-							"./img/results/result5.png",
-							"./img/results/result6.png",
-							"./img/results/result1.png",						
-						];
-
-	$sliderTestamonials = $('#sliderTestamonials');
-
-	for (var i = 0; i < arrImgResults.length; i++) {		
-		$resultsItem = $('<div>').addClass('results-item').append($('<div>').addClass('content-overlay').addClass('content-overlay-testamonial'))
-											.append($('<img>').addClass('results-item__img img-responsive')
-																.attr('src', arrImgResults[i]));
-		$sliderTestamonials.append($resultsItem);									
-	}	
-
-	// initial plugin slick slider
-	$('#sliderTestamonials').slick({   
-	    dots: true,
-	    customPaging : function(slider, i) {
-	    var thumb = $(slider.$slides[i]).data();
-	    return '<a>'+(i+1)+'</a>';
-	    },
-	    arrows: true,
-	    vertical: true,
-	    slidesToShow: 1,
-	    centerMode: true,     
-	}); 
-
-
-	var countTestam = arrImgResults.length - 1;		
-	var counterResultG = 1;	
-	var counterResultV = 1;		
-
-
-	var blockWidthResult = parseInt(jQuery('#sliderTestamonials .slick-dots li').css('width'));	
-	var blockHeightResult = parseInt(jQuery('#sliderTestamonials .slick-dots li').css('height'));
-	var blockMarginLeftResult = parseInt(jQuery('#sliderTestamonials .slick-dots li').css('margin-right'));	
-	var blockMarginBottomResult = parseInt(jQuery('#sliderTestamonials .slick-dots li').css('margin-bottom'));	
-	var countTestamWidthLength = (arrImgResults.length * blockWidthResult) + (countTestam * blockMarginLeftResult);
-	var countTestamHeightLength = (arrImgResults.length * blockWidthResult) + (countTestam * blockMarginBottomResult);
-
-	var howplusResultG = blockWidthResult + blockMarginLeftResult;
-	var howplusResultV = blockHeightResult + blockMarginBottomResult;	
-	
-	var currentScrollPositionResultG = 0;
-	var currentScrollPositionResultV = 0;
-	$('#sliderTestamonials .slick-dots li').click(function(){  	
-		if($(window).width() >= '992') {
-			if(counterResultV < countTestam) {
-				currentScrollPositionResultV = howplusResultV * $(this).index();					
-				$("#sliderTestamonials .slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
-				counterResultV = $(this).index() + 1;
-			}	
-		} else {
-			if(counterResultG < countTestam) {
-				currentScrollPositionResultG = howplusResultG * $(this).index();					
-				$("#sliderTestamonials .slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
-				counterResultG = $(this).index() + 1;
-			}	
-		}					
-	});
-
-	$('#sliderTestamonials .slick-next').click(function(e){	
-		if($(window).width() >= '992') {
-			if(counterResultV < countTestam) {
-				if(counterResultV > 0) {
-					currentScrollPositionResultV += howplusResultV;
-				}						
-				$("#sliderTestamonials .slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
-				counterResultV++;
-			} else {
-				currentScrollPositionResultV = -currentScrollPositionResultV;			
-				$("#sliderTestamonials .slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 800);
-				currentScrollPositionResultV = 0;
-				counterResultV = 0;
-			}
-		} else {
-			if(counterResultG < countTestam) {
-				if(counterResultG > 0) {
-					currentScrollPositionResultG += howplusResultG;
-				}						
-				$("#sliderTestamonials .slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
-				counterResultG++;
-			} else {
-				currentScrollPositionResultG = -currentScrollPositionResultG;			
-				$("#sliderTestamonials .slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 800);
-				currentScrollPositionResultG = 0;
-				counterResultG = 0;
-			}
-		}	
-				
-	});
-
-	$('#sliderTestamonials .slick-prev').click(function(e){	
-		if($(window).width() >= '992') {
-			if(counterResultV > 0 && currentScrollPositionResultV > 0){
-				currentScrollPositionResultV -= howplusResultV;			
-				$("#sliderTestamonials .slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 1100);
-				counterResultV--;
-			} else {
-				currentScrollPositionResultV = countTestamHeightLength;			
-				$("#sliderTestamonials .slick-dots").animate({ scrollTop: currentScrollPositionResultV + "px" }, 800);			
-				counterResultV = countTestam;
-			}
-		} else {
-			if(counterResultG > 0 && currentScrollPositionResultG > 0){
-				currentScrollPositionResultG -= howplusResultG;			
-				$("#sliderTestamonials .slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 1100);
-				counterResultG--;
-			} else {
-				currentScrollPositionResultG = countTestamWidthLength;			
-				$("#sliderTestamonials .slick-dots").animate({ scrollLeft: currentScrollPositionResultG + "px" }, 800);			
-				counterResultG = countTestam;
-			}
-		}	
-		
-	});
-	//end animation slider testamonial -----------------------------------------------------------------
 	
 
 });

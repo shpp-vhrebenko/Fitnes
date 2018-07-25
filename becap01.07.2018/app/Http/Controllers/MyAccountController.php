@@ -132,7 +132,7 @@ class MyAccountController extends Controller
 
         // How many days left before the start of the marathon
         if($course->type == 'marathon') {
-            $dataStartMarathon = Carbon::createFromFormat('Y-m-d', $course->date_end_selection); 
+            $dataStartMarathon = Carbon::createFromFormat('Y-m-d H:i:s', $course->date_end_selection.'00:00:00'); 
             $diffMinutesStartMarathon = $currentDate->diffInMinutes($dataStartMarathon, false);   
             if($diffMinutesStartMarathon > 0 && $diffMinutesStartMarathon > 1140) {
                 $diffDaysStartMarathon = $currentDate->diffInDays($dataStartMarathon, false); 
@@ -150,15 +150,15 @@ class MyAccountController extends Controller
                 return view('my_acount/pages/courses/marathon_message', compact(['page_title','message', 'course'])); 
             }   
         }
+
+
              
-        // Format training shedule for current course. If the marathon or course has already begun
+        // Format training shedule for current course. If the marathon or course has already begun      
+            
         if($currentDayCourse <= $course->period) {
             $notification = array();
-            $notification['message'] = self::isShowNotification($currentUser, $course, $currentDayCourse);            
-           
-            if($currentDayCourse == 0) {
-                $currentDayCourse = 1;
-            }
+            $notification['message'] = self::isShowNotification($currentUser, $course, $currentDayCourse);                
+          
             $category = Category::where('id', 1)->firstOrFail(); 
             $items = $category->items()->where('course_id',$course_id)->get();
 
@@ -420,16 +420,31 @@ class MyAccountController extends Controller
 
     protected static function  getCurrentCourseDayNumber($data_start_course)
     {
-        $currentDate = Carbon::now();       
-        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $data_start_course);
-        return $dataStartCourse->diffInDays($currentDate, false); 
+        $currentDate = Carbon::now();   
+        $timestamp = strtotime($data_start_course);
+        $date = date('Y-m-d', $timestamp);    
+        
+        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $date.'00:00:00');  
+        $currentDayCourse = $dataStartCourse->diffInDays($currentDate, false);
+        if($currentDayCourse == 0) {
+            $currentDayCourse = 1;
+        } else {
+            $currentDayCourse = $currentDayCourse + 1;
+        }      
+        return $currentDayCourse;
     }
 
     protected static function  getCurrentMarathonDayNumber($data_start_course)
     {
         $currentDate = Carbon::now();       
-        $dataStartCourse = Carbon::createFromFormat('Y-m-d', $data_start_course);
-        return $dataStartCourse->diffInDays($currentDate, false); 
+        $dataStartCourse = Carbon::createFromFormat('Y-m-d H:i:s', $data_start_course.'00:00:00');
+        $currentDayCourse = $dataStartCourse->diffInDays($currentDate, false);
+        if($currentDayCourse == 0) {
+            $currentDayCourse = 1;
+        } else {
+            $currentDayCourse = $currentDayCourse + 1;
+        }      
+        return $currentDayCourse;         
     }
 
     public function food_regulations(Request $request, $course_slug)

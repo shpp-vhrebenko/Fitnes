@@ -201,22 +201,33 @@
     <section class="testamonials" id="review">
         <div class="container-fluid testamonials__container">
             <div class="row">
-                <div class="col-md-12 col-lg-2 col-xl-3 results-title__box">
-                    <div class="results__title">
-                        <p><span class="results__header"><b>ОТЗЫВЫ</b></span><br>
-                        <span>234 ОТЗЫВА</span><br>
-                        </p>
+                <div class="col-md-12 col-lg-5 testamonials__title">
+                    <h3>ОТЗЫВЫ</h3>
+                    <p>234 ОТЗЫВА</p>
+                </div>
+                <div id="carouselTestamonials" class="testamonials__carousel carousel vert slide col-md-12 col-lg-7" data-ride="false">
+                    <div class="row">
+                        <div class="col-12 order-2 col-md-12 col-lg-1 order-lg-1 testamonials__indicators">
+                             <a class="carousel-control-prev" href="#carouselTestamonials" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                            </a>
+                            <ol class="carousel-indicators carousel-indicators-numbers" id="carouselTestamonialsIndicators">                                
+                            </ol>
+                            <a class="carousel-control-next" href="#carouselTestamonials" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                        <div class="col-12 order-1 col-md-12 col-lg-11 order-lg-2 testamonials__content">
+                            <div class="carousel-inner" id="carouselTestamonials-inner">                             
+                            </div>
+                        </div>
                     </div>                    
                 </div>
-                <div class="col-md-12 col-lg-10 col-xl-9 results-slider__box">
-                    <div id="sliderTestamonials" class="slider-results">
-                                                                                                              
-                    </div>
-                </div>                
-                
             </div>
-        </div>   
-    </section>  
+        </div>        
+    </section>
     <section class="results" id="results">
         <div class="container results-container">
             <div class="row">

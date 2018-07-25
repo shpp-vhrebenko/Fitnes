@@ -73,7 +73,9 @@ class Item extends Model
         $img->resize(null, 300, function ($constraint) {
             $constraint->aspectRatio();
         });
-        $img->save( public_path('uploads/items/' . $filename), 45);        
+       /* $path = 'uploads/items/' . $filename;*/
+        $img->save( public_path('uploads/items/' . $filename), 45); 
+       /* $img->save($path, 45);   */
 
         return $filename;
     }
